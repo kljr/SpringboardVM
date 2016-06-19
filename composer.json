@@ -1,0 +1,63 @@
+{
+    "name": "JacksonRiver/SpringBoard-VM",
+    "description": "VM for SpringBoard",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Romore",
+            "role": "maintainer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.drupal-composer.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "JacksonRiver/Springboard-Build",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/JacksonRiver/Springboard-Build.git",
+                    "type": "git",
+                    "reference": "7.x-4.x"
+                }
+            }
+        }
+    ],
+    "require": {
+        "composer/installers": "^1.0.20",
+        "mnsami/composer-custom-directory-installer": "1.1.*",
+        "drupal/drupal": "7.x",
+        "JacksonRiver/Springboard-Build": "master"
+    },
+    "require-dev": {
+        "geerlingguy/drupal-vm": "^3.1"
+    },
+    "conflict": {
+        "drupal/core": "8.*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+          "web/": ["type:drupal-core"],
+          "web/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
+          "web/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"],
+          "web/sites/all/libraries/{$name}/": ["type:drupal-library"],
+          "web/sites/all/drush/{$name}/": ["type:drupal-drush"],
+          "web/profiles/{$name}/": ["type:drupal-profile"],
+          "web/profiles/sbsetup/": ["JacksonRiver/Springboard-Build"]
+        },
+        "preserve-paths": [
+          "web/sites/all/modules/contrib",
+          "web/sites/all/themes/contrib",
+          "web/sites/all/libraries",
+          "web/sites/all/drush",
+          "web/sites/default/settings.php",
+          "web/sites/default/files"
+        ]
+    }
+}
