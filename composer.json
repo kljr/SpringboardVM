@@ -6,6 +6,7 @@
     "authors": [
         {
             "name": "Robert Romore",
+            "email": "robert.romore@jacksonriver.com",
             "role": "maintainer"
         }
     ],
@@ -17,12 +18,167 @@
         {
             "type": "package",
             "package": {
-                "name": "JacksonRiver/Springboard-Build",
+                "name": "jacksonriver/springboard_modules",
+                "version": "4.10.2",
+                "source": {
+                    "url": "https://github.com/JacksonRiver/springboard_modules.git",
+                    "type": "git",
+                    "reference": "7.x-4.10.2"
+                },
+                "dist": {
+                    "url": "https://github.com/JacksonRiver/springboard_modules/archive/7.x-4.10.2.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jacksonriver/springboard_themes",
+                "version": "4.10.2",
+                "source": {
+                    "url": "https://github.com/JacksonRiver/springboard-themes.git",
+                    "type": "git",
+                    "reference": "7.x-4.10.2"
+                },
+                "dist": {
+                    "url": "https://github.com/JacksonRiver/springboard-themes/archive/7.x-4.10.2.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jacksonriver/springboard_profile",
+                "version": "4.10.2",
+                "source": {
+                    "url": "https://github.com/JacksonRiver/springboard.git",
+                    "type": "git",
+                    "reference": "7.x-4.10.2"
+                },
+                "dist": {
+                    "url": "https://github.com/JacksonRiver/springboard/archive/7.x-4.10.2.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jacksonriver/litle-sdk-for-php",
+                "version": "dev-8.27.1-jr",
+                "source": {
+                  "url": "https://github.com/JacksonRiver/litle-sdk-for-php",
+                  "type": "git",
+                  "reference": "jacksonriver-8.27_ssl_update"
+                },
+                "dist": {
+                    "url": "https://github.com/JacksonRiver/litle-sdk-for-php/archive/8.27.1-jr.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "davatron5000/FitVids.js",
                 "version": "master",
                 "source": {
-                    "url": "https://github.com/JacksonRiver/Springboard-Build.git",
+                  "url": "https://github.com/davatron5000/FitVids.js",
+                  "type": "git",
+                  "reference": "master"
+                },
+                "dist": {
+                    "url": "https://github.com/davatron5000/FitVids.js/archive/v1.1.0.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "serbanghita/Mobile-Detect",
+                "version": "master",
+                "source": {
+                  "url": "https://github.com/serbanghita/Mobile-Detect",
+                  "type": "git",
+                  "reference": "master"
+                },
+                "dist": {
+                    "url": "https://github.com/serbanghita/Mobile-Detect/archive/2.8.22.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "donatj/PhpUserAgent",
+                "version": "master",
+                "source": {
+                  "url": "https://github.com/donatj/PhpUserAgent",
+                  "type": "git",
+                  "reference": "master"
+                },
+                "dist": {
+                    "url": "https://github.com/donatj/PhpUserAgent/archive/v0.5.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "developerforce/salesforce",
+                "version": "master",
+                "source": {
+                  "url": "https://github.com/developerforce/Force.com-Toolkit-for-PHP",
+                  "type": "git",
+                  "reference": "master"
+                },
+                "dist": {
+                    "url": "https://github.com/developerforce/Force.com-Toolkit-for-PHP/archive/v27.0.3.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "twilio/twilio-php",
+                "version": "master",
+                "source": {
+                  "url": "https://github.com/twilio/twilio-php",
+                  "type": "git",
+                  "reference": "master"
+                },
+                "dist": {
+                    "url": "https://github.com/twilio/twilio-php/archive/4.10.0.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ckeditor/ckeditor",
+                "version": "3.6.6.1",
+                "dist": {
+                    "url": "https://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.1/ckeditor_3.6.6.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal/salesforce",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://git.drupal.org/project/salesforce.git",
                     "type": "git",
-                    "reference": "7.x-4.x"
+                    "reference": "master"
                 }
             }
         }
@@ -30,34 +186,154 @@
     "require": {
         "composer/installers": "^1.0.20",
         "mnsami/composer-custom-directory-installer": "1.1.*",
-        "drupal/drupal": "7.x",
-        "JacksonRiver/Springboard-Build": "master"
+        "drupal/drupal": "7.43",
+        "jacksonriver/springboard_modules": "4.10.2",
+        "jacksonriver/springboard_themes": "4.10.2",
+        "jacksonriver/springboard_profile": "4.10.2",
+        "jacksonriver/litle-sdk-for-php": "dev-8.27.1-jr",
+        "ckeditor/ckeditor": "3.6.6.1",
+        "drupal/addressfield": "7.1.1",
+        "drupal/blockreference": "7.1.16",
+        "drupal/commerce": "7.1.11",
+        "drupal/commerce_authnet": "7.1.1",
+        "drupal/commerce_cardonfile": "^7.2-beta1",
+        "drupal/commerce_currency_settings": "7.1.2",
+        "drupal/commerce_paypal": "7.2.2",
+        "drupal/context": "7.3.6",
+        "drupal/conditional_fields": "^7.3-alpha1",
+        "drupal/ctools": "7.1.9",
+        "drupal/date": "7.2.8",
+        "drupal/encrypt": "7.1.1",
+        "drupal/entity": "7.1.6",
+        "drupal/entityreference": "7.1.1",
+        "drupal/entityreference_prepopulate": "7.1.5",
+        "drupal/draggableviews": "7.2.0",
+        "drupal/fboauth": "7.2-rc3",
+        "drupal/field_group": "7.1.3",
+        "drupal/features": "7.2.0",
+        "drupal/formblock": "7.1.0-alpha1",
+        "drupal/google_analytics": "7.1.3",
+        "drupal/imce": "7.1.8",
+        "drupal/imce_wysiwyg": "7.1.0",
+        "drupal/improved_multi_select": "^7.2-dev",
+        "drupal/jquery_update": "^7.2",
+        "drupal/libraries": "7.2.1",
+        "drupal/link": "7.1.2",
+        "drupal/metatag": "7.1.0-beta9",
+        "drupal/node_clone": "7.1.0",
+        "drupal/oauth": "7.3.2",
+        "drupal/pathauto": "7.1.3",
+        "drupal/pm_existing_pages": "^7.1-dev",
+        "drupal/panelizer": "7.3.1",
+        "drupal/panels": "7.3.4",
+        "drupal/views_data_export": "7.3.0-beta8",
+        "drupal/panels_extra_styles": "7.1.1",
+        "drupal/rules": "7.2.3",
+        "drupal/redirect": "7.1.0-rc1",
+        "drupal/region_tokens": "7.1.0-rc3",
+        "drupal/salesforce": "dev-master#e2b4ce0ffcd5c8e5f862f695a7bd2d4e915f1dc9",
+        "drupal/securepages": "7.1.0-beta1",
+        "drupal/shorten": "7.1.2",
+        "drupal/smtp": "7.1.3",
+        "drupal/strongarm": "7.2.0",
+        "drupal/tfa": "7.2.0-beta2",
+        "drupal/tfa_basic": "7.1-beta1",
+        "drupal/token": "7.1.5",
+        "drupal/token_filter": "^7.1",
+        "drupal/token_insert": "^7.2",
+        "drupal/video_embed_field": "7.2-beta7",
+        "drupal/views": "7.3.11",
+        "drupal/views_bulk_operations": "7.3.3",
+        "drupal/views_conditional": "7.1.1",
+        "drupal/views_watchdog": "7.3.3",
+        "drupal/webform": "7.3.*",
+        "drupal/webform_tokens": "7.1.5-rc1",
+        "drupal/wysiwyg": "7.2.2",
+        "drupal/services": "7.3.12",
+        "drupal/honeypot": "7.1.17",
+        "drupal/password_policy": "7.1.11",
+        "drupal/new_relic_rpm": "7.1-alpha2",
+        "davatron5000/FitVids.js": "master",
+        "serbanghita/Mobile-Detect": "master",
+        "developerforce/salesforce": "master",
+        "twilio/twilio-php": "master",
+        "donatj/PhpUserAgent": "master"
     },
     "require-dev": {
-        "geerlingguy/drupal-vm": "^3.1"
+        "geerlingguy/drupal-vm": "^3.1",
+        "cweagans/composer-patches": "~1.0",
+        "composer/installers": "~1.0",
+        "derhasi/composer-preserve-paths": "0.1.*",
+        "drupal/registry_rebuild": "^7.2.3"
     },
     "conflict": {
         "drupal/core": "8.*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ]
+    },
+    "config": {
+      "preferred-install": "source"
+    },
     "extra": {
         "installer-paths": {
           "web/": ["type:drupal-core"],
           "web/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
+          "web/sites/all/modules/contrib/tfa_basic/includes/twilio-php/": ["twilio/twilio-php"],
+          "web/sites/all/modules/springboard/": ["jacksonriver/springboard_modules"],
           "web/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"],
+          "web/sites/all/themes/springboard_themes/": ["jacksonriver/springboard_themes"],
           "web/sites/all/libraries/{$name}/": ["type:drupal-library"],
+          "web/sites/all/libraries/litle/": ["jacksonriver/litle-sdk-for-php"],
+          "web/sites/all/libraries/ckeditor/": ["ckeditor/ckeditor"],
+          "web/sites/all/libraries/fitvids/": ["davatron5000/FitVids.js"],
+          "web/sites/all/libraries/salesforce/": ["developerforce/salesforce"],
+          "web/sites/all/libraries/mobiledetect/": ["serbanghita/Mobile-Detect"],
+          "web/sites/all/libraries/phpuseragent/": ["donatj/PhpUserAgent"],
           "web/sites/all/drush/{$name}/": ["type:drupal-drush"],
           "web/profiles/{$name}/": ["type:drupal-profile"],
-          "web/profiles/sbsetup/": ["JacksonRiver/Springboard-Build"]
+          "web/profiles/sbsetup/": ["jacksonriver/springboard_profile"]
         },
         "preserve-paths": [
           "web/sites/all/modules/contrib",
+          "web/sites/all/modules/springboard",
           "web/sites/all/themes/contrib",
+          "web/sites/all/themes/springboard",
           "web/sites/all/libraries",
           "web/sites/all/drush",
           "web/sites/default/settings.php",
           "web/sites/default/files"
-        ]
+        ],
+        "patches": {
+          "drupal/commerce_authnet": {
+            "Fix to authnet requirements": "http://drupal.org/files/incorrect_requirements-2063787-1.patch",
+            "Commerce authnet patch to update URLs": "https://raw.githubusercontent.com/JacksonRiver/Springboard-Build/7.x-4.x/patches/commerce_authnet_update_to_akami.patch?2"
+          },
+          "drupal/commerce_paypal": {
+            "Commerce paypal SSL fix": "https://www.drupal.org/files/issues/use-tls.patch"
+          },
+          "drupal/encrypt": {
+            "Make encrypt module use the encrypt key": "http://drupal.org/files/encrypt_key_is_never_used.patch",
+            "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.10.2/patches/encrypt-trim-only-decrypted-output.patch"
+          },
+          "drupal/rules": {
+            "1810656 - Makes some of Rules UI compatible with jQuery 1.7": "https://www.drupal.org/files/rules-jquery_update_compatibility-1810656-37.patch"
+          },
+          "drupal/salesforce": {
+            "Add idLookup as an option for UPSERT key": "http://drupal.org/files/salesforce-externalId_and_idLookup-1951728.patch",
+            "Fix broken test": "http://drupal.org/files/salesforce_mapping-tests-1951744_1.patch",
+            "Include only record types that are available": "http://drupal.org/files/salesforce_mapping-available_record_types.patch",
+            "Allow connections to test salesforce accounts": "http://drupal.org/files/salesforce-sandox-account-access-1934790-9.patch",
+            "Additional caching login in describObject method": "http://drupal.org/files/salesforce-object-additional-caching.patch",
+            "Increase the sobject cache from 5 minutes to 1 hour": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.x-sobject_cache/patches/salesforce_increase_sobject_cache_timeout.patch"
+          },
+          "drupal/token": {
+            "Add a [current-page:object:?] dynamic token (see: https://www.drupal.org/node/919760)": "https://drupal.org/files/token-current_page_object_token-919760-9.patch"
+          }
+        }
     }
 }

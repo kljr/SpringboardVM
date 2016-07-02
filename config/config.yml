@@ -38,14 +38,14 @@ drupalvm_webserver: apache
 # Set this to 'false' if you are using a different site deployment strategy and
 # would like to configure 'vagrant_synced_folders' and 'apache_vhosts' manually.
 build_makefile: false
-drush_makefile_path: "{{ config_dir }}/drupal.make.yml"
+drush_makefile_path: "vendor/JacksonRiver/Springboard-Build/springboard-core.make"
 
 # Set 'build_makefile' to 'false' and this to 'true' if you are using a
 # composer based site deployment strategy.
-build_composer: false
+build_composer: true
 drupal_composer_path: false
 drupal_composer_install_dir: "/var/www/springboard"
-drupal_composer_dependencies: ~
+drupal_composer_dependencies: []
 
 # Set this to 'true' and 'build_makefile', 'build_composer' to 'false' if you
 # are using Composer's create-project as a site deployment strategy.
@@ -61,7 +61,7 @@ install_site: true
 drupal_core_path: "{{ drupal_composer_install_dir }}/web"
 drupal_mysql_user: drupal
 drupal_mysql_password: drupal
-drupal_mysql_database: drupal
+drupal_mysql_database: springboard
 
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
 drupal_major_version: 7
