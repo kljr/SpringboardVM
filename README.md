@@ -18,7 +18,11 @@ First you need to [install composer](https://getcomposer.org/doc/00-intro.md#ins
 > Note: The instructions below refer to the [global composer installation](https://getcomposer.org/doc/00-intro.md#globally).
 You might need to replace `composer` with `php composer.phar` (or similar) for your setup.
 
-After that you can create the project:
+Then clone this repository and run `composer update`. You might also need to `cd` into the 'web/' folder and run `composer update` there too.
+
+Adjust any DrupalVM settings you'd like in config/config.yml.
+
+Finally, run `vagrant up`.
 
 ```
 composer create-project drupal-composer/drupal-project:7.x-dev some-dir --stability dev --no-interaction
