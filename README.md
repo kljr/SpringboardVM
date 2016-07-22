@@ -24,10 +24,6 @@ Adjust any DrupalVM settings you'd like in config/config.yml.
 
 Finally, run `vagrant up`.
 
-```
-composer create-project drupal-composer/drupal-project:7.x-dev some-dir --stability dev --no-interaction
-```
-
 With `composer require ...` you can download new dependencies to your installation.
 
 ```
