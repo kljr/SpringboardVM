@@ -1,7 +1,11 @@
 # Composer template for Springboard projects
 
-This project template should provide a kickstart for managing your site
-dependencies with [Composer](https://getcomposer.org/).
+This repository is a fork of [drupal-project](https://github.com/drupal-composer/drupal-project/tree/7.x)
+repository, modified to include DrupalVM, Springboard, and some related Composer
+projects.
+
+This project template should provide a kickstart for managing your Springboard
+site  with [Composer](https://getcomposer.org/).
 
 If you want to know how to use it as replacement for
 [Drush Make](https://github.com/drush-ops/drush/blob/master/docs/make.md) visit
@@ -29,13 +33,15 @@ composer require drupal/ctools:7.*
 
 ## Recommended Plugins
 
-For Vagrant, it's recommended to install the following plugins:
+For Vagrant, it's recommended to install the following plugins (using
+`vagrant plugin install plugin-name`):
 - [vagrant-auto_network](https://github.com/oscar-stack/vagrant-auto_network)
 - [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier)
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
 - [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
 
-For Composer, the following plugins are recommended:
+For Composer, the following plugins are recommended (installed using
+`composer global require "user/package:version-constraints"`)
 - [prestissimo](https://github.com/hirak/prestissimo)
 
 ## What does the template do?
@@ -50,6 +56,7 @@ When installing the given `composer.json` some tasks are taken care of:
 * Springboard themes will be placed in `web/sites/all/themes/springboard/`
 * Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/`
 * The Springboard profile will be placed in `web/profiles/sbsetup/`
+* Patches defined in composer.json will be automatically applied and a PATCHES.txt listing any patches installed will be placed in the patched project's folder.
 
 ## DrupalVM
 
@@ -69,3 +76,7 @@ that the generated `composer.json` might differ from this project's file.
 ### Should I commit the contrib modules I download
 
 Composer recommends **no**. They provide [argumentation against but also workrounds if a project decides to do it anyway](https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md).
+
+## Credits
+
+Thanks to [drupal-project](https://github.com/drupal-composer/drupal-project/tree/7.x) for the initial template, [DrupalVM](https://www.drupalvm.com/), [composer-patches](https://github.com/cweagans/composer-patches) for helping manage patches, and [composer-preserve-paths](https://github.com/derhasi/composer-preserve-paths) for helping with path preservation.
