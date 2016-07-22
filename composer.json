@@ -66,6 +66,18 @@
         {
             "type": "package",
             "package": {
+                "name": "drupal-git/salesforce",
+                "version": "master",
+                "source": {
+                    "url": "https://git.drupal.org/project/salesforce.git",
+                    "type": "git",
+                    "reference": "e2b4ce0ffcd5c8e5f862f695a7bd2d4e915f1dc9"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "jacksonriver/litle-sdk-for-php",
                 "version": "dev-8.27.1-jr",
                 "source": {
@@ -169,18 +181,6 @@
                     "type": "zip"
                 }
             }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "drupal/salesforce",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://git.drupal.org/project/salesforce.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
         }
     ],
     "require": {
@@ -231,7 +231,7 @@
         "drupal/rules": "7.2.3",
         "drupal/redirect": "7.1.0-rc1",
         "drupal/region_tokens": "7.1.0-rc3",
-        "drupal/salesforce": "dev-master#e2b4ce0ffcd5c8e5f862f695a7bd2d4e915f1dc9",
+        "drupal-git/salesforce": "master",
         "drupal/securepages": "7.1.0-beta1",
         "drupal/shorten": "7.1.2",
         "drupal/smtp": "7.1.3",
@@ -283,6 +283,7 @@
         "installer-paths": {
           "web/": ["type:drupal-core"],
           "web/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
+          "web/sites/all/modules/contrib/salesforce": ["drupal-git/salesforce"],
           "web/sites/all/modules/contrib/tfa_basic/includes/twilio-php/": ["twilio/twilio-php"],
           "web/sites/all/modules/springboard/": ["jacksonriver/springboard_modules"],
           "web/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"],
@@ -310,25 +311,25 @@
         ],
         "patches": {
           "drupal/commerce_authnet": {
-            "Fix to authnet requirements": "http://drupal.org/files/incorrect_requirements-2063787-1.patch",
+            "Fix to authnet requirements": "https://drupal.org/files/incorrect_requirements-2063787-1.patch",
             "Commerce authnet patch to update URLs": "https://raw.githubusercontent.com/JacksonRiver/Springboard-Build/7.x-4.x/patches/commerce_authnet_update_to_akami.patch?2"
           },
           "drupal/commerce_paypal": {
             "Commerce paypal SSL fix": "https://www.drupal.org/files/issues/use-tls.patch"
           },
           "drupal/encrypt": {
-            "Make encrypt module use the encrypt key": "http://drupal.org/files/encrypt_key_is_never_used.patch",
+            "Make encrypt module use the encrypt key": "https://drupal.org/files/encrypt_key_is_never_used.patch",
             "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.10.2/patches/encrypt-trim-only-decrypted-output.patch"
           },
           "drupal/rules": {
             "1810656 - Makes some of Rules UI compatible with jQuery 1.7": "https://www.drupal.org/files/rules-jquery_update_compatibility-1810656-37.patch"
           },
-          "drupal/salesforce": {
-            "Add idLookup as an option for UPSERT key": "http://drupal.org/files/salesforce-externalId_and_idLookup-1951728.patch",
-            "Fix broken test": "http://drupal.org/files/salesforce_mapping-tests-1951744_1.patch",
-            "Include only record types that are available": "http://drupal.org/files/salesforce_mapping-available_record_types.patch",
-            "Allow connections to test salesforce accounts": "http://drupal.org/files/salesforce-sandox-account-access-1934790-9.patch",
-            "Additional caching login in describObject method": "http://drupal.org/files/salesforce-object-additional-caching.patch",
+          "drupal-git/salesforce": {
+            "Add idLookup as an option for UPSERT key": "https://drupal.org/files/salesforce-externalId_and_idLookup-1951728.patch",
+            "Fix broken test": "https://drupal.org/files/salesforce_mapping-tests-1951744_1.patch",
+            "Include only record types that are available": "https://drupal.org/files/salesforce_mapping-available_record_types.patch",
+            "Allow connections to test salesforce accounts": "https://drupal.org/files/salesforce-sandox-account-access-1934790-9.patch",
+            "Additional caching login in describObject method": "https://drupal.org/files/salesforce-object-additional-caching.patch",
             "Increase the sobject cache from 5 minutes to 1 hour": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.x-sobject_cache/patches/salesforce_increase_sobject_cache_timeout.patch"
           },
           "drupal/token": {
