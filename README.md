@@ -1,6 +1,6 @@
 # Composer template for Springboard projects
 
-This repository is a fork of [drupal-project](https://github.com/drupal-composer/drupal-project/tree/7.x)
+This repository is a fork of the [drupal-project](https://github.com/drupal-composer/drupal-project/tree/7.x)
 repository, modified to include DrupalVM, Springboard, and some related Composer
 projects.
 
@@ -56,7 +56,7 @@ When installing the given `composer.json` some tasks are taken care of:
 * Springboard themes will be placed in `web/sites/all/themes/springboard/`
 * Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/`
 * The Springboard profile will be placed in `web/profiles/sbsetup/`
-* Patches defined in composer.json will be automatically applied and a PATCHES.txt listing any patches installed will be placed in the patched project's folder.
+* Patches defined in composer.json will be automatically applied and a PATCHES.txt file listing any patches installed will be placed in the patched project's folder.
 
 ## DrupalVM
 
