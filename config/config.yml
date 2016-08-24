@@ -173,7 +173,7 @@ installed_extras:
   - adminer
   # - blackfire
   # - drupalconsole
-  # - mailhog
+  - mailhog
   # - memcached
   # - newrelic
   # - nodejs
