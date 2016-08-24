@@ -19,14 +19,14 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/springboard_modules",
-                "version": "4.10.2",
+                "version": "4.10.3",
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard_modules.git",
                     "type": "git",
-                    "reference": "7.x-4.10.2"
+                    "reference": "7.x-4.10.3"
                 },
                 "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard_modules/archive/7.x-4.10.2.zip",
+                    "url": "https://github.com/JacksonRiver/springboard_modules/archive/7.x-4.10.3.zip",
                     "type": "zip"
                 }
             }
@@ -35,14 +35,14 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/springboard_themes",
-                "version": "4.10.2",
+                "version": "4.10.3",
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard-themes.git",
                     "type": "git",
-                    "reference": "7.x-4.10.2"
+                    "reference": "7.x-4.10.3"
                 },
                 "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard-themes/archive/7.x-4.10.2.zip",
+                    "url": "https://github.com/JacksonRiver/springboard-themes/archive/7.x-4.10.3.zip",
                     "type": "zip"
                 }
             }
@@ -51,14 +51,14 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/springboard_profile",
-                "version": "4.10.2",
+                "version": "4.10.3",
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard.git",
                     "type": "git",
-                    "reference": "7.x-4.10.2"
+                    "reference": "7.x-4.10.3"
                 },
                 "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard/archive/7.x-4.10.2.zip",
+                    "url": "https://github.com/JacksonRiver/springboard/archive/7.x-4.10.3.zip",
                     "type": "zip"
                 }
             }
@@ -187,9 +187,9 @@
         "composer/installers": "^1.0.20",
         "mnsami/composer-custom-directory-installer": "1.1.*",
         "drupal/drupal": "7.43",
-        "jacksonriver/springboard_modules": "4.10.2",
-        "jacksonriver/springboard_themes": "4.10.2",
-        "jacksonriver/springboard_profile": "4.10.2",
+        "jacksonriver/springboard_modules": "4.10.3",
+        "jacksonriver/springboard_themes": "4.10.3",
+        "jacksonriver/springboard_profile": "4.10.3",
         "jacksonriver/litle-sdk-for-php": "dev-8.27.1-jr",
         "ckeditor/ckeditor": "3.6.6.1",
         "drupal/addressfield": "7.1.1",
@@ -319,7 +319,7 @@
           },
           "drupal/encrypt": {
             "Make encrypt module use the encrypt key": "https://drupal.org/files/encrypt_key_is_never_used.patch",
-            "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.10.2/patches/encrypt-trim-only-decrypted-output.patch"
+            "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.10.3/patches/encrypt-trim-only-decrypted-output.patch"
           },
           "drupal/rules": {
             "1810656 - Makes some of Rules UI compatible with jQuery 1.7": "https://www.drupal.org/files/rules-jquery_update_compatibility-1810656-37.patch"
