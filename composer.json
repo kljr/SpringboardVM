@@ -26,7 +26,7 @@
                     "reference": "7.x-4.x"
                 },
                 "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard_modules/archive/7.x-4.11.zip",
+                    "url": "https://github.com/JacksonRiver/springboard_modules/archive/7.x-4.12.zip",
                     "type": "zip"
                 }
             }
@@ -42,7 +42,7 @@
                     "reference": "7.x-4.x"
                 },
                 "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard-themes/archive/7.x-4.11.zip",
+                    "url": "https://github.com/JacksonRiver/springboard-themes/archive/7.x-4.12.zip",
                     "type": "zip"
                 }
             }
@@ -58,7 +58,7 @@
                     "reference": "7.x-4.x"
                 },
                 "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard/archive/7.x-4.11.zip",
+                    "url": "https://github.com/JacksonRiver/springboard/archive/7.x-4.12.zip",
                     "type": "zip"
                 }
             }
@@ -196,7 +196,7 @@
         "drupal/blockreference": "7.1.16",
         "drupal/commerce": "7.1.11",
         "drupal/commerce_authnet": "7.1.1",
-        "drupal/commerce_cardonfile": "^7.2-beta1",
+        "drupal/commerce_cardonfile": "^7.2.0-beta5",
         "drupal/commerce_currency_settings": "7.1.2",
         "drupal/commerce_paypal": "7.2.2",
         "drupal/context": "7.3.6",
@@ -224,8 +224,8 @@
         "drupal/oauth": "7.3.2",
         "drupal/pathauto": "7.1.3",
         "drupal/pm_existing_pages": "^7.1-dev",
-        "drupal/panelizer": "7.3.1",
-        "drupal/panels": "7.3.4",
+        "drupal/panelizer": "7.3.4",
+        "drupal/panels": "7.3.7",
         "drupal/views_data_export": "7.3.0-beta8",
         "drupal/panels_extra_styles": "7.1.1",
         "drupal/rules": "7.2.3",
@@ -258,7 +258,9 @@
         "serbanghita/Mobile-Detect": "master",
         "developerforce/salesforce": "master",
         "twilio/twilio-php": "master",
-        "donatj/PhpUserAgent": "master"
+        "donatj/PhpUserAgent": "master",
+        "drupal/views_litepager": "7.3.0",
+        "drupal/email_registration": "7.1.3"
     },
     "require-dev": {
         "geerlingguy/drupal-vm": "^3.1",
@@ -320,7 +322,7 @@
           },
           "drupal/encrypt": {
             "Make encrypt module use the encrypt key": "https://drupal.org/files/encrypt_key_is_never_used.patch",
-            "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.10.2/patches/encrypt-trim-only-decrypted-output.patch"
+            "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.12/patches/encrypt-trim-only-decrypted-output.patch"
           },
           "drupal/rules": {
             "1810656 - Makes some of Rules UI compatible with jQuery 1.7": "https://www.drupal.org/files/rules-jquery_update_compatibility-1810656-37.patch"
@@ -338,6 +340,12 @@
           },
           "drupal/token": {
             "Add a [current-page:object:?] dynamic token (see: https://www.drupal.org/node/919760)": "https://drupal.org/files/token-current_page_object_token-919760-9.patch"
+          },
+          "drupal/fboauth": {
+            "Fix javascript redirect bug with fboauth": "https://www.drupal.org/files/issues/decode_url_before_redirecting_js-2793219-1.patch"
+          },
+          "drupal/views_litepager": {
+            "Remove hook_requirements() to prevent error 'Call to undefined function views_api_version()'": "https://www.drupal.org/files/issues/views_litepager-site-install-requirements-check-error-1874586-10-D7.patch"
           }
         }
     }
