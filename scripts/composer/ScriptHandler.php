@@ -41,13 +41,6 @@ class ScriptHandler {
       $event->getIO()->write("Create a sites/default/settings.php file with chmod 0666");
     }
 
-    // Prepare the services file for installation
-    if (!$fs->exists($root . '/sites/default/services.yml') and $fs->exists($root . '/sites/default/default.services.yml')) {
-      $fs->copy($root . '/sites/default/default.services.yml', $root . '/sites/default/services.yml');
-      $fs->chmod($root . '/sites/default/services.yml', 0666);
-      $event->getIO()->write("Create a sites/default/services.yml file with chmod 0666");
-    }
-
     // Create the files directory with chmod 0777
     if (!$fs->exists($root . '/sites/default/files')) {
       $oldmask = umask(0);
