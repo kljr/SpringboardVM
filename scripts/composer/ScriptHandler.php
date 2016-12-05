@@ -48,6 +48,13 @@ class ScriptHandler {
       umask($oldmask);
       $event->getIO()->write("Create a sites/default/files directory with chmod 0777");
     }
+
+    // Create the sustainers key file.
+    if (!$fs->exists($root . '/sites/default/files/sustainer.key')) {
+      $file = $fs->fopen($root . '/sites/default/files/sustainer.key', 'w');
+      $fs->fwrite($file, 'springboardvm.dev');
+      $event->getIO()->write("Create a sites/default/files/sustainer.key file");
+    }
   }
 
 }

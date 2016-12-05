@@ -53,6 +53,14 @@ drupal_enable_modules: [ 'devel' ]
 drupal_account_name: admin
 drupal_account_pass: admin
 
+apache_vhosts_ssl:
+  - servername: "{{ drupal_domain }}"
+    documentroot: "{{ drupal_core_path }}"
+    certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+    certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
 # MySQL databases and users.
 mysql_databases:
   - name: "{{ drupal_db_name }}"
@@ -154,3 +162,6 @@ php_xdebug_remote_connect_back: 1
 # Use PHPSTORM for PHPStorm, sublime.xdebug for Sublime Text.
 php_xdebug_idekey: sublime.xdebug
 php_xdebug_max_nesting_level: 256
+
+known_hosts_path: ~/.ssh/known_hosts
+ssh_home: "{{ drupal_core_path }}"
