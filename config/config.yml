@@ -86,6 +86,8 @@ installed_extras:
   - xdebug
   # - xhprof
 
+drush_version: "8.x"
+
 # PHP Configuration. Currently-supported versions: 5.6, 7.0.
 # To use 5.6, see: http://docs.drupalvm.com/en/latest/other/php-56/
 php_version: "5.6"

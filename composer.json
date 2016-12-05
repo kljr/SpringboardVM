@@ -19,7 +19,7 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/springboard_modules",
-                "version": "4",
+                "version": "4.12",
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard_modules.git",
                     "type": "git",
@@ -35,7 +35,7 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/springboard_themes",
-                "version": "4",
+                "version": "4.12",
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard-themes.git",
                     "type": "git",
@@ -51,7 +51,7 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/springboard_profile",
-                "version": "4",
+                "version": "4.12",
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard.git",
                     "type": "git",
@@ -87,6 +87,22 @@
                 },
                 "dist": {
                     "url": "https://github.com/JacksonRiver/litle-sdk-for-php/archive/8.27.1-jr.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "braintree/braintree_php",
+                "version": "3.18.0",
+                "source": {
+                    "url": "https://github.com/braintree/braintree_php",
+                    "type": "git",
+                    "reference": "3.18.0"
+                },
+                "dist": {
+                    "url": "https://github.com/braintree/braintree_php/archive/3.18.0.zip",
                     "type": "zip"
                 }
             }
@@ -186,10 +202,10 @@
     "require": {
         "composer/installers": "^1.0.20",
         "mnsami/composer-custom-directory-installer": "1.1.*",
-        "drupal/drupal": "7.43",
-        "jacksonriver/springboard_modules": "4",
-        "jacksonriver/springboard_themes": "4",
-        "jacksonriver/springboard_profile": "4",
+        "drupal/drupal": "7.52",
+        "jacksonriver/springboard_modules": "4.12",
+        "jacksonriver/springboard_themes": "4.12",
+        "jacksonriver/springboard_profile": "4.12",
         "jacksonriver/litle-sdk-for-php": "dev-8.27.1-jr",
         "ckeditor/ckeditor": "3.6.6.1",
         "drupal/addressfield": "7.1.1",
@@ -203,6 +219,7 @@
         "drupal/conditional_fields": "^7.3-alpha1",
         "drupal/ctools": "7.1.4",
         "drupal/date": "7.2.8",
+        "drupal/email_registration": "7.1.3",
         "drupal/encrypt": "7.1.1",
         "drupal/entity": "7.1.6",
         "drupal/entityreference": "7.1.1",
@@ -246,6 +263,7 @@
         "drupal/views": "7.3.11",
         "drupal/views_bulk_operations": "7.3.3",
         "drupal/views_conditional": "7.1.1",
+        "drupal/views_litepager": "7.3.0",
         "drupal/views_watchdog": "7.3.3",
         "drupal/webform": "7.3.*",
         "drupal/webform_tokens": "7.1.5-rc1",
@@ -258,9 +276,7 @@
         "serbanghita/Mobile-Detect": "master",
         "developerforce/salesforce": "master",
         "twilio/twilio-php": "master",
-        "donatj/PhpUserAgent": "master",
-        "drupal/views_litepager": "7.3.0",
-        "drupal/email_registration": "7.1.3"
+        "donatj/PhpUserAgent": "master"
     },
     "require-dev": {
         "geerlingguy/drupal-vm": "^3.1",
@@ -322,7 +338,7 @@
           },
           "drupal/encrypt": {
             "Make encrypt module use the encrypt key": "https://drupal.org/files/encrypt_key_is_never_used.patch",
-            "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.12/patches/encrypt-trim-only-decrypted-output.patch"
+            "Trim only the decrypted output from encrypt": "https://raw.github.com/JacksonRiver/Springboard-Build/7.x-4.12.2/patches/encrypt-trim-only-decrypted-output.patch"
           },
           "drupal/rules": {
             "1810656 - Makes some of Rules UI compatible with jQuery 1.7": "https://www.drupal.org/files/rules-jquery_update_compatibility-1810656-37.patch"
