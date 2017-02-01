@@ -56,13 +56,14 @@ When installing the given `composer.json` some tasks are taken care of:
 * Springboard themes will be placed in `web/sites/all/themes/springboard/`
 * Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/`
 * The Springboard profile will be placed in `web/profiles/sbsetup/`
+* The Springboard acceptance tests repository will be placed in `web/tests`. This project uses Codeception to run tests for Springboard, which requires the host to have access to the guests MySQL server. In order to achieve this, a `Vagrantfile.local` file has been placed in `config/`, and a port has been forwarded from the guests 3306 port to the hosts 3307 port. If you'd like to run the Codeception tests, you'll need to follow the instructions in `web/tests/README.md`, and modify the `web/tests/codeception.yml` file to change the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
 * Patches defined in composer.json will be automatically applied and a PATCHES.txt file listing any patches installed will be placed in the patched project's folder.
 
 ## DrupalVM
 
 More information about DrupalVM can be found at [DrupalVM.com](http://drupalvm.com/), and documentation for DrupalVM can be found at [the DrupalVM docs](http://docs.drupalvm.com/).
 
-DrupalVM will be placed in `vendor/geerlingguy/drupal-vm/`, and configuration files will be available to edit in the `config/` directory. A `config.yml` file is located in `config/`, which is a modified version of DrupalVM's default.config.yml file. Any configuration that needs to be changed for DrupalVM can be done in this file. Additionally, you can place a `local.config.yml` file in this folder to override any settings in `config.yml`, which is useful if you're sharing your VM configuration across teams.
+DrupalVM will be placed in `vendor/geerlingguy/drupal-vm/`, and configuration files will be available to edit in the `config/` directory. A `config.yml` file is located in `config/`, which is a modified version of DrupalVM's default.config.yml file. Any configuration that needs to be changed for DrupalVM can be done in this file. Additionally, you can place a `local.config.yml` file in this folder to override any settings in `config.yml`, which is useful if you're sharing your VM configuration across teams. A Vagrantfile named `Vagrantfile.local` may also be placed in this directory to override anything in DrupalVM's Vagrantfile. This file has already been created for Codeception, described above.
 
 ## Generate composer.json from existing project
 
