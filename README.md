@@ -52,7 +52,7 @@ When installing the given `composer.json` some tasks are taken care of:
 * DrupalVM will be installed in your vendor directory.
 * Modules (packages of type `drupal-module`) will be placed in `web/sites/all/modules/contrib/`
 * Springboard modules will be placed in `web/sites/all/modules/springboard/`
-* Theme (packages of type `drupal-module`) will be placed in `web/sites/all/themes/contrib/`
+* Themes (packages of type `drupal-theme`) will be placed in `web/sites/all/themes/contrib/`
 * Springboard themes will be placed in `web/sites/all/themes/springboard/`
 * Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/`
 * The Springboard profile will be placed in `web/profiles/sbsetup/`
