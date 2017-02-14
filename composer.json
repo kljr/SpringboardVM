@@ -20,7 +20,7 @@
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard-build.git",
                     "type": "git",
-                    "reference": "7.x-4.x"
+                    "reference": "7.x-4.x_add_developer_make_file"
                 },
                 "dist": {
                     "url": "https://github.com/JacksonRiver/springboard-build/archive/7.x-4.14.zip",
@@ -70,6 +70,6 @@
         }
     },
     "scripts": {
-        "post-update-cmd": "if [ ! -d 'web' ]; then drush make --working-copy --no-gitinfofile build/springboard-developer.make web; fi"
+        "post-update-cmd": "if [ ! -d 'web' ]; then drush make --no-gitinfofile build/springboard-developer.make web; fi"
     }
 }
