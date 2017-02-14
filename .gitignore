@@ -1,0 +1,6 @@
+.DS_Store
+build/
+tests/
+vendor/
+web/
+composer.lock
