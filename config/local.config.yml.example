@@ -14,4 +14,4 @@ apache_vhosts_ssl:
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: |
-          Pgit stasusroxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/test2"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/test2"
