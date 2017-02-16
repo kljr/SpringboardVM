@@ -2,7 +2,7 @@
 build/
 tests/
 vendor/
-web/
+sites/
 composer.lock
 config/local.config.yml
 .vagrant

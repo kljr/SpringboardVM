@@ -49,7 +49,7 @@
         "codeception/codeception": "^2.2"
     },
     "require-dev": {
-        "geerlingguy/drupal-vm": "^3.1",
+        "geerlingguy/drupal-vm": "^3.5",
         "cweagans/composer-patches": "~1.0",
         "composer/installers": "~1.0"
     },
@@ -71,9 +71,7 @@
     },
     "scripts": {
         "post-update-cmd": [
-          "if [ ! -d 'web' ]; then drush make --no-gitinfofile build/springboard-developer.make web; fi",
-          "cd web; echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore"
-          
+            "scripts/make-sb.sh"
         ]
     }
 }

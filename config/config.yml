@@ -7,7 +7,7 @@ vagrant_box: geerlingguy/ubuntu1404
 # machine name, and IP address for each instance.
 vagrant_hostname: springboardvm.dev
 vagrant_machine_name: springboardvm
-vagrant_ip: 0.0.0.0
+vagrant_ip: 192.168.88.88
 
 # A list of synced folders, with the keys 'local_path', 'destination', and
 # a 'type' of [nfs|rsync|smb] (leave empty for slow native shares). See
@@ -37,7 +37,7 @@ build_composer_project: false
 install_site: true
 
 # Required Drupal settings.
-drupal_core_path: "{{ drupal_composer_install_dir }}/web"
+drupal_core_path: "{{ drupal_composer_install_dir }}/sites/7.x-4.x"
 drupal_db_user: drupal
 drupal_db_password: drupal
 drupal_db_name: springboard
