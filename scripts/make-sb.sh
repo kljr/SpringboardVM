@@ -5,18 +5,17 @@
 
 # First site built on composer install/update.
 if [ ! -d sites/first ]; then
-   # Check to see if the developer make file is avaible.
+   # Check to see if the developer make file is available.
    if [ -f build/springboard-developer.make ]; then
      drush make --no-gitinfofile build/springboard-developer.make $directory;
      # add springboard to drupal core's .gitignore.
      cd sites/first echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
      cd ../../
    else
-     # Use the standard make file.
+     # If no developer make, use the standard make file.
      drush make --no-gitinfofile --working-copy build/springboard-mtsb.make $directory;
    fi;
 fi;
-
 
 CONFIG_FILE=config/local.config.yml
 

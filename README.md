@@ -2,8 +2,6 @@
 
 Creates one or more fully configured Springboard sites, plus a virtual machine to run them in.
 
-Also downloads the acceptance test repo.
-
 By default, a single Springboard site will be installed, running the 7.x-4.x branch. Additional Springboard
 installs and vhosts can be defined by following the example in `local.config.yml.example`. If you create additional
 sites the install script will prompt you for the Springboard version, which can be a branch or tag in the Springboard-Build repo.
@@ -14,6 +12,7 @@ sites the install script will prompt you for the Springboard version, which can 
 - [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
 - VirtualBox
 - Vagrant
+- Ansible (not required, but will make things quicker).
 
 If you have all of the following vagrant plugins, no network/IP configuration is required:
 
@@ -38,11 +37,12 @@ The first time running vagrant will take a while.
 
 ## What does the template do?
 
+* Composer will download Springboard-Build, DrupalVM, the Acceptance Test repo and their vendor dependencies.
+* Composer will then trigger a bash script which runs drush make.
 * Drush make will install Springboard, checking out working copies from the springboard git repo.
 * The default install will be in `sites/first` and will have Springboard version 7.x-4.x
-* Additional sites will be in sites/{docroot}, docroot defined in local.config.yml.
+* Additional sites will be in sites/{docroot}, with the docroot you defined in local.config.yml. Bash will prompt you for the Spingboard version.
 * The Springboard acceptance tests repository will be placed in `tests`. A port has been forwarded from the guests 3306 port to the hosts 3307 port. If you'd like to run the Codeception tests, you'll need to follow the instructions in `web/tests/README.md`, and modify the `web/tests/codeception.yml` file to change the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
-* The Springboard-Build repository will be placed in `build`.
 
 ## Updating Virtual hosts
 
