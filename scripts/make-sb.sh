@@ -1,5 +1,23 @@
 #!/usr/bin/env bash
 
+# Build a default springboard site and a site
+# for each vhost defined in local.config.yml.
+
+# First site built on composer install/update.
+if [ ! -d sites/first ]; then
+   # Check to see if the developer make file is avaible.
+   if [ -f build/springboard-developer.make ]; then
+     drush make --no-gitinfofile build/springboard-developer.make $directory;
+     # add springboard to drupal core's .gitignore.
+     cd sites/first echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
+     cd ../../
+   else
+     # Use the standard make file.
+     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make $directory;
+   fi;
+fi;
+
+
 CONFIG_FILE=config/local.config.yml
 
 function parse_yaml {
@@ -23,35 +41,38 @@ function parse_yaml {
    }'
 }
 
-
-if [ ! -d sites/7.x-4.x ]; then drush make --no-gitinfofile build/springboard-developer.make sites/7.x-4.x; fi;
-cd sites/7.x-4.x echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore; cd ../../
-
+# Parse the local config yml file into the global vars.
 eval $(parse_yaml ${CONFIG_FILE})
 
 for vhost in ${!apache_vhosts__documentroot*}
-do
-    directory=${!vhost}
-    directory=${directory/__/\/}
-echo $vhost
+    do
+        # Get the docroot directory name.
+        directory=${!vhost}
+        directory=${directory/__/\/}
 
+        if [ ! -d $directory ]; then
 
-    if [ ! -d $directory ]; then
-       echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
+           echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
+           read branch
+           cd build
+           git checkout $branch
+           cd ../
 
-       read branch
-       cd build
-       git checkout $branch
-       cd ../
+           # Check to see if the developer make file is available.
+           if [ -f build/springboard-developer.make ]; then
+             drush make --no-gitinfofile build/springboard-developer.make $directory;
+             # add springboard to drupal core's .gitignore.
+             cd sites/$directory echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
+             cd ../../
+           else
+             # Use the standard make file.
+             drush make --no-gitinfofile --working-copy build/springboard-mtsb.make $directory;
+           fi;
+           # Create a sustainer.key file in sites/default/files
+           mkdir -p sites/$directory/sites/default/files
+           if [ ! -e sites/$directory/sites/default/files/sustainer.key ]; then
+              echo $directory > sites/$directory/sites/default/files/sustainer.key
+           fi;
+        fi;
 
-       #drush make --no-gitinfofile build/springboard-developer.make $directory;
-    fi;
-
-   # cd $directory; echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore; cd ../../
-   cd build
-   git checkout 7.x-4.x
-   cd ../
-done
-
-
-
+    done
