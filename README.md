@@ -43,12 +43,14 @@ The first time running vagrant will take a while.
 * The default install will be in `sites/first` and will have Springboard version 7.x-4.x
 * Additional sites will be in sites/{docroot}, with the docroot you defined in local.config.yml. Bash will prompt you for the Spingboard version.
 * The Springboard acceptance tests repository will be placed in `tests`. A port has been forwarded from the guests 3306 port to the hosts 3307 port. If you'd like to run the Codeception tests, you'll need to follow the instructions in `web/tests/README.md`, and modify the `web/tests/codeception.yml` file to change the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
+* Provides a shell script to allow Drush make Springboard-Buils to update Drupal core and contrib on an existing site without touching the Springboard Repos.
 
 ## Updating Virtual hosts
 
 If you want to add a new site to a previously provisioned SpringboardVM, then you need to:
 * Define it in local.config.yml
 * run `composer update`
+* Enter the springboard version at the prompt
 * run `vagrant provision`
 
 
