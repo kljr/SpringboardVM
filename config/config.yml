@@ -27,7 +27,7 @@ build_makefile: false
 # composer based site deployment strategy.
 build_composer: false
 drupal_composer_path: false
-drupal_composer_install_dir: "/var/www/springboard"
+drupal_composer_install_dir: "/var/www/springboard/sites"
 drupal_composer_dependencies: []
 
 build_composer_project: false
@@ -37,7 +37,7 @@ build_composer_project: false
 install_site: true
 
 # Required Drupal settings.
-drupal_core_path: "{{ drupal_composer_install_dir }}/sites/first"
+drupal_core_path: "{{ drupal_composer_install_dir }}/first"
 drupal_db_user: drupal
 drupal_db_password: drupal
 drupal_db_name: springboard
@@ -166,4 +166,4 @@ php_xdebug_idekey: sublime.xdebug
 php_xdebug_max_nesting_level: 256
 
 known_hosts_path: ~/.ssh/known_hosts
-ssh_home: "{{ drupal_core_path }}"
+ssh_home: "{{ drupal_composer_install_dir }}"
