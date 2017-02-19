@@ -37,7 +37,7 @@ build_composer_project: false
 install_site: true
 
 # Required Drupal settings.
-drupal_core_path: "{{ drupal_composer_install_dir }}/first"
+drupal_core_path: "{{ drupal_composer_install_dir }}/sb_default"
 drupal_db_user: drupal
 drupal_db_password: drupal
 drupal_db_name: springboard

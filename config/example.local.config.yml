@@ -6,7 +6,6 @@
 #vagrant_machine_name: springboardvm
 #vagrant_ip: 0.0.0.0
 
-# You're going to want to use the "sites" directory to hold them: ex, "sites/mynewdocroot"
 # Don't use any special characters in the docroot name. Only a-z and "/" are allowed.
 
 # If you're adding a new site to a previously provisioned SpringboardVM, then you need to:
@@ -51,16 +50,17 @@ apache_vhosts:
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ dashboard_install_dir }}"
           DirectoryIndex index.html
 
+
+
 apache_vhosts_ssl:
   - servername: "test2.dev"
     documentroot: "{{drupal_composer_install_dir}}/test2"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/test2"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_composer_install_dir}}/test2"
 
 # Default DrupalVM virtual hosts.
-
   - servername: "{{ drupal_domain }}"
     documentroot: "{{ drupal_core_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
@@ -69,12 +69,15 @@ apache_vhosts_ssl:
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
 
-# create additional databases.
+# create additional databases. Use the docroot name for the database name.
+# If you don't specify one here, drush will create it during post-provision.
 mysql_databases:
-  - name:  "tickets"
+#Custom db.
+  - name: "test2"
     encoding: utf8mb4
     collation: utf8mb4_general_ci
 
+# Default DrupalVM Db.
   - name: "{{ drupal_db_name }}"
     encoding: utf8mb4
     collation: utf8mb4_general_ci

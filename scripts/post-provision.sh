@@ -2,10 +2,10 @@
 
 PROJECT_ROOT=/var/www/springboard
 
-cd ${PROJECT_ROOT}/sites/first
+cd ${PROJECT_ROOT}/sites/sb_default
 set -x
 # Set Drupal variable to above directory 'encrypt_secure_key_path'
-drush vset encrypt_secure_key_path ${PROJECT_ROOT}/sites/first/sites/default/files/
+drush vset encrypt_secure_key_path ${PROJECT_ROOT}/sites/sb_default/sites/default/files/
 
 cd ${PROJECT_ROOT}
 CONFIG_FILE=config/local.config.yml

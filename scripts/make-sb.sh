@@ -4,16 +4,17 @@
 # for each vhost defined in local.config.yml.
 
 # First site built on composer install/update.
-if [ ! -d sites/first ]; then
+if [ ! -d sites/sb_default ]; then
    # Check to see if the developer make file is available.
    if [ -f build/springboard-developer.make ]; then
-     drush make --no-gitinfofile build/springboard-developer.make sites/first;
+     drush make --no-gitinfofile build/springboard-developer.make sites/sb_default;
      # add springboard to drupal core's .gitignore.
-     cd sites/first echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
+     cd sites/sb_default;
+     echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
      cd ../../
    else
      # If no developer make, use the standard make file.
-     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/first;
+     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/sb_default;
    fi;
 fi;
 
@@ -33,7 +34,9 @@ function parse_yaml_for_vhosts {
         if ($2 == "documentroot") {
              split($3, dirname, "/")
              vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-             printf("%s%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, "__"dirname[2], dirname[2]);
+             if (dirname[2] != "") {
+               printf("%s%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, "__"dirname[2], dirname[2]);
+             }
          }
       }
    }'
@@ -43,34 +46,32 @@ function parse_yaml_for_vhosts {
 eval $(parse_yaml_for_vhosts ${CONFIG_FILE})
 #( set -o posix ; set ) | more
 for vhost in ${!apache_vhosts__documentroot*}
-    do
-        # Get the docroot directory name.
-        directory=${!vhost}
-        directory=${directory/__/\/}
-        echo $directory
-        if [ ! -d $directory ]; then
-
-           echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
-           read branch
-           cd build
-           git checkout $branch
-           cd ../
-
-           # Check to see if the developer make file is available.
-           if [ -f build/springboard-developer.make ]; then
-             drush make --no-gitinfofile build/springboard-developer.make sites/$directory;
-             # add springboard to drupal core's .gitignore.
-             cd sites/$directory echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
-             cd ../../
-           else
-             # Use the standard make file.
-             drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
-           fi;
-           # Create a sustainer.key file in sites/default/files
-           mkdir -p sites/$directory/sites/default/files
-           if [ ! -e sites/$directory/sites/default/files/sustainer.key ]; then
-              echo $directory > sites/$directory/sites/default/files/sustainer.key
-           fi;
+do
+    # Get the docroot directory name.
+    directory=${!vhost}
+    directory=${directory/__/\/}
+    if [ ! -d sites/$directory ]; then
+        echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
+        read branch
+        cd build
+        git checkout $branch
+        cd ../
+        # Check to see if the developer make file is available.
+        if [ -f build/springboard-developer.make ]; then
+            drush make --no-gitinfofile build/springboard-developer.make sites/$directory;
+        else
+            # Use the standard make file.
+            drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
         fi;
+        mkdir sites/$directory;
+        cd sites/$directory;
+        echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
+        cd ../../
+        # Create a sustainer.key file in sites/default/files
+        mkdir -p sites/$directory/sites/default/files
+        if [ ! -e sites/$directory/sites/default/files/sustainer.key ]; then
+          echo $directory > sites/$directory/sites/default/files/sustainer.key
+        fi;
+    fi;
 
-    done
+done

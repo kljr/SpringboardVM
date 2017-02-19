@@ -23,7 +23,7 @@ function parse_yaml {
 eval $(parse_yaml ${CONFIG_FILE})
 
 # Create a sustainer.key file in sites/default/files
-mkdir -p ${PROJECT_ROOT}/sites/first/sites/default/files
-if [ ! -e ${PROJECT_ROOT}/sites/first/sites/default/files/sustainer.key ]; then
-  echo ${vagrant_hostname} > ${PROJECT_ROOT}/sites/first/sites/default/files/sustainer.key
+mkdir -p ${PROJECT_ROOT}/sites/sb_default/sites/default/files
+if [ ! -e ${PROJECT_ROOT}/sites/sb_default/sites/default/files/sustainer.key ]; then
+  echo ${vagrant_hostname} > ${PROJECT_ROOT}/sites/sb_default/sites/default/files/sustainer.key
 fi
