@@ -41,7 +41,7 @@ function parse_yaml_for_vhosts {
 
 # Parse the local config yml file into the global vars.
 eval $(parse_yaml_for_vhosts ${CONFIG_FILE})
-( set -o posix ; set ) | more
+#( set -o posix ; set ) | more
 for vhost in ${!apache_vhosts__documentroot*}
     do
         # Get the docroot directory name.
