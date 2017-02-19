@@ -33,7 +33,7 @@ function parse_yaml_for_vhosts {
         if ($2 == "documentroot") {
              split($3, dirname, "/")
              vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-             printf("%s%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, "__"dirname[3], dirname[3]);
+             printf("%s%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, "__"dirname[2], dirname[2]);
          }
       }
    }'
@@ -41,12 +41,13 @@ function parse_yaml_for_vhosts {
 
 # Parse the local config yml file into the global vars.
 eval $(parse_yaml_for_vhosts ${CONFIG_FILE})
-#( set -o posix ; set ) | more
+( set -o posix ; set ) | more
 for vhost in ${!apache_vhosts__documentroot*}
     do
         # Get the docroot directory name.
         directory=${!vhost}
         directory=${directory/__/\/}
+        echo $directory
         if [ ! -d $directory ]; then
 
            echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
