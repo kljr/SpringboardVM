@@ -21,7 +21,8 @@ If you have all of the following vagrant plugins, no network/IP configuration is
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
 
 Otherwise you will need to edit the vagrant_ip in local.config.yml, and update /etc/hosts to
-point sb_default.dev and the other domains you create at the IP of the virtual machine.
+point sbcrush.dev and the other domains you create at the IP of the virtual machine. You can find the
+correct information for the hosts file by visiting the VM IP address after install.
 
 Also helpful:
 
