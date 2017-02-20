@@ -36,7 +36,7 @@ After composer  update completes, run `vagrant up`.
 The first time running vagrant will take a while. After all processes complete successfully
 you can view the dashboard at dashboard.springboardvm.dev.
 
-## What does Crush do?
+## What does Springboard Crush do?
 
 * Composer will download Springboard-Build, DrupalVM, the Acceptance Test repo and their vendor dependencies.
 * Composer will then trigger a bash script which runs drush make.
