@@ -72,7 +72,7 @@ site, without overwriting Springboard folders or any non-Springboard customizati
 The Springboard acceptance tests repository will be placed in `tests`.
 A port has been forwarded from the guests 3306 port to the hosts 3307 port,
 or you can configure mySQL to allow connections from any IP by setting the mySQL
-bind address to 0.0.0.0 in teh lcoal.config.yml file.
+bind address to 0.0.0.0 in the local.config.yml file.
 If you'd like to run the Codeception tests, you'll need to follow the instructions
 in `tests/README.md`, and modify the `tests/codeception.yml` file to change
 the `modules:config:Db:dsn` variable to forward like so: `mysql:host=127.0.0.1;dbname=springboard;port=3307`,
