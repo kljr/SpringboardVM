@@ -52,7 +52,7 @@ class ScriptHandler {
     // Create the sustainers key file.
     if (!$fs->exists($root . '/sites/default/files/sustainer.key')) {
       $file = $fs->fopen($root . '/sites/default/files/sustainer.key', 'w');
-      $fs->fwrite($file, 'springboardvm.dev');
+      $fs->fwrite($file, 'sb-crush.dev');
       $event->getIO()->write("Create a sites/default/files/sustainer.key file");
     }
   }

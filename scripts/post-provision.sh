@@ -20,7 +20,7 @@ fi;
 cd ${PROJECT_ROOT}
 
 LOCAL_CONFIG_FILE=${PROJECT_ROOT}/config/local.config.yml
-if [ -f LOCAL_CONFIG_FILE ]; then
+if [ -f ${LOCAL_CONFIG_FILE} ]; then
     # Parse the local config yml file into the global vars.
     eval $(parse_yaml ${LOCAL_CONFIG_FILE})
     #( set -o posix ; set ) | more

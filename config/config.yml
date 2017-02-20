@@ -1,21 +1,14 @@
 ---
-# `vagrant_box` can also be set to geerlingguy/centos6, geerlingguy/centos7,
-# geerlingguy/ubuntu1404, geerlingguy/ubuntu1204, parallels/ubuntu-14.04, etc.
-vagrant_box: geerlingguy/ubuntu1404
 
-# If you need to run multiple instances of Drupal VM, set a unique hostname,
-# machine name, and IP address for each instance.
-vagrant_hostname: springboardvm.dev
-vagrant_machine_name: springboardvm
+# Don't modify this file, use local.config.yml instead. Place values
+# you want to override there.
+
+vagrant_box: geerlingguy/ubuntu1404
+vagrant_hostname: sbcrush.dev
+vagrant_machine_name: sbcrush
 vagrant_ip: 0.0.0.0
 
-# A list of synced folders, with the keys 'local_path', 'destination', and
-# a 'type' of [nfs|rsync|smb] (leave empty for slow native shares). See
-# http://docs.drupalvm.com/en/latest/extras/syncing-folders/ for more info.
 vagrant_synced_folders:
-  # The first synced folder will be used for the default Drupal installation, if
-  # any of the build_* settings are 'true'. By default the folder is set to
-  # the drupal-vm folder.
   - local_path: .
     destination: /var/www/springboard
     type: nfs
@@ -23,22 +16,17 @@ vagrant_synced_folders:
 
 build_makefile: false
 
-# Set 'build_makefile' to 'false' and this to 'true' if you are using a
-# composer based site deployment strategy.
 build_composer: false
 drupal_composer_path: false
 drupal_composer_install_dir: "/var/www/springboard/sites"
 drupal_composer_dependencies: []
 
 build_composer_project: false
-
-# Set this to 'false' if you don't need to install drupal (using the drupal_*
-# settings below), but instead copy down a database (e.g. using drush sql-sync).
 install_site: true
 
 # Required Drupal settings.
 drupal_core_dir: "sb_default"
-drupal_testing_dir: "testing"
+drupal_testing_dir: "sb_testing"
 drupal_core_path: "{{ drupal_composer_install_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ drupal_composer_install_dir }}/{{drupal_testing_dir}}"
 drupal_db_user: drupal
@@ -49,16 +37,14 @@ drupal_site_install_extra_args: ["install_configure_form.update_status_module='a
 
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
 drupal_major_version: 7
-drupal_domain: "{{ vagrant_hostname }}"
-drupal_testing_domain: "sb-testing.dev"
+drupal_domain: "{{ vagrant_machine_name }}-default.dev"
+drupal_testing_domain: "{{ vagrant_machine_name }}-testing.dev"
 drupal_site_name: "Springboard"
 drupal_install_profile: sbsetup
 drupal_enable_modules: [ 'devel' ]
 drupal_account_name: admin
 drupal_account_pass: admin
 
-# Comment out any extra utilities you don't want to install. If you don't want
-# to install *any* extras, set this value to an empty set, e.g. `[]`.
 installed_extras:
   # - adminer
   - blackfire
@@ -78,8 +64,6 @@ installed_extras:
 
 drush_version: "8.x"
 
-# PHP Configuration. Currently-supported versions: 5.6, 7.0.
-# To use 5.6, see: http://docs.drupalvm.com/en/latest/other/php-56/
 php_version: "5.6"
 php_install_recommends: no
 php_packages:
@@ -160,6 +144,7 @@ ssh_home: "{{ drupal_composer_install_dir }}"
 
 
 apache_vhosts:
+
 # Testing Site
   - servername: "{{ drupal_testing_domain }}"
     serveralias: "www.{{ drupal_testing_domain }}"
@@ -218,12 +203,12 @@ apache_vhosts_ssl:
 # If you don't specify one here, drush will create it during post-provision.
 mysql_databases:
 # Testing site
-  - name: "sb_testing"
+  - name: "{{ drupal_testing_dir }}"
     encoding: utf8mb4
     collation: utf8mb4_general_ci
 
 # Default DrupalVM Db.
-  - name: "{{ drupal_db_name }}"
+  - name: "{{ drupal_core_dir }}"
     encoding: utf8mb4
     collation: utf8mb4_general_ci
 
