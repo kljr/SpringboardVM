@@ -10,7 +10,7 @@ Creates one or more fully configured Springboard sites, plus a virtual machine t
 - Composer
 - VirtualBox
 - Vagrant
-- Ansible (not required, but will make things quicker).as
+- Ansible (not required, but will make things quicker)
 - Bash
 
 If you have all of the following vagrant plugins, no network/IP configuration is required:
