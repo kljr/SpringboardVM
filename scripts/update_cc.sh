@@ -28,11 +28,13 @@ rm -r tmp_springboard/sites/all/modules/springboard
 rm -r tmp_springboard/sites/all/themes
 rm -r tmp_springboard/sites/all/libraries/springboard_advocacy
 rm -r tmp_springboard/sites/all/libraries/springboard_composer
+rm -r tmp_springboard/sites/default
 
 cp -R $path/sites/all/modules/springboard tmp_springboard/sites/all/modules
 cp -R $path/sites/all/themes tmp_springboard/sites/all
 cp -R $path/sites/all/libraries/springboard_advocacy tmp_springboard/sites/all/libraries
 cp -R $path/sites/all/libraries/springboard_composer tmp_springboard/sites/all/libraries
+cp -R $path/sites/default tmp_springboard/sites
 
 echo "Making backup of $path"
 mv $path backups/${path:5}_$(date +%s)
