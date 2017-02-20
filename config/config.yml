@@ -37,7 +37,10 @@ build_composer_project: false
 install_site: true
 
 # Required Drupal settings.
-drupal_core_path: "{{ drupal_composer_install_dir }}/sb_default"
+drupal_core_dir: "sb_default"
+drupal_testing_dir: "testing"
+drupal_core_path: "{{ drupal_composer_install_dir }}/{{drupal_core_dir}}"
+drupal_testing_path: "{{ drupal_composer_install_dir }}/{{drupal_testing_dir}}"
 drupal_db_user: drupal
 drupal_db_password: drupal
 drupal_db_name: springboard
@@ -47,25 +50,12 @@ drupal_site_install_extra_args: ["install_configure_form.update_status_module='a
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
 drupal_major_version: 7
 drupal_domain: "{{ vagrant_hostname }}"
+drupal_testing_domain: "sb-testing.dev"
 drupal_site_name: "Springboard"
 drupal_install_profile: sbsetup
 drupal_enable_modules: [ 'devel' ]
 drupal_account_name: admin
 drupal_account_pass: admin
-
-apache_vhosts_ssl:
-  - servername: "{{ drupal_domain }}"
-    documentroot: "{{ drupal_core_path }}"
-    certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
-    certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
-
-# MySQL databases and users.
-mysql_databases:
-  - name: "{{ drupal_db_name }}"
-    encoding: utf8mb4
-    collation: utf8mb4_general_ci
 
 # Comment out any extra utilities you don't want to install. If you don't want
 # to install *any* extras, set this value to an empty set, e.g. `[]`.
@@ -167,3 +157,81 @@ php_xdebug_max_nesting_level: 256
 
 known_hosts_path: ~/.ssh/known_hosts
 ssh_home: "{{ drupal_composer_install_dir }}"
+
+
+apache_vhosts:
+# Testing Site
+  - servername: "{{ drupal_testing_domain }}"
+    serveralias: "www.{{ drupal_testing_domain }}"
+    documentroot: "{{ drupal_testing_path }}"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_testing_path}}"
+
+# Default DrupalVM virtual hosts.
+
+  - servername: "{{ drupal_domain }}"
+    serveralias: "www.{{ drupal_domain }}"
+    documentroot: "{{ drupal_core_path }}"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+  - servername: "adminer.{{ vagrant_hostname }}"
+    documentroot: "{{ adminer_install_dir }}"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ adminer_install_dir }}"
+
+  - servername: "xhprof.{{ vagrant_hostname }}"
+    documentroot: "{{ php_xhprof_html_dir }}"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ php_xhprof_html_dir }}"
+
+  - servername: "pimpmylog.{{ vagrant_hostname }}"
+    documentroot: "{{ pimpmylog_install_dir }}"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ pimpmylog_install_dir }}"
+
+  - servername: "{{ vagrant_ip }}"
+    serveralias: "dashboard.{{ vagrant_hostname }}"
+    documentroot: "{{ dashboard_install_dir }}"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ dashboard_install_dir }}"
+          DirectoryIndex index.html
+
+apache_vhosts_ssl:
+  - servername: "{{ drupal_testing_domain }}"
+    serveralias: "www.{{ drupal_testing_domain }}"
+    certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+    certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_composer_install_dir }}/testing"
+
+# Default DrupalVM virtual hosts.
+  - servername: "{{ drupal_domain }}"
+    documentroot: "{{ drupal_core_path }}"
+    certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+    certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+
+# create additional databases. Use the docroot name for the database name.
+# If you don't specify one here, drush will create it during post-provision.
+mysql_databases:
+# Testing site
+  - name: "sb_testing"
+    encoding: utf8mb4
+    collation: utf8mb4_general_ci
+
+# Default DrupalVM Db.
+  - name: "{{ drupal_db_name }}"
+    encoding: utf8mb4
+    collation: utf8mb4_general_ci
+
+mysql_users:
+  - name: "{{ drupal_db_user }}"
+    host: "%"
+    password: "{{ drupal_db_password }}"
+    priv: "*.*:ALL"
+
+# Allow connections from any IP. Useful for acceptance tests.
+#mysql_bind_address: 0.0.0.0

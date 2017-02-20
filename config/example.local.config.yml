@@ -1,26 +1,37 @@
-# Add additional Springboard installs and vhosts.
-
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance.
 #vagrant_hostname: springboardvm.dev
 #vagrant_machine_name: springboardvm
 #vagrant_ip: 0.0.0.0
 
-# Don't use any special characters in the docroot name. Only a-z and "/" are allowed.
+
+# Add additional Springboard installs and vhosts.
+# Don't use any special characters in the docroot name. Only a-z are allowed.
 
 # If you're adding a new site to a previously provisioned SpringboardVM, then you need to:
 # run `composer update`
 # run `vagrant provision`
 
 apache_vhosts:
-#custom virtual host
-  - servername: "test2.dev"
-    serveralias: "www.test2.dev"
-    documentroot: "{{drupal_composer_install_dir}}/test2"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_composer_install_dir}}/test2"
 
-# Default DrupalVM virtual hosts.
+# A Custom Site
+  - servername: "another-site"
+    serveralias: "www.another-site.dev"
+    documentroot: "{{drupal_composer_install_dir}}/another"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_composer_install_dir}}/another"
+
+# You need to maintain the default DrupalVM vhost definitions
+# in this file too.
+
+# The Default Testing Site
+  - servername: "{{ drupal_testing_domain }}"
+    serveralias: "www.{{ drupal_testing_domain }}"
+    documentroot: "{{ drupal_testing_path }}"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_testing_path}}"
+
+# Default  virtual hosts.
 
   - servername: "{{ drupal_domain }}"
     serveralias: "www.{{ drupal_domain }}"
@@ -50,15 +61,13 @@ apache_vhosts:
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ dashboard_install_dir }}"
           DirectoryIndex index.html
 
-
-
 apache_vhosts_ssl:
-  - servername: "test2.dev"
-    documentroot: "{{drupal_composer_install_dir}}/test2"
+  - servername: "{{ drupal_testing_domain }}"
+    serveralias: "www.{{ drupal_testing_domain }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_composer_install_dir}}/test2"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_testing_path }}"
 
 # Default DrupalVM virtual hosts.
   - servername: "{{ drupal_domain }}"
@@ -72,8 +81,8 @@ apache_vhosts_ssl:
 # create additional databases. Use the docroot name for the database name.
 # If you don't specify one here, drush will create it during post-provision.
 mysql_databases:
-#Custom db.
-  - name: "test2"
+# Testing site
+  - name: "sb_testing"
     encoding: utf8mb4
     collation: utf8mb4_general_ci
 

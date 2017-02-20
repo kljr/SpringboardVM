@@ -9,7 +9,7 @@ echo "Type the relative path the drupal root of the site whose contrib modules y
 read path
 
 echo "Making backup, please wait..."
-cp -R $path backups/${path:5}_$(date +%s)
+cp -R $path backups/sites/${path:5}_$(date +%s)
 
 echo "Type the Springboard-Build branch name that you want to replace contrib with, followed by [ENTER]:"
 read branch

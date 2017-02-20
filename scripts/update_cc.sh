@@ -37,6 +37,6 @@ cp -R $path/sites/all/libraries/springboard_composer tmp_springboard/sites/all/l
 cp -R $path/sites/default tmp_springboard/sites
 
 echo "Making backup of $path"
-mv $path backups/${path:5}_$(date +%s)
+mv $path backups/sites/${path:5}_$(date +%s)
 mv tmp_springboard $path
 echo "Done"
