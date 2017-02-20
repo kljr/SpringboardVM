@@ -34,9 +34,15 @@ if [ ! -d sites/${drupal_testing_dir} ]; then
    fi;
     cd sites/${drupal_testing_dir};
     echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
+
     cd ../../
 fi;
 
+# Add codeception config files
+if [ -d acceptance-tests ]; then
+  \cp templates/tests/codeception.yml acceptance-tests
+  \cp templates/tests/acceptance.suite.yml acceptance-tests/tests
+fi;
 
 
 LOCAL_CONFIG_FILE=config/local.config.yml

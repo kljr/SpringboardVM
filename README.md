@@ -72,7 +72,17 @@ the updated folder into its place.
 site, without overwriting Springboard folders or any non-Springboard customizations in the libraries or contrib folders.
 
 ## Running tests
-The Springboard acceptance tests repository will be placed in `tests`.
+
+Configuration templates for codeception are copied from the templates/tests directory into the acceptance test
+repository. They should be ready to go.
+
+Run `composer update` from the /acceptance-tests directory to install codeception's dependencies.
+
+Then `../vendor/bin/codecept run`
+
+You can use one virtual host exclusively for running tests. The shell scripts
+will make it easy to switch among different springboard versions you may want to test.
+
 A port has been forwarded from the guests 3306 port to the hosts 3307 port,
 or you can configure mySQL to allow connections from any IP by setting the mySQL
 bind address to 0.0.0.0 in the local.config.yml file.
@@ -81,10 +91,9 @@ in `tests/README.md`, and modify the `tests/codeception.yml` file to change
 the `modules:config:Db:dsn` variable to forward like so: `mysql:host=127.0.0.1;dbname=springboard;port=3307`,
 or to use the IP of your VM if you've configured the mySQL bind address to be 0.0.0.0.
 
-You should use one virtual host exclusively for running tests. The shell scripts
-will make it easy to switch among different springboard versions you may want to test.
-
 ## DrupalVM
+
+Drupal VM ships with a firewall. You can disable it by sshing into the machine and doing `sudo service firewall stop`
 
 More information about DrupalVM can be found at [DrupalVM.com](http://drupalvm.com/),
 and documentation for DrupalVM can be found at [the DrupalVM docs](http://docs.drupalvm.com/).
