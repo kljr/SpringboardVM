@@ -44,6 +44,7 @@ you can view the dashboard at dashboard.springboardvm.dev.
 * Composer will then trigger a bash script which runs drush make.
 * Drush will install Springboard, checking out git working copies of Springboard modules, themes and libraries from the springboard git repo. The default install will be in `sites/sb_default` and will have Springboard version 7.x-4.x
 * Additional sites will be in sites/{docroot}, with the docroot you defined in local.config.yml.
+* Vagrant will provision Drupal VM, Apache and mySQL, and create virtual host entries and databases.
 * Springboard Crush provides a shell script to allow Drush to update Drupal core and contrib on an existing site without touching its Springboard folders.
 
 ## Updating virtual hosts and adding new sites.
