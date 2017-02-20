@@ -34,5 +34,7 @@ cp -R $path/sites/all/themes tmp_springboard/sites/all
 cp -R $path/sites/all/libraries/springboard_advocacy tmp_springboard/sites/all/libraries
 cp -R $path/sites/all/libraries/springboard_composer tmp_springboard/sites/all/libraries
 
-mv $path ${path}_old
+echo "Making backup of $path"
+mv $path backups/${path:5}_$(date +%s)
 mv tmp_springboard $path
+echo "Done"

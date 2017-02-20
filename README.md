@@ -1,10 +1,6 @@
-# Composer/Drush/DrupalVM template for Springboard projects
+# Crush (Composer + Drush) for Springboard projects
 
 Creates one or more fully configured Springboard sites, plus a virtual machine to run them in.
-
-By default, a single Springboard site will be installed, running the 7.x-4.x branch. Additional Springboard
-installs and vhosts can be defined by following the example in `local.config.yml.example`. If you create additional
-sites the install script will prompt you for the Springboard version, which can be a branch or tag in the Springboard-Build repo.
 
 ## Prerequisites
 
@@ -20,39 +16,58 @@ If you have all of the following vagrant plugins, no network/IP configuration is
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
 - [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
 
-Otherwise you will need to edit vagrant_ip in config.yml, and update /etc/hosts to
-point springboardvm.dev at the IP you choose.
+Otherwise you will need to edit the vagrant_ip in local.config.yml, and update /etc/hosts to
+point springboardvm.dev and the other host you create at the IP of the machine.
 
 #Usage
 
 Clone this repository.
 
+If you want to create additional Springboard sites besides the default, copy config/example.local.config.yml to
+config/local.config.yml and edit as you see fit.
+
 Run `composer update`
 
-If you defined any additional springboard installs on local.config.yml, you will be prompted for the springboard-build branch.
+After composer  update completes, run `vagrant up`.
 
-After composer completes, run `vagrant up`.
+The first time running vagrant will take a while. After all processes complete successfully
+you can view the dashboard at dashboard.springboardvm.dev.
 
-The first time running vagrant will take a while.
-
-## What does the template do?
+## What does Crush do?
 
 * Composer will download Springboard-Build, DrupalVM, the Acceptance Test repo and their vendor dependencies.
 * Composer will then trigger a bash script which runs drush make.
-* Drush make will install Springboard, checking out working copies from the springboard git repo.
-* The default install will be in `sites/first` and will have Springboard version 7.x-4.x
-* Additional sites will be in sites/{docroot}, with the docroot you defined in local.config.yml. Bash will prompt you for the Spingboard version.
-* The Springboard acceptance tests repository will be placed in `tests`. A port has been forwarded from the guests 3306 port to the hosts 3307 port. If you'd like to run the Codeception tests, you'll need to follow the instructions in `web/tests/README.md`, and modify the `web/tests/codeception.yml` file to change the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
-* Provides a shell script to allow Drush make Springboard-Buils to update Drupal core and contrib on an existing site without touching the Springboard Repos.
+* Drush make will install Springboard, checking out git working copies of Springboard modules, themes and libraries from the springboard git repo.
+* The default install will be in `sites/sb_default` and will have Springboard version 7.x-4.x
+* Additional sites will be in sites/{docroot}, with the docroot you defined in local.config.yml.
+* The Springboard acceptance tests repository will be placed in `tests`.
+A port has been forwarded from the guests 3306 port to the hosts 3307 port, you can configure mySql to allow connections from any IP.
+If you'd like to run the Codeception tests, you'll need to follow the instructions
+in `web/tests/README.md`, and modify the `web/tests/codeception.yml` file to change
+the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
+* Provides a shell script to allow Drush make Springboard-Builds to update Drupal core
+and contrib on an existing site without touching the Springboard Repos.
 
-## Updating Virtual hosts
+## Updating virtual hosts and adding new sites.
 
 If you want to add a new site to a previously provisioned SpringboardVM, then you need to:
 * Define it in local.config.yml
-* run `composer update`
-* Enter the springboard version at the prompt
-* run `vagrant provision`
+* run `scripts/make-sb.sh` (You may have to chmod +x).
+* Enter the springboard version you want to download at the prompt
+* Wait for the script to complete, then run `vagrant provision` to update apache
+and do other post-provision tasks.
 
+##Updating Springboard sites
+
+There are two scripts which allow you to update a Springboard site's Drupal core and contrib modules automatically,
+without touching Springboard modules, themes or libraries;
+
+* scripts/update-cc.sh prompts you to download a version of Springboard, and then copies
+the Springboard folders of your existing site into it, renames the old site folder, and moves
+the new folder into its place.
+
+* scripts/update-cc-inverse copies drupal core and contrib files out of a new Springboard download and places them into your existing
+site, without overwriting Springboard folders or any non-Springboard customizations in the libraries or contrib folders.
 
 ## DrupalVM
 

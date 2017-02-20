@@ -8,8 +8,12 @@
 echo "Type the relative path the drupal root of the site whose contrib modules you want to update, followed by [ENTER]:"
 read path
 
+echo "Making backup, please wait..."
+cp -R $path backups/${path:5}_$(date +%s)
+
 echo "Type the Springboard-Build branch name that you want to replace contrib with, followed by [ENTER]:"
 read branch
+echo "Building Springboard"
 
 cd build
 git checkout $branch
@@ -17,32 +21,43 @@ cd ../
 
 # Check to see if the developer make file is available.
 if [ -f build/springboard-developer.make ]; then
- drush make --no-gitinfofile build/springboard-developer.make tmp_contrib;
+ drush make --no-gitinfofile build/springboard-developer.make tmp_springboard;
 else
  # Use the standard make file.
- drush make --no-gitinfofile build/springboard-mtsb.make tmp_contrib;
+ drush make --no-gitinfofile build/springboard-mtsb.make tmp_springboard;
 fi;
 
-rm -r $path/sites/all/modules/contrib
-cp -R tmp_contrib/sites/all/modules/contrib $path/sites/all/modules/contrib
-rm -r tmp_contrib/sites/all/libraries/springboard_advocacy
-rm -r tmp_contrib/sites/all/libraries/springboard_composer
+echo "Updating Springboard $path"
 
-for FILE in tmp_contrib/sites/all/libraries/*; do
+rm -r tmp_springboard/sites/all/libraries/springboard_advocacy
+rm -r tmp_springboard/sites/all/libraries/springboard_composer
+
+for FILE in tmp_springboard/sites/all/modules/contrib/*; do
+    if [[ -d $FILE ]]; then
+      rm -r $path/sites/all/modules/contrib/$(echo $FILE| cut -d'/' -f 6)
+    fi;
+done
+
+\cp -R tmp_springboard/sites/all/modules/contrib/* $path/sites/all/modules/contrib
+
+for FILE in tmp_springboard/sites/all/libraries/*; do
     if [[ -d $FILE ]]; then
       rm -r $path/sites/all/libraries/$(echo $FILE| cut -d'/' -f 5)
     fi;
 done
 
-\cp -R tmp_contrib/sites/all/libraries $path/sites/all/
-rm -r tmp_contrib/sites
+\cp -R tmp_springboard/sites/all/libraries $path/sites/all/
+rm -r tmp_springboard/sites
 
-for FILE in tmp_contrib/*; do
-    if [[ ! -d $FILE ]]; then
-      rm -r $path/${FILE:12}
-    fi;
-done
+#for FILE in tmp_springboard/*; do
+#    if [[ ! -d $FILE ]]; then
+#     echo $path/${FILE}
+#
+#      rm -r $path/${FILE:12}
+#    fi;
+#done
 
-\cp -R tmp_contrib/* $path
+\cp -R tmp_springboard/* $path
 
-rm -r tmp_contrib
+rm -r tmp_springboard
+echo "Done."

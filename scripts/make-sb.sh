@@ -63,7 +63,6 @@ do
             # Use the standard make file.
             drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
         fi;
-        mkdir sites/$directory;
         cd sites/$directory;
         echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
         cd ../../

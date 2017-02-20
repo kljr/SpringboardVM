@@ -6,3 +6,4 @@ sites/
 composer.lock
 config/local.config.yml
 .vagrant
+backups
