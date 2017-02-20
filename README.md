@@ -1,6 +1,6 @@
 # Springboard Crush
 
-Springboard with Composer + Drush + DrupalVM.
+Springboard with Composer + Drush Make + DrupalVM.
 
 Creates one or more fully configured Springboard sites, plus a virtual machine to run them in.
 
