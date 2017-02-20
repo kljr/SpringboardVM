@@ -5,7 +5,7 @@ Creates one or more fully configured Springboard sites, plus a virtual machine t
 ## Prerequisites
 
 - Linux or Mac (with NFS)
-- [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
+- Composer
 - VirtualBox
 - Vagrant
 - Ansible (not required, but will make things quicker).
@@ -14,10 +14,13 @@ If you have all of the following vagrant plugins, no network/IP configuration is
 
 - [vagrant-auto_network](https://github.com/oscar-stack/vagrant-auto_network)
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
-- [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
 
 Otherwise you will need to edit the vagrant_ip in local.config.yml, and update /etc/hosts to
 point springboardvm.dev and the other host you create at the IP of the machine.
+
+Also helpful:
+
+- [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
 
 #Usage
 
@@ -37,16 +40,9 @@ you can view the dashboard at dashboard.springboardvm.dev.
 
 * Composer will download Springboard-Build, DrupalVM, the Acceptance Test repo and their vendor dependencies.
 * Composer will then trigger a bash script which runs drush make.
-* Drush make will install Springboard, checking out git working copies of Springboard modules, themes and libraries from the springboard git repo.
-* The default install will be in `sites/sb_default` and will have Springboard version 7.x-4.x
+* Drush make will install Springboard, checking out git working copies of Springboard modules, themes and libraries from the springboard git repo. The default install will be in `sites/sb_default` and will have Springboard version 7.x-4.x
 * Additional sites will be in sites/{docroot}, with the docroot you defined in local.config.yml.
-* The Springboard acceptance tests repository will be placed in `tests`.
-A port has been forwarded from the guests 3306 port to the hosts 3307 port, you can configure mySql to allow connections from any IP.
-If you'd like to run the Codeception tests, you'll need to follow the instructions
-in `web/tests/README.md`, and modify the `web/tests/codeception.yml` file to change
-the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
-* Provides a shell script to allow Drush make Springboard-Builds to update Drupal core
-and contrib on an existing site without touching the Springboard Repos.
+* Crush provides a shell script to allow Drush to update Drupal core and contrib on an existing site without touching its Springboard folders.
 
 ## Updating virtual hosts and adding new sites.
 
@@ -57,17 +53,24 @@ If you want to add a new site to a previously provisioned SpringboardVM, then yo
 * Wait for the script to complete, then run `vagrant provision` to update apache
 and do other post-provision tasks.
 
-##Updating Springboard sites
+## Updating existing Springboard sites
 
 There are two scripts which allow you to update a Springboard site's Drupal core and contrib modules automatically,
 without touching Springboard modules, themes or libraries;
 
 * scripts/update-cc.sh prompts you to download a version of Springboard, and then copies
-the Springboard folders of your existing site into it, renames the old site folder, and moves
+the Springboard folders of your existing site into it, moves the old site folder into backups directory, and moves
 the new folder into its place.
 
 * scripts/update-cc-inverse copies drupal core and contrib files out of a new Springboard download and places them into your existing
 site, without overwriting Springboard folders or any non-Springboard customizations in the libraries or contrib folders.
+
+## Running tests
+The Springboard acceptance tests repository will be placed in `tests`.
+A port has been forwarded from the guests 3306 port to the hosts 3307 port, or you can configure mySQL to allow connections from any IP.
+If you'd like to run the Codeception tests, you'll need to follow the instructions
+in `tests/README.md`, and modify the `tests/codeception.yml` file to change
+the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
 
 ## DrupalVM
 
