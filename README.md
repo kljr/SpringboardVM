@@ -51,8 +51,7 @@ you can view the dashboard at dashboard.springboardvm.dev.
 
 If you want to add a new site to a previously provisioned SpringboardVM, then you need to:
 * Define it in local.config.yml
-* run `scripts/make-sb.sh` (You may have to chmod +x).
-* Enter the springboard version you want to download at the prompt
+* Run `scripts/make-sb.sh` (You may have to chmod +x). Enter the springboard version you want to download at the prompt.
 * Wait for the script to complete, then run `vagrant provision` to update apache
 and do other post-provision tasks.
 
@@ -83,4 +82,4 @@ DrupalVM will be placed in `vendor/geerlingguy/drupal-vm/`, and configuration fi
 
 ## Credits
 
-Thanks to [drupal-project](https://github.com/drupal-composer/drupal-project/tree/7.x) for the initial template, [DrupalVM](https://www.drupalvm.com/), [composer-patches](https://github.com/cweagans/composer-patches) for helping manage patches, and [composer-preserve-paths](https://github.com/derhasi/composer-preserve-paths) for helping with path preservation.
+Thanks to [Springboard-Build-Composer](https://github.com/robertromore/Springboard-Build-Composer), [Composer template for Drupal projects](https://github.com/drupal-composer/drupal-project/tree/7.x) for the initial template, and [DrupalVM](https://www.drupalvm.com/)
