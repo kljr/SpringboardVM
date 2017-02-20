@@ -1,4 +1,6 @@
-# Springboard Crush (Springboard with Composer + Drush).
+# Springboard Crush
+
+Springboard with Composer + Drush + DrupalVM.
 
 Creates one or more fully configured Springboard sites, plus a virtual machine to run them in.
 
@@ -16,7 +18,7 @@ If you have all of the following vagrant plugins, no network/IP configuration is
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
 
 Otherwise you will need to edit the vagrant_ip in local.config.yml, and update /etc/hosts to
-point springboardvm.dev and the other host you create at the IP of the machine.
+point springboardvm.dev and the other domains you create at the IP of the virtual machine.
 
 Also helpful:
 
