@@ -30,17 +30,19 @@ function parse_yaml_for_vhosts {
    }'
 }
 
-# Parse the local config yml file into the global vars.
-eval $(parse_yaml_for_vhosts ${CONFIG_FILE})
-#( set -o posix ; set ) | more
-for vhost in ${!apache_vhosts__documentroot*}
-    do
-        # Get the docroot directory name.
-        directory=${!vhost}
-        directory=${directory/__/\/}
-        if [ ! -f ${PROJECT_ROOT}/sites/$directory/sites/default/settings.php ]; then
-          cd ${PROJECT_ROOT}/sites/$directory
-          drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$directory
-          drush vset encrypt_secure_key_path ${PROJECT_ROOT}/sites/$directory/sites/default/files/
-        fi;
-    done
+if [ -f CONFIG_FILE ]; then
+    # Parse the local config yml file into the global vars.
+    eval $(parse_yaml_for_vhosts ${CONFIG_FILE})
+    #( set -o posix ; set ) | more
+    for vhost in ${!apache_vhosts__documentroot*}
+        do
+            # Get the docroot directory name.
+            directory=${!vhost}
+            directory=${directory/__/\/}
+            if [ ! -f ${PROJECT_ROOT}/sites/$directory/sites/default/settings.php ]; then
+              cd ${PROJECT_ROOT}/sites/$directory
+              drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$directory
+              drush vset encrypt_secure_key_path ${PROJECT_ROOT}/sites/$directory/sites/default/files/
+            fi;
+        done
+fi;
