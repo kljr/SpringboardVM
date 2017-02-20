@@ -10,7 +10,8 @@ Creates one or more fully configured Springboard sites, plus a virtual machine t
 - Composer
 - VirtualBox
 - Vagrant
-- Ansible (not required, but will make things quicker).
+- Ansible (not required, but will make things quicker).as
+- Bash
 
 If you have all of the following vagrant plugins, no network/IP configuration is required:
 
@@ -69,16 +70,28 @@ site, without overwriting Springboard folders or any non-Springboard customizati
 
 ## Running tests
 The Springboard acceptance tests repository will be placed in `tests`.
-A port has been forwarded from the guests 3306 port to the hosts 3307 port, or you can configure mySQL to allow connections from any IP.
+A port has been forwarded from the guests 3306 port to the hosts 3307 port,
+or you can configure mySQL to allow connections from any IP by setting the mySQL
+bind address to 0.0.0.0 in teh lcoal.config.yml file.
 If you'd like to run the Codeception tests, you'll need to follow the instructions
 in `tests/README.md`, and modify the `tests/codeception.yml` file to change
-the `modules:config:Db:dsn` variable to use `mysql:host=127.0.0.1;dbname=springboard;port=3307`.
+the `modules:config:Db:dsn` variable to forward like so: `mysql:host=127.0.0.1;dbname=springboard;port=3307`,
+or to use the IP of your VM if you've configured the mySQL bind address to be 0.0.0.0
 
 ## DrupalVM
 
-More information about DrupalVM can be found at [DrupalVM.com](http://drupalvm.com/), and documentation for DrupalVM can be found at [the DrupalVM docs](http://docs.drupalvm.com/).
+More information about DrupalVM can be found at [DrupalVM.com](http://drupalvm.com/),
+and documentation for DrupalVM can be found at [the DrupalVM docs](http://docs.drupalvm.com/).
 
-DrupalVM will be placed in `vendor/geerlingguy/drupal-vm/`, and configuration files will be available to edit in the `config/` directory. A `config.yml` file is located in `config/`, which is a modified version of DrupalVM's default.config.yml file. Any configuration that needs to be changed for DrupalVM can be done in this file. Additionally, you can place a `local.config.yml` file in this folder to override any settings in `config.yml`, which is useful if you're sharing your VM configuration across teams. A Vagrantfile named `Vagrantfile.local` may also be placed in this directory to override anything in DrupalVM's Vagrantfile.
+DrupalVM will be placed in `vendor/geerlingguy/drupal-vm/`,
+and configuration files will be in the `config/`
+directory. A `config.yml` file is located in `config/`, which is a
+modified version of DrupalVM's default.config.yml file.
+Additionally, you can place a `local.config.yml` file in
+this folder to override any settings in `config.yml` which you
+do not want to commit to the repo.
+A Vagrantfile named `Vagrantfile.local` may also be placed in this
+directory to override anything in DrupalVM's Vagrantfile.
 
 ## Credits
 
