@@ -9,13 +9,13 @@ contrib modules without touching their Springboard directories, and a virtual ma
 ## Prerequisites
 
 - Linux or Mac (with NFS)
-- Bash
 - Composer
 - VirtualBox
 - Vagrant
 - Ansible (not required, but will make things quicker)
+- For acceptance tests, port 3334 free. If port 3334 is already in use, edit config/vagranfile.local to use a different one. You will also have to edit the acceptance test configuration to get them to work on an alternate port.
 
-If you have all of the following vagrant plugins, no network/IP configuration is required:
+If you have the following vagrant plugins, no network/IP configuration is required:
 
 - [vagrant-auto_network](https://github.com/oscar-stack/vagrant-auto_network)
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
@@ -37,7 +37,7 @@ config/local.config.yml and edit as you see fit.
 
 Run `composer update`
 
-After composer  update completes, run `vagrant up`.
+After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
 you can view the dashboard at dashboard.sbcrush.dev.
@@ -50,6 +50,7 @@ you can view the dashboard at dashboard.sbcrush.dev.
 * Additional sites can be put in sites/{docroot}, with a docroot you define in config/local.config.yml.
 * Vagrant will provision DrupalVM, Apache and mySQL, create virtual host entries, site databases, and install the Springboard profile.
 * Springboard Crush provides shell scripts to allow Drush Make to update Drupal core and contrib on an existing site without touching its Springboard folders.
+* SPringboard Crush configures the acceptance tests to work out of the box, with no configuration.
 
 ## Updating virtual hosts and adding new sites.
 
@@ -83,7 +84,7 @@ Then `../vendor/bin/codecept run`
 You can use one virtual host exclusively for running tests. The shell scripts
 will make it easy to switch among different springboard versions you may want to test.
 
-A port has been forwarded from the guests 3306 port to the hosts 3307 port,
+A port has been forwarded from the guests 3306 port to the hosts 3334 port,
 or you can configure mySQL to allow connections from any IP by setting the mySQL
 bind address to 0.0.0.0 in the local.config.yml file.
 If you'd like to run the Codeception tests, you'll need to follow the instructions
