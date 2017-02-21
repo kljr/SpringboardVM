@@ -16,12 +16,14 @@ eval $(parse_yaml ${MAIN_CONFIG_FILE})
 # First site built on composer install/update.
 if [ ! -d sites/${drupal_core_dir} ]; then
    # Check to see if the developer make file is available.
-   if [ -f build/springboard-developer.make ]; then
-     drush make --no-gitinfofile build/springboard-developer.make sites/${drupal_core_dir};
-   else
-     # If no developer make, use the standard make file.
+#   if [ -f build/springboard-developer.make ]; then
+#     drush make --no-gitinfofile build/springboard-developer.make sites/${drupal_core_dir};
+#   else
+#     # If no developer make, use the standard make file.
+#     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
+#   fi;
+
      drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
-   fi;
     # add springboard to drupal core's .gitignore.
     cd sites/${drupal_core_dir};
     echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
@@ -30,12 +32,14 @@ fi;
 
 if [ ! -d sites/${drupal_testing_dir} ]; then
    # Check to see if the developer make file is available.
-   if [ -f build/springboard-developer.make ]; then
-     drush make --no-gitinfofile build/springboard-developer.make sites/${drupal_testing_dir};
-   else
-     # If no developer make, use the standard make file.
-     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_testing_dir};
-   fi;
+#   if [ -f build/springboard-developer.make ]; then
+#     drush make --no-gitinfofile build/springboard-developer.make sites/${drupal_testing_dir};
+#   else
+#     # If no developer make, use the standard make file.
+#     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_testing_dir};
+#   fi;
+   drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_testing_dir};
+
     cd sites/${drupal_testing_dir};
     echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
 
@@ -67,12 +71,13 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             git checkout $branch
             cd ../
             # Check to see if the developer make file is available.
-            if [ -f build/springboard-developer.make ]; then
-                drush make --no-gitinfofile build/springboard-developer.make sites/$directory;
-            else
-                # Use the standard make file.
-                drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
-            fi;
+#            if [ -f build/springboard-developer.make ]; then
+#                drush make --no-gitinfofile build/springboard-developer.make sites/$directory;
+#            else
+#                # Use the standard make file.
+#                drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
+#            fi;
+            drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
             cd sites/$directory;
             echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
             cd ../../

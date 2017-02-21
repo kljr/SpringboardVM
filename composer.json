@@ -13,7 +13,7 @@
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard-build.git",
                     "type": "git",
-                    "reference": "7.x-4.x_add_developer_make_file"
+                    "reference": "7.x-4.x"
                 },
                 "dist": {
                     "url": "https://github.com/JacksonRiver/springboard-build/archive/7.x-4.14.zip",
