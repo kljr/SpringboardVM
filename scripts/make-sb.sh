@@ -44,8 +44,8 @@ fi;
 
 # Add codeception config files
 if [ -d acceptance-tests ]; then
-  \cp templates/tests/codeception.yml acceptance-tests
-  \cp templates/tests/acceptance.suite.yml acceptance-tests/tests
+  \cp templates/codeception/codeception.yml acceptance-tests
+  \cp templates/ceodeception/acceptance.suite.yml acceptance-tests/tests
 fi;
 
 
