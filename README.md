@@ -2,9 +2,11 @@
 
 Springboard with Composer + Drush Make + DrupalVM + Codeception.
 
-Provides multiple fully-configured Springboard sites with working copies of the Springboard repositories,
-a dedicated testing site and environment, scripts that allow Drush Make to update existing sites' core and
-contrib modules without touching their Springboard directories, and a virtual machine to run them in.
+Provides multiple fully-configured Springboard sites with working copies
+of the Springboard repositories, a dedicated testing site and
+environment, scripts that allow Drush Make to update existing sites'
+core and contrib modules without touching their Springboard directories,
+and a virtual machine to run them in.
 
 ## Prerequisites
 
@@ -21,9 +23,11 @@ If you have the following Vagrant plugins, no network/IP configuration is requir
 - [vagrant-auto_network](https://github.com/oscar-stack/vagrant-auto_network)
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
 
-Otherwise you will need to edit the vagrant_ip in local.config.yml, and update /etc/hosts to
-point druvmoser.dev and the other domains you create at the IP of the virtual machine. You can find the
-correct information for the hosts file by visiting the VM IP address after install.
+Otherwise you will need to edit the vagrant_ip in local.config.yml, and
+update /etc/hosts to point druvmoser.dev and the other domains you
+create at the IP of the virtual machine. You can find the correct
+information for the hosts file by visiting the VM IP address after
+install.
 
 Also helpful:
 
@@ -33,7 +37,8 @@ Also helpful:
 
 Clone this repository.
 
-If you want to create additional Springboard sites besides the two default sites, copy config/example.local.config.yml to
+If you want to create additional Springboard sites besides the two
+default sites, copy config/example.local.config.yml to
 config/local.config.yml and edit as you see fit.
 
 Run `composer update`
@@ -45,72 +50,92 @@ you can view the dashboard at dashboard.druvmoser.dev.
 
 ## What does Druvmoser do?
 
-* Downloads Springboard-Build, DrupalVM, the Acceptance Test repo and their vendor dependencies.
+* Downloads Springboard-Build, DrupalVM, the Acceptance Test repo and
+their vendor dependencies.
 * Triggers a bash script which runs drush make.
-* Installs Springboard, checking out git working copies of Springboard modules, themes and libraries from the
-Springboard git repo. The default install will be in `sites/sb_default` and `sites/sb_test,` and will have Springboard
- version 7.x-4.x
-* Provisions DrupalVM, Apache and mySQL, creates virtual host entries, site databases, and installs the Springboard
-profile.
-* Allows additional sites to be automatically installed in sites/{docroot}, with a docroot and virtual host you define
-in config/local.config.yml.
-* Provides shell scripts to allow Drush Make to update Drupal core and contrib on an existing site without touching its
-Springboard folders.
+* Installs Springboard, checking out git working copies of Springboard
+modules, themes and libraries from the Springboard git repo. The default
+install will be in `sites/sb_default` and `sites/sb_test,` and will have
+Springboard version 7.x-4.x
+* Provisions DrupalVM, Apache and mySQL, creates virtual host entries,
+site databases, and installs the Springboard profile.
+* Allows additional sites to be automatically installed in
+sites/{docroot}, with a docroot and virtual host you define in
+config/local.config.yml.
+* Provides shell scripts to allow Drush Make to update Drupal core and
+contrib on an existing site without touching its Springboard folders.
 * Configures the acceptance tests to work out of the box.
-* Provides a Drush alias to quickly install and configure developer modules: `drush dm-prep` installs admin_menu,
-module_filter, and devel, and disables toolbar menu, configures devel and the views admin UI, and sets the admin
-password to "admin".
+* Provides a Drush alias to quickly install and configure developer
+modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
+and disables toolbar menu, configures devel and the views admin UI, and
+sets the adminpassword to "admin".
 
 ## Updating virtual hosts and adding new sites.
 
-If you want to add a new site to a previously provisioned Druvmoser, then you need to:
+If you want to add a new site to a previously provisioned Druvmoser,
+then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` (You may have to chmod +x). Enter the springboard version you want to download at the prompt.
-* Wait for the script to complete, then run `vagrant provision` to update Apache
+* Run `scripts/make-sb.sh` (You may have to chmod +x). Enter the
+springboard version you want to download at the prompt.
+* Wait for the script to complete, then run `vagrant provision` to
+update Apache
 and create the databases and settings files.
 
 ## Updating existing Springboard sites
 
-There are two scripts which allow you to update a Springboard site's Drupal core and contrib modules automatically,
-without touching Springboard modules, themes or libraries;
+There are two scripts which allow you to update a Springboard site's
+Drupal core and contrib modules automatically, without touching
+Springboard modules, themes or libraries;
 
-* scripts/update-cc.sh prompts you to download a version of Springboard, and then copies
-the Springboard folders of your existing site into it, moves the old site folder into the backups directory, and moves
-the updated folder into its place.
+* scripts/update-cc.sh prompts you to download a version of Springboard,
+and then copies the Springboard folders of your existing site into it,
+moves the old site folder into the backups directory, and moves the
+updated folder into its place.
 
-* scripts/update-cc-inverse copies drupal core and contrib files out of a new Springboard download and places them into
-your existing site, without overwriting Springboard folders or any non-Springboard customizations in the libraries or
-contrib folders.
+* scripts/update-cc-inverse copies drupal core and contrib files out of
+a new Springboard download and places them into your existing site,
+without overwriting Springboard folders or any non-Springboard
+customizations in the libraries or contrib folders.
 
 ## Running tests
 
-Configuration templates for codeception are copied from the templates/tests directory into the acceptance test
-repository. They should be ready to go.
+Configuration templates for codeception are copied from the
+templates/tests directory into the acceptance test repository. They
+should be ready to go.
 
-Run `composer update` from the /acceptance-tests directory to install Codeception's dependencies.
+If the install script was unable to find Composer, run `composer update`
+from the /acceptance-tests directory to install Codeception's
+dependencies.
 
-Then `../vendor/bin/codecept run`
+Then `vendor/bin/codecept run`
 
-You can use one virtual host exclusively for running tests. The shell scripts
-will make it easy to switch among different springboard versions you may want to test.
+You can use one virtual host exclusively for running tests. The shell
+scripts will make it easy to switch among different springboard versions
+you may want to test. You can also delete the sb_testing directy, run
+`scripts/make-sb.sh` to install a completely new Springboard version,
+then run `vagrant provision` to recreate the settings.php file.
 
-A port has been forwarded from the guest's 3306 port to the host's 3334 port. If port 3334 is already in use,
-edit config/vagranfile.local to use a different one. You will also have to edit the acceptance test configuration
-to get them to work on an alternate port.
-
+A port has been forwarded from the guest's 3306 port to the host's 3334
+port. If port 3334 is already in use, edit config/vagranfile.local to
+use a different one. You will also have to edit the acceptance test
+configuration to get them to work on an alternate port.
 
 ## DrupalVM
 
-More information about DrupalVM can be found at [DrupalVM.com](http://drupalvm.com/),
-and documentation for DrupalVM can be found at [the DrupalVM docs](http://docs.drupalvm.com/).
+More information about DrupalVM can be found at
+[DrupalVM.com](http://drupalvm.com/), and documentation for DrupalVM can
+be found at [the DrupalVM docs](http://docs.drupalvm.com/).
 
-Drupal VM ships with a firewall. You can disable it by ssh-ing into the machine and doing `sudo service firewall stop`
+Drupal VM ships with a firewall. You can disable it by ssh-ing into the
+machine and doing `sudo service firewall stop`
 
-A Vagrantfile named `Vagrantfile.local` is placed in the config directory to override anything in
-DrupalVM's Vagrantfile.
+A Vagrantfile named `Vagrantfile.local` is placed in the config
+directory to override anything in DrupalVM's Vagrantfile.
 
 ## Credits
 
-Thanks to [Springboard-Build-Composer](https://github.com/robertromore/Springboard-Build-Composer), [Composer template
- for Drupal projects](https://github.com/drupal-composer/drupal-project/tree/7.x) for the initial template, and
- [DrupalVM](https://www.drupalvm.com/)
+Thanks to
+[Springboard-Build-Composer](https://github.com/robertromore/Springboard
+-Build-Composer), [Composer template for Drupal
+projects](https://github.com/drupal-composer/drupal-project/tree/7.x)
+for the initial template, and [DrupalVM](https://www.drupalvm.com/)
