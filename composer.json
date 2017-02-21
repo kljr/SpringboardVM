@@ -4,7 +4,6 @@
     "type": "project",
     "license": "MIT",
     "repositories": [
-
         {
             "type": "package",
             "package": {
@@ -47,22 +46,18 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ]
     },
     "config": {
       "preferred-install": "source"
     },
     "extra": {
         "installer-paths": {
-          "build": ["jacksonriver/springboard-build"],
-          "acceptance-tests": ["jacksonriver/acceptance-tests"]
+            "build": ["jacksonriver/springboard-build"]
         }
     },
     "scripts": {
         "post-update-cmd": [
-            "scripts/make-sb.sh"
+            "scripts/make-sb.sh",
         ]
     }
 }
