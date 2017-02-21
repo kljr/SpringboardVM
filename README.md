@@ -110,8 +110,8 @@ dependencies.
 Then `vendor/bin/codecept run`
 
 You can use one virtual host exclusively for running tests. The shell
-scripts will make it easy to switch among different springboard versions
-you may want to test. You can also delete the sb_testing directy, run
+scripts will make it easy to switch among different Springboard versions
+you may want to test. You can also delete the sb_testing directory, run
 `scripts/make-sb.sh` to install a completely new Springboard version,
 then run `vagrant provision` to recreate the settings.php file.
 
