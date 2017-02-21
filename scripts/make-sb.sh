@@ -46,30 +46,6 @@ if [ ! -d sites/${drupal_testing_dir} ]; then
     cd ../../
 fi;
 
-# Add codeception config files
-if [ -d acceptance-tests ] && [ ! -f acceptance-tests/codeception.yml ]; then
-    \cp templates/codeception/codeception.yml acceptance-tests
-    \cp templates/codeception/acceptance.suite.yml acceptance-tests/tests
-    if [ ! -d acceptance-tests/vendor ]; then
-        cd acceptance-tests
-        $HOME/composer.phar about 2> /dev/null
-        if [ $? -eq 0 ]; then
-            $HOME/composer.phar update
-            else
-                $HOME/composer about 2> /dev/null
-                if [ $? -eq 0 ]; then
-                    $HOME/composer update
-                else
-                    /usr/local/bin/composer about 2> /dev/null
-                    if [ $? -eq 0 ]; then
-                    $HOME/composer update
-                fi;
-           fi;
-        fi;
-        cd ../
-    fi;
-fi;
-
 LOCAL_CONFIG_FILE=config/local.config.yml
 
 if [ -f ${LOCAL_CONFIG_FILE} ]; then
