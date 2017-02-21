@@ -9,7 +9,7 @@ contrib modules without touching their Springboard directories, and a virtual ma
 ## Prerequisites
 
 - Linux or Mac (with NFS)
-- Composer installed globally, and preferably aliased in your shell as "composer"".
+- Composer installed globally, and preferably renamed or aliased in your shell as "composer"".
 - Drush installed globally.
 - VirtualBox
 - Vagrant
