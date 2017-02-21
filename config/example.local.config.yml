@@ -20,7 +20,7 @@
 apache_vhosts:
 
 # A Custom Site
-  - servername: "another-site"
+  - servername: "another-site.dev"
     serveralias: "www.another-site.dev"
     documentroot: "{{drupal_composer_install_dir}}/another_site"
     extra_parameters: |

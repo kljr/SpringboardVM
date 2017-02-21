@@ -1,15 +1,8 @@
 {
-    "name": "JacksonRiver/SpringBoard-VM",
-    "description": "VM for SpringBoard",
+    "name": "jacksonriver/druvmoser",
+    "description": "Springboard with Composer + Drush Make + DrupalVM + Codeception.",
     "type": "project",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Robert Romore",
-            "email": "robert.romore@jacksonriver.com",
-            "role": "maintainer"
-        }
-    ],
     "repositories": [
 
         {
@@ -49,7 +42,6 @@
     },
     "require-dev": {
         "geerlingguy/drupal-vm": "^3.5",
-        "cweagans/composer-patches": "~1.0",
         "composer/installers": "~1.0"
     },
     "minimum-stability": "dev",
