@@ -9,12 +9,12 @@ contrib modules without touching their Springboard directories, and a virtual ma
 ## Prerequisites
 
 - Linux or Mac (with NFS)
-- Composer installed globally.
+- Composer installed globally, and preferably aliased in your shell as "composer"".
 - Drush installed globally.
 - VirtualBox
 - Vagrant
 - Ansible (not required, but will make things quicker. Can be easily installed with Homebrew on a Mac)
-- For acceptance tests, port 3334.
+- For acceptance tests, port 3334 open.
 
 If you have the following Vagrant plugins, no network/IP configuration is required:
 

@@ -20,7 +20,7 @@ if [ -d acceptance-tests ] && [ ! -d acceptance-tests/vendor ]; then
                 if [ $? -eq 0 ]; then
                 /usr/local/bin/composer/composer update
                 else
-                    echo "Please run composer update from the acceptance-tests directory too!"
+                    echo "Please run 'composer update' from the acceptance-tests directory too!"
             fi;
        fi;
     fi;
