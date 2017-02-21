@@ -1,0 +1,8 @@
+modules:
+    config:
+        Db:
+            dsn: 'mysql:host=127.0.0.1;dbname=sb_testing;port=3334'
+            user: 'drupal'
+            password: 'drupal'
+            populate: true
+            cleanup: true

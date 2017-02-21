@@ -1,0 +1,52 @@
+modules:
+    config:
+        WebDriver:
+            url: 'http://druvmoser-test.dev/'
+
+# For salesforce use the serialized values from an existing DB, not the values themselves
+# For the other configs, use the actual values.
+
+# Salesforce:
+#   salesforce_consumer_key:
+#   salesforce_consumer_secret:
+#   salesforce_identity:
+#   salesforce_instance_url:
+#   salesforce_queue_all_lease_key:
+#   salesforce_refresh_token:
+#   salesforce_sandbox_account:
+
+#Advocacy:
+#  springboard_advocacy_client_id:
+#  springboard_advocacy_client_secret:
+#  springboard_advocacy_smarty_authid:
+#  springboard_advocacy_smarty_authtoken:
+#  social_action_twitter_consumer_key:
+#  social_action_twitter_consumer_secret:
+#  springboard_advocacy_server_url
+#  springboard_advocacy_test_email
+
+#PayPal:
+#  paypal_email: ''
+#  paypal_username: ''
+#  paypal_password: ''
+#  paypal_signature: ''
+#  paypal_payer: ''
+#  paypal_payer_pass: ''
+
+#Sustainers:
+#  sustainers_key_path: '/tmp'
+
+
+# These values can be accessed during a test:
+
+# $config = \Codeception\Configuration::config();
+# $settings = \Codeception\Configuration::suiteSettings('acceptance', $config);
+
+# And inserted:
+
+#    foreach ($settings['Salesforce'] as $key => $value) {
+#       $I->haveInDatabase('variable', array('name' => $key, 'value' => $value));
+#     }
+
+# to use the method "haveInDatabase" in a test, the test must be tagged:
+# $scenario->group('no_populate');
