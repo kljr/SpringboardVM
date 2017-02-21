@@ -5,6 +5,13 @@
 
 #Copies files *out of* a new springboard download and replaces them into an existing site.
 
+# Deal with relative paths
+script_dir="$(dirname "$0")"
+source "$script_dir/parse-yaml.sh"
+cd $script_dir
+export PATH=$PWD:$PATH
+cd ../
+
 echo "Type the relative path the drupal root of the site whose contrib modules you want to update, followed by [ENTER]:"
 read path
 

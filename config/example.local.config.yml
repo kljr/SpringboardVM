@@ -5,8 +5,8 @@
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance. Otherwise, leave this alone.
-#vagrant_hostname: sbcrush.dev
-#vagrant_machine_name: sbcrush
+#vagrant_hostname: druvmoser.dev
+#vagrant_machine_name: druvmoser
 #vagrant_ip: 0.0.0.0
 
 
@@ -28,7 +28,7 @@ apache_vhosts:
 
 # You need to maintain the default DrupalVM vhost definitions
 # in this file too. Don't change these unless you are running multiple
-# sbcrush installs.
+# druvmoser installs.
 
 # The Default Testing Site
   - servername: "{{ drupal_testing_domain }}"

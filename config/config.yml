@@ -4,8 +4,8 @@
 # you want to override there.
 
 vagrant_box: geerlingguy/ubuntu1404
-vagrant_hostname: sbcrush.dev
-vagrant_machine_name: sbcrush
+vagrant_hostname: druvmoser.dev
+vagrant_machine_name: druvmoser
 vagrant_ip: 0.0.0.0
 
 vagrant_synced_folders:
@@ -37,8 +37,8 @@ drupal_site_install_extra_args: ["install_configure_form.update_status_module='a
 
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
 drupal_major_version: 7
-drupal_domain: "{{ vagrant_machine_name }}-default.dev"
-drupal_testing_domain: "{{ vagrant_machine_name }}-testing.dev"
+drupal_domain: "{{ vagrant_machine_name }}.dev"
+drupal_testing_domain: "{{ vagrant_machine_name }}-test.dev"
 drupal_site_name: "Springboard"
 drupal_install_profile: sbsetup
 drupal_enable_modules: [ 'devel' ]

@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-yaml_dir="$(dirname "$0")"
-source "$yaml_dir/parse-yaml.sh"
+# Deal with relative paths
+script_dir="$(dirname "$0")"
+source "$script_dir/parse-yaml.sh"
+cd $script_dir
+export PATH=$PWD:$PATH
+cd ../
 
 # Build a default springboard site and a site
 # for each vhost defined in local.config.yml.
