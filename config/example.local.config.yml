@@ -24,7 +24,7 @@ apache_vhosts:
     serveralias: "www.another-site.dev"
     documentroot: "{{drupal_composer_install_dir}}/another_site"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_composer_install_dir}}/another"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/{{drupal_composer_install_dir}}/another_site"
 
 # You need to maintain the default DrupalVM vhost definitions
 # in this file too. Don't change these unless you are running multiple
