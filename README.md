@@ -10,8 +10,9 @@ and a virtual machine to run them in.
 
 ## Prerequisites
 
-- Linux or Mac (with NFS)
+- Linux or Mac (with NFS, required)
 - Composer installed globally, and preferably renamed or aliased in your shell as "composer"".
+- Drush installed globally (`composer global require drush/drush`)
 - VirtualBox
 - Vagrant
 - Ansible (not required, but will make things quicker. Can be easily installed with Homebrew on a Mac)

@@ -38,7 +38,6 @@
         "mnsami/composer-custom-directory-installer": "1.1.*",
         "jacksonriver/springboard-build": "4.14",
         "jacksonriver/acceptance-tests": "4.14"
-
     },
     "require-dev": {
         "geerlingguy/drupal-vm": "^3.5",
