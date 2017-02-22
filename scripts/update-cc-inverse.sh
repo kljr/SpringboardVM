@@ -67,4 +67,4 @@ rm -r tmp_springboard/sites
 \cp -R tmp_springboard/* $path
 
 rm -r tmp_springboard
-echo "Done."
+echo "Done. If there are changes to the Springboard-owned themes, modules or libraries in the new version you just swapped out, you'll need to do a git checkout in each of their folders to get them."
