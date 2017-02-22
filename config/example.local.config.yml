@@ -68,6 +68,14 @@ apache_vhosts:
           DirectoryIndex index.html
 
 apache_vhosts_ssl:
+
+  - servername: "another-site.dev"
+    documentroot: "{{drupal_composer_install_dir}}/another_site"
+    certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+    certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{drupal_composer_install_dir}}/another_site"
+
   - servername: "{{ drupal_testing_domain }}"
     documentroot: "{{ drupal_testing_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
