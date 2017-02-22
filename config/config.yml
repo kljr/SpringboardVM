@@ -31,7 +31,7 @@ drupal_core_path: "{{ drupal_composer_install_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ drupal_composer_install_dir }}/{{drupal_testing_dir}}"
 drupal_db_user: drupal
 drupal_db_password: drupal
-drupal_db_name: springboard
+drupal_db_name: sb_default
 
 drupal_site_install_extra_args: ["install_configure_form.update_status_module='array(FALSE,FALSE)'"]
 

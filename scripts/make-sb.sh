@@ -25,9 +25,13 @@ if [ ! -d sites/${drupal_core_dir} ]; then
 
      drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
     # add springboard to drupal core's .gitignore.
+  if [ -d sites/${drupal_core_dir} ]; then
     cd sites/${drupal_core_dir};
     echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
     cd ../../
+    else
+      echo "The drupal directory doesn't exist. Drush make must have failed."
+  fi;
 fi;
 
 if [ ! -d sites/${drupal_testing_dir} ]; then
@@ -40,10 +44,13 @@ if [ ! -d sites/${drupal_testing_dir} ]; then
 #   fi;
    drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_testing_dir};
 
+  if [ -d sites/${drupal_testing_dir} ]; then
     cd sites/${drupal_testing_dir};
     echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
-
     cd ../../
+    else
+      echo "The drupal directory doesn't exist. Drush make must have failed."
+  fi;
 fi;
 
 LOCAL_CONFIG_FILE=config/local.config.yml
@@ -71,13 +78,15 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
 #                drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
 #            fi;
             drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
-            cd sites/$directory;
-            echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
-            cd ../../
-            # Create a sustainer.key file in sites/default/files
-            mkdir -p sites/$directory/sites/default/files
-            if [ ! -e sites/$directory/sites/default/files/sustainer.key ]; then
-              echo $directory > sites/$directory/sites/default/files/sustainer.key
+            if [ -d sites/$directory} ]; then
+              cd sites/$directory;
+              echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;
+              cd ../../
+              # Create a sustainer.key file in sites/default/files
+              mkdir -p sites/$directory/sites/default/files
+              if [ ! -e sites/$directory/sites/default/files/sustainer.key ]; then
+                echo $directory > sites/$directory/sites/default/files/sustainer.key
+              fi;
             fi;
         fi;
 
