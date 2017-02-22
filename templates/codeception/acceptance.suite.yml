@@ -1,7 +1,7 @@
 modules:
     config:
         WebDriver:
-            url: 'http://druvmoser-test.dev/'
+            url: 'https://druvmoser-test.dev/'
 
 # For salesforce use the serialized values from an existing DB, not the values themselves
 # For the other configs, use the actual values.

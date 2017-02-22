@@ -69,7 +69,7 @@ apache_vhosts:
 
 apache_vhosts_ssl:
   - servername: "{{ drupal_testing_domain }}"
-    serveralias: "www.{{ drupal_testing_domain }}"
+    documentroot: "{{ drupal_testing_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: |
