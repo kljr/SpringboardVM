@@ -12,7 +12,6 @@ and a virtual machine to run them in.
 
 - Linux or Mac (with NFS)
 - Composer installed globally, and preferably renamed or aliased in your shell as "composer"".
-- Drush installed globally.
 - VirtualBox
 - Vagrant
 - Ansible (not required, but will make things quicker. Can be easily installed with Homebrew on a Mac)
