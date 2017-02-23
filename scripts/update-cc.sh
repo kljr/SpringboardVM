@@ -45,6 +45,7 @@ cp -R $path/sites/all/libraries/springboard_composer tmp_springboard/sites/all/l
 cp -R $path/sites/default tmp_springboard/sites
 
 echo "Making backup of $path"
-mv $path backups/sites/${path:5}_$(date +%s)
+DATE=`date +%Y-%m-%d:%H:%M:%S`
+mv $path backups/sites${path:5}_$DATE
 mv tmp_springboard $path
 echo "Done. If there are changes to the Springboard-owned themes, modules or libraries in the new version you just swapped out, you'll need to do a git checkout in each of their folders to get them."

@@ -6,7 +6,6 @@ source "$script_dir/parse-yaml.sh"
 cd $script_dir
 export PATH=$PWD:$PATH
 cd ../
-drush --help
 # Build a default springboard site and a site
 # for each vhost defined in local.config.yml.
 MAIN_CONFIG_FILE=config/config.yml

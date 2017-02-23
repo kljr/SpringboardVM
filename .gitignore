@@ -1,10 +1,8 @@
 .DS_Store
-build/
-acceptance-tests/
-tests/
-vendor/
-sites/
+/build
+/acceptance-tests
+/vendor
+/sites
 composer.lock
 config/local.config.yml
 .vagrant
-backups/sites
