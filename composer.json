@@ -41,7 +41,7 @@
         "drush/drush": "7.*"
     },
     "require-dev": {
-        "geerlingguy/drupal-vm": "^3.5",
+        "geerlingguy/drupal-vm": "^4.2",
         "composer/installers": "~1.0"
     },
     "minimum-stability": "dev",
