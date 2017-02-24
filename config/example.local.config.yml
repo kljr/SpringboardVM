@@ -61,44 +61,22 @@ apache_vhosts:
 
 apache_vhosts_ssl:
 
+  # your cusotm site ssl entry
   - servername: "another-site.dev"
     documentroot: "{{drupal_composer_install_dir}}/another_site"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
+  # Default DruVMoser virtual hosts.
   - servername: "{{ drupal_testing_domain }}"
     documentroot: "{{ drupal_testing_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
-# Default DrupalVM virtual hosts.
   - servername: "{{ drupal_domain }}"
     documentroot: "{{ drupal_core_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
-
-
-# create additional databases. Use the docroot name for the database name.
-# If you don't specify one here, drush will create it during post-provision.
-mysql_databases:
-# Testing site
-  - name: "{{ drupal_testing_dir }}"
-    encoding: utf8mb4
-    collation: utf8mb4_general_ci
-
-# Default DrupalVM Db.
-  - name: "{{ drupal_core_dir }}"
-    encoding: utf8mb4
-    collation: utf8mb4_general_ci
-
-mysql_users:
-  - name: "{{ drupal_db_user }}"
-    host: "%"
-    password: "{{ drupal_db_password }}"
-    priv: "*.*:ALL"
-
-# Allow connections from any IP. Useful for acceptance tests.
-#mysql_bind_address: 0.0.0.0

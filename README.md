@@ -1,4 +1,4 @@
-# Druvmoser
+# DruVMoser
 
 Springboard with Composer + Drush Make + DrupalVM + Codeception.
 
@@ -31,6 +31,7 @@ install.
 Also helpful:
 
 - [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
+- [vagrant-triggers](https://github.com/emyl/vagrant-triggers)
 
 #Usage
 
@@ -47,7 +48,7 @@ After the update completes, run `vagrant up`.
 The first time running vagrant will take a while. After all processes complete successfully
 you can view the dashboard at dashboard.druvmoser.dev.
 
-## What does Druvmoser do?
+## What does DruVMoser do?
 
 * Downloads Springboard-Build, DrupalVM, the Acceptance Test repo and
 their vendor dependencies.
@@ -71,7 +72,7 @@ sets the adminpassword to "admin".
 
 ## Updating virtual hosts and adding new sites.
 
-If you want to add a new site to a previously provisioned Druvmoser,
+If you want to add a new site to a previously provisioned DruVMoser,
 then you need to:
 * Define the virtual host entry in local.config.yml
 * Run `scripts/make-sb.sh` (You may have to chmod +x). Enter the
