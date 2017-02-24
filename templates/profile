@@ -1,0 +1,42 @@
+# Provisioner copies these to the guest's /hopme/vagrant/.profile
+
+alias druv='cd /var/www/springboard'
+
+function drsp(){
+  cd /var/www/springboard/sites/$1/sites/all/modules/springboard
+}
+
+function drspt(){
+  cd /var/www/springboard/sites/$1/sites/all/themes/springboard_themes
+}
+
+function drspl(){
+  cd /var/www/springboard/sites/$1/sites/all/librarires
+}
+
+function drac(){
+  cd /var/www/springboard/sites/acceptance-tests
+}
+
+function drsi(){
+  if [ -d /var/www/springboard/sites/$1 ]; then
+    cd /var/www/springboard/sites/$1
+    drush site-install sbsetup -y --site-name=$1 --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$1
+   else
+    echo "Can't find that folder"
+   fi;
+}
+
+function drbld(){
+   dir=$PWD
+   cd /var/www/springboard/sites/build
+   git status;
+   if [ ! $# -eq 0 ]; then
+     git checkout $1
+  fi;
+  cd $dir
+}
+
+alias upcc='/var/www/springboard/sites/scripts/update-cc.sh'
+alias upccin='/var/www/springboard/sites/scripts/update-cc-inverse.sh'
+alias make-sb='/var/www/springboard/sites/scripts/make-sb.sh'

@@ -16,13 +16,13 @@ eval $(parse_yaml ${MAIN_CONFIG_FILE})
 if [ ! -d sites/${drupal_core_dir} ]; then
    # Check to see if the developer make file is available.
 #   if [ -f build/springboard-developer.make ]; then
-#     vendor/bin/drush make --no-gitinfofile build/springboard-developer.make sites/${drupal_core_dir};
+#     drush make --no-gitinfofile build/springboard-developer.make sites/${drupal_core_dir};
 #   else
 #     # If no developer make, use the standard make file.
-#     vendor/bin/drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
+#     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
 #   fi;
 
-     vendor/bin/drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
+     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
     # add springboard to drupal core's .gitignore.
   if [ -d sites/${drupal_core_dir} ]; then
     cd sites/${drupal_core_dir};
@@ -41,7 +41,7 @@ if [ ! -d sites/${drupal_testing_dir} ]; then
 #     # If no developer make, use the standard make file.
 #     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_testing_dir};
 #   fi;
-   vendor/bin/drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_testing_dir};
+   drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_testing_dir};
 
   if [ -d sites/${drupal_testing_dir} ]; then
     cd sites/${drupal_testing_dir};
@@ -76,7 +76,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
 #                # Use the standard make file.
 #                drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
 #            fi;
-            vendor/bin/drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
+            drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/$directory;
             if [ -d sites/$directory} ]; then
               cd sites/$directory;
               echo sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;

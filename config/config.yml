@@ -9,7 +9,7 @@ vagrant_machine_name: druvmoser
 vagrant_ip: 0.0.0.0
 
 vagrant_synced_folders:
-  - local_path:  ./sites
+  - local_path:  .
     destination: /var/www/springboard
     type: nfs
     create: true
@@ -18,7 +18,7 @@ build_makefile: false
 
 build_composer: false
 drupal_composer_path: false
-drupal_composer_install_dir: "/var/www/springboard"
+drupal_composer_install_dir: "/var/www/springboard/sites"
 drupal_composer_dependencies: []
 
 build_composer_project: false

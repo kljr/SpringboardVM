@@ -3,8 +3,7 @@
 Springboard with Composer + Drush Make + DrupalVM + Codeception.
 
 Provides multiple fully-configured Springboard sites with working copies
-of the Springboard repositories, a dedicated testing site and
-environment, scripts that allow Drush Make to update existing sites'
+of the Springboard repositories, a dedicated testing site, scripts that allow Drush Make to update existing sites'
 core and contrib modules without touching their Springboard directories,
 and a virtual machine to run them in.
 
@@ -47,12 +46,13 @@ Run `composer update`
 After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
-you can view the dashboard at https://dashboard.druvmoser.dev.
+you can view the DrupalVM dashboard at https://dashboard.druvmoser.dev.
 
 ## What does DruVMoser do?
 
-* Downloads Springboard-Build, DrupalVM, the Acceptance Test repo and
-their vendor dependencies and triggers a bash script which runs drush make.
+* Downloads Springboard-Build, the Acceptance Test repo, DrupalVM, Codeception and
+their vendor dependencies.
+* Triggers a bash script which runs drush make.
 * Installs Springboard, checking out git working copies of Springboard
 modules, themes and libraries from the Springboard git repo. The default
 sites will be in `sites/sb_default` and `sites/sb_test,` and will have
@@ -138,21 +138,41 @@ Add these to your .profile or .bash_profile:
 ```
 example: "drsp sb_default" - switch to springboard modules directory of the sb_default install
 
+```
+function drspt(){
+  cd /Path/to/druvmoser/sites/$1/sites/all/themes/springboard_themes
+}
+```
+example: "drsp sb_default" - switch to springboard themes directory of the sb_default install
+
+
+```
+function drspl(){
+  cd /Path/to/druvmoser/sites/$1/sites/all/librarires
+}
+```
+example: "drsp sb_default" - switch to libraries directory of the sb_default install
 
 ```
     function drbld(){
+       dir=$PWD
        cd /Path/to/druvmoser/build
        if [ ! $# -eq 0 ]; then
          git checkout $1
+       else
+         git status
       fi;
-      cd ../
+      cd $dir
     }
+
 ```
 
 example:
-drbld (no arguments, displays curent branch of the build repo.)
+drbld (no arguments, displays current branch of the build repo.)
 
 drbld 7.x-4.x (switch build repo to 7.x-4.x)
+
+
 
 
 > Vagrant
@@ -182,10 +202,6 @@ Instead use [cgr](https://github.com/consolidation/cgr) to manage all your globa
     php drush core-status
     chmod +x drush
     sudo mv drush /usr/local/bin
-
-Optional. Enrich the bash startup file with completion and aliases:
-
-    drush init
 
 ##Updating DruVMoser itself
 

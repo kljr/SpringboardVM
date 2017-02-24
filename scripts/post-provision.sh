@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_ROOT=/var/www/springboard
+PROJECT_ROOT=/var/www/springboard/sites
 source "/vagrant/scripts/parse-yaml.sh"
 
 MAIN_CONFIG_FILE=/vagrant/config/config.yml
@@ -42,4 +42,5 @@ fi;
 
 if [ ! -f /home/vagrant/.drush/drushrc.php ]; then
   cp /vagrant/drush/drushrc.php /home/vagrant/.drush/drushrc.php
+  cat /vagrant/templates/profile >> /home/vagrant/.profile
 fi;

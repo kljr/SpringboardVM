@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_ROOT=/var/www/springboard
+PROJECT_ROOT=/var/www/springboard/sites
 CONFIG_FILE=/vagrant/config/config.yml
 
 source "/vagrant/scripts/parse-yaml.sh"
