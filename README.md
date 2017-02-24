@@ -120,7 +120,7 @@ port. If port 3334 is already in use, edit config/vagranfile.local to
 use a different one. You will also have to edit the acceptance test
 configuration to get them to work on an alternate port.
 
-#Useful shell aliases
+##Useful shell aliases
 
 Add these to your .profile or .bash_profile:
 
