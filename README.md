@@ -128,7 +128,6 @@ Add these to your .profile or .bash_profile:
 
 - alias druv='cd /Path/to/druvmoser'
 
-
     function drac(){
         cd /Path/to/druvmoser/acceptance-tests
     }
@@ -136,6 +135,7 @@ Add these to your .profile or .bash_profile:
     function drsp(){
         cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
     }
+
     ex: drsp sb_default
 
     function drbld(){
@@ -145,8 +145,10 @@ Add these to your .profile or .bash_profile:
       fi;
       cd ../
     }
+
     ex: drbld (no arguments, check what branch the build repo is on.)
         drbld 7.x-4.x (switch build repo to .x-4.x)
+
 
 > Vagrant
 
@@ -156,6 +158,7 @@ Add these to your .profile or .bash_profile:
 - alias vsh='vagrant ssh'
 
 > Executables
+
 - alias upcc='/Path/to/druvmoser/scripts/update-cc.sh'
 - alias upccin='/Path/to/druvmoser/scripts/update-cc-inverse.sh'
 - alias make-sb='/Path/to/druvmoser/scripts/make-sb.sh'
