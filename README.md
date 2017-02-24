@@ -12,7 +12,7 @@ and a virtual machine to run them in.
 
 - Linux or Mac (with NFS, required)
 - Composer installed globally, and preferably renamed or aliased in your shell as "composer"".
-- Drush installed globally (`composer global require drush/drush`)
+- Drush installed globally (see Drush notes below)
 - VirtualBox
 - Vagrant
 - Ansible (not required, but will make things quicker. Can be easily installed with Homebrew on a Mac)
@@ -161,6 +161,22 @@ Add these to your .profile or .bash_profile:
 - alias make-sb='/Path/to/druvmoser/scripts/make-sb.sh'
 - alias codecept=/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept
 - alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
+
+##Drush global install
+
+You could install Drush globally with Composer, but that is likely to lead to conflicts
+if you have other global dependencies.
+
+Use [cgr](https://github.com/consolidation/cgr) or take the steps below:
+
+    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush
+    php drush core-status
+    chmod +x drush
+    sudo mv drush /usr/local/bin
+
+Optional. Enrich the bash startup file with completion and aliases:
+
+    drush init
 
 ## DrupalVM
 
