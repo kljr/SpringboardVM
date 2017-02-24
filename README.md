@@ -52,12 +52,11 @@ you can view the dashboard at dashboard.druvmoser.dev.
 ## What does DruVMoser do?
 
 * Downloads Springboard-Build, DrupalVM, the Acceptance Test repo and
-their vendor dependencies.
-* Triggers a bash script which runs drush make.
+their vendor dependencies and triggers a bash script which runs drush make.
 * Installs Springboard, checking out git working copies of Springboard
 modules, themes and libraries from the Springboard git repo. The default
-install will be in `sites/sb_default` and `sites/sb_test,` and will have
-Springboard version 7.x-4.x
+sites will be in `sites/sb_default` and `sites/sb_test,` and will have
+Springboard version 7.x-4.x. The "sites" directory is a vagrant shared folder.
 * Provisions DrupalVM, Apache and mySQL, creates virtual host entries,
 site databases, and installs the Springboard profile.
 * Allows additional sites to be automatically installed in
@@ -97,6 +96,9 @@ a new Springboard download and places them into your existing site,
 without overwriting Springboard folders or any non-Springboard
 customizations in the libraries or contrib folders.
 
+* If you want to replace all code in a site, including any repositories, just delete the root folder, and
+run `scripts/make-sb.sh`, and then `vagrant provision`.
+
 ## Running tests
 
 Configuration templates for codeception are copied from the
@@ -127,17 +129,16 @@ Add these to your .profile or .bash_profile:
 > Directory switching
 
 - alias druv='cd /Path/to/druvmoser'
+- alias drac='cd /Path/to/druvmoser/acceptance-tests'
 ```
-    function drac(){
-        cd /Path/to/druvmoser/acceptance-tests
-    }
-
     function drsp(){
         cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
     }
+```
+example: "drsp sb_default" - switch to springboard modules directory of the sb_default install
 
-    ex: drsp sb_default
 
+```
     function drbld(){
        cd /Path/to/druvmoser/build
        if [ ! $# -eq 0 ]; then
@@ -145,10 +146,13 @@ Add these to your .profile or .bash_profile:
       fi;
       cd ../
     }
-
-    ex: drbld (no arguments, check what branch the build repo is on.)
-        drbld 7.x-4.x (switch build repo to .x-4.x)
 ```
+
+example:
+drbld (no arguments, check what branch the build repo is on.)
+
+drbld 7.x-4.x (switch build repo to .x-4.x)
+
 
 > Vagrant
 
@@ -165,12 +169,13 @@ Add these to your .profile or .bash_profile:
 - alias codecept=/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept
 - alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
 
+
 ##Drush global install
 
-You could install Drush globally with Composer, but that is likely to lead to conflicts
-if you have other global dependencies.
+You could install Drush globally with Composer (`composer require global drush/drush`), but that is likely to lead to conflicts
+if you have other global projects with dependencies.
 
-Use [cgr](https://github.com/consolidation/cgr) or take the steps below:
+Instead use [cgr](https://github.com/consolidation/cgr) to manage all your global packages, or take the steps below:
 
     php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush
     php drush core-status
