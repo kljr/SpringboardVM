@@ -68,7 +68,7 @@ contrib on an existing site without touching its Springboard folders.
 * Provides a Drush alias to quickly install and configure developer
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
-sets the adminpassword to "admin".
+sets the admin password to "admin".
 
 ## Updating virtual hosts and adding new sites.
 
@@ -78,8 +78,7 @@ then you need to:
 * Run `scripts/make-sb.sh` (You may have to chmod +x). Enter the
 springboard version you want to download at the prompt.
 * Wait for the script to complete, then run `vagrant provision` to
-update Apache
-and create the databases and settings files.
+update Apache and create the databases and settings files.
 
 ## Updating existing Springboard sites
 
