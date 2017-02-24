@@ -7,8 +7,12 @@ MAIN_CONFIG_FILE=/vagrant/config/config.yml
 eval $(parse_yaml ${MAIN_CONFIG_FILE})
 cd ${PROJECT_ROOT}/${drupal_core_dir}
 set -x
-# Set Drupal variable to above directory 'encrypt_secure_key_path'
-drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files/
+
+cd ${PROJECT_ROOT}/${drupal_core_dir}
+ if [ ! -f sites/default/settings.php ]; then
+    drush site-install sbsetup -y --site-name=${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_dir}
+    drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files/
+fi;
 
 cd ${PROJECT_ROOT}/${drupal_testing_dir}
  if [ ! -f sites/default/settings.php ]; then

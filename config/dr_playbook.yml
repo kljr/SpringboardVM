@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+    - ../vendor/geerlingguy/drupal-vm/provisioning/vars/main.yml
+    - ../vendor/geerlingguy/drupal-vm/default.config.yml
+    - config.yml
+  pre_tasks:
+    - name: Include OS-specific variables.
+      include_vars: "../vendor/geerlingguy/drupal-vm/provisioning/vars/Debian.yml"
+
+    - name: Define config_dir.
+      set_fact:
+        config_dir: "{{ playbook_dir }}/.."
+      when: config_dir is not defined
+
+      tags: ['always']
+
+    - include_vars: "{{ item }}"
+      with_fileglob:
+        - "../vendor/geerlingguy/drupal-vm/default.config.yml"
+        - "config.yml"
+        - "local.config.yml"
+        - "{{ lookup('env', 'DRUPALVM_ENV')|default(drupalvm_env, true)|default(ansible_env.DRUPALVM_ENV)|default(omit) }}.config.yml"
+      tags: ['always']
+
+
+    - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/hostname.yml
+
+    - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/init-debian.yml
+      when: ansible_os_family == 'Debian'
+      static: no
+  roles:
+    - { role: geerlingguy.apache, when: drupalvm_webserver == 'apache' }
+    - { role: geerlingguy.apache-php-fpm, when: drupalvm_webserver == 'apache' }
+    - { role: geerlingguy.adminer, when: '"adminer" in installed_extras' }
+    - { role: geerlingguy.pimpmylog, when: '"pimpmylog" in installed_extras' }
+
+  tasks:
+    - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/www.yml
