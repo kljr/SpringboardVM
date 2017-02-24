@@ -120,6 +120,39 @@ port. If port 3334 is already in use, edit config/vagranfile.local to
 use a different one. You will also have to edit the acceptance test
 configuration to get them to work on an alternate port.
 
+#Useful shell aliases
+
+Add these to your .profile or .bash_profile:
+
+> Directory switching
+
+- alias druv='cd /Path/to/druvmoser'
+- alias composer='php /Path/to/composer.phar'
+
+
+
+    function drac(){
+        cd /Path/to/druvmoser/acceptance-tests
+    }
+
+    function drsp(){
+        cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
+    }
+    ex: drsp sb_default
+
+
+> Vagrant
+
+- alias vlt='vagrant halt'
+- alias vup='vagrant up'
+- alias vre='vagrant reload'
+- alias vssh='vagrant ssh'
+
+> codeception executables
+
+- alias codecept=/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept
+- alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
+
 ## DrupalVM
 
 More information about DrupalVM can be found at
