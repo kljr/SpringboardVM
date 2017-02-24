@@ -28,12 +28,14 @@ git checkout $branch
 cd ../
 
 # Check to see if the developer make file is available.
-if [ -f build/springboard-developer.make ]; then
- drush make --no-gitinfofile build/springboard-developer.make tmp_springboard;
-else
- # Use the standard make file.
- drush make --no-gitinfofile build/springboard-mtsb.make tmp_springboard;
-fi;
+#if [ -f build/springboard-developer.make ]; then
+# vendor/bin/drush make --no-gitinfofile build/springboard-developer.make tmp_springboard;
+#else
+# # Use the standard make file.
+# vendor/bin/drush make --no-gitinfofile --working-copy build/springboard-mtsb.make tmp_springboard;
+#fi;
+
+vendor/bin/drush make --no-gitinfofile --working-copy build/springboard-mtsb.make tmp_springboard;
 
 echo "Updating Springboard $path"
 

@@ -10,14 +10,14 @@ set -x
 
 cd ${PROJECT_ROOT}/${drupal_core_dir}
  if [ ! -f sites/default/settings.php ]; then
-    drush site-install sbsetup -y --site-name=${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_dir}
-    drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files/
+    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_dir}
+    /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files/
 fi;
 
 cd ${PROJECT_ROOT}/${drupal_testing_dir}
  if [ ! -f sites/default/settings.php ]; then
-    drush site-install sbsetup -y --site-name=${drupal_testing_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_dir}
-    drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files/
+    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_testing_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_dir}
+    /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files/
 fi;
 
 cd ${PROJECT_ROOT}
@@ -34,8 +34,8 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             directory=${directory/__/\/}
             if [ ! -f ${PROJECT_ROOT}/$directory/sites/default/settings.php ]; then
               cd ${PROJECT_ROOT}/$directory
-              drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$directory
-              drush vset encrypt_secure_key_path ${PROJECT_ROOT}/$directory/sites/default/files/
+              /usr/local/bin/drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$directory
+              /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/$directory/sites/default/files/
             fi;
         done
 fi;

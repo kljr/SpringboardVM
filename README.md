@@ -12,6 +12,7 @@ and a virtual machine to run them in.
 
 - Linux or Mac (with NFS, required)
 - Composer installed globally, and preferably renamed or aliased in your shell as "composer"".
+- Drush installed globally (`composer global require drush/drush`)
 - VirtualBox
 - Vagrant
 - Ansible (not required, but will make things quicker. Can be easily installed with Homebrew on a Mac)
@@ -137,6 +138,15 @@ Add these to your .profile or .bash_profile:
     }
     ex: drsp sb_default
 
+    function drbld(){
+       cd /Path/to/druvmoser/build
+       if [ ! $# -eq 0 ]; then
+         git checkout $1
+      fi;
+      cd ../
+    }
+    ex: drbld (no arguments, check what branch the build repo is on.)
+        drbld 7.x-4.x (switch build repo to .x-4.x)
 
 > Vagrant
 
