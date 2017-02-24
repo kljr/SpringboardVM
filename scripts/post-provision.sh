@@ -39,3 +39,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             fi;
         done
 fi;
+
+if [ ! -f /home/vagrant/.drush/drushrc.php ]; then
+  cp /vagrant/drush/drushrc.php /home/vagrant/.drush/drushrc.php
+fi;
