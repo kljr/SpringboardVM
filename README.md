@@ -47,7 +47,7 @@ Run `composer update`
 After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
-you can view the dashboard at dashboard.druvmoser.dev.
+you can view the dashboard at https://dashboard.druvmoser.dev.
 
 ## What does DruVMoser do?
 
@@ -130,6 +130,7 @@ Add these to your .profile or .bash_profile:
 
 - alias druv='cd /Path/to/druvmoser'
 - alias drac='cd /Path/to/druvmoser/acceptance-tests'
+
 ```
     function drsp(){
         cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
@@ -149,9 +150,9 @@ example: "drsp sb_default" - switch to springboard modules directory of the sb_d
 ```
 
 example:
-drbld (no arguments, check what branch the build repo is on.)
+drbld (no arguments, displays curent branch of the build repo.)
 
-drbld 7.x-4.x (switch build repo to .x-4.x)
+drbld 7.x-4.x (switch build repo to 7.x-4.x)
 
 
 > Vagrant
@@ -188,7 +189,7 @@ Optional. Enrich the bash startup file with completion and aliases:
 
 ##Updating DruVMoser itself
 
-After you pull the latest changes, `run vagrant reload --provision`
+After you pull the latest changes, run `vagrant reload --provision`
 
 ## DrupalVM
 
