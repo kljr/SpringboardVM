@@ -186,6 +186,10 @@ Optional. Enrich the bash startup file with completion and aliases:
 
     drush init
 
+##Updating DruVMoser itself
+
+After you pull the latest changes, `run vagrant reload --provision`
+
 ## DrupalVM
 
 More information about DrupalVM can be found at
