@@ -127,8 +127,6 @@ Add these to your .profile or .bash_profile:
 > Directory switching
 
 - alias druv='cd /Path/to/druvmoser'
-- alias composer='php /Path/to/composer.phar'
-
 
 
     function drac(){
@@ -148,8 +146,7 @@ Add these to your .profile or .bash_profile:
 - alias vre='vagrant reload'
 - alias vssh='vagrant ssh'
 
-> codeception executables
-
+> Executables
 - alias codecept=/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept
 - alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
 
