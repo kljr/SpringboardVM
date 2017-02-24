@@ -144,9 +144,12 @@ Add these to your .profile or .bash_profile:
 - alias vlt='vagrant halt'
 - alias vup='vagrant up'
 - alias vre='vagrant reload'
-- alias vssh='vagrant ssh'
+- alias vsh='vagrant ssh'
 
 > Executables
+- alias upcc='/Path/to/druvmoser/scripts/update-cc.sh'
+- alias upccin='/Path/to/druvmoser/scripts/update-cc-inverse.sh'
+- alias make-sb='/Path/to/druvmoser/scripts/make-sb.sh'
 - alias codecept=/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept
 - alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
 
