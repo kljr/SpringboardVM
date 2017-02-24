@@ -69,6 +69,7 @@ contrib on an existing site without touching its Springboard folders.
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
+* Automatic DB backups when you halt or destroy the VM (requires vagrant triggers plugin).
 
 ## Updating virtual hosts and adding new sites.
 
@@ -96,7 +97,7 @@ a new Springboard download and places them into your existing site,
 without overwriting Springboard folders or any non-Springboard
 customizations in the libraries or contrib folders.
 
-* If you want to replace all code in a site, including any repositories, just delete the root folder, and
+* If you want to replace all code in a site, including any repositories, just delete the document root folder, and
 run `scripts/make-sb.sh`, and then `vagrant provision`.
 
 ## Running tests
@@ -124,7 +125,8 @@ configuration to get them to work on an alternate port.
 
 ##Useful shell aliases
 
-Add these to your .profile or .bash_profile:
+Add these to your .profile or .bash_profile.  They are also available by default
+on the virtual machine. See templates/profile.
 
 > Directory switching
 
@@ -143,7 +145,7 @@ function drspt(){
   cd /Path/to/druvmoser/sites/$1/sites/all/themes/springboard_themes
 }
 ```
-example: "drsp sb_default" - switch to springboard themes directory of the sb_default install
+example: "drspt sb_default" - switch to springboard themes directory of the sb_default install
 
 
 ```
@@ -151,7 +153,7 @@ function drspl(){
   cd /Path/to/druvmoser/sites/$1/sites/all/librarires
 }
 ```
-example: "drsp sb_default" - switch to libraries directory of the sb_default install
+example: "drspl sb_default" - switch to libraries directory of the sb_default install
 
 ```
     function drbld(){
@@ -181,6 +183,8 @@ drbld 7.x-4.x (switch build repo to 7.x-4.x)
 - alias vup='vagrant up'
 - alias vre='vagrant reload'
 - alias vsh='vagrant ssh'
+- alias vapr='DR_APACHE_RESTART=TRUE vagrant up' #requires vagrant triggers plugin. Restarts apache instead of actually provisioning the vm. Without the triggers plugin this will run vagrant up as usual!
+
 
 > Executables
 

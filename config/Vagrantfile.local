@@ -1,12 +1,24 @@
 config.vm.network "forwarded_port", guest: 3306, host: 3334, protocol: "tcp"
 
 if Vagrant.has_plugin?('vagrant-triggers')
-    config.trigger.before :provision do
-        if ENV['DR_APACHE_RESTART']
+    if ENV['DR_APACHE_RESTART']
+        config.trigger.instead_of :up do
           run_remote "service apache2 start"
         end
     end
 end
+
+if Vagrant.has_plugin?('vagrant-triggers')
+    config.trigger.before :halt do
+      info "Dumping the database before shutting down..."
+      run_remote  "bash /vagrant/scripts/backup-db.sh"
+    end
+    config.trigger.before :destroy do
+      info "Dumping the database before shutting down..."
+      run_remote  "bash /vagrant/scripts/backup-db.sh"
+    end
+end
+
 
 if ENV['DR_NEW_VHOSTS']
       config.vm.provision 'ansible' do |ansible|
