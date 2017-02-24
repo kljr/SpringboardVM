@@ -1,4 +1,4 @@
-# Provisioner copies these to the guest's /hopme/vagrant/.profile
+# Provisioner copies these to the guest's /home/vagrant/.profile
 
 alias druv='cd /var/www/springboard'
 
@@ -11,11 +11,11 @@ function drspt(){
 }
 
 function drspl(){
-  cd /var/www/springboard/sites/$1/sites/all/librarires
+  cd /var/www/springboard/sites/$1/sites/all/libraries
 }
 
 function drac(){
-  cd /var/www/springboard/sites/acceptance-tests
+  cd /var/www/springboard/acceptance-tests
 }
 
 function drsi(){
@@ -29,7 +29,7 @@ function drsi(){
 
 function drbld(){
    dir=$PWD
-   cd /var/www/springboard/sites/build
+   cd /var/www/springboard/build
    git status;
    if [ ! $# -eq 0 ]; then
      git checkout $1
@@ -37,6 +37,6 @@ function drbld(){
   cd $dir
 }
 
-alias upcc='/var/www/springboard/sites/scripts/update-cc.sh'
-alias upccin='/var/www/springboard/sites/scripts/update-cc-inverse.sh'
-alias make-sb='/var/www/springboard/sites/scripts/make-sb.sh'
+alias upcc='/var/www/springboard/scripts/update-cc.sh'
+alias upccin='/var/www/springboard/scripts/update-cc-inverse.sh'
+alias make-sb='/var/www/springboard/scripts/make-sb.sh'

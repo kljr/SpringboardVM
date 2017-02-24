@@ -41,6 +41,6 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
 fi;
 
 if [ ! -f /home/vagrant/.drush/drushrc.php ]; then
-  cp /vagrant/drush/drushrc.php /home/vagrant/.drush/drushrc.php
+  cp /vagrant/templates/drushrc.php /home/vagrant/.drush/drushrc.php
   cat /vagrant/templates/profile >> /home/vagrant/.profile
 fi;

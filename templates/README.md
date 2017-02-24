@@ -1,1 +1,1 @@
-Codeception templates
+Things that get copied elsewhere.
