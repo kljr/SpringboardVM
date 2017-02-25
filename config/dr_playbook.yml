@@ -1,42 +1,94 @@
 ---
-# Tries run the minimum necessary tasks to re-provision the apache vhost definitions.
-# Experimental.
+# Tries to run the minimum necessary tasks to re-provision the apache vhost definitions
+# and create databases for new hosts.
 
 - hosts: all
   become: yes
   vars_files:
-    - ../vendor/geerlingguy/drupal-vm/provisioning/vars/main.yml
     - ../vendor/geerlingguy/drupal-vm/default.config.yml
     - config.yml
-  pre_tasks:
-    - name: Include OS-specific variables.
-      include_vars: "../vendor/geerlingguy/drupal-vm/provisioning/vars/Debian.yml"
+    - local.config.yml
+    - "{{ druvmoser_vm_path }}/vars/main.yml"
+    - "{{ druvmoser_vm_path }}/vars/Debian.yml"
 
-    - name: Define config_dir.
-      set_fact:
-        config_dir: "{{ playbook_dir }}/.."
-      when: config_dir is not defined
-
-      tags: ['always']
-
-    - include_vars: "{{ item }}"
-      with_fileglob:
-        - "../vendor/geerlingguy/drupal-vm/default.config.yml"
-        - "config.yml"
-        - "local.config.yml"
-        - "{{ lookup('env', 'DRUPALVM_ENV')|default(drupalvm_env, true)|default(ansible_env.DRUPALVM_ENV)|default(omit) }}.config.yml"
-      tags: ['always']
-
-
-    - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/hostname.yml
-    - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/init-debian.yml
-      when: ansible_os_family == 'Debian'
-      static: no
   roles:
-    - { role: geerlingguy.apache, when: drupalvm_webserver == 'apache' }
-    - { role: geerlingguy.apache-php-fpm, when: drupalvm_webserver == 'apache' }
-    - { role: geerlingguy.adminer, when: '"adminer" in installed_extras' }
-    - { role: geerlingguy.pimpmylog, when: '"pimpmylog" in installed_extras' }
+    - { role: "{{ druvmoser_vm_roles_path }}.apache", when: drupalvm_webserver == 'apache' }
+    - { role: "{{ druvmoser_vm_roles_path }}.apache-php-fpm", when: drupalvm_webserver == 'apache' }
+    - role: "{{ druvmoser_vm_roles_path }}.php-xhprof"
+      workspace: "/root/php{{ php_version }}"
+      when: '"xhprof" in installed_extras'
+    - role: thom8.php-upload-progress
+      workspace: "/root/php{{ php_version }}"
+      when: '"upload-progress" in installed_extras'
+    - { role: "{{ druvmoser_vm_roles_path }}.blackfire", when: '"blackfire" in installed_extras' }
+    - { role: "{{ druvmoser_vm_roles_path }}.adminer", when: '"adminer" in installed_extras' }
+    - { role: "{{ druvmoser_vm_roles_path }}.pimpmylog", when: '"pimpmylog" in installed_extras' }
+    - { role: "{{ druvmoser_vm_roles_path }}.daemonize", when: '"mailhog" in installed_extras' }
+    - { role: "{{ druvmoser_vm_roles_path }}.mailhog", when: '"mailhog" in installed_extras' }
+    - { role: "{{ druvmoser_vm_roles_path }}.mysql", when: drupalvm_database == 'mysql' }
+    - { role: "{{ druvmoser_vm_roles_path }}.php-mysql", when: drupalvm_database == 'mysql' }
 
   tasks:
-    - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/www.yml
+
+    - name: DruVMoser baby.
+      include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/{{ ansible_os_family }}.yml"
+
+    # Include variables and define needed variables.
+    - name: Include OS-specific variables.
+      include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/{{ ansible_os_family }}.yml"
+
+    - name: Define apache_packages.
+      set_fact:
+        apache_packages: "{{ __apache_packages | list }}"
+      when: apache_packages is not defined
+
+    # Setup/install tasks.
+#    - include: "{{ druvmoser_vm_roles_path }}.apache/tasks/setup-{{ ansible_os_family }}.yml"
+#      static: no
+
+    # Figure out what version of Apache is installed.
+    - name: Get installed version of Apache.
+      shell: "{{ apache_daemon_path }}{{ apache_daemon }} -v"
+      changed_when: false
+      always_run: yes
+      register: _apache_version
+
+    - name: Create apache_version variable.
+      set_fact:
+        apache_version: "{{ _apache_version.stdout.split()[2].split('/')[1] }}"
+
+    - include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/apache-22.yml"
+      when: "apache_version.split('.')[1] == '2'"
+
+    - include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/apache-24.yml"
+      when: "apache_version.split('.')[1] == '4'"
+
+    - name: Add apache vhosts configuration.
+      template:
+        src: "{{ druvmoser_vm_roles_path }}.apache/templates/vhosts.conf.j2"
+        dest: "/etc/apache2/sites-available/vhosts.conf"
+        owner: root
+        group: root
+        mode: 0644
+      notify: restart apache
+      when: apache_create_vhosts
+
+    - name: Add vhost symlink in sites-enabled.
+      file:
+        src: "/etc/apache2/sites-available/vhosts.conf"
+        dest: "/etc/apache2/sites-enabled/vhosts.conf"
+        state: link
+      notify: restart apache
+      when: apache_create_vhosts
+
+    - name: Run configured post-provision shell scripts.
+      script: "{{ item }}"
+      with_items: "{{ druvmoser_post_provision_scripts|default([]) }}"
+
+    - name: Copy dashboard page into place.
+      template:
+        src: ../templates/dashboard.html.j2
+        dest: "{{ dashboard_install_dir }}/index.html"
+        mode: 0644
+
+

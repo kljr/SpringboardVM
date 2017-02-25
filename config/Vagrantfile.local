@@ -31,13 +31,13 @@ if Vagrant.has_plugin?('vagrant-triggers')
 end
 
 
-#if ENV['DR_NEW_VHOSTS']
-#      config.vm.provision 'ansible' do |ansible|
-#        ansible.playbook = "config/dr_playbook.yml"
-#        ansible.extra_vars = {
-#          config_dir: host_config_dir,
-#          drupalvm_env: drupalvm_env
-#        }
-#        ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
-#      end
-#end
+if ENV['DR_NEW_VHOSTS']
+      config.vm.provision 'ansible' do |ansible|
+        ansible.playbook = "config/dr_playbook.yml"
+        ansible.extra_vars = {
+          config_dir: host_config_dir,
+          drupalvm_env: drupalvm_env
+        }
+        ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
+      end
+end
