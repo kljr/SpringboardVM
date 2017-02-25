@@ -261,7 +261,12 @@ directory to override anything in DrupalVM's Vagrantfile.
 ## Credits
 
 Thanks to
-[Springboard-Build-Composer](https://github.com/robertromore/Springboard
--Build-Composer), [Composer template for Drupal
-projects](https://github.com/drupal-composer/drupal-project/tree/7.x)
-for the initial template, and [DrupalVM](https://www.drupalvm.com/)
+- [Springboard-Build-Composer](https://github.com/robertromore/Springboard-Build-Composer)
+- [Composer template for Drupal projects](https://github.com/drupal-composer/drupal-project/tree/7.x)
+- [DrupalVM](https://www.drupalvm.com/)
+
+#### Why not just use Composer?
+
+Drush make is on the way out, but Springboard uses drush makefiles. If there was a versioned composer.json equivalent
+to Springboard's makefiles, it would be fairly simple to convert to using `composer create-project jacksonriver/springboard`
+as basis for triggering multiple new builds, rather than `drush make springboard-mtsb.make`.
