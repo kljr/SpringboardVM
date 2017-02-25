@@ -72,8 +72,6 @@ installed_extras:
   # - xhprof
 
 # Add any extra apt or yum packages you would like installed.
-extra_packages:
-  - sqlite
 drush_version: "8.x"
 
 php_version: "5.6"
@@ -131,8 +129,16 @@ php_max_input_vars: "4000"
 # Run specified scripts before or after VM is provisioned. Path is relative to
 # the `provisioning/playbook.yml` file.
 pre_provision_scripts: ["../../../../scripts/pre-provision.sh"]
-post_provision_scripts: ["../../../../scripts/post-provision.sh"]
-  # - "../examples/scripts/configure-solr.sh"
+post_provision_scripts:
+ - "../../../../scripts/post-provision.sh"
+
+druvmoser_post_provision_scripts:
+ - "../scripts/post-provision.sh"
+
+druvmoser_apache_vhosts_filename: "vhosts.conf"
+druvmoser_apache_vhosts_template: "../vendor/geerlingguy/drupal-vm/provisioning/roles/geerlingguy.apache/templates/vhosts.conf.j2"
+post_provision_tasks_dir: "../../../../scripts/drush-aliases-local.yml"
+
 
 # MySQL Configuration.
 mysql_root_password: root
@@ -204,7 +210,6 @@ apache_vhosts_ssl:
     documentroot: "{{ dashboard_install_dir }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
-    extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # create additional databases. Use the docroot name for the database name.

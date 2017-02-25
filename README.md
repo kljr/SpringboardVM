@@ -14,7 +14,7 @@ and a virtual machine to run them in.
 - Drush installed globally (see Drush notes below)
 - VirtualBox
 - Vagrant
-- Ansible (not required, but will make things quicker. Can be easily installed with Homebrew on a Mac)
+- Ansible (Can be easily installed with Homebrew on a Mac)
 - For acceptance tests, port 3334 open.
 
 If you have the following Vagrant plugins, no network/IP configuration is required:
@@ -76,6 +76,7 @@ and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
 * Provides shell aliases to quickly navigate the directory hierarchy and perform tasks.
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
+* Creates short drush aliases from host to guest which match your docroot folder name: `drush @docroot`
 
 ## Updating virtual hosts and adding new sites.
 
