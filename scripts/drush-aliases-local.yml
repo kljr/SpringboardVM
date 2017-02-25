@@ -20,9 +20,12 @@
 
 # Note that this doesn't work for Windows, since Ansible's running in the VM.
 - name: Configure host machine drush aliases.
-  template:
-    src: ../../../../templates/local.aliases.drushrc.php.j2
-    dest: "~/.drush/{{ vagrant_machine_name }}-short.aliases.drushrc.php"
+  template: src={{ item }} dest="~/.drush/{{ vagrant_machine_name }}-short.aliases.drushrc.php"
+  with_first_found:
+    - files:
+       - ../../../../templates/local.aliases.drushrc.php.j2
+       - ../templates/local.aliases.drushrc.php.j2
   delegate_to: 127.0.0.1
   become: no
-  when: configure_drush_aliases
+  when:
+   - configure_drush_aliases

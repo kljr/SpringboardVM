@@ -8,7 +8,7 @@
 
 {% macro alias(host, root) %}
 {%- if root not in _devtool_docroots %}
-$aliases['drv{{ root|replace("/var/www/springboard/sites/", "") }}'] = array(
+$aliases['#{{ root|replace("/var/www/springboard/sites/", "") }}'] = array(
   'uri' => '{{ host }}',
   'root' => '{{ root }}',
   'remote-host' => '{{ host }}',

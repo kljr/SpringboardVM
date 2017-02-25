@@ -76,7 +76,7 @@ and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
 * Provides shell aliases to quickly navigate the directory hierarchy and perform tasks.
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
-* Creates short drush aliases from host to guest which match your docroot folder name: `drush @drv{docroot}`
+* Creates short drush aliases from host to guest which match your docroot folder name: `drush @#docroot`. The "#" is not a typo
 
 ## Updating virtual hosts and adding new sites.
 

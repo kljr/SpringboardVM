@@ -46,7 +46,7 @@
           <td><a href="http://{{ servername }}">{{ servername }}</a></td>
           <td><code>{{ docroot }}</code></td>
         {% if configure_drush_aliases %}
-          <td><code>drush @{{ vagrant_machine_name }}.{{ servername }}</code></td>
+          <td><code>drush @#{{ docroot|replace("/var/www/springboard/sites/", "") }}</code></td>
         {% endif %}
         </tr>
       {% endif %}

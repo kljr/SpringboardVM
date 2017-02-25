@@ -101,6 +101,17 @@
       script: "{{ item }}"
       with_items: "{{ druvmoser_post_provision_scripts|default([]) }}"
 
+    - name: Run configured post-provision shell scripts.
+      script: "{{ item }}"
+      with_items: "{{ druvmoser_post_provision_scripts|default([]) }}"
+
+    - name: Run configured post-provision ansible task files.
+      include: "{{ outer_item }}"
+      loop_control:
+        loop_var: outer_item
+      with_fileglob:
+        - "{{ druvmoser_post_provision_tasks_dir|default(omit) }}"
+
     - name: Copy dashboard page into place.
       template:
         src: ../templates/dashboard.html.j2
