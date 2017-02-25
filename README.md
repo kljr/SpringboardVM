@@ -28,10 +28,15 @@ create at the IP of the virtual machine. You can find the correct
 information for the hosts file by visiting the VM IP address after
 install.
 
-Also helpful:
+For DB backups:
+
+- [vagrant-triggers](https://github.com/emyl/vagrant-triggers)
+
+
+Also helpful but not required:
 
 - [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
-- [vagrant-triggers](https://github.com/emyl/vagrant-triggers)
+
 
 #Usage
 
@@ -135,25 +140,45 @@ on the virtual machine. See templates/profile.
 
 ```
     function drsp(){
+      if [ -d /Path/to/druvmoser/sites/$1 ]; then
         cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
+      else
+        echo "Can't find that directory"
+      fi
     }
+
+    # example: "drsp sb_default" - switch to springboard modules directory of the sb_default install
 ```
-example: "drsp sb_default" - switch to springboard modules directory of the sb_default install
+
+
 
 ```
 function drspt(){
-  cd /Path/to/druvmoser/sites/$1/sites/all/themes/springboard_themes
+  if [ -d /Path/to/druvmoser/sites/$1 ]; then
+    cd /Path/to/druvmoser/sites/$1/sites/all/themes/springboard_themes
+  else
+    echo "Can't find that directory"
+  fi
+
+  # example: "drspt sb_default" - switch to springboard themes directory of the sb_default install
 }
 ```
-example: "drspt sb_default" - switch to springboard themes directory of the sb_default install
+
 
 
 ```
 function drspl(){
-  cd /Path/to/druvmoser/sites/$1/sites/all/librarires
+  if [ -d /Path/to/druvmoser/sites/$1 ]; then
+    cd /Path/to/druvmoser/sites/$1/sites/all/librarires
+  else
+    echo "Can't find that directory"
+  fi
 }
+
+ # example: "drspl sb_default" - switch to libraries directory of the sb_default install
 ```
-example: "drspl sb_default" - switch to libraries directory of the sb_default install
+
+
 
 ```
     function drbld(){
@@ -167,12 +192,13 @@ example: "drspl sb_default" - switch to libraries directory of the sb_default in
       cd $dir
     }
 
+    # examplea:
+    drbld (no arguments, displays current branch of the build repo.)
+
+    drbld 7.x-4.x (switch build repo to 7.x-4.x)
+
 ```
 
-example:
-drbld (no arguments, displays current branch of the build repo.)
-
-drbld 7.x-4.x (switch build repo to 7.x-4.x)
 
 > Executables
 
@@ -197,6 +223,7 @@ Restart Apache on the VM from the host machine
 - alias vapr='DR_APACHE_RESTART=TRUE vagrant up' #requires vagrant triggers plugin. Restarts apache instead of actually upping the vm. Without the triggers plugin this will run vagrant up as usual!
 
 >DB backups
+
 - alias drdump='DR_DUMP_DBS=TRUE vagrant up' #requires vagrant triggers plugin
 
 
@@ -204,7 +231,7 @@ Restart Apache on the VM from the host machine
 ##Drush global install
 
 You could install Drush globally with Composer (`composer require global drush/drush`), but that is likely to lead to conflicts
-if you have other global projects with dependencies.
+if you have other global projects with conflicting dependencies.
 
 Instead use [cgr](https://github.com/consolidation/cgr) to manage all your global packages, or take the steps below:
 

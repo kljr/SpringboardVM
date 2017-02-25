@@ -3,15 +3,27 @@
 alias druv='cd /var/www/springboard'
 
 function drsp(){
-  cd /var/www/springboard/sites/$1/sites/all/modules/springboard
+  if [ -d /var/www/springboard/sites/$1 ]; then
+    cd /var/www/springboard/sites/$1/sites/all/modules/springboard
+  else
+    echo "Can't find that directory"
+  fi
 }
 
 function drspt(){
-  cd /var/www/springboard/sites/$1/sites/all/themes/springboard_themes
+  if [ -d /var/www/springboard/sites/$1 ]; then
+    cd /var/www/springboard/sites/$1/sites/all/themes/springboard_themes
+  else
+    echo "Can't find that directory"
+  fi
 }
 
 function drspl(){
-  cd /var/www/springboard/sites/$1/sites/all/libraries
+  if [ -d /var/www/springboard/sites/$1 ]; then
+    cd /var/www/springboard/sites/$1/sites/all/libraries
+  else
+    echo "Can't find that directory"
+  fi
 }
 
 function drac(){
@@ -23,7 +35,7 @@ function drsi(){
     cd /var/www/springboard/sites/$1
     drush site-install sbsetup -y --site-name=$1 --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$1
    else
-    echo "Can't find that folder"
+    echo "Can't find that directory"
    fi;
 }
 

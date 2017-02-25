@@ -1,4 +1,6 @@
 ---
+# Tries run the minimum necessary tasks to re-provision the apache vhost definitions.
+
 - hosts: all
   become: yes
   vars_files:
@@ -26,7 +28,6 @@
 
 
     - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/hostname.yml
-
     - include: ../vendor/geerlingguy/drupal-vm/provisioning/tasks/init-debian.yml
       when: ansible_os_family == 'Debian'
       static: no

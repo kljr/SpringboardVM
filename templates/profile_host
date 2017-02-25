@@ -1,0 +1,90 @@
+# Useful shell aliases
+# This is *not* automatically copied to your .profile
+
+# Add these to your .profile or .bash_profile.
+# Most are also available by default
+# on the virtual machine. See templates/profile.
+
+#  Directory switching
+
+alias druv='cd /Path/to/druvmoser'
+alias drac='cd /Path/to/druvmoser/acceptance-tests'
+
+# Switch to modules dir.
+function drsp(){
+  if [ -d /Path/to/druvmoser/sites/$1 ]; then
+    cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
+  else
+    echo "Can't find that directory"
+  fi
+}
+# example: "drsp sb_default" - switch to springboard modules directory of the sb_default install
+
+
+# Switch to themes dir.
+function drspt(){
+  if [ -d /Path/to/druvmoser/sites/$1 ]; then
+    cd /Path/to/druvmoser/sites/$1/sites/all/themes/springboard_themes
+  else
+    echo "Can't find that directory"
+  fi
+}
+# example: "drspt sb_default" - switch to springboard themes directory of the sb_default install
+
+
+# Switch to libraries dir.
+function drspl(){
+  if [ -d /Path/to/druvmoser/sites/$1 ]; then
+    cd /Path/to/druvmoser/sites/$1/sites/all/librarires
+  else
+    echo "Can't find that directory"
+  fi
+}
+# example: "drspl sb_default" - switch to libraries directory of the sb_default install
+
+# Check or change SPringboard-Build version
+function drbld(){
+   dir=$PWD
+   cd /Path/to/druvmoser/build
+   if [ ! $# -eq 0 ]; then
+     git checkout $1
+   else
+     git status
+  fi;
+  cd $dir
+}
+
+# examples:
+# drbld (no arguments, displays current branch of the build repo.)
+# drbld 7.x-4.x (switch build repo to 7.x-4.x)
+
+
+#  Executables
+
+alias upcc='/Path/to/druvmoser/scripts/update-cc.sh'
+alias upccin='/Path/to/druvmoser/scripts/update-cc-inverse.sh'
+alias make-sb='/Path/to/druvmoser/scripts/make-sb.sh'
+alias codecept='/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept'
+alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
+
+
+# Aliases that can only be run from the host machine:
+# Vagrant
+
+alias vlt='vagrant halt'
+alias vup='vagrant up'
+alias vre='vagrant reload'
+alias vsh='vagrant ssh'
+
+# APACHE
+
+# Restart Apache on the VM from the host machine
+# Requires vagrant triggers plugin. Restarts apache instead of actually upping the vm.
+# Without the triggers plugin this will run vagrant up as usual!
+
+alias vapr='DR_APACHE_RESTART=TRUE vagrant up'
+
+# DB backups
+alias drdump='DR_DUMP_DBS=TRUE vagrant up'
+#requires vagrant triggers plugin
+
