@@ -25,7 +25,7 @@ if Vagrant.has_plugin?('vagrant-triggers')
     if ENV['DR_DUMP_DBS']
         config.trigger.instead_of :up do
           info "Dumping the database before shutting down..."
-          run_remote  "bash /vagrant/scripts/backup-db.sh"
+          run_remote  "bash /vagrant/scripts/db-backup.sh"
         end
     end
 end
