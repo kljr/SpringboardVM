@@ -1,14 +1,19 @@
+
+# Configure the forwarded port for the acceptance tests.
 config.vm.network "forwarded_port", guest: 3306, host: 3334, protocol: "tcp"
 
+
+# Vagrant Triggers plugin magic
+
+# Restart apache
 if Vagrant.has_plugin?('vagrant-triggers')
     if ENV['DR_APACHE_RESTART']
         config.trigger.instead_of :up do
           run_remote "service apache2 start"
         end
     end
-end
 
-if Vagrant.has_plugin?('vagrant-triggers')
+    # Dump databases
     config.trigger.before :halt do
       info "Dumping the database before shutting down..."
       run_remote  "bash /vagrant/scripts/backup-db.sh"
@@ -26,13 +31,13 @@ if Vagrant.has_plugin?('vagrant-triggers')
 end
 
 
-if ENV['DR_NEW_VHOSTS']
-      config.vm.provision 'ansible' do |ansible|
-        ansible.playbook = "config/dr_playbook.yml"
-        ansible.extra_vars = {
-          config_dir: host_config_dir,
-          drupalvm_env: drupalvm_env
-        }
-        ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
-      end
-end
+#if ENV['DR_NEW_VHOSTS']
+#      config.vm.provision 'ansible' do |ansible|
+#        ansible.playbook = "config/dr_playbook.yml"
+#        ansible.extra_vars = {
+#          config_dir: host_config_dir,
+#          drupalvm_env: drupalvm_env
+#        }
+#        ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
+#      end
+#end

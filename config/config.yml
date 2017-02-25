@@ -3,6 +3,7 @@
 # Don't modify this file, use local.config.yml instead. Place values
 # you want to override there.
 
+# Springboard can't run Ubuntu 1604 because of a db schema bug.
 vagrant_box: geerlingguy/ubuntu1404
 vagrant_hostname: druvmoser.dev
 vagrant_machine_name: druvmoser

@@ -61,7 +61,7 @@ their vendor dependencies.
 * Installs Springboard, checking out git working copies of Springboard
 modules, themes and libraries from the Springboard git repo. The default
 sites will be in `sites/sb_default` and `sites/sb_test,` and will have
-Springboard version 7.x-4.x. The "sites" directory is a vagrant shared folder.
+Springboard version 7.x-4.x.
 * Provisions DrupalVM, Apache and mySQL, creates virtual host entries,
 site databases, and installs the Springboard profile.
 * Allows additional sites to be automatically installed in
@@ -74,21 +74,22 @@ contrib on an existing site without touching its Springboard folders.
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
-* Automatic DB backups when you halt or destroy the VM (requires vagrant triggers plugin).
+* Provides shell aliases to quickly navigate the directory hierarchy and perform tasks.
+* Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
 
 ## Updating virtual hosts and adding new sites.
 
 If you want to add a new site to a previously provisioned DruVMoser,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` (You may have to chmod +x). Enter the
+* Run `scripts/make-sb.sh` or `composer update` (You may have to chmod the +x the script). Enter the
 springboard version you want to download at the prompt.
-* Wait for the script to complete, then run `vagrant provision` to
+* Wait for the make script to complete, then run `vagrant provision` to
 update Apache and create the databases and settings files.
 
 ## Updating existing Springboard sites
 
-There are two scripts which allow you to update a Springboard site's
+There are two shell scripts which allow you to update a Springboard site's
 Drupal core and contrib modules automatically, without touching
 Springboard modules, themes or libraries;
 
@@ -131,7 +132,8 @@ configuration to get them to work on an alternate port.
 ##Useful shell aliases
 
 Add these to your .profile or .bash_profile.  They are also available by default
-on the virtual machine. See templates/profile.
+on the virtual machine. See templates/profile_host for a template formatted for
+copying and pasting.
 
 > Directory switching
 
