@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This can only be run from the VM.
+
 PROJECT_ROOT=/var/www/springboard/sites
 CONFIG_FILE=/vagrant/config/config.yml
 

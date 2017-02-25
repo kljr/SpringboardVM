@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This can only be run from the VM.
+
 PROJECT_ROOT=/var/www/springboard/sites
 source "/vagrant/scripts/parse-yaml.sh"
 

@@ -1,8 +1,8 @@
 # Useful shell aliases
-# This is *not* automatically copied to your .profile
+# This is *not* automatically copied to your .bashrc
 
-# Add these to your .profile or .bash_profile.
-# Most are also available by default on the virtual machine. See templates/profile.
+# Add these to your .bashrc or .bash_alias.
+# Most are also available by default on the virtual machine. See templates/bashrc_guest.
 
 #  Directory switching
 
