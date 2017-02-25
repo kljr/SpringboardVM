@@ -13,6 +13,24 @@
       .panel, .jumbotron, .well {
         margin-bottom: 20px;
       }
+      .jumbotron {
+        background-color: #7fa5f51a !important;
+        margin-top: 20px  !important;
+        padding-top: 10px !important;
+        padding-bottom: 15px !important;
+      }
+      .panel-default > .panel-heading {
+      	color: #333;
+      	background-color: #7fa5f51a !important;
+      	border-color: #ddd;
+      }
+
+      .well {
+        background-color: #f6f8ee7a !important;
+        border: 1px solid #32353f33 !important;
+        color: #355 !important;
+      }
+
       td, th {
         padding: 8px;
       }
@@ -300,15 +318,7 @@
               <div class="col-md-7 text-center">
                 <h1>DruVMoser</h1>
                 <p><a href="https://github.com/kljr/druvmoser">DruVMoser</a> is a VM for local Springboard development, built with Composer, Drush, <a href="http://www.drupalvm.com">DrupalVM</a>, Vagrant + Ansible.</p>
-                <p><a class="" href="http://github.com/kljr/druvmoser" role="button">Read the documentation</a></p>
-              </div>
-
-              <div class="col-md-5">
-                <h5>/etc/hosts</h5>
-                <section class="well small">
-                  {{ sectionHost() }}
-                </section>
-                <small>Unless you're using the <a href="https://github.com/cogitatio/vagrant-hostsupdater" target="_blank">vagrant-hostsupdater</a> or <a href="https://github.com/smdahlen/vagrant-hostmanager" target="_blank">vagrant-hostmanager</a> plugin, add the lines above to your host machine's hosts file.</small>
+                <p><a class="" href="http://github.com/kljr/druvmoser" role="button">Documentation</a></p>
               </div>
             </div>
           </section>
@@ -355,6 +365,16 @@
 
               {{ sectionDatabaseUserList() }}
             </div>
+          </section>
+          <section class="panel panel-default">
+            <div class="panel-heading">Hosts file configuration</div>
+              <div class="panel-body">
+                <section class="well small">
+                  {{ sectionHost() }}
+                </section>
+                <small>Unless you're using the <a href="https://github.com/cogitatio/vagrant-hostsupdater" target="_blank">vagrant-hostsupdater</a> or <a href="https://github.com/smdahlen/vagrant-hostmanager" target="_blank">vagrant-hostmanager</a> plugin, add the lines above to your host machine's hosts file.</small>
+              </div>
+              </div>
           </section>
         </div>
       </div>
