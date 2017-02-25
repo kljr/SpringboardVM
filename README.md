@@ -131,8 +131,8 @@ configuration to get them to work on an alternate port.
 
 ##Useful shell aliases
 
-Add these to your .profile or .bash_profile.  They are also available by default
-on the virtual machine. See templates/profile_host for a template formatted for
+Add these to your .bashrc. They are also available by default
+on the virtual machine. See templates/bashrc_host for a template formatted for
 copying and pasting.
 
 > Directory switching
