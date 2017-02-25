@@ -174,18 +174,6 @@ drbld (no arguments, displays current branch of the build repo.)
 
 drbld 7.x-4.x (switch build repo to 7.x-4.x)
 
-
-
-
-> Vagrant
-
-- alias vlt='vagrant halt'
-- alias vup='vagrant up'
-- alias vre='vagrant reload'
-- alias vsh='vagrant ssh'
-- alias vapr='DR_APACHE_RESTART=TRUE vagrant up' #requires vagrant triggers plugin. Restarts apache instead of actually provisioning the vm. Without the triggers plugin this will run vagrant up as usual!
-
-
 > Executables
 
 - alias upcc='/Path/to/druvmoser/scripts/update-cc.sh'
@@ -193,6 +181,24 @@ drbld 7.x-4.x (switch build repo to 7.x-4.x)
 - alias make-sb='/Path/to/druvmoser/scripts/make-sb.sh'
 - alias codecept=/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept
 - alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
+
+
+####Aliases that can only be run from the host machine:
+> Vagrant
+
+- alias vlt='vagrant halt'
+- alias vup='vagrant up'
+- alias vre='vagrant reload'
+- alias vsh='vagrant ssh'
+
+>APACHE
+
+Restart Apache on the VM from the host machine
+- alias vapr='DR_APACHE_RESTART=TRUE vagrant up' #requires vagrant triggers plugin. Restarts apache instead of actually upping the vm. Without the triggers plugin this will run vagrant up as usual!
+
+>DB backups
+- alias drdump='DR_DUMP_DBS=TRUE vagrant up' #requires vagrant triggers plugin
+
 
 
 ##Drush global install
