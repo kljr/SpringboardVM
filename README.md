@@ -51,7 +51,7 @@ Run `composer update`
 After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
-you can view the DrupalVM dashboard at https://dashboard.druvmoser.dev.
+you can view the DrupalVM dashboard at http://dashboard.druvmoser.dev.
 
 ## What does DruVMoser do?
 
