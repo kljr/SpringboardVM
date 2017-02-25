@@ -1,7 +1,9 @@
+# Additional DrupalVM vagrant configuration.
+# If you need to add your own config, you can put it in an untracked file
+# in config/Vagrantfile.custom
 
 # Configure the forwarded port for the acceptance tests.
 config.vm.network "forwarded_port", guest: 3306, host: 3334, protocol: "tcp"
-
 
 # Vagrant Triggers plugin magic
 
@@ -16,11 +18,11 @@ if Vagrant.has_plugin?('vagrant-triggers')
     # Dump databases
     config.trigger.before :halt do
       info "Dumping the database before shutting down..."
-      run_remote  "bash /vagrant/scripts/backup-db.sh"
+      run_remote  "bash /vagrant/scripts/db-backup.sh"
     end
     config.trigger.before :destroy do
       info "Dumping the database before shutting down..."
-      run_remote  "bash /vagrant/scripts/backup-db.sh"
+      run_remote  "bash /vagrant/scripts/db-backup.sh"
     end
     if ENV['DR_DUMP_DBS']
         config.trigger.instead_of :up do
@@ -29,7 +31,6 @@ if Vagrant.has_plugin?('vagrant-triggers')
         end
     end
 end
-
 
 if ENV['DR_NEW_VHOSTS']
       config.vm.provision 'ansible' do |ansible|
@@ -41,3 +42,6 @@ if ENV['DR_NEW_VHOSTS']
         ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
       end
 end
+
+# Allow an untracked Vagrantfile to modify the configurations
+eval File.read "#{host_config_dir}/Vagrantfile.custom" if File.exist?("#{host_config_dir}/Vagrantfile.custom")
