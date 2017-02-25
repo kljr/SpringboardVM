@@ -10,6 +10,7 @@
     - local.config.yml
     - "{{ druvmoser_vm_path }}/vars/main.yml"
     - "{{ druvmoser_vm_path }}/vars/Debian.yml"
+    - "{{ druvmoser_vm_path }}/vars/RedHat.yml"
 
   roles:
     - { role: "{{ druvmoser_vm_roles_path }}.apache", when: drupalvm_webserver == 'apache' }
@@ -31,7 +32,8 @@
   tasks:
 
     - name: DruVMoser baby.
-      include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/{{ ansible_os_family }}.yml"
+      set_fact:
+        druvmoser_shim: "This is just a placeholder for the 'start-at-task' ansible flag"
 
     # Include variables and define needed variables.
     - name: Include OS-specific variables.
