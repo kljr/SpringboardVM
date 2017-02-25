@@ -76,17 +76,17 @@ and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
 * Provides shell aliases to quickly navigate the directory hierarchy and perform tasks.
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
-* Creates short drush aliases from host to guest which match your docroot folder name: `drush @docroot`
+* Creates short drush aliases from host to guest which match your docroot folder name: `drush @drv{docroot}`
 
 ## Updating virtual hosts and adding new sites.
 
 If you want to add a new site to a previously provisioned DruVMoser,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` or `composer update` (You may have to chmod the +x the script). Enter the
+* Run `scripts/make-sb.sh` (faster) or `composer update` (You may have to chmod the +x the script). Enter the
 springboard version you want to download at the prompt.
-* Wait for the make script to complete, then run `vagrant provision` to
-update Apache and create the databases and settings files.
+* Wait for the make script to complete, then run `scripts/apache-provision.sh` (faster)
+ or `vagrant provision` to update Apache and create the databases and settings files.
 
 ## Updating existing Springboard sites
 
