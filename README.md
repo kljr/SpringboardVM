@@ -1,11 +1,13 @@
 # DruVMoser
 
-Springboard with Composer + Drush Make + DrupalVM + Codeception.
+A Springboard development environment built with Composer, Drush make, Codeception, DrupalVM,
+Ansible and Bash.
 
 Provides multiple fully-configured Springboard sites with working copies
-of the Springboard repositories, a dedicated testing site, scripts that allow Drush Make to update existing sites'
-core and contrib modules without touching their Springboard directories,
-and a virtual machine to run them in.
+of the Springboard repositories, a dedicated testing site and testing suite, bash scripts which
+allow Drush make to update existing sites' core and contrib modules without touching
+their Springboard directories, and quick, pain-free provisioning, management and updating
+of Apache, mySQL and Drupal/Springboard.
 
 ## Prerequisites
 
@@ -51,7 +53,7 @@ Run `composer update`
 After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
-you can view the DrupalVM dashboard at http://dashboard.druvmoser.dev.
+you can view the DruVMoser dashboard at http://dashboard.druvmoser.dev.
 
 ## What does DruVMoser do?
 
