@@ -132,106 +132,50 @@ port. If port 3334 is already in use, edit config/vagranfile.local to
 use a different one. You will also have to edit the acceptance test
 configuration to get them to work on an alternate port.
 
-##Useful shell aliases
+##Useful shell aliases and functions
 
-Add these to your .bashrc. They are also available by default
-on the virtual machine. See templates/bashrc_host for a template formatted for
-copying and pasting.
+Most of these are available by default on the virtual machine. See templates/bashrc_host for a template formatted for
+copying and pasting to your computer's .bashrc file.
 
-> Directory switching
+>Directory switching
 
-- alias druv='cd /Path/to/druvmoser'
-- alias drac='cd /Path/to/druvmoser/acceptance-tests'
-
-```
-    function drsp(){
-      if [ -d /Path/to/druvmoser/sites/$1 ]; then
-        cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
-      else
-        echo "Can't find that directory"
-      fi
-    }
-
-    # example: "drsp sb_default" - switch to springboard modules directory of the sb_default install
-```
+* druv -  go to DruvMoser root.
+* drac - Go to acceptance tests directory
+* drsp [docroot] - switch to the Springboard modules directory of site with [docroot]
+* drspt [docroot] - switch to the Springboard themes directory of site with [docroot]
+* drspl [docroot] - switch to the libraries directory of site with [docroot]
+* drbld - show Springboard version of the build directory
+* drbld [branch_name] - switch the springboard build repo to a branch.
 
 
+>  Managing sites
 
-```
-function drspt(){
-  if [ -d /Path/to/druvmoser/sites/$1 ]; then
-    cd /Path/to/druvmoser/sites/$1/sites/all/themes/springboard_themes
-  else
-    echo "Can't find that directory"
-  fi
+* upcc - copy your springboard directories into a new springboard download, and replace the original directory.
+* upccin -  copy new drupal core and contrib into your existing springboard install.
+* make-sb - create a new site and database after defining a new virtual host entry.
 
-  # example: "drspt sb_default" - switch to springboard themes directory of the sb_default install
-}
-```
+> Testing
 
+* drac - Go to acceptance tests directory
+* codecept - start codeception
+* selchr - start selenium with chromedriver.
 
+#####These are only available for your host computer.
 
-```
-function drspl(){
-  if [ -d /Path/to/druvmoser/sites/$1 ]; then
-    cd /Path/to/druvmoser/sites/$1/sites/all/librarires
-  else
-    echo "Can't find that directory"
-  fi
-}
-
- # example: "drspl sb_default" - switch to libraries directory of the sb_default install
-```
-
-
-
-```
-    function drbld(){
-       dir=$PWD
-       cd /Path/to/druvmoser/build
-       if [ ! $# -eq 0 ]; then
-         git checkout $1
-       else
-         git status
-      fi;
-      cd $dir
-    }
-
-    # examplea:
-    drbld (no arguments, displays current branch of the build repo.)
-
-    drbld 7.x-4.x (switch build repo to 7.x-4.x)
-
-```
-
-
-> Executables
-
-- alias upcc='/Path/to/druvmoser/scripts/update-cc.sh'
-- alias upccin='/Path/to/druvmoser/scripts/update-cc-inverse.sh'
-- alias make-sb='/Path/to/druvmoser/scripts/make-sb.sh'
-- alias codecept=/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept
-- alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
-
-
-####Aliases that can only be run from the host machine:
 > Vagrant
+* vlt - vagrant halt
+* vup - vagrant up
+* vre - vagrant reload
+* vsh - vagrant ssh
 
-- alias vlt='vagrant halt'
-- alias vup='vagrant up'
-- alias vre='vagrant reload'
-- alias vsh='vagrant ssh'
+> Apache
 
->APACHE
+* aprel - restart apache
+* appro - provision new vhosts and site databases
 
-Restart Apache on the VM from the host machine
-- alias vapr='DR_APACHE_RESTART=TRUE vagrant up' #requires vagrant triggers plugin. Restarts apache instead of actually upping the vm. Without the triggers plugin this will run vagrant up as usual!
+ > DB
 
->DB backups
-
-- alias drdump='DR_DUMP_DBS=TRUE vagrant up' #requires vagrant triggers plugin
-
-
+* drdump - dump all databases to backup
 
 ##Drush global install
 
