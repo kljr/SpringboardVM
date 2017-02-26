@@ -146,8 +146,6 @@ copy and paste to your computer's .bashrc file.
 * `drdrm [docroot]` - switch to the Springboard modules directory of site with [docroot]
 * `drdrt [docroot]` - switch to the Springboard themes directory of site with [docroot]
 * `drdrl [docroot]` - switch to the libraries directory of site with [docroot]
-* `drbld` - show Springboard version of the build repo
-* `drbld [branch_name]` - switch the springboard build repo to a branch.
 
 
 >  Managing sites
@@ -156,6 +154,8 @@ copy and paste to your computer's .bashrc file.
 * `upccin` -  copy new drupal core and contrib into your existing springboard install.
 * `make-sb` - create a new Springboard installation after defining a new virtual host entry.
 * `appro` - provision virtual hosts for new installations, create the site database, and create drush aliases.
+* `drbld` - show Springboard version of the build repo
+* `drbld [branch_name]` - switch the springboard build repo to a branch.
 
 > Testing
 
