@@ -24,36 +24,36 @@ function drdr(){
 }
 
 # Switch to modules dir.
-function drsp(){
+function drdrm(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
   else
     echo "Can't find that directory"
   fi
 }
-# example: "drsp sb_default" - switch to springboard modules directory of the sb_default install
+# example: "drdr sb_default" - switch to springboard modules directory of the sb_default install
 
 
 # Switch to themes dir.
-function drspt(){
+function drdrt(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
   else
     echo "Can't find that directory"
   fi
 }
-# example: "drspt sb_default" - switch to springboard themes directory of the sb_default install
+# example: "drdrt sb_default" - switch to springboard themes directory of the sb_default install
 
 
 # Switch to libraries dir.
-function drspl(){
+function drdrl(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/librarires
   else
     echo "Can't find that directory"
   fi
 }
-# example: "drspl sb_default" - switch to libraries directory of the sb_default install
+# example: "drdrl sb_default" - switch to libraries directory of the sb_default install
 
 # Check or change SPringboard-Build version
 function drbld(){
