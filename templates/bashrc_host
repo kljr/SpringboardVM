@@ -14,7 +14,7 @@ PATH_TO_DRUV=/path/to/druvmoser_install_directory
 alias drac='cd $PATH_TO_DRUV/acceptance-tests'
 
 # Switch to modules dir.
-function drdr(){
+function dwdw(){
    if [ $# -eq 0 ]; then
      cd $PATH_TO_DRUV
    else
@@ -27,39 +27,39 @@ function drdr(){
 }
 
 # Switch to modules dir.
-function drdrm(){
+function dwdwm(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
   else
     echo "Can't find that directory"
   fi
 }
-# example: "drdr sb_default" - switch to springboard modules directory of the sb_default install
+# example: "dwdw sb_default" - switch to springboard modules directory of the sb_default install
 
 
 # Switch to themes dir.
-function drdrt(){
+function dwdwt(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
   else
     echo "Can't find that directory"
   fi
 }
-# example: "drdrt sb_default" - switch to springboard themes directory of the sb_default install
+# example: "dwdwt sb_default" - switch to springboard themes directory of the sb_default install
 
 
 # Switch to libraries dir.
-function drdrl(){
+function dwdwl(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/librarires
   else
     echo "Can't find that directory"
   fi
 }
-# example: "drdrl sb_default" - switch to libraries directory of the sb_default install
+# example: "dwdwl sb_default" - switch to libraries directory of the sb_default install
 
 # Check or change SPringboard-Build version
-function drbld(){
+function dwbld(){
    dir=$PWD
    cd $PATH_TO_DRUV/build
    if [ ! $# -eq 0 ]; then
@@ -71,8 +71,8 @@ function drbld(){
 }
 
 # examples:
-# drbld (no arguments, displays current branch of the build repo.)
-# drbld 7.x-4.x (switch build repo to 7.x-4.x)
+# dwbld (no arguments, displays current branch of the build repo.)
+# dwbld 7.x-4.x (switch build repo to 7.x-4.x)
 
 
 #  Executables
@@ -105,5 +105,5 @@ alias aprel='DR_APACHE_RESTART=TRUE vagrant up'
 alias appro='$PATH_TO_DRUV/scripts/apache-provision.sh
 
 # DB backups
-alias drdump='DR_DUMP_DBS=TRUE vagrant up'
+alias dwdump='DR_DUMP_DBS=TRUE vagrant up'
 #requires vagrant triggers plugin

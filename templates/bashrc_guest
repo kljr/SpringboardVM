@@ -2,9 +2,7 @@
 
 PATH_TO_DRUV='/var/www/springboard'
 
-alias druv=cd $PATH_TO_DRUV
-
-function drdr(){
+function dwdw(){
    if [ $# -eq 0 ]; then
      cd $PATH_TO_DRUV
    else
@@ -16,7 +14,7 @@ function drdr(){
    fi
 }
 
-function drdrm(){
+function dwdwm(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
   else
@@ -24,7 +22,7 @@ function drdrm(){
   fi
 }
 
-function drdrt(){
+function dwdwt(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
   else
@@ -32,7 +30,7 @@ function drdrt(){
   fi
 }
 
-function drdrl(){
+function dwdwl(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/libraries
   else
@@ -53,7 +51,7 @@ function drsi(){
    fi;
 }
 
-function drbld(){
+function dwbld(){
    dir=$PWD
    cd $PATH_TO_DRUV/build
    git status;
