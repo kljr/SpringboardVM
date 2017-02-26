@@ -5,11 +5,15 @@ PATH_TO_DRUV='/var/www/springboard'
 alias druv=cd $PATH_TO_DRUV
 
 function drdr(){
-  if [ -d $PATH_TO_DRUV/sites/$1 ]; then
-    cd $PATH_TO_DRUV/sites/$1
-  else
-    echo "Can't find that directory"
-  fi
+   if [ $# -eq 0 ]; then
+     cd $PATH_TO_DRUV
+   else
+       if [ -d $PATH_TO_DRUV/sites/$1 ]; then
+         cd $PATH_TO_DRUV/sites/$1
+       else
+         echo "Can't find that directory"
+       fi
+   fi
 }
 
 function drdrm(){
