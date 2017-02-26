@@ -142,7 +142,7 @@ copy and paste to your computer's .bashrc file.
 
 * `druv` -  go to DruvMoser root.
 * `drac` - Go to acceptance tests directory
-* `drdr` [docroot/path] - switch to any path in a docroot.
+* `drdr [docroot/path]` - switch to any path in a docroot.
 * `drdrm [docroot]` - switch to the Springboard modules directory of site with [docroot]
 * `drdrt [docroot]` - switch to the Springboard themes directory of site with [docroot]
 * `drdrl [docroot]` - switch to the libraries directory of site with [docroot]
