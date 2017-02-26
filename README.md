@@ -107,7 +107,7 @@ without overwriting Springboard folders or any non-Springboard
 customizations in the libraries or contrib folders.
 
 * If you want to replace all code in a site, including any repositories, just delete the document root folder, and
-run `scripts/make-sb.sh`, and then `vagrant provision`.
+run `scripts/make-sb.sh`, and then `scripts/apache-provision.sh`.
 
 ## Running tests
 

@@ -81,7 +81,11 @@ alias vsh='vagrant ssh'
 # Requires vagrant triggers plugin. Restarts apache instead of actually upping the vm.
 # Without the triggers plugin this will run vagrant up as usual!
 
-alias vapr='DR_APACHE_RESTART=TRUE vagrant up'
+alias aprel='DR_APACHE_RESTART=TRUE vagrant up'
+
+# Refresh vhosts and create dbs for new sites
+
+alias appro='/path/to/druvmoser/scripts/apache-provision.sh
 
 # DB backups
 alias drdump='DR_DUMP_DBS=TRUE vagrant up'

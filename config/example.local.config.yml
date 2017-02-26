@@ -1,28 +1,21 @@
-# Items defined in this file will completely override items defined in
-# the other yaml files. So you have to redefine the entire vhosts array
-# instead of just adding new items to it. This is a limitation of the DrupalVM
-# ansible playbook.
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance. Otherwise, leave this alone.
 #vagrant_hostname: druvmoser.dev
 #vagrant_machine_name: druvmoser
 #vagrant_ip: 0.0.0.0
-
+# druvmoser_drush_alias_uniqifier: '#'
 
 # Add additional Springboard installs and vhosts.
-# Don't use any special characters in the docroot name. Only a-z and are allowed.
-
-# If you're adding a new site to a previously provisioned SpringboardVM, then you need to:
-# run `composer update`
-# run `vagrant provision`
+# Don't use any special characters in the docroot name. Only a-z are allowed.
 
 apache_vhosts:
 
 # A Custom Site
+# Keep your document root names short. They become drush aliases.
   - servername: "another-site.dev"
     serveralias: "www.another-site.dev"
-    documentroot: "{{drupal_composer_install_dir}}/another_site"
+    documentroot: "{{drupal_composer_install_dir}}/ano"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # Don't forget to define the apache_vhosts_ssl entry below, as well.
@@ -65,7 +58,7 @@ apache_vhosts_ssl:
 
   # your cusotm site ssl entry
   - servername: "another-site.dev"
-    documentroot: "{{drupal_composer_install_dir}}/another_site"
+    documentroot: "{{drupal_composer_install_dir}}/ano"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"

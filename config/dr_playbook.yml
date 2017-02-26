@@ -113,5 +113,3 @@
         src: ../templates/dashboard.html.j2
         dest: "{{ dashboard_install_dir }}/index.html"
         mode: 0644
-
-

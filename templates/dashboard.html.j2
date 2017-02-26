@@ -317,7 +317,7 @@
             <div class="row">
               <div class="col-md-7 text-center">
                 <h1>DruVMoser</h1>
-                <p><a href="https://github.com/kljr/druvmoser">DruVMoser</a> is a Springboard development environment, built with Composer, Drush, <a href="http://www.drupalvm.com">DrupalVM</a>, Vagrant + Ansible.</p>
+                <p><a href="https://github.com/kljr/druvmoser">DruVMoser</a> is a Springboard development environment, built with Composer, Drush, <a href="http://www.drupalvm.com">DrupalVM</a>, Vagrant, Ansible and Bash.</p>
                 <p><a class="" href="https://github.com/kljr/druvmoser/blob/master/README.md" role="button">Documentation</a></p>
               </div>
             </div>
@@ -342,12 +342,66 @@
             </div>
           </section>
 
-          <section class="panel panel-default">
-            <div class="panel-heading">PHP information</div>
-            <div class="panel-body">
-              {{ sectionPhpInformation() }}
-            </div>
-          </section>
+        <section class="panel panel-default">
+          <div class="panel-heading">Shell commands</div>
+          <div class="panel-body">
+<p>You need to copy these from <em>templates/bash_host</em> to your .bashrc file to use them.</p>
+<b>Directory switching</b><br>
+<ul>
+<li>druv - go to DruvMoser root.</li>
+<li>drac - Go to acceptance tests directory</li>
+<li>drsp [docroot] - switch to the Springboard modules directory
+of site with [docroot]</li>
+<li>drspt [docroot] - switch to the Springboard themes directory
+of site with [docroot]</li>
+<li>drspl [docroot] - switch to the libraries directory of site
+with [docroot]</li>
+<li>drbld - show Springboard version of the build directory</li>
+<li>drbld [brnach_name] - switch the springboard build repo to a
+branch.</li>
+</ul>
+<b>Managing sites</b><br>
+<ul>
+<li>upcc - copy your springboard directories into a new
+springboard download, and replace the original
+directory.
+</li>
+<li>upccin - copy new drupal core and contrib into
+your existing springboard
+install.
+</li>
+<li>make-sb - create a new site and database after defining
+a new virtual host entry. <br>
+</li>
+</ul>
+<b>Testing</b><br>
+<ul>
+<li>drac - Go to acceptance tests directory</li>
+<li>codecept - start
+codeception
+</li>
+<li>selchr - start selenium with chromedriver.</li>
+</ul>
+<b>Vagrant</b><br>
+<ul>
+<li>vlt - vagrant halt</li>
+<li>vup -vagrant up</li>
+<li>vre - vagrant reload</li>
+<li>vsh - vagrant ssh</li>
+</ul>
+<b>Apache</b><br>
+<ul>
+<li>aprel - restart apache</li>
+<li>appro - provision new vhosts and site databases</li>
+</ul>
+<b>DB</b><br>
+<ul>
+<li>drdump - dump all databases to backup</li>
+</ul>
+
+          </div>
+        </section>
+
         </div>
 
         <div class="col-md-5">
@@ -357,15 +411,20 @@
               {{ sectionDatabaseConnection() }}
             </div>
           </section>
-
           <section class="panel panel-default">
+            <div class="panel-heading">PHP information</div>
+            <div class="panel-body">
+              {{ sectionPhpInformation() }}
+            </div>
+          </section>
+          <!--<section class="panel panel-default">
             <div class="panel-heading">Databases</div>
             <div class="panel-body">
               {{ sectionDatabaseList() }}
 
               {{ sectionDatabaseUserList() }}
             </div>
-          </section>
+          </section>-->
           <section class="panel panel-default">
             <div class="panel-heading">Hosts file configuration</div>
               <div class="panel-body">
