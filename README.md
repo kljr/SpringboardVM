@@ -14,9 +14,9 @@ of Apache, mySQL and Drupal/Springboard.
 - Linux or Mac (with NFS, required)
 - Composer installed globally, and preferably renamed or aliased in your shell as "composer"".
 - Drush installed globally (see Drush notes below)
-- VirtualBox
-- Vagrant
-- Ansible (Can be easily installed with Homebrew on a Mac)
+- VirtualBox 5.1.10 or later (5.0.32 appears to still work on Mac)
+- Vagrant 1.8.6 or later
+- Ansible 2.2.0 or later (can be easily installed with Homebrew on a Mac)
 - For acceptance tests, port 3334 open.
 
 If you have the following Vagrant plugins, no network/IP configuration is required:
@@ -150,9 +150,10 @@ copying and pasting to your computer's .bashrc file.
 
 >  Managing sites
 
-* `upcc` - copy your springboard directories into a new springboard download, and replace the original directory.
+* `upcc` - copy your springboard directories into a new springboard download, and replace the original docroot.
 * `upccin` -  copy new drupal core and contrib into your existing springboard install.
-* `make-sb` - create a new site and database after defining a new virtual host entry.
+* `make-sb` - create a new Springboard installation after defining a new virtual host entry.
+* `appro` - provision virtual hosts for new installations, create the site database, and create drush aliases.
 
 > Testing
 
@@ -172,7 +173,7 @@ copying and pasting to your computer's .bashrc file.
 > Apache
 
 * `aprel` - restart apache
-* `appro` - provision new vhosts and site databases
+* `appro` - provision virtual hosts for new installations, create the site database, and create drush aliases.
 
 > DB
 
