@@ -58,27 +58,27 @@ you can view the DruVMoser dashboard at http://dashboard.druvmoser.dev.
 ## What does DruVMoser do?
 
 * Downloads Springboard-Build, the Acceptance Test repo, DrupalVM, Codeception and
-their vendor dependencies.
-* Triggers a bash script which runs drush make.
-* Installs Springboard, checking out git working copies of Springboard
-modules, themes and libraries from the Springboard git repo. The default
-sites will be in `sites/sb_default` and `sites/sb_test,` and will have
-Springboard version 7.x-4.x.
+their vendor dependencies and triggers a bash script which runs drush make and
+installs Springboard, checking out git working copies of Springboard
+modules, themes and libraries from the Springboard git repo.
 * Provisions DrupalVM, Apache and mySQL, creates virtual host entries,
 site databases, and installs the Springboard profile.
+* Creates two default sites, one a dedicated testing site.
+* Configures the acceptance tests to work out of the box.
 * Allows additional sites to be automatically installed in
 sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
 * Provides shell scripts to allow Drush Make to update Drupal core and
 contrib on an existing site without touching its Springboard folders.
-* Configures the acceptance tests to work out of the box.
 * Provides a Drush alias to quickly install and configure developer
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
 * Provides shell aliases to quickly navigate the directory hierarchy and perform tasks.
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
-* Creates short drush aliases from host to guest which match your docroot folder name: `drush @#docroot`. The "#" is not a typo
+* Creates Drush aliases from host to guest which match your docroot folder name: `drush @#docroot`, allowing you to
+keep your aliases short and simple. The "#" is not a typo, it's a configurable prefix which allows you to run multiple
+installs of DruVMoser and not have conflicting aliases.
 
 ## Updating virtual hosts and adding new sites.
 
@@ -88,7 +88,7 @@ then you need to:
 * Run `scripts/make-sb.sh` (faster) or `composer update` (You may have to chmod the +x the script). Enter the
 springboard version you want to download at the prompt.
 * Wait for the make script to complete, then run `scripts/apache-provision.sh` (faster)
- or `vagrant provision` to update Apache and create the databases and settings files.
+ or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
 
 ## Updating existing Springboard sites
 
@@ -96,12 +96,12 @@ There are two shell scripts which allow you to update a Springboard site's
 Drupal core and contrib modules automatically, without touching
 Springboard modules, themes or libraries;
 
-* scripts/update-cc.sh prompts you to download a version of Springboard,
+* `scripts/update-cc.sh` prompts you to download a version of Springboard,
 and then copies the Springboard folders of your existing site into it,
 moves the old site folder into the backups directory, and moves the
 updated folder into its place.
 
-* scripts/update-cc-inverse copies drupal core and contrib files out of
+* `scripts/update-cc-inverse` copies drupal core and contrib files out of
 a new Springboard download and places them into your existing site,
 without overwriting Springboard folders or any non-Springboard
 customizations in the libraries or contrib folders.
@@ -139,44 +139,44 @@ copying and pasting to your computer's .bashrc file.
 
 >Directory switching
 
-* druv -  go to DruvMoser root.
-* drac - Go to acceptance tests directory
-* drsp [docroot] - switch to the Springboard modules directory of site with [docroot]
-* drspt [docroot] - switch to the Springboard themes directory of site with [docroot]
-* drspl [docroot] - switch to the libraries directory of site with [docroot]
-* drbld - show Springboard version of the build directory
-* drbld [branch_name] - switch the springboard build repo to a branch.
+* `druv` -  go to DruvMoser root.
+* `drac` - Go to acceptance tests directory
+* `drsp [docroot]` - switch to the Springboard modules directory of site with [docroot]
+* `drspt [docroot]` - switch to the Springboard themes directory of site with [docroot]
+* `drspl [docroot]` - switch to the libraries directory of site with [docroot]
+* `drbld` - show Springboard version of the build directory
+* `drbld [branch_name]` - switch the springboard build repo to a branch.
 
 
 >  Managing sites
 
-* upcc - copy your springboard directories into a new springboard download, and replace the original directory.
-* upccin -  copy new drupal core and contrib into your existing springboard install.
-* make-sb - create a new site and database after defining a new virtual host entry.
+* `upcc` - copy your springboard directories into a new springboard download, and replace the original directory.
+* `upccin` -  copy new drupal core and contrib into your existing springboard install.
+* `mak`e-sb` - create a new site and database after defining a new virtual host entry.
 
 > Testing
 
-* drac - Go to acceptance tests directory
-* codecept - start codeception
-* selchr - start selenium with chromedriver.
+* `drac` - Go to acceptance tests directory
+* `codecept` - start codeception
+* `selchr` - start selenium with chromedriver.
 
 #####These are only available for your host computer.
 
 > Vagrant
 
-* vlt - vagrant halt
-* vup - vagrant up
-* vre - vagrant reload
-* vsh - vagrant ssh
+* `vlt` - vagrant halt
+* `vup` - vagrant up
+* `vre` - vagrant reload
+* `vsh` - vagrant ssh
 
 > Apache
 
-* aprel - restart apache
-* appro - provision new vhosts and site databases
+* `aprel` - restart apache
+* `appro` - provision new vhosts and site databases
 
 > DB
 
-* drdump - dump all databases to backup
+* `drdump` - dump all databases to backup
 
 ##Drush global install
 
