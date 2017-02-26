@@ -174,7 +174,7 @@ copying and pasting to your computer's .bashrc file.
 * aprel - restart apache
 * appro - provision new vhosts and site databases
 
- > DB
+> DB
 
 * drdump - dump all databases to backup
 
