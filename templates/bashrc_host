@@ -15,6 +15,15 @@ alias druv='cd $PATH_TO_DRUV'
 alias drac='cd $PATH_TO_DRUV/acceptance-tests'
 
 # Switch to modules dir.
+function drdr(){
+   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
+     cd $PATH_TO_DRUV/sites/$1
+   else
+     echo "Can't find that directory"
+   fi
+}
+
+# Switch to modules dir.
 function drsp(){
   if [ -d $PATH_TO_DRUV/sites/$1 ]; then
     cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard

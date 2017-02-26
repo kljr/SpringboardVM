@@ -2,6 +2,14 @@
 
 alias druv='cd /var/www/springboard'
 
+function drdr(){
+  if [ -d /var/www/springboard/sites/$1 ]; then
+    cd /var/www/springboard/sites/$1
+  else
+    echo "Can't find that directory"
+  fi
+}
+
 function drsp(){
   if [ -d /var/www/springboard/sites/$1 ]; then
     cd /var/www/springboard/sites/$1/sites/all/modules/springboard

@@ -129,23 +129,24 @@ you may want to test. You can also delete the sb_testing directory, run
 then run `vagrant provision` to recreate the settings.php file.
 
 A port has been forwarded from the guest's 3306 port to the host's 3334
-port. If port 3334 is already in use, edit config/vagranfile.local to
-use a different one. You will also have to edit the acceptance test
-configuration to get them to work on an alternate port.
+port. If port 3334 is already in use, edit the port in `config/Vagranfile.local`
+or create a new `config/Vagrantfile.custom`. You will also have
+to edit `acceptance-tests/codeception.yml` to have the alternate port.
 
 ##Useful shell aliases and functions
 
-Most of these are available by default on the virtual machine. See templates/bashrc_host for a template formatted for
-copying and pasting to your computer's .bashrc file.
+Most of these are available by default on the virtual machine. See templates/bashrc_host for a template formatted to
+copy and paste to your computer's .bashrc file.
 
 >Directory switching
 
 * `druv` -  go to DruvMoser root.
 * `drac` - Go to acceptance tests directory
+* `drdr` [docroot/path] - switch to any path in a docroot.
 * `drsp [docroot]` - switch to the Springboard modules directory of site with [docroot]
 * `drspt [docroot]` - switch to the Springboard themes directory of site with [docroot]
 * `drspl [docroot]` - switch to the libraries directory of site with [docroot]
-* `drbld` - show Springboard version of the build directory
+* `drbld` - show Springboard version of the build repo
 * `drbld [branch_name]` - switch the springboard build repo to a branch.
 
 
