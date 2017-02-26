@@ -152,7 +152,7 @@ copying and pasting to your computer's .bashrc file.
 
 * `upcc` - copy your springboard directories into a new springboard download, and replace the original directory.
 * `upccin` -  copy new drupal core and contrib into your existing springboard install.
-* `mak`e-sb` - create a new site and database after defining a new virtual host entry.
+* `make-sb` - create a new site and database after defining a new virtual host entry.
 
 > Testing
 
