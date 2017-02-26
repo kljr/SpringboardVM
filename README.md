@@ -24,10 +24,11 @@ If you have the following Vagrant plugins, no network/IP configuration is requir
 - [vagrant-auto_network](https://github.com/oscar-stack/vagrant-auto_network)
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
 
-Otherwise you will need to edit the vagrant_ip in local.config.yml, and
-update /etc/hosts to point druvmoser.dev and the other domains you
+Otherwise you will need to edit *vagrant_ip* in `config/local.config.yml`
+to assign an IP Address, and update */etc/hosts* on your computer to point
+druvmoser.dev and the other domains you
 create at the IP of the virtual machine. You can find the correct
-information for the hosts file by visiting the VM IP address after
+information for the hosts file by visiting the DruVMoser's IP address after
 install.
 
 For DB backups:
