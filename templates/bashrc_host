@@ -1,18 +1,23 @@
 # Useful shell aliases
 # This is *not* automatically copied to your .bashrc
 
+
+# All you need to do is define this path and copy this file to .bashrc
+
+PATH_TO_DRUV=/path/to/druvmoser_install_directory
+
 # Add these to your .bashrc or .bash_alias.
 # Most are also available by default on the virtual machine. See templates/bashrc_guest.
 
 #  Directory switching
 
-alias druv='cd /Path/to/druvmoser'
-alias drac='cd /Path/to/druvmoser/acceptance-tests'
+alias druv='cd $PATH_TO_DRUV'
+alias drac='cd $PATH_TO_DRUV/acceptance-tests'
 
 # Switch to modules dir.
 function drsp(){
-  if [ -d /Path/to/druvmoser/sites/$1 ]; then
-    cd /Path/to/druvmoser/sites/$1/sites/all/modules/springboard
+  if [ -d $PATH_TO_DRUV/sites/$1 ]; then
+    cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
   else
     echo "Can't find that directory"
   fi
@@ -22,8 +27,8 @@ function drsp(){
 
 # Switch to themes dir.
 function drspt(){
-  if [ -d /Path/to/druvmoser/sites/$1 ]; then
-    cd /Path/to/druvmoser/sites/$1/sites/all/themes/springboard_themes
+  if [ -d $PATH_TO_DRUV/sites/$1 ]; then
+    cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
   else
     echo "Can't find that directory"
   fi
@@ -33,8 +38,8 @@ function drspt(){
 
 # Switch to libraries dir.
 function drspl(){
-  if [ -d /Path/to/druvmoser/sites/$1 ]; then
-    cd /Path/to/druvmoser/sites/$1/sites/all/librarires
+  if [ -d $PATH_TO_DRUV/sites/$1 ]; then
+    cd $PATH_TO_DRUV/sites/$1/sites/all/librarires
   else
     echo "Can't find that directory"
   fi
@@ -44,7 +49,7 @@ function drspl(){
 # Check or change SPringboard-Build version
 function drbld(){
    dir=$PWD
-   cd /Path/to/druvmoser/build
+   cd $PATH_TO_DRUV/build
    if [ ! $# -eq 0 ]; then
      git checkout $1
    else
@@ -60,11 +65,11 @@ function drbld(){
 
 #  Executables
 
-alias upcc='/Path/to/druvmoser/scripts/update-cc.sh'
-alias upccin='/Path/to/druvmoser/scripts/update-cc-inverse.sh'
-alias make-sb='/Path/to/druvmoser/scripts/make-sb.sh'
-alias codecept='/Path/to/druvmoser/acceptance-tests/vendor/bin/codecept'
-alias selchr='java -jar /Path/to/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
+alias upcc='$PATH_TO_DRUV/scripts/update-cc.sh'
+alias upccin='$PATH_TO_DRUV/scripts/update-cc-inverse.sh'
+alias make-sb='$PATH_TO_DRUV/scripts/make-sb.sh'
+alias codecept='$PATH_TO_DRUV/acceptance-tests/vendor/bin/codecept'
+alias selchr='java -jar $PATH_TO_DRUV/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
 
 
 # Aliases that can only be run from the host machine:
@@ -85,9 +90,8 @@ alias aprel='DR_APACHE_RESTART=TRUE vagrant up'
 
 # Refresh vhosts and create dbs for new sites
 
-alias appro='/path/to/druvmoser/scripts/apache-provision.sh
+alias appro='$PATH_TO_DRUV/scripts/apache-provision.sh
 
 # DB backups
 alias drdump='DR_DUMP_DBS=TRUE vagrant up'
 #requires vagrant triggers plugin
-
