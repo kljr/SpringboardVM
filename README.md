@@ -163,6 +163,7 @@ copying and pasting to your computer's .bashrc file.
 #####These are only available for your host computer.
 
 > Vagrant
+
 * vlt - vagrant halt
 * vup - vagrant up
 * vre - vagrant reload
