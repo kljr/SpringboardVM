@@ -4,10 +4,10 @@ A Springboard development environment built with Composer, Drush make, Codecepti
 Ansible and Bash.
 
 Provides multiple fully-configured Springboard sites with working copies
-of the Springboard repositories, a dedicated testing site and testing suite, bash scripts which
+of the Springboard repositories, a dedicated testing site and testing suite, Bash scripts which
 allow Drush make to update existing sites' core and contrib modules without touching
-their Springboard directories, and quick, pain-free provisioning, management and updating
-of Apache, mySQL and Drupal/Springboard.
+their Springboard directories, automatic DB backups from guest to host,
+and quick, pain-free provisioning, management and updating of Apache, mySQL and Drupal/Springboard.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ you can view the DruVMoser dashboard at http://dashboard.druvmoser.dev.
 their vendor dependencies and triggers a bash script which runs drush make and
 installs Springboard, checking out git working copies of Springboard
 modules, themes and libraries from the Springboard git repo.
-* Provisions DrupalVM, Apache and mySQL, creates virtual host entries,
+* Provisions DrupalVM, Apache and mySQL, creates virtual hosts,
 site databases, and installs the Springboard profile.
 * Creates two default sites, one a dedicated testing site.
 * Configures the acceptance tests to work out of the box.
@@ -75,7 +75,7 @@ contrib on an existing site without touching its Springboard folders.
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
-* Provides shell aliases to quickly navigate the directory hierarchy and perform tasks.
+* Provides shell aliases and functions to quickly navigate the directory hierarchy and perform tasks.
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
 * Creates Drush aliases from host to guest which match your docroot folder name: `drush @#docroot`, allowing you to
 keep your aliases short and simple. The "#" is not a typo, it's a configurable prefix which allows you to run multiple
@@ -128,7 +128,7 @@ You can use one virtual host exclusively for running tests. The shell
 scripts will make it easy to switch among different Springboard versions
 you may want to test. You can also delete the sb_testing directory, run
 `scripts/make-sb.sh` to install a completely new Springboard version,
-then run `scripts/apache-provision` to recreate the settings.php file.
+then run `scripts/apache-provision.sh` to recreate the settings.php file.
 
 A port has been forwarded from the guest's 3306 port to the host's 3334
 port. If port 3334 is already in use, edit the port in `config/Vagranfile.local`
