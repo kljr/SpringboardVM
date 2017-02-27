@@ -140,11 +140,14 @@ copy and paste to your computer's .bashrc file.
 
 >Directory switching
 
-* `dwdw` - Go to DruVMoser install directory.
+* `druv` - Go to DruVMoser install directory.
 * `dwdw [docroot/path]` - switch to any path in a docroot.
 * `dwdwm [docroot]` - switch to the Springboard modules directory of site with [docroot]
 * `dwdwt [docroot]` - switch to the Springboard themes directory of site with [docroot]
 * `dwdwl [docroot]` - switch to the libraries directory of site with [docroot]
+
+* If you're already in a site directory path, the above commands will work without arguments.
+
 * `dwac` - Go to acceptance tests directory
 
 >  Managing sites

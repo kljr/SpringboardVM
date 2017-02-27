@@ -12,12 +12,28 @@ PATH_TO_DRUV=/path/to/druvmoser_install_directory
 #  Directory switching
 
 alias drac='cd $PATH_TO_DRUV/acceptance-tests'
+alias druv='cd $PATH_TO_DRUV'
 
-# Switch to modules dir.
 function dwdw(){
-   if [ $# -eq 0 ]; then
-     cd $PATH_TO_DRUV
-   else
+    if [ $# -eq 0 ]; then
+        f=${#PATH_TO_DRUV}
+        g=${PWD:0:$f+7}
+        h=${PWD:$f+7}
+        l=$PWD
+        i=$(strpos $h '/')
+        if [ -z $i ]; then
+            dir=$PWD
+        else
+            j=${h:0:$i}
+            dir=$g$j
+        fi
+        if [ -d $dir ]; then
+            cd $dir
+            echo "you're in" $dir
+        else
+            echo "Can't find that directory"
+        fi
+    else
        if [ -d $PATH_TO_DRUV/sites/$1 ]; then
          cd $PATH_TO_DRUV/sites/$1
        else
