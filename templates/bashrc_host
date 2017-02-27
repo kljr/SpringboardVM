@@ -28,33 +28,91 @@ function dwdw(){
 
 # Switch to modules dir.
 function dwdwm(){
-  if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-    cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
-  else
-    echo "Can't find that directory"
-  fi
+    if [ $# -eq 0 ]; then
+        f=$(strpos $PWD '/sites/')
+        g=${PWD:0:$f+7}
+        h=${PWD:$f+7}
+        i=$(strpos $h '/')
+        if [ -z $i ]; then
+            dir=$PWD/sites/all/modules/springboard
+        else
+            j=${h:0:$i}
+            dir=$g$j/sites/all/modules/springboard
+        fi
+        if [ -d $dir ]; then
+            cd $dir
+            echo "you're in" $dir
+        else
+            echo "Can't find that directory"
+        fi
+    else
+          if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
+            cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
+          else
+            echo "Can't find that directory"
+          fi
+    fi
 }
 # example: "dwdw sb_default" - switch to springboard modules directory of the sb_default install
 
 
 # Switch to themes dir.
+
 function dwdwt(){
-  if [ -d $PATH_TO_DRUV/sites/$1 ] &&  && [ $# -eq 1 ]; then
-    cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
-  else
-    echo "Can't find that directory"
-  fi
+    if [ $# -eq 0 ]; then
+        f=$(strpos $PWD '/sites/')
+        g=${PWD:0:$f+7}
+        h=${PWD:$f+7}
+        i=$(strpos $h '/')
+        if [ -z $i ]; then
+            dir=$PWD/sites/all/themes/springboard_themes
+        else
+	  	      j=${h:0:$i}
+  	  	    dir=$g$j/sites/all/themes/springboard_themes
+  	  	fi
+        if [ -d $dir ]; then
+            cd $dir
+            echo "you're in" $dir
+
+        else
+            echo "Can't find that directory"
+        fi
+    else
+        if [ -d $PATH_TO_DRUV/sites/$1 ] &&  [ $# -eq 1 ]; then
+            cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
+        else
+            echo "Can't find that directory"
+        fi
+    fi
 }
 # example: "dwdwt sb_default" - switch to springboard themes directory of the sb_default install
 
-
 # Switch to libraries dir.
 function dwdwl(){
-  if [ -d $PATH_TO_DRUV/sites/$1 ] &&  && [ $# -eq 1 ]; then
-    cd $PATH_TO_DRUV/sites/$1/sites/all/librarires
-  else
-    echo "Can't find that directory"
-  fi
+    if [ $# -eq 0 ]; then
+        f=$(strpos $PWD '/sites/')
+        g=${PWD:0:$f+7}
+        h=${PWD:$f+7}
+        i=$(strpos $h '/')
+        if [ -z $i ]; then
+            dir=$PWD/sites/all/libraries
+        else
+					j=${h:0:$i}
+        	dir=$g$j/sites/all/libraries
+        fi
+        if [ -d $dir ]; then
+            cd $dir
+            echo "you're in" $dir
+        else
+            echo "Can't find that directory"
+        fi
+    else
+        if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
+            cd $PATH_TO_DRUV/sites/$1/sites/all/librarires
+        else
+            echo "Can't find that directory"
+        fi
+    fi
 }
 # example: "dwdwl sb_default" - switch to libraries directory of the sb_default install
 
@@ -107,3 +165,12 @@ alias appro=$PATH_TO_DRUV/scripts/apache-provision.sh
 # DB backups
 alias dwdump='DR_DUMP_DBS=TRUE vagrant up'
 #requires vagrant triggers plugin
+
+function strpos()
+{
+    str=${1/$2*/}
+    if [ "${#str}" -eq "${#1}" ]; then
+        return 0
+    fi
+    echo ${#str}
+}
