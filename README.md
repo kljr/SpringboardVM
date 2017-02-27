@@ -102,7 +102,7 @@ and then copies the Springboard folders of your existing site into it,
 moves the old site folder into the backups directory, and moves the
 updated folder into its place.
 
-* `scripts/update-cc-inverse` copies drupal core and contrib files out of
+* `scripts/update-cc-inverse.sh` copies drupal core and contrib files out of
 a new Springboard download and places them into your existing site,
 without overwriting Springboard folders or any non-Springboard
 customizations in the libraries or contrib folders.
@@ -126,7 +126,7 @@ You can use one virtual host exclusively for running tests. The shell
 scripts will make it easy to switch among different Springboard versions
 you may want to test. You can also delete the sb_testing directory, run
 `scripts/make-sb.sh` to install a completely new Springboard version,
-then run `vagrant provision` to recreate the settings.php file.
+then run `scripts/apache-provision` to recreate the settings.php file.
 
 A port has been forwarded from the guest's 3306 port to the host's 3334
 port. If port 3334 is already in use, edit the port in `config/Vagranfile.local`
@@ -146,7 +146,7 @@ copy and paste to your computer's .bashrc file.
 * `dwdwt [docroot]` - switch to the Springboard themes directory of site with [docroot]
 * `dwdwl [docroot]` - switch to the libraries directory of site with [docroot]
 
-* If you're already in a site directory path, the above commands will work without arguments.
+* If you're already in a site directory context, the above commands will work without arguments.
 
 * `dwac` - Go to acceptance tests directory
 

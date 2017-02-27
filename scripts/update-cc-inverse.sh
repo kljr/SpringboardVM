@@ -12,8 +12,14 @@ cd $script_dir
 export PATH=$PWD:$PATH
 cd ../
 
-echo "Type the relative path the drupal root of the site whose contrib modules you want to update, followed by [ENTER]:"
+echo "Type the relative path from DruvMoser install directroy to the docroot of the site you want to update, followed by [ENTER]:"
 read path
+
+if [ ! -d $path ]; then
+  echo "Can't find that directory."
+  exit 0
+fi
+
 
 echo "Making backup, please wait..."
 DATE=`date +%Y-%m-%d:%H:%M:%S`

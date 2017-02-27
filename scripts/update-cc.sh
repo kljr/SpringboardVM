@@ -13,9 +13,13 @@ cd $script_dir
 export PATH=$PWD:$PATH
 cd ../
 
-
-echo "Type the relative path the drupal root of the site whose contrib modules you want to update, followed by [ENTER]:"
+echo "Type the relative path from DruvMoser install directory to the docroot of the site whose contrib modules you want to update, followed by [ENTER]:"
 read path
+
+if [ ! -d $path ]; then
+  echo "Can't find that directory."
+  exit 0
+fi
 
 echo "Type the Springboard-Build branch name that you want to replace contrib with, followed by [ENTER]:"
 read branch
