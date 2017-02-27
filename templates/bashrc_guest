@@ -17,7 +17,7 @@ function dwdw(){
 # Switch to modules dir.
 function dwdwm(){
     if [ $# -eq 0 ]; then
-        f=$(strpos $PWD '/sites/')
+        f=${#PATH_TO_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         l=$PWD
@@ -49,7 +49,7 @@ function dwdwm(){
 
 function dwdwt(){
     if [ $# -eq 0 ]; then
-        f=$(strpos $PWD '/sites/')
+        f=${#PATH_TO_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -79,7 +79,7 @@ function dwdwt(){
 # Switch to libraries dir.
 function dwdwl(){
     if [ $# -eq 0 ]; then
-        f=$(strpos $PWD '/sites/')
+        f=${#PATH_TO_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -135,14 +135,3 @@ function dwbld(){
 alias upcc='$PATH_TO_DRUV/scripts/update-cc.sh'
 alias upccin='$PATH_TO_DRUV/scripts/update-cc-inverse.sh'
 alias make-sb='$PATH_TO_DRUV/scripts/make-sb.sh'
-
-function strpos(){
-
-    str=${1/$2*/}
-
-    if [ "${#str}" -eq "${#1}" ]; then
-        return 0
-    fi
-
-    echo ${#str}
-}
