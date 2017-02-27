@@ -13,8 +13,9 @@ cd $script_dir
 export PATH=$PWD:$PATH
 cd ../
 
-echo "Type the relative path from DruvMoser install directory to the docroot of the site whose contrib modules you want to update, followed by [ENTER]:"
-read path
+echo "Type the docroot of the site you want to update, followed by [ENTER]:"
+read docroot
+path="sites/$docroot"
 
 if [ ! -d $path ]; then
   echo "Can't find that directory."

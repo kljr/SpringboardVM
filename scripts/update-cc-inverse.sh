@@ -12,14 +12,14 @@ cd $script_dir
 export PATH=$PWD:$PATH
 cd ../
 
-echo "Type the relative path from DruvMoser install directroy to the docroot of the site you want to update, followed by [ENTER]:"
-read path
+echo "Type the docroot of the site you want to update, followed by [ENTER]:"
+read docroot
+path="sites/$docroot"
 
 if [ ! -d $path ]; then
   echo "Can't find that directory."
   exit 0
 fi
-
 
 echo "Making backup, please wait..."
 DATE=`date +%Y-%m-%d:%H:%M:%S`

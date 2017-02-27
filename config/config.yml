@@ -19,17 +19,25 @@ build_makefile: false
 
 build_composer: false
 drupal_composer_path: false
+
+# Don't change this. Really.
 drupal_composer_install_dir: "/var/www/springboard/sites"
+
 drupal_composer_dependencies: []
 
 build_composer_project: false
 install_site: false
 
-# Required Drupal settings.
+
 drupal_core_dir: "sb_default"
 drupal_testing_dir: "sb_testing"
+
+# Required Drupal settings.
+# Don't change this block. Really.
 drupal_core_path: "{{ drupal_composer_install_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ drupal_composer_install_dir }}/{{drupal_testing_dir}}"
+
+# This probably is ignored
 drupal_db_user: drupal
 drupal_db_password: drupal
 drupal_db_name: sb_default

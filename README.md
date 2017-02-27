@@ -91,6 +91,8 @@ springboard version you want to download at the prompt.
 * Wait for the make script to complete, then run `scripts/apache-provision.sh` (faster)
  or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
 
+Adding too many sites at once can cause PHP timeouts, so be reasonable.
+
 ## Updating existing Springboard sites
 
 There are two shell scripts which allow you to update a Springboard site's
@@ -141,11 +143,10 @@ copy and paste to your computer's .bashrc file.
 >Directory switching
 
 * `druv` - Go to DruVMoser install directory.
-* `dwdw [docroot/path]` - switch to any path in a docroot.
+* `dwdw [docroot/path]` - switch to docroot or any path in a docroot.
 * `dwdwm [docroot]` - switch to the Springboard modules directory of site with [docroot]
 * `dwdwt [docroot]` - switch to the Springboard themes directory of site with [docroot]
 * `dwdwl [docroot]` - switch to the libraries directory of site with [docroot]
-
 * If you're already in a site directory context, the above commands will work without arguments.
 
 * `dwac` - Go to acceptance tests directory
