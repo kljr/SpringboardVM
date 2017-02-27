@@ -181,3 +181,13 @@ alias appro=$PATH_TO_DRUV/scripts/apache-provision.sh
 # DB backups
 alias dwdump='here=$PWD; cd $PATH_TO_DRUV; DR_DUMP_DBS=TRUE vagrant up; cd $here'
 #requires vagrant triggers plugin
+
+
+function strpos()
+{
+    str=${1/$2*/}
+    if [ "${#str}" -eq "${#1}" ]; then
+        return 0
+    fi
+    echo ${#str}
+}
