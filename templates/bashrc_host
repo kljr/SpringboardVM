@@ -179,5 +179,5 @@ alias aprel='DR_APACHE_RESTART=TRUE vagrant up'
 alias appro=$PATH_TO_DRUV/scripts/apache-provision.sh
 
 # DB backups
-alias dwdump='DR_DUMP_DBS=TRUE vagrant up'
+alias dwdump='here=$PWD; cd $PATH_TO_DRUV; DR_DUMP_DBS=TRUE vagrant up; cd $here'
 #requires vagrant triggers plugin
