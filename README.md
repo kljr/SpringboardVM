@@ -17,7 +17,8 @@ and quick, pain-free provisioning, management and updating of Apache, mySQL and 
 - VirtualBox 5.1.10 or later (5.0.32 appears to still work on Mac)
 - Vagrant 1.8.6 or later
 - Ansible 2.2.0 or later (can be easily installed with Homebrew on a Mac)
-- For acceptance tests, port 3334 open.
+- For acceptance tests, port 3334 open. You can change this port by editing
+config/Vagrantfile.local if there is a conflict. (You'll need to update the acceptance tests port config too.)
 
 If you have the following Vagrant plugins, no network/IP configuration is required:
 
