@@ -39,26 +39,27 @@ if [ ${FILES} = true ]; then
     gunzip artifacts/sites/$artifact/files.tar.gz
     tar -xf artifacts/sites/$artifact/files.tar -C artifacts/sites/$artifact/
 
-    if [ -d artifacts/sites/$artifact/files ]; then
-        echo "untarring"
-        if [ -d $path/sites/default/files ]; then
-            echo "Delete $path/sites/default/files"
-            select yn in "Yes" "No"; do
-                case $yn in
-                    Yes ) echo "removing files"; sudo rm -r $path/sites/default/files; break;;
-                    No ) FILES=false; break;;
-                esac
-            done
-        fi
+        if [ -d artifacts/sites/$artifact/files ]; then
+            echo "untarring"
+            if [ -d $path/sites/default/files ]; then
+                echo "Delete $path/sites/default/files"
+                select yn in "Yes" "No"; do
+                    case $yn in
+                        Yes ) echo "removing files"; sudo rm -r $path/sites/default/files; break;;
+                        No ) FILES=false; break;;
+                    esac
+                done
+            fi
 
-        if [ -d $path/sites/default ]  && ${FILES} = true; then
-              echo "moving files"
-              sudo mv artifacts/sites/$artifact/files $path/sites/default
-              echo "files moved"
-          else
-              echo "Can't find the file path"
-        fi
+            if [ -d $path/sites/default ]  && ${FILES} = true; then
+                  echo "moving files"
+                  sudo mv artifacts/sites/$artifact/files $path/sites/default
+                  echo "files moved"
+              else
+                  echo "Can't find the file path"
+            fi
         gzip artifacts/sites/$artifact/files.tar
+        fi
     else
         exit 0;
     fi
