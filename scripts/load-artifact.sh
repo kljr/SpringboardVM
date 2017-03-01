@@ -23,10 +23,6 @@ if [ ! -d artifacts/sites/$artifact ]; then
   exit 0
 fi
 
-function hhh() {
- FILES=true
-}
-
 echo "Do you wish to move artifact files"
 select yn in "Yes" "No"; do
     case $yn in
@@ -40,21 +36,32 @@ if [ ${FILES} = true ]; then
     if [ ! -f artifacts/sites/$artifact/files.tar.gz ]; then
       echo "Can't find the files directory in that artifact."
       exit 0
-    fi
-    #tar -zxvf files.tar.gz
-    echo "untarring"
-    if [ -d $path/default/files ]; then
-      echo "remoinv"
-      #sudo rm -r $path/default/files
-    fi
+    gunzip artifacts/sites/$artifact/files.tar.gz
+    tar -xf artifacts/sites/$artifact/files.tar -C artifacts/sites/$artifact/
 
-    if [ -d $path/default ]; then
-      #mv files $path/default
-      echo "moving files"
-      else
-      echo "Can't find the file path"
+    if [ -d artifacts/sites/$artifact/files ]; then
+        echo "untarring"
+        if [ -d $path/sites/default/files ]; then
+            echo "Delete $path/sites/default/files"
+            select yn in "Yes" "No"; do
+                case $yn in
+                    Yes ) echo "removing files"; sudo rm -r $path/sites/default/files; break;;
+                    No ) FILES=false; break;;
+                esac
+            done
+        fi
+
+        if [ -d $path/sites/default ]  && ${FILES} = true; then
+              echo "moving files"
+              sudo mv artifacts/sites/$artifact/files $path/sites/default
+              echo "files moved"
+          else
+              echo "Can't find the file path"
+        fi
+        gzip artifacts/sites/$artifact/files.tar
+    else
+        exit 0;
     fi
-    #rm -r files
 fi
 
 echo "Do you wish to load the artifact db"
@@ -71,8 +78,13 @@ if [ ${DB} = true ]; then
       exit 0
     fi
     echo "loading db"
-#    cd artifacts/sites/$artifact
-#    gunzip dump.sql.gz
-#    rm dump.sql
+    gunzip artifacts/sites/$artifact/dump.sql.gz
+    if [ -f artifacts/sites/$artifact/dump.sql ]; then
+       drush @#$docroot sql-drop
+       echo "Importing db"
+       drush @#$docroot sql-cli < artifacts/sites/$artifact/dump.sql
+       echo "DB finished"
+       gzip artifacts/sites/$artifact/dump.sql
+    fi
 fi
 

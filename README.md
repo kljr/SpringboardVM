@@ -70,6 +70,8 @@ site databases, and installs the Springboard profile.
 * Allows additional sites to be automatically installed in
 sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
+* Automates replacing generic site databases and file assets with
+reference site assets.
 * Provides shell scripts to allow Drush Make to update Drupal core and
 contrib on an existing site without touching its Springboard folders.
 * Provides a Drush alias to quickly install and configure developer
@@ -112,6 +114,14 @@ customizations in the libraries or contrib folders.
 
 * If you want to replace all code in a site, including any repositories, just delete the document root folder, and
 run `scripts/make-sb.sh`, and then `scripts/apache-provision.sh`.
+
+## Replacing default content with reference databases and files.
+
+There's not a direct connection to S3, but if you place gzipped files and dbs in
+the `artifacts/sites` folder according to the instructions in the
+ [readme,](https://github.com/kljr/druvmoser/blob/master/artifacts/README.md)
+you can automatically replace any site's files and/or database with those items
+ by running `scripts/load-artifact.sh.`
 
 ## Running tests
 
