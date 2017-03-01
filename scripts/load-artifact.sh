@@ -34,32 +34,34 @@ done
 
 if [ ${FILES} = true ]; then
     if [ ! -f artifacts/sites/$artifact/files.tar.gz ]; then
-      echo "Can't find the files directory in that artifact."
+      echo "Can't find the files archive in that artifact."
       exit 0
+    fi
     gunzip artifacts/sites/$artifact/files.tar.gz
-    tar -xf artifacts/sites/$artifact/files.tar -C artifacts/sites/$artifact/
+    mkdir artifacts/sites/$artifact/files
+    tar -xf artifacts/sites/$artifact/files.tar -C artifacts/sites/$artifact/files
 
-        if [ -d artifacts/sites/$artifact/files ]; then
-            echo "untarring"
-            if [ -d $path/sites/default/files ]; then
-                echo "Delete $path/sites/default/files"
-                select yn in "Yes" "No"; do
-                    case $yn in
-                        Yes ) echo "removing files"; sudo rm -r $path/sites/default/files; break;;
-                        No ) FILES=false; break;;
-                    esac
-                done
-            fi
-
-            if [ -d $path/sites/default ]  && ${FILES} = true; then
-                  echo "moving files"
-                  sudo mv artifacts/sites/$artifact/files $path/sites/default
-                  echo "files moved"
-              else
-                  echo "Can't find the file path"
-            fi
-        gzip artifacts/sites/$artifact/files.tar
+    if [ -d artifacts/sites/$artifact/files ] && [ "$(ls -A artifacts/sites/$artifact/files)" ]; then
+        echo "untarring"
+        if [ -d $path/sites/default/files ]; then
+            echo "Delete $path/sites/default/files"
+            select yn in "Yes" "No"; do
+                case $yn in
+                    Yes ) echo "removing files"; sudo rm -r $path/sites/default/files; break;;
+                    No ) FILES=false; break;;
+                esac
+            done
         fi
+
+        if [ -d $path/sites/default ]  && [ ${FILES} = true ]; then
+              echo "moving files"
+              sudo mv artifacts/sites/$artifact/files $path/sites/default
+              echo "files moved"
+        else
+              rm -r artifacts/sites/$artifact/files; echo $PWD;
+              echo "Can't find the file path, or you cancelled."
+        fi
+    gzip artifacts/sites/$artifact/files.tar
     else
         exit 0;
     fi
