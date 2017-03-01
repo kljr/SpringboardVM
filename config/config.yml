@@ -147,8 +147,8 @@ druvmoser_post_provision_scripts:
 
 druvmoser_vm_path: "../vendor/geerlingguy/drupal-vm/provisioning"
 druvmoser_vm_roles_path: "../vendor/geerlingguy/drupal-vm/provisioning/roles/geerlingguy"
-post_provision_tasks_dir: "../../../../config/drush-aliases-local.yml"
-druvmoser_post_provision_tasks_dir: "../config/drush-aliases-local.yml"
+post_provision_tasks_dir: "../../../../config/drush-aliases.yml"
+druvmoser_post_provision_tasks_dir: "../config/drush-aliases.yml"
 druvmoser_apache_vhosts_template: "../vendor/geerlingguy/drupal-vm/provisioning/roles/geerlingguy.apache/templates/vhosts.conf.j2"
 
 # A unique DruVMoser prefix for drush aliases, to keep them from
