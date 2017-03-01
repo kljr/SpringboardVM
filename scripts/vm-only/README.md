@@ -1,0 +1,1 @@
+These scripts should only execute via vagrant ssh
