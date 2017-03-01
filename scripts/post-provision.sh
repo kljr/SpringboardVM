@@ -39,6 +39,12 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
               /usr/local/bin/drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$directory
               /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/$directory/sites/default/files/
             fi;
+            if [ ! -f ${PROJECT_ROOT}/$directory/sites/default/files ]; then
+                mkdir -p ${PROJECT_ROOT}/$directory/sites/default/files
+            fi
+            if [ ! -e ${PROJECT_ROOT}/$directory/sites/default/files/sustainer.key ]; then
+                echo ${directory} > ${PROJECT_ROOT}/$directory/sites/default/files/sustainer.key
+            fi
         done
 fi;
 
