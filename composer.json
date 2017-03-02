@@ -58,7 +58,6 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "scripts/make-sb.sh",
             "scripts/install-codeception.sh"
         ]
     }

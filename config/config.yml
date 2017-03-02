@@ -140,8 +140,10 @@ pre_provision_scripts: ["../../../../scripts/pre-provision.sh"]
 
 # One script, two relative paths, depdending on context
 post_provision_scripts:
+ - "../../../../scripts/make-sb.sh"
  - "../../../../scripts/post-provision.sh"
 druvmoser_post_provision_scripts:
+ - "../scripts/make-sb.sh"
  - "../scripts/post-provision.sh"
 
 
