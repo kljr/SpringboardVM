@@ -50,5 +50,5 @@ fi;
 
 if [ ! -f /home/vagrant/.drush/drushrc.php ]; then
   cp /vagrant/templates/drushrc.php /home/vagrant/.drush/drushrc.php
-  cat /vagrant/templates/profile >> /home/vagrant/.bashrc
+  cat /vagrant/templates/bashrc_guest >> /home/vagrant/.bashrc
 fi;
