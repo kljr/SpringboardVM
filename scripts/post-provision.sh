@@ -22,6 +22,21 @@ cd ${PROJECT_ROOT}/${drupal_testing_dir}
     /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files/
 fi;
 
+# Create a sustainer.key file in sites/default/files
+if [ ! -f ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files ]; then
+    mkdir -p ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files
+    if [ ! -e ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files/sustainer.key ]; then
+      echo ${vagrant_hostname} > ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files/sustainer.key
+    fi
+fi
+if [ ! -f ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files ]; then
+    mkdir -p ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files
+    if [ ! -e ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files/sustainer.key ]; then
+      echo ${drupal_testing_dir} > ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files/sustainer.key
+    fi
+fi
+
+
 cd ${PROJECT_ROOT}
 
 LOCAL_CONFIG_FILE=/vagrant/config/local.config.yml
