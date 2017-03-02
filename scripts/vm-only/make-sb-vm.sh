@@ -73,6 +73,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
 #                drush make --no-gitinfofile --working-copy build/springboard-mtsb.make /vagrant/sites/$directory;
 #            fi;
             drush make --no-gitinfofile --working-copy build/springboard-mtsb.make /vagrant/sites/$directory;
+
             if [ -d /vagrant/sites/$directory} ]; then
               cd /vagrant/sites/$directory;
               echo /vagrant/sites/all >> .gitignore; echo profiles/sbsetup >> .gitignore;

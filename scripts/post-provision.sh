@@ -50,10 +50,13 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             directory=${!vhost}
             directory=${directory/__/\/}
             if [ ! -f ${PROJECT_ROOT}/$directory/sites/default/settings.php ]; then
+              #( set -o posix ; set ) | more
               cd ${PROJECT_ROOT}/$directory
-              /usr/local/bin/drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$directory
+              /usr/local/bin/drush sql-create -y --db-su=root --db-su-pw=root --db-url="mysql://drupal_db_user:drupal_db_password@127.0.0.1/$directory"
+              /usr/local/bin/drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url="mysql://root:root@127.0.0.1/$directory"
               /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/$directory/sites/default/files/
             fi;
+
             if [ ! -f ${PROJECT_ROOT}/$directory/sites/default/files ]; then
                 mkdir -p ${PROJECT_ROOT}/$directory/sites/default/files
             fi
