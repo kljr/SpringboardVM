@@ -89,7 +89,7 @@ installs of DruVMoser and not have conflicting aliases.
 If you want to add a new site to a previously provisioned DruVMoser,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` (faster) or `composer update` (You may have to chmod the +x the script). Enter the
+* Run `scripts/make-sb.sh` (You may have to chmod the +x the script). Enter the
 springboard version you want to download at the prompt.
 * Wait for the make script to complete, then run `scripts/apache-provision.sh` (faster)
  or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
