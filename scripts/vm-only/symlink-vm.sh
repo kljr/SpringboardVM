@@ -32,12 +32,12 @@ if [ ${REPLACE} = true ]; then
     rm -r $docpath/sites/all/modules/springboard
     rm -r $docpath/sites/all/themes/springboard_themes
     rm -r $docpath/sites/all/libraries/springboard_advocacy
-    rm -r $docpath/sites/all/libraries/springboard_composer
+    rm -r $docpath/profiles/sbsetup
 
     ln -s ../../../../../linked/springboard_modules $docpath/sites/all/modules/springboard
     ln -s ../../../../../linked/springboard_themes $docpath/sites/all/themes/springboard_themes
     ln -s ../../../../../linked/springboard_advocacy $docpath/sites/all/libraries/springboard_advocacy
-    ln -s ../../../../../linked/springboard_composer $docpath/sites/all/libraries/springboard_composer
+    ln -s ../../../../../linked/sbsetup $docpath/profiles/sbsetup
 
     echo "links created"
 fi;

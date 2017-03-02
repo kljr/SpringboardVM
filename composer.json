@@ -71,15 +71,15 @@
         {
             "type": "package",
             "package": {
-                "name": "jacksonriver/springboard-composer",
+                "name": "jacksonriver/springboard",
                 "version": "4.14",
                 "source": {
-                    "url": "https://github.com/JacksonRiver/springboard-composer-vendor",
+                    "url": "https://github.com/JacksonRiver/springboard",
                     "type": "git",
-                    "reference": "master"
+                    "reference": "7.x-4.x"
                 },
                 "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard-composer-vendor/archive/7.x-4.12.zip",
+                    "url": "https://github.com/JacksonRiver/springboard/archive/7.x-4.14.zip",
                     "type": "zip"
                 }
             }
@@ -105,7 +105,7 @@
         "jacksonriver/springboard-themes": "4.14",
         "jacksonriver/springboard-modules": "4.14",
         "jacksonriver/springboard-sdk": "4.14",
-        "jacksonriver/springboard-composer": "4.14"
+        "jacksonriver/springboard": "4.14"
     },
     "require-dev": {
         "geerlingguy/drupal-vm": "^4.2",
@@ -125,7 +125,7 @@
             "linked/springboard_modules": ["jacksonriver/springboard-modules"],
             "linked/springboard_themes": ["jacksonriver/springboard-themes"],
             "linked/springboard_advocacy": ["jacksonriver/springboard-sdk"],
-            "linked/springboard_composer": ["jacksonriver/springboard-composer"]
+            "linked/sbsetup": ["jacksonriver/springboard"]
         }
     },
     "scripts": {
