@@ -89,10 +89,7 @@ installs of DruVMoser and not have conflicting aliases.
 If you want to add a new site to a previously provisioned DruVMoser,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` (You may have to chmod the +x the script). Enter the
-springboard version you want to download at the prompt.
-* Wait for the make script to complete, then run `scripts/apache-provision.sh` (faster)
- or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
+* Run `scripts/druv-provision.sh` (faster) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
 
 Adding too many sites at once can cause PHP timeouts, so be reasonable.
 
@@ -113,7 +110,7 @@ without overwriting Springboard folders or any non-Springboard
 customizations in the libraries or contrib folders.
 
 * If you want to replace all code in a site, including any repositories, just delete the document root folder, and
-run `scripts/make-sb.sh`, and then `scripts/apache-provision.sh`.
+run scripts/druv-provision.sh`.
 
 ## Replacing default content with reference databases and files.
 
@@ -137,9 +134,9 @@ Then `vendor/bin/codecept run`
 
 You can use one virtual host exclusively for running tests. The shell
 scripts will make it easy to switch among different Springboard versions
-you may want to test. You can also delete the sb_testing directory, run
-`scripts/make-sb.sh` to install a completely new Springboard version,
-then run `scripts/apache-provision.sh` to recreate the settings.php file.
+you may want to test. You can also delete the sb_testing directory, and run
+`scripts/druv-provision.sh` to install a completely new Springboard version,
+
 
 A port has been forwarded from the guest's 3306 port to the host's 3334
 port. If port 3334 is already in use, edit the port in `config/Vagranfile.local`
@@ -166,8 +163,7 @@ copy and paste to your computer's .bashrc file.
 
 * `upcc` - copy your springboard directories into a new springboard download, and replace the original docroot.
 * `upccin` -  copy new drupal core and contrib into your existing springboard install.
-* `make-sb` - create a new Springboard installation after defining a new virtual host entry.
-* `appro` - provision virtual hosts for new installations, create the site database, and create drush aliases.
+* `druvpro` - provision virtual hosts for new installations, create the site, the database, and drush aliases.
 * `dwbld` - show Springboard version of the build repo
 * `dwbld [branch_name]` - switch the springboard build repo to a branch.
 
@@ -189,7 +185,7 @@ copy and paste to your computer's .bashrc file.
 > Apache
 
 * `aprel` - restart apache
-* `appro` - provision virtual hosts for new installations, create the site database, and create drush aliases.
+* `druvpro` - provision virtual hosts for new installations, create the site, database, and drush aliases.
 
 > DB
 
