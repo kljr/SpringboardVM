@@ -112,7 +112,7 @@ customizations in the libraries or contrib folders.
 * If you want to replace all code in a site, including any repositories, just delete the document root folder, and
 run scripts/druv-provision.sh`.
 
-## Replacing default content with reference databases and files.
+## Replacing default content with reference databases and files
 
 There's not a direct connection to S3, but if you place gzipped files and dbs in
 the `artifacts/sites` folder according to the instructions in the
