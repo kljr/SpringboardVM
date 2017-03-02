@@ -89,7 +89,7 @@ installs of DruVMoser and not have conflicting aliases.
 If you want to add a new site to a previously provisioned DruVMoser,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/druv-provision.sh` (faster) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
+* Run `scripts/make-sb.sh` followed by `scripts/druv-provision.sh` (faster) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
 
 Adding too many sites at once can cause PHP timeouts, so be reasonable.
 
@@ -110,7 +110,7 @@ without overwriting Springboard folders or any non-Springboard
 customizations in the libraries or contrib folders.
 
 * If you want to replace all code in a site, including any repositories, just delete the document root folder, and
-run scripts/druv-provision.sh`.
+run `scripts/make-sb.sh` followed by `scripts/druv-provision.sh`.
 
 ## Replacing default content with reference databases and files
 
@@ -140,7 +140,7 @@ Then `vendor/bin/codecept run`
 
 You can use one virtual host exclusively for running tests. The shell
 scripts will make it easy to switch among different Springboard versions
-you may want to test. You can also delete the sb_testing directory, and run
+you may want to test. You can also delete the sb_testing directory, and run `scripts/make-sb.sh` followed by
 `scripts/druv-provision.sh` to install a completely new Springboard version,
 
 
