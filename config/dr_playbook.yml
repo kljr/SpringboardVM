@@ -100,6 +100,10 @@
       notify: restart apache
       when: apache_create_vhosts
 
+    - name: Run configured pre-provision shell scripts.
+      script: "{{ item }}"
+      with_items: "{{ druvmoser_pre_provision_scripts|default([]) }}"
+
     - name: Run configured post-provision shell scripts.
       script: "{{ item }}"
       with_items: "{{ druvmoser_post_provision_scripts|default([]) }}"

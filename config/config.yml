@@ -136,16 +136,19 @@ php_max_input_vars: "4000"
 
 # Run specified scripts before or after VM is provisioned. Path is relative to
 # the `provisioning/playbook.yml` file.
-pre_provision_scripts: ["../../../../scripts/pre-provision.sh"]
+pre_provision_scripts:
+ - "../../../../scripts/make-sb.sh"
+ - "../../../../scripts/pre-provision.sh"
+druvmoser_pre_provision_scripts:
+ - "../scripts/make-sb.sh"
+ - "../scripts/pre-provision.sh"
 
 # One script, two relative paths, depdending on context
 post_provision_scripts:
  - "../../../../scripts/install-codeception.sh"
- - "../../../../scripts/make-sb.sh"
  - "../../../../scripts/post-provision.sh"
 druvmoser_post_provision_scripts:
  - "../scripts/install-codeception.sh"
- - "../scripts/make-sb.sh"
  - "../scripts/post-provision.sh"
 
 
