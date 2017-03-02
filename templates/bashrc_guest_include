@@ -1,0 +1,6 @@
+
+# add the aliases.
+
+if [ -f $HOME/.bashrc_druv ]; then
+    . $HOME/.bashrc_druv
+fi
