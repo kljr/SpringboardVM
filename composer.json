@@ -58,7 +58,6 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "scripts/install-codeception.sh"
         ]
     }
 }
