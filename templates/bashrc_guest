@@ -4,6 +4,15 @@ PATH_TO_DRUV='/var/www/springboard'
 
 alias druv='cd $PATH_TO_DRUV'
 
+
+# Add these to your .bashrc or .bash_alias.
+# Most are also available by default on the virtual machine. See templates/bashrc_guest.
+
+#  Directory switching
+
+alias drac='cd $PATH_TO_DRUV/acceptance-tests'
+alias druv='cd $PATH_TO_DRUV'
+
 function dwdw(){
     if [ $# -eq 0 ]; then
         f=${#PATH_TO_DRUV}
@@ -26,6 +35,7 @@ function dwdw(){
     else
        if [ -d $PATH_TO_DRUV/sites/$1 ]; then
          cd $PATH_TO_DRUV/sites/$1
+         echo "you're in $PATH_TO_DRUV/sites/$1"
        else
          echo "Can't find that directory"
        fi
@@ -38,7 +48,6 @@ function dwdwm(){
         f=${#PATH_TO_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
-        l=$PWD
         i=$(strpos $h '/')
         if [ -z $i ]; then
             dir=$PWD/sites/all/modules/springboard
@@ -55,6 +64,7 @@ function dwdwm(){
     else
           if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
             cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
+            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard"
           else
             echo "Can't find that directory"
           fi
@@ -74,7 +84,7 @@ function dwdwt(){
         if [ -z $i ]; then
             dir=$PWD/sites/all/themes/springboard_themes
         else
-	  	    j=${h:0:$i}
+	  	      j=${h:0:$i}
   	  	    dir=$g$j/sites/all/themes/springboard_themes
   	  	fi
         if [ -d $dir ]; then
@@ -87,6 +97,7 @@ function dwdwt(){
     else
         if [ -d $PATH_TO_DRUV/sites/$1 ] &&  [ $# -eq 1 ]; then
             cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
+            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes"
         else
             echo "Can't find that directory"
         fi
@@ -104,7 +115,7 @@ function dwdwl(){
         if [ -z $i ]; then
             dir=$PWD/sites/all/libraries
         else
-					j=${h:0:$i}
+			j=${h:0:$i}
         	dir=$g$j/sites/all/libraries
         fi
         if [ -d $dir ]; then
@@ -115,44 +126,39 @@ function dwdwl(){
         fi
     else
         if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/sites/all/librarires
+            cd $PATH_TO_DRUV/sites/$1/sites/all/libraries
+            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/libraries"
         else
             echo "Can't find that directory"
         fi
     fi
 }
+# example: "dwdwl sb_default" - switch to libraries directory of the sb_default install
 
-function dwac(){
-  cd $PATH_TO_DRUV/acceptance-tests
-}
-
-function dwsi(){
-  if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-    read -r -p "Are you sure? [y/N] " response
-    if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-         cd $PATH_TO_DRUV/sites/$1
-         drush site-install sbsetup -y --site-name=$1 --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/$1
-    else
-      echo "cancelled"
-    fi
-   else
-    echo "Can't find that directory"
-   fi;
-}
-
+# Check or change Springboard-Build version
 function dwbld(){
    dir=$PWD
    cd $PATH_TO_DRUV/build
-   git status;
    if [ ! $# -eq 0 ]; then
      git checkout $1
+   else
+     git status
   fi;
   cd $dir
 }
 
+# examples:
+# dwbld (no arguments, displays current branch of the build repo.)
+# dwbld 7.x-4.x (switch build repo to 7.x-4.x)
+
+
+#  Executables
+
 alias upcc='$PATH_TO_DRUV/scripts/update-cc.sh'
 alias upccin='$PATH_TO_DRUV/scripts/update-cc-inverse.sh'
 alias make-sb='$PATH_TO_DRUV/scripts/make-sb.sh'
+alias codecept='$PATH_TO_DRUV/acceptance-tests/vendor/bin/codecept'
+alias selchr='java -jar $PATH_TO_DRUV/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
 
 function strpos()
 {

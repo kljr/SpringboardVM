@@ -36,6 +36,7 @@ function dwdw(){
     else
        if [ -d $PATH_TO_DRUV/sites/$1 ]; then
          cd $PATH_TO_DRUV/sites/$1
+         echo "you're in $PATH_TO_DRUV/sites/$1"
        else
          echo "Can't find that directory"
        fi
@@ -64,6 +65,7 @@ function dwdwm(){
     else
           if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
             cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
+            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard"
           else
             echo "Can't find that directory"
           fi
@@ -96,6 +98,7 @@ function dwdwt(){
     else
         if [ -d $PATH_TO_DRUV/sites/$1 ] &&  [ $# -eq 1 ]; then
             cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
+            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes"
         else
             echo "Can't find that directory"
         fi
@@ -124,7 +127,8 @@ function dwdwl(){
         fi
     else
         if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/sites/all/librarires
+            cd $PATH_TO_DRUV/sites/$1/sites/all/libraries
+            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/libraries"
         else
             echo "Can't find that directory"
         fi

@@ -8,18 +8,11 @@
 # Copies existing site's repos *into* a new springboard download and
 # renames the new springboard directory to the old springboard directory.
 
-# Deal with relative paths
-#script_dir="$(dirname "$0")"
-#source "$script_dir/parse-yaml.sh"
-#cd $script_dir
-#export PATH=$PWD:$PATH
-#cd ../
-
-echo "Type the docroot of the site you want to update, followed by [ENTER]:"
+echo "Type the docroot folder name of the site you want to update, followed by [ENTER]:"
 read docroot
-path="/vagrant/sites/$docroot"
+docpath="/vagrant/sites/$docroot"
 
-if [ ! -d $path ]; then
+if [ ! -d $docpath ]; then
   echo "Can't find that directory."
   exit 0
 fi
@@ -47,14 +40,14 @@ rm -r /vagrant/tmp_springboard/sites/all/libraries/springboard_advocacy
 rm -r /vagrant/tmp_springboard/sites/all/libraries/springboard_composer
 rm -r /vagrant/tmp_springboard/sites/default
 
-cp -R $path/sites/all/modules/springboard /vagrant/tmp_springboard/sites/all/modules
-cp -R $path/sites/all/themes /vagrant/tmp_springboard/sites/all
-cp -R $path/sites/all/libraries/springboard_advocacy /vagrant/tmp_springboard/sites/all/libraries
-cp -R $path/sites/all/libraries/springboard_composer /vagrant/tmp_springboard/sites/all/libraries
-cp -R $path/sites/default /vagrant/tmp_springboard/sites
+cp -R $docpath/sites/all/modules/springboard /vagrant/tmp_springboard/sites/all/modules
+cp -R $docpath/sites/all/themes /vagrant/tmp_springboard/sites/all
+cp -R $docpath/sites/all/libraries/springboard_advocacy /vagrant/tmp_springboard/sites/all/libraries
+cp -R $docpath/sites/all/libraries/springboard_composer /vagrant/tmp_springboard/sites/all/libraries
+cp -R $docpath/sites/default /vagrant/tmp_springboard/sites
 
-echo "Making backup of $path"
+echo "Making backup of $docpath"
 DATE=`date +%Y-%m-%d:%H:%M:%S`
-mv $path backups/sites${path:5}_$DATE
-mv /vagrant/tmp_springboard $path
+mv $docpath /vagrant/backups/sites/${docroot}_$DATE
+mv /vagrant/tmp_springboard $docpath
 echo "Done. If there are changes to the Springboard-owned themes, modules or libraries in the new version you just swapped out, you'll need to do a git checkout in each of their folders to get them."

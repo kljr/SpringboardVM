@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
 
-# Deal with relative paths
-script_dir="$(dirname "$0")"
-cd $script_dir
-export PATH=$PWD:$PATH
-cd ../
-
 echo "Type the docroot of the site you want to update, followed by [ENTER]:"
 read docroot
-path="/vagrant/sites/$docroot"
+docpath="/vagrant/sites/$docroot"
 
-if [ ! -d $path ]; then
+if [ ! -d $docpath ]; then
   echo "Can't find that directory."
   exit 0
 fi
@@ -43,19 +37,19 @@ if [ ${FILES} = true ]; then
 
     if [ -d /vagrant/artifacts/sites/$artifact/files ] && [ "$(ls -A /vagrant/artifacts/sites/$artifact/files)" ]; then
         echo "untarring"
-        if [ -d $path/sites/default/files ]; then
-            echo "Delete $path/sites/default/files"
+        if [ -d $docpath/sites/default/files ]; then
+            echo "Delete $docpath/sites/default/files"
             select yn in "Yes" "No"; do
                 case $yn in
-                    Yes ) echo "removing files"; sudo rm -r $path/sites/default/files; break;;
+                    Yes ) echo "removing files"; sudo rm -r $docpath/sites/default/files; break;;
                     No ) FILES=false; break;;
                 esac
             done
         fi
 
-        if [ -d $path/sites/default ]  && [ ${FILES} = true ]; then
+        if [ -d $docpath/sites/default ]  && [ ${FILES} = true ]; then
               echo "moving files"
-              sudo mv /vagrant/artifacts/sites/$artifact/files $path/sites/default
+              sudo mv /vagrant/artifacts/sites/$artifact/files $docpath/sites/default
               echo "files moved"
         else
               rm -r /vagrant/artifacts/sites/$artifact/files; echo $PWD;
