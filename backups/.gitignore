@@ -1,4 +1,6 @@
 /*
 !/sites
 !/dbs
-!.gitignore
+/sites/*
+/dbs/*
+!/.gitignore
