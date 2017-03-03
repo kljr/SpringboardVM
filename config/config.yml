@@ -144,7 +144,7 @@ druvmoser_pre_provision_scripts:
 
 # One script, two relative paths, depdending on context
 post_provision_scripts:
-
+ - "../../../../scripts/install-codeception.sh"
  - "../../../../scripts/post-provision.sh"
 druvmoser_post_provision_scripts:
  - "../scripts/post-provision.sh"
