@@ -5,8 +5,8 @@
 
 # Springboard can't run Ubuntu 1604 because of a db schema bug.
 vagrant_box: geerlingguy/ubuntu1404
-vagrant_hostname: druvmoser.dev
-vagrant_machine_name: druvmoser
+vagrant_hostname: blingo.dev
+vagrant_machine_name: blingo
 vagrant_ip: 0.0.0.0
 
 vagrant_synced_folders:
@@ -29,8 +29,8 @@ build_composer_project: false
 install_site: false
 
 
-drupal_core_dir: "sb_default"
-drupal_testing_dir: "sb_testing"
+drupal_core_dir: "sb_default_x"
+drupal_testing_dir: "sb_testingx"
 
 # Required Drupal settings.
 # Don't change this block. Really.
@@ -144,7 +144,6 @@ druvmoser_pre_provision_scripts:
 
 # One script, two relative paths, depdending on context
 post_provision_scripts:
- - "../../../../scripts/install-codeception.sh"
  - "../../../../scripts/post-provision.sh"
 druvmoser_post_provision_scripts:
  - "../scripts/post-provision.sh"

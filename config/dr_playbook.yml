@@ -10,7 +10,6 @@
   vars_files:
     - ../vendor/geerlingguy/drupal-vm/default.config.yml
     - config.yml
-    - local.config.yml
     - "{{ druvmoser_vm_path }}/vars/main.yml"
     - "{{ druvmoser_vm_path }}/vars/Debian.yml"
     - "{{ druvmoser_vm_path }}/vars/RedHat.yml"
@@ -55,6 +54,11 @@
     - name: DruVMoser baby.
       set_fact:
         druvmoser_shim: "This is just a placeholder for the 'start-at-task' ansible flag"
+
+    - name: Yadda
+      include_vars: "local.config.yml"
+      ignore_errors: yes
+
 
     # Include variables and define needed variables.
     - name: Include OS-specific variables.
