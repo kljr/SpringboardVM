@@ -3,7 +3,7 @@
 # in config/Vagrantfile.custom
 
 # Configure the forwarded port for the acceptance tests.
-config.vm.network "forwarded_port", guest: 3306, host: 3335, protocol: "tcp"
+config.vm.network "forwarded_port", guest: 3306, host: 3334, protocol: "tcp"
 
 # Vagrant Triggers plugin magic
 
