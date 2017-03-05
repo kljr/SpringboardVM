@@ -6,4 +6,16 @@
 composer.lock
 config/local.config.yml
 .vagrant
+/config/dr_playbook.retry
+/config/vagrantfile.custom
+/backups/*
+!/backups/sites
+!/backups/dbs
+/backups/sites/*
+/backups/dbs/*
+/artifacts/*
+!/artifacts/sites
+/artifacts/sites/*
 /linked/*
+!.gitkeep
+!README.md
