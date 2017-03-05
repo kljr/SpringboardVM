@@ -33,6 +33,7 @@ if Vagrant.has_plugin?('vagrant-triggers')
 end
 
 if ENV['DR_NEW_VHOSTS']
+   if ansible_bin && !vconfig['force_ansible_local']
       config.vm.provision 'ansible' do |ansible|
         ansible.playbook = "config/dr_playbook.yml"
         ansible.extra_vars = {
@@ -41,6 +42,16 @@ if ENV['DR_NEW_VHOSTS']
         }
         ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
       end
+   else
+      config.vm.provision 'ansible' do |ansible|
+          ansible.playbook = "/vagrant/config/dr_playbook.yml"
+          ansible.extra_vars = {
+            config_dir: "/vagrant/config",
+            drupalvm_env: drupalvm_env
+          }
+          ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
+      end
+   end
 end
 
 # Allow an untracked Vagrantfile to modify the configurations
