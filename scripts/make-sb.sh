@@ -22,7 +22,6 @@ fi
 MAIN_CONFIG_FILE=config/config.yml
 eval $(parse_yaml ${MAIN_CONFIG_FILE})
 #( set -o posix ; set ) | more
-
 # First site built on composer install/update.
 if [ ! -d sites/${drupal_core_dir} ]; then
    # Check to see if the developer make file is available.
@@ -32,6 +31,7 @@ if [ ! -d sites/${drupal_core_dir} ]; then
 #     # If no developer make, use the standard make file.
 #     drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
 #   fi;
+
 
      drush make --no-gitinfofile --working-copy build/springboard-mtsb.make sites/${drupal_core_dir};
     # add springboard to drupal core's .gitignore.
