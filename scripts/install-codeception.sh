@@ -18,7 +18,7 @@ if [ -d acceptance-tests ] && [ ! -d acceptance-tests/vendor ]; then
             else
                 /usr/local/bin/composer about 2> /dev/null
                 if [ $? -eq 0 ]; then
-                    /usr/local/bin/composer/composer update
+                    /usr/local/bin/composer update
                 else
                     echo "Please run 'composer update' from the acceptance-tests directory too!"
             fi;
