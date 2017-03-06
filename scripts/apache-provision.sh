@@ -2,4 +2,4 @@
 
 #deprecated, use druv-provision.sh
 
-DR_NEW_VHOSTS=TRUE DRUPALVM_ANSIBLE_ARGS='--start-at-task=*DruVMoser baby*' vagrant provision
+DR_NEW_VHOSTS=TRUE DRUPALVM_ANSIBLE_ARGS='--start-at-task=DruVMoser' vagrant provision

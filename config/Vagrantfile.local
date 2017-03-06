@@ -43,14 +43,14 @@ if ENV['DR_NEW_VHOSTS']
         ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
       end
    else
-      config.vm.provision 'ansible' do |ansible|
-          ansible.playbook = "/vagrant/config/dr_playbook.yml"
-          ansible.extra_vars = {
-            config_dir: "/vagrant/config",
-            drupalvm_env: drupalvm_env
-          }
-          ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
-      end
+    config.vm.provision 'ansible_local' do |ansible|
+      ansible.playbook = "/vagrant/config/dr_playbook.yml"
+      ansible.extra_vars = {
+        config_dir: guest_config_dir,
+        drupalvm_env: drupalvm_env
+      }
+      ansible.raw_arguments = ENV['DRUPALVM_ANSIBLE_ARGS']
+    end
    end
 end
 

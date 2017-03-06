@@ -12,13 +12,13 @@ set -x
 
 cd ${PROJECT_ROOT}/${drupal_core_dir}
  if [ ! -f sites/default/settings.php ]; then
-    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_dir}
+    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_core_dir} --root=${PROJECT_ROOT}/${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_dir}
     /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_core_dir}/sites/default/files/
 fi;
 
 cd ${PROJECT_ROOT}/${drupal_testing_dir}
  if [ ! -f sites/default/settings.php ]; then
-    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_testing_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_dir}
+    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_testing_dir} --root=${PROJECT_ROOT}/${drupal_testing_dir}  --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_dir}
     /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/${drupal_testing_dir}/sites/default/files/
 fi;
 
@@ -52,8 +52,8 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             if [ ! -f ${PROJECT_ROOT}/$directory/sites/default/settings.php ]; then
               #( set -o posix ; set ) | more
               cd ${PROJECT_ROOT}/$directory
-              /usr/local/bin/drush sql-create -y --db-su=root --db-su-pw=root --db-url="mysql://drupal_db_user:drupal_db_password@127.0.0.1/$directory"
-              /usr/local/bin/drush site-install sbsetup -y --site-name=$directory --account-name=admin  --account-pass=admin --db-url="mysql://root:root@127.0.0.1/$directory"
+              /usr/local/bin/drush sql-create -y --root=${PROJECT_ROOT}/$directory --db-su=root --db-su-pw=root --db-url="mysql://drupal_db_user:drupal_db_password@127.0.0.1/$directory"
+              /usr/local/bin/drush site-install sbsetup -y --root=${PROJECT_ROOT}/$directory --site-name=$directory --account-name=admin  --account-pass=admin --db-url="mysql://root:root@127.0.0.1/$directory"
               /usr/local/bin/drush vset encrypt_secure_key_path ${PROJECT_ROOT}/$directory/sites/default/files/
             fi;
 

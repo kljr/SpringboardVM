@@ -51,7 +51,7 @@
   # These tasks are lifted from the apache role.
   tasks:
 
-    - name: DruVMoser baby.
+    - name: DruVMoser
       set_fact:
         druvmoser_shim: "This is just a placeholder for the 'start-at-task' ansible flag"
 
