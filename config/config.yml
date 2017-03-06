@@ -15,6 +15,7 @@ vagrant_synced_folders:
     type: nfs
     create: true
 
+# Stop drupalvm from doing anything to install Drupal so DruVMoser can handle it.
 build_makefile: false
 build_composer: false
 drupal_composer_path: false
@@ -27,11 +28,11 @@ druv_site_dir: "/var/www/springboard/sites"
 drupal_composer_install_dir: "/var/www/springboard/sites"
 
 
-drupal_core_dir: "sb_default"
+drupal_default_dir: "sb_default"
 drupal_testing_dir: "sb_testing"
 # Required Drupal settings.
 # Don't change this block. Really.
-drupal_core_path: "{{ druv_site_dir }}/{{drupal_core_dir}}"
+drupal_core_path: "{{ druv_site_dir }}/{{drupal_default_dir}}"
 drupal_testing_path: "{{ druv_site_dir }}/{{drupal_testing_dir}}"
 
 # This probably is ignored
@@ -41,7 +42,7 @@ drupal_testing_path: "{{ druv_site_dir }}/{{drupal_testing_dir}}"
 #drupal_site_install_extra_args: ["install_configure_form.update_status_module='array(FALSE,FALSE)'"]
 ## Settings for installing a Drupal site if 'install_site:' is 'true'.
 #drupal_major_version: 7
-#drupal_domain: "{{ vagrant_machine_name }}.dev"
+drupal_domain: "{{ vagrant_machine_name }}.dev"
 #drupal_testing_domain: "{{ vagrant_machine_name }}-test.dev"
 #drupal_site_name: "Springboard"
 #drupal_install_profile: sbsetup
@@ -235,7 +236,7 @@ mysql_databases:
     collation: utf8mb4_general_ci
 
 # Default DrupalVM Db.
-  - name: "{{ drupal_core_dir }}"
+  - name: "{{ drupal_default_dir }}"
     encoding: utf8mb4
     collation: utf8mb4_general_ci
 
