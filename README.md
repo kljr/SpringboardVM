@@ -12,7 +12,7 @@ and quick, pain-free provisioning, management and updating of Apache, mySQL and 
 ## Prerequisites
 
 - Linux or Mac (with NFS, required)
-- Composer installed globally, and preferably renamed or aliased in your shell as "composer"".
+- Composer.phar installed globally, preferably renamed and moved to /usr/local/bin/composer.
 - Drush installed globally (see Drush notes below)
 - VirtualBox 5.1.10 or later (5.0.32 appears to still work on Mac)
 - Vagrant 1.8.6 or later
@@ -201,7 +201,11 @@ copy and paste to your computer's .bashrc file.
 You could install Drush globally with Composer (`composer require global drush/drush`), but that is likely to lead to conflicts
 if you have other global projects with conflicting dependencies.
 
-Instead use [cgr](https://github.com/consolidation/cgr) to manage all your global packages, or take the steps below:
+Instead use [cgr](https://github.com/consolidation/cgr) to manage all your global packages
+(requires that composer be renamed from "composer.phar" to "composer"
+and installed globally, preferably as /usr/local/bin/composer).
+
+Or take the steps below to manually install drush globally:
 
     php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush
     php drush core-status
