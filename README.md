@@ -225,8 +225,8 @@ be found at [the DrupalVM docs](http://docs.drupalvm.com/).
 Drupal VM ships with a firewall. You can disable it by ssh-ing into the
 machine and doing `sudo service firewall stop`
 
-A Vagrantfile named `Vagrantfile.local` is placed in the config
-directory to override anything in DrupalVM's Vagrantfile.
+A Vagrantfile named `Vagrantfile.custom` can be placed in the config
+directory to override or add to DrupalVM's and DruVMoser's Vagrant files.
 
 ## Credits
 
