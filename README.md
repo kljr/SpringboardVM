@@ -16,7 +16,6 @@ and quick, pain-free provisioning, management and updating of Apache, mySQL and 
 - Drush installed globally (see Drush notes below)
 - VirtualBox 5.1.10 or later (5.0.32 appears to still work on Mac)
 - Vagrant 1.8.6 or later
-- Ansible 2.2.0 or later (can be easily installed with Homebrew on a Mac)
 - For acceptance tests, port 3334 open. You can change this port by editing
 config/Vagrantfile.local if there is a conflict. (You'll need to update the acceptance tests port config too.)
 
@@ -38,7 +37,7 @@ For DB backups:
 
 
 Also helpful but not required:
-
+- Ansible 2.2.0 or later, for faster provisioning (can be easily installed with Homebrew on a Mac)
 - [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
 
 
