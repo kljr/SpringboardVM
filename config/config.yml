@@ -22,33 +22,16 @@ drupal_composer_path: false
 build_composer_project: false
 install_site: false
 
-# Don't change this. Really.
+# Don't change this block. Really.
 druv_site_dir: "/var/www/springboard/sites"
-#deprecated
-drupal_composer_install_dir: "/var/www/springboard/sites"
-
-
+drupal_composer_install_dir: "/var/www/springboard/sites" #deprecated
 drupal_core_dir: "sb_default"
 drupal_testing_dir: "sb_testing"
-# Required Drupal settings.
-# Don't change this block. Really.
 drupal_core_path: "{{ druv_site_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ druv_site_dir }}/{{drupal_testing_dir}}"
 drupal_domain: "{{ vagrant_machine_name }}.dev"
 drupal_testing_domain: "{{ vagrant_machine_name }}-test.dev"
 
-# This probably is ignored
-#drupal_db_user: drupal
-#drupal_db_password: drupal
-#drupal_db_name: sb_default
-#drupal_site_install_extra_args: ["install_configure_form.update_status_module='array(FALSE,FALSE)'"]
-## Settings for installing a Drupal site if 'install_site:' is 'true'.
-#drupal_major_version: 7
-#drupal_site_name: "Springboard"
-#drupal_install_profile: sbsetup
-#drupal_enable_modules: [ 'devel' ]
-#drupal_account_name: admin
-#drupal_account_pass: admin
 
 # Cron jobs are added to the vagrant user's crontab. Keys include name
 # (required), minute, hour, day, weekday, month, job (required), and state.
