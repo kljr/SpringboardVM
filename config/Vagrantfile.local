@@ -30,6 +30,8 @@ if Vagrant.has_plugin?('vagrant-triggers')
           run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
         end
     end
+else
+    puts "Vagrant triggers plugin not installed. Install the vagrant triggers plugin to get automatic db backups."
 end
 
 if ENV['DR_NEW_VHOSTS']
