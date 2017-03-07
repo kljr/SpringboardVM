@@ -18,6 +18,10 @@ and quick, pain-free provisioning, management and updating of Apache, mySQL and 
 - Vagrant 1.8.6 or later
 - For acceptance tests, port 3334 open. You can change this port by editing
 config/Vagrantfile.local if there is a conflict. (You'll need to update the acceptance tests port config too.)
+- Ansible 2.2.0 or later, for faster provisioning and the creation of Drush aliases
+ on your host computer. DruVMoser will work without this (it's installed on the VM too),
+ but you'll lose the automatic host-to-guest aliases, which are very helpful. On OS X, Ansible is
+ easily installed with Homebrew.
 
 If you have the following Vagrant plugins, no network/IP configuration is required:
 
@@ -35,9 +39,7 @@ For DB backups:
 
 - [vagrant-triggers](https://github.com/emyl/vagrant-triggers)
 
-
 Also helpful but not required:
-- Ansible 2.2.0 or later, for faster provisioning (can be easily installed with Homebrew on a Mac)
 - [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
 
 
