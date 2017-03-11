@@ -61,8 +61,8 @@ you can view the DruVMoser dashboard at http://dashboard.druvmoser.dev.
 ## What does DruVMoser do?
 
 * Downloads Springboard-Build, the Acceptance Test repo, DrupalVM, Codeception and
-their vendor dependencies and triggers a bash script which runs drush make and
-installs Springboard, checking out git working copies of Springboard
+their vendor dependencies, and triggers a bash script which runs drush make,
+installing Springboard by checking out git working copies of Springboard
 modules, themes and libraries from the Springboard git repo.
 * Provisions DrupalVM, Apache and mySQL, creates virtual hosts,
 site databases, and installs the Springboard profile.
@@ -73,8 +73,9 @@ sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
 * Automates replacing generic site databases and file assets with
 reference site assets.
+* Automates optional symlinking of sites' Springboard directories to shared repositories.
 * Provides shell scripts to allow Drush Make to update Drupal core and
-contrib on an existing site without touching its Springboard folders.
+contributed modules without touching a site's Springboard folders.
 * Provides a Drush alias to quickly install and configure developer
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
@@ -147,7 +148,7 @@ you may want to test. You can also delete the sb_testing directory, and run `scr
 
 A port has been forwarded from the guest's 3306 port to the host's 3334
 port. If port 3334 is already in use, edit the port in `config/Vagranfile.local`
-or create a new `config/Vagrantfile.custom`. You will also have
+or create a new `config/Vagrantfile.custom` file. You will also have
 to edit `acceptance-tests/codeception.yml` to have the alternate port.
 
 ##Useful shell aliases and functions
