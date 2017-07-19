@@ -108,7 +108,7 @@
         "jacksonriver/springboard": "4.14"
     },
     "require-dev": {
-        "geerlingguy/drupal-vm": "^4.2",
+        "geerlingguy/drupal-vm": "4.6",
         "composer/installers": "~1.0"
     },
     "minimum-stability": "dev",

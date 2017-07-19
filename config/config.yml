@@ -17,10 +17,14 @@ vagrant_synced_folders:
 
 # Stop drupalvm from doing anything to install Drupal so DruVMoser can handle it.
 build_makefile: false
+drupal_build_makefile: false
 build_composer: false
 drupal_composer_path: false
 build_composer_project: false
+drupal_build_composer: false
+drupal_composer_dependencies: []
 install_site: false
+drupal_install_site: false
 
 # Don't change this block. Really.
 druv_site_dir: "/var/www/springboard/sites"
@@ -59,7 +63,7 @@ installed_extras:
   # - xhprof
 
 # Add any extra apt or yum packages you would like installed.
-drush_version: "8.x"
+drush_version: "8.1.10"
 
 php_version: "5.6"
 php_install_recommends: no
