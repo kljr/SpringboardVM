@@ -43,7 +43,7 @@ rm -r /vagrant/tmp_springboard/sites/all/libraries/springboard_composer
 
 for FILE in /vagrant/tmp_springboard/sites/all/modules/contrib/*; do
     if [[ -d $FILE ]]; then
-      rm -r $docpath/sites/all/modules/contrib/$(echo $FILE| cut -d'/' -f 6)
+      sudo rm -r $docpath/sites/all/modules/contrib/$(echo $FILE| cut -d'/' -f 8)
     fi;
 done
 
@@ -51,7 +51,7 @@ done
 
 for FILE in /vagrant/tmp_springboard/sites/all/libraries/*; do
     if [[ -d $FILE ]]; then
-      rm -r $docpath/sites/all/libraries/$(echo $FILE| cut -d'/' -f 5)
+      sudo rm -r $docpath/sites/all/libraries/$(echo $FILE| cut -d'/' -f 7)
     fi;
 done
 

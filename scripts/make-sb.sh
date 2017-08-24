@@ -78,7 +78,9 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
             read branch
             cd build
+            git pull
             git checkout $branch
+            git pull
             cd ../
             # Check to see if the developer make file is available.
 #            if [ -f build/springboard-developer.make ]; then
