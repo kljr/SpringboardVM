@@ -33,6 +33,12 @@ cd ../
 #fi;
 drush make --no-gitinfofile --working-copy build/springboard-mtsb.make /vagrant/tmp_springboard;
 
+tmp_dir="/vagrant/tmp_springboard"
+
+if [ ! -d $tmp_dir ]; then
+  echo "It appears that drush make failed"
+  exit 0
+fi
 
 rm -r /vagrant/tmp_springboard/sites/all/modules/springboard
 rm -r /vagrant/tmp_springboard/sites/all/themes
