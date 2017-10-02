@@ -23,6 +23,22 @@
         {
             "type": "package",
             "package": {
+                "name": "jacksonriver/springboard-composer",
+                "version": "4.14",
+                "source": {
+                    "url": "https://github.com/JacksonRiver/springboard-composer.git",
+                    "type": "git",
+                    "reference": "7.x-4.x"
+                },
+                "dist": {
+                    "url": "https://github.com/JacksonRiver/springboard-composer/archive/7.x-4.14.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "jacksonriver/springboard-modules",
                 "version": "4.14",
                 "source": {
@@ -121,6 +137,7 @@
     "extra": {
         "installer-paths": {
             "build": ["jacksonriver/springboard-build"],
+            "springboard-composer": ["jacksonriver/springboard-composer"],
             "acceptance-tests": ["jacksonriver/acceptance-tests"],
             "linked/springboard_modules": ["jacksonriver/springboard-modules"],
             "linked/springboard_themes": ["jacksonriver/springboard-themes"],

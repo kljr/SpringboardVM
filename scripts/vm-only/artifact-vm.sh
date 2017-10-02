@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Type the docroot of the site you want to update, followed by [ENTER]:"
+echo "Type the project root of the site you want to update, followed by [ENTER]:"
 read docroot
 docpath="/vagrant/sites/$docroot"
 
@@ -77,7 +77,7 @@ if [ ${DB} = true ]; then
     echo "loading db"
     gunzip /vagrant/artifacts/sites/$artifact/dump.sql.gz
     if [ -f /vagrant/artifacts/sites/$artifact/dump.sql ]; then
-       cd /vagrant/sites/$docroot
+       cd /vagrant/sites/$docroot/web
        drush sql-drop
        echo "Importing db"
        drush sql-cli < /vagrant/artifacts/sites/$artifact/dump.sql

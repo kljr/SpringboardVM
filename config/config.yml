@@ -29,8 +29,10 @@ drupal_install_site: false
 # Don't change this block. Really.
 druv_site_dir: "/var/www/springboard/sites"
 drupal_composer_install_dir: "/var/www/springboard/sites" #deprecated
-drupal_core_dir: "sb_default"
-drupal_testing_dir: "sb_testing"
+drupal_core_dir: "sb_default/web"
+drupal_testing_dir: "sb_testing/web"
+drupal_core_porject_dir: "sb_default"
+drupal_testing_project_dir: "sb_testing"
 drupal_core_path: "{{ druv_site_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ druv_site_dir }}/{{drupal_testing_dir}}"
 drupal_domain: "{{ vagrant_machine_name }}.dev"

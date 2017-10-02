@@ -12,7 +12,7 @@ function parse_yaml {
         for (i in vname) {if (i > indent) {delete vname[i]}}
         if (length($3) > 0) {
             vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-            if ($2 == "documentroot") {
+            if ($2 == "projectroot") {
                 split($3, dirname, "/")
                 if (dirname[2] != "") {
                     printf("%s%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, "__"dirname[2], dirname[2]);
