@@ -8,7 +8,10 @@
 
 {% macro alias(host, root) %}
 {%- if root not in _devtool_docroots %}
-$aliases['{{ druvmoser_drush_alias_uniqifier }}{{ root|replace("/var/www/springboard/sites/", "") }}'] = array(
+
+{% set vars = {'foo': root|replace("/var/www/springboard/sites/", "") } %}
+
+$aliases['{{ druvmoser_drush_alias_uniqifier }}{{ vars.foo|replace("/web", "") }}'] = array(
   'uri' => '{{ host }}',
   'root' => '{{ root }}',
   'remote-host' => '{{ host }}',

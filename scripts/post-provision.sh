@@ -12,13 +12,13 @@ set -x
 
 cd ${DRUV_ROOT}/${drupal_core_dir}
  if [ ! -f sites/default/settings.php ]; then
-    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_core_dir} --root=${DRUV_ROOT}/${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_dir}
+    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_core_project_dir} --root=${DRUV_ROOT}/${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_project_dir}
     /usr/local/bin/drush vset encrypt_secure_key_path ${DRUV_ROOT}/${drupal_core_dir}/sites/default/files/
 fi;
 
 cd ${DRUV_ROOT}/${drupal_testing_dir}
  if [ ! -f sites/default/settings.php ]; then
-    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_testing_dir} --root=${DRUV_ROOT}/${drupal_testing_dir}  --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_dir}
+    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_testing_project_dir} --root=${DRUV_ROOT}/${drupal_testing_dir}  --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_project_dir}
     /usr/local/bin/drush vset encrypt_secure_key_path ${DRUV_ROOT}/${drupal_testing_dir}/sites/default/files/
 fi;
 

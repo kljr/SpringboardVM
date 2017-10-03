@@ -5,8 +5,8 @@
 
 # Springboard can't run Ubuntu 1604 because of a db schema bug.
 vagrant_box: geerlingguy/ubuntu1404
-vagrant_hostname: druvmoser.dev
-vagrant_machine_name: druvmoser
+vagrant_hostname: druv.dev
+vagrant_machine_name: druv
 vagrant_ip: 0.0.0.0
 
 vagrant_synced_folders:
@@ -31,7 +31,7 @@ druv_site_dir: "/var/www/springboard/sites"
 drupal_composer_install_dir: "/var/www/springboard/sites" #deprecated
 drupal_core_dir: "sb_default/web"
 drupal_testing_dir: "sb_testing/web"
-drupal_core_porject_dir: "sb_default"
+drupal_core_project_dir: "sb_default"
 drupal_testing_project_dir: "sb_testing"
 drupal_core_path: "{{ druv_site_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ druv_site_dir }}/{{drupal_testing_dir}}"
@@ -141,7 +141,7 @@ druvmoser_apache_vhosts_template: "../vendor/geerlingguy/drupal-vm/provisioning/
 
 # A unique DruVMoser prefix for drush aliases, to keep them from
 # getting mismatched with aliases from other dev environments.
-druvmoser_drush_alias_uniqifier: '#'
+druvmoser_drush_alias_uniqifier: '2'
 
 
 # MySQL Configuration.

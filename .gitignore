@@ -1,8 +1,10 @@
 .DS_Store
 /build
+/springboard-composer
 /acceptance-tests
 /vendor
 /sites
+/sites/*
 composer.lock
 config/local.config.yml
 .vagrant

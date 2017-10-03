@@ -37,11 +37,11 @@ if [ ${FILES} = true ]; then
 
     if [ -d /vagrant/artifacts/sites/$artifact/files ] && [ "$(ls -A /vagrant/artifacts/sites/$artifact/files)" ]; then
         echo "untarring"
-        if [ -d $docpath/sites/default/files ]; then
-            echo "Delete $docpath/sites/default/files"
+        if [ -d $docpath/web/sites/default/files ]; then
+            echo "Delete $docpath/web/sites/default/files"
             select yn in "Yes" "No"; do
                 case $yn in
-                    Yes ) echo "removing files"; sudo rm -r $docpath/sites/default/files; break;;
+                    Yes ) echo "removing files"; sudo rm -r $docpath/web/sites/default/files; break;;
                     No ) FILES=false; break;;
                 esac
             done
@@ -49,7 +49,7 @@ if [ ${FILES} = true ]; then
 
         if [ -d $docpath/sites/default ]  && [ ${FILES} = true ]; then
               echo "moving files"
-              sudo mv /vagrant/artifacts/sites/$artifact/files $docpath/sites/default
+              sudo mv /vagrant/artifacts/sites/$artifact/files $docpath/web/sites/default
               echo "files moved"
         else
               rm -r /vagrant/artifacts/sites/$artifact/files; echo $PWD;

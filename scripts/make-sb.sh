@@ -23,17 +23,31 @@ MAIN_CONFIG_FILE=config/config.yml
 eval $(parse_yaml ${MAIN_CONFIG_FILE})
 #( set -o posix ; set ) | more
 # First site built on composer install/update.
-if [ ! -d sites/${drupal_project_dir} ]; then
-
+if [ ! -d sites/${drupal_core_project_dir} ]; then
      cd springboard-composer
      git checkout develop
      git pull
      cd ../
-     cp -R springboard-composer sites/${drupal_project_dir}
+     cp -R springboard-composer sites/${drupal_core_project_dir}
+  if [ -d sites/${drupal_core_project_dir} ]; then
+    cd sites/${drupal_core_project_dir};
+    $HOME/composer.phar about 2> /dev/null
+    if [ $? -eq 0 ]; then
+        $HOME/composer.phar run-script dev-install
+        else
+            $HOME/composer about 2> /dev/null
+            if [ $? -eq 0 ]; then
+                $HOME/composer run-script dev-install
+            else
+                /usr/local/bin/composer about 2> /dev/null
+                if [ $? -eq 0 ]; then
+                    /usr/local/bin/composer run-script dev-install
+                else
+                    echo "COuld not find composer"
+            fi;
+       fi;
+    fi;
 
-  if [ -d sites/${drupal_core_dir} ]; then
-    cd sites/${drupal_core_dir};
-    composer run-script dev-install
     cd ../../
     else
       echo "The drupal directory doesn't exist. Drush make must have failed."
@@ -46,11 +60,26 @@ if [ ! -d sites/${drupal_testing_project_dir} ]; then
      git checkout develop
      git pull
      cd ../
-     cp -R springboard-composer sites/${drupal_core_dir}
+     cp -R springboard-composer sites/${drupal_testing_project_dir}
 
   if [ -d sites/${drupal_testing_project_dir} ]; then
     cd sites/${drupal_testing_project_dir};
-    composer run-script dev-install
+    $HOME/composer.phar about 2> /dev/null
+    if [ $? -eq 0 ]; then
+        $HOME/composer.phar run-script dev-install
+        else
+            $HOME/composer about 2> /dev/null
+            if [ $? -eq 0 ]; then
+                $HOME/composer run-script dev-install
+            else
+                /usr/local/bin/composer about 2> /dev/null
+                if [ $? -eq 0 ]; then
+                    /usr/local/bin/composer run-script dev-install
+                else
+                    echo "COuld not find composer"
+            fi;
+       fi;
+    fi;
     cd ../../
     else
       echo "The drupal directory doesn't exist. Drush make must have failed."
@@ -76,12 +105,28 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             git checkout $branch
             git pull
             cd ../
+       fi;
 
-            cp -R springboard-composer sites/${drupal_core_dir}
-            if [ -d sites/$directory} ]; then
-              cd sites/$directory;
-              composer run-script dev-install
-              if [ ! -e sites/$directory/sites/default/files/sustainer.key ]; then
+       if [ ! -d sites/$directory/web} ]; then
+            echo"sdfsdfs"
+            cp -R springboard-composer sites/$directory
+            cd sites/$directory;
+            $HOME/composer.phar about 2> /dev/null
+            if [ $? -eq 0 ]; then
+                $HOME/composer.phar run-script dev-install
+                else
+                    $HOME/composer about 2> /dev/null
+                    if [ $? -eq 0 ]; then
+                        $HOME/composer run-script dev-install
+                    else
+                        /usr/local/bin/composer about 2> /dev/null
+                        if [ $? -eq 0 ]; then
+                            /usr/local/bin/composer run-script dev-install
+                        else
+                            echo "COuld not find composer"
+                    fi;
+                fi;
+                 if [ ! -e sites/$directory/web/sites/default/files/sustainer.key ]; then
                 echo $directory > sites/$directory/sites/default/files/sustainer.key
               fi;
               cd ../../

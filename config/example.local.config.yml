@@ -15,7 +15,8 @@ apache_vhosts:
 # Keep your document root names short. They become drush aliases.
   - servername: "another-site.dev"
     serveralias: "www.another-site.dev"
-    documentroot: "{{druv_site_dir}}/ano"
+    projectroot: "{{druv_site_dir}}/ano"
+    documentroot: "{{druv_site_dir}}/ano/web"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # Don't forget to define the apache_vhosts_ssl entry below, as well.
@@ -58,7 +59,7 @@ apache_vhosts_ssl:
 
   # your cusotm site ssl entry
   - servername: "another-site.dev"
-    documentroot: "{{druv_site_dir}}/ano"
+    documentroot: "{{druv_site_dir}}/ano/web"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
