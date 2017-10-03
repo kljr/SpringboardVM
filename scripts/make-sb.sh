@@ -23,6 +23,9 @@ MAIN_CONFIG_FILE=config/config.yml
 eval $(parse_yaml ${MAIN_CONFIG_FILE})
 #( set -o posix ; set ) | more
 # First site built on composer install/update.
+if [ ! -d sites ]; then
+  mkdir sites
+fi;
 if [ ! -d sites/${drupal_core_project_dir} ]; then
      cd springboard-composer
      git checkout develop

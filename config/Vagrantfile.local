@@ -18,11 +18,11 @@ if Vagrant.has_plugin?('vagrant-triggers')
     # Dump databases
     config.trigger.before :halt do
       info "Dumping the database before shutting down..."
-      run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
+     # run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
     end
     config.trigger.before :destroy do
       info "Dumping the database before shutting down..."
-      run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
+    #  run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
     end
     if ENV['DR_DUMP_DBS']
         config.trigger.instead_of :up do
