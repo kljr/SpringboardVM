@@ -1,13 +1,12 @@
 # DruVMoser
 
-A Springboard development environment built with Composer, Drush make, Codeception, DrupalVM,
+A Springboard development environment built with Composer, Codeception, DrupalVM,
 Ansible and Bash.
 
 Provides multiple fully-configured Springboard sites with working copies
-of the Springboard repositories, a dedicated testing site and testing suite, Bash scripts which
-allow Drush make to update existing sites' core and contrib modules without touching
-their Springboard directories, automatic DB backups from guest to host,
-and quick, pain-free provisioning, management and updating of Apache, mySQL and Drupal/Springboard.
+of the Springboard repositories, a dedicated testing site and testing suite, automatic DB backups
+from guest to host, and quick, pain-free provisioning, management and updating
+ of Apache, mySQL and Drupal/Springboard.
 
 ## Prerequisites
 
@@ -43,7 +42,7 @@ Also helpful but not required:
 - [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
 
 
-#Usage
+# Usage
 
 Clone this repository.
 
@@ -73,9 +72,6 @@ sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
 * Automates replacing generic site databases and file assets with
 reference site assets.
-* Automates optional symlinking of sites' Springboard directories to shared repositories.
-* Provides shell scripts to allow Drush Make to update Drupal core and
-contributed modules without touching a site's Springboard folders.
 * Provides a Drush alias to quickly install and configure developer
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
@@ -97,21 +93,7 @@ Adding too many sites at once can cause PHP timeouts, so be reasonable.
 
 ## Updating existing Springboard sites
 
-There are two shell scripts which allow you to update a Springboard site's
-Drupal core and contrib modules automatically, without touching
-Springboard modules, themes or libraries;
-
-* `scripts/update-cc.sh` prompts you to download a version of Springboard,
-and then copies the Springboard folders of your existing site into it,
-moves the old site folder into the backups directory, and moves the
-updated folder into its place.
-
-* `scripts/update-cc-inverse.sh` copies drupal core and contrib files out of
-a new Springboard download and places them into your existing site,
-without overwriting Springboard folders or any non-Springboard
-customizations in the libraries or contrib folders.
-
-* If you want to replace all code in a site, including any repositories, just delete the document root folder, and
+* If you want to replace all code in a site, including any repositories, just delete the project root folder, and
 run `scripts/make-sb.sh` followed by `scripts/druv-provision.sh`.
 
 ## Replacing default content with reference databases and files
@@ -121,12 +103,6 @@ the `artifacts/sites` folder according to the instructions in the
  [readme,](https://github.com/kljr/druvmoser/blob/master/artifacts/README.md)
 you can automatically replace any site's files and/or database with those items
  by running `scripts/load-artifact.sh.`
-
-## Symlinking shared repositories
-
-`scripts/symlink.sh` automates the replacing of springboard repositories inside a particular site's folders with
-symlinks to shared repositories in the `linked` folder, if that is the way you prefer to work. The default is to use the
-repo in the site's directory tree.
 
 ## Running tests
 
@@ -146,17 +122,17 @@ you may want to test. You can also delete the sb_testing directory, and run `scr
 `scripts/druv-provision.sh` to install a completely new Springboard version,
 
 
-A port has been forwarded from the guest's 3306 port to the host's 3334
-port. If port 3334 is already in use, edit the port in `config/Vagranfile.local`
+A port has been forwarded from the guest's 3306 port to the host's 3335
+port. If port 3335 is already in use, edit the port in `config/Vagranfile.local`
 or create a new `config/Vagrantfile.custom` file. You will also have
 to edit `acceptance-tests/codeception.yml` to have the alternate port.
 
-##Useful shell aliases and functions
+## Useful shell aliases and functions
 
 Most of these are available by default on the virtual machine. See templates/bashrc_host for a template formatted to
 copy and paste to your computer's .bashrc file.
 
->Directory switching
+> Directory switching
 
 * `druv` - Go to DruVMoser install directory.
 * `dwdw [docroot/path]` - switch to docroot or any path in a docroot.
@@ -169,8 +145,6 @@ copy and paste to your computer's .bashrc file.
 
 >  Managing sites
 
-* `upcc` - copy your springboard directories into a new springboard download, and replace the original docroot.
-* `upccin` -  copy new drupal core and contrib into your existing springboard install.
 * `druvpro` - provision virtual hosts for new installations, create the site, the database, and drush aliases.
 * `dwbld` - show Springboard version of the build repo
 * `dwbld [branch_name]` - switch the springboard build repo to a branch.
@@ -181,7 +155,7 @@ copy and paste to your computer's .bashrc file.
 * `codecept` - start codeception
 * `selchr` - start selenium with chromedriver.
 
-#####These are only available for your host computer.
+##### These are only available for your host computer.
 
 > Vagrant
 
@@ -199,7 +173,7 @@ copy and paste to your computer's .bashrc file.
 
 * `dwdump` - dump all databases to backup
 
-##Drush global install
+## Drush global install
 
 You could install Drush globally with Composer (`composer require global drush/drush`), but that is likely to lead to conflicts
 if you have other global projects with conflicting dependencies.
@@ -237,9 +211,3 @@ Thanks to
 - [Springboard-Build-Composer](https://github.com/robertromore/Springboard-Build-Composer)
 - [Composer template for Drupal projects](https://github.com/drupal-composer/drupal-project/tree/7.x)
 - [DrupalVM](https://www.drupalvm.com/)
-
-#### Why not just use Composer?
-
-Drush make is on the way out, but Springboard uses drush makefiles. If there was a versioned composer.json equivalent
-to Springboard's makefiles, it would be fairly simple to convert to using `composer create-project jacksonriver/springboard`
-as basis for triggering multiple new builds, rather than `drush make springboard-mtsb.make`.

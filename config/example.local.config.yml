@@ -12,7 +12,10 @@
 apache_vhosts:
 
 # A Custom Site
-# Keep your document root names short. They become drush aliases.
+# Keep your project root names short. They become drush aliases.
+# Projectroot and document root are both required. Document root
+# should always be projectroot + '/web'. Other conifgurations will not
+# work.
   - servername: "another-site.dev"
     serveralias: "www.another-site.dev"
     projectroot: "{{druv_site_dir}}/ano"

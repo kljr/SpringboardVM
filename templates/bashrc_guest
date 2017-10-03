@@ -50,10 +50,10 @@ function dwdwm(){
         h=${PWD:$f+7}
         i=$(strpos $h '/')
         if [ -z $i ]; then
-            dir=$PWD/sites/all/modules/springboard
+            dir=$PWD/web/sites/all/modules/springboard
         else
             j=${h:0:$i}
-            dir=$g$j/sites/all/modules/springboard
+            dir=$g$j/web/sites/all/modules/springboard
         fi
         if [ -d $dir ]; then
             cd $dir
@@ -63,8 +63,8 @@ function dwdwm(){
         fi
     else
           if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard
-            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/modules/springboard"
+            cd $PATH_TO_DRUV/sites/$1/web/sites/all/modules/springboard
+            echo "You're in $PATH_TO_DRUV/sites/$1/web/sites/all/modules/springboard"
           else
             echo "Can't find that directory"
           fi
@@ -82,10 +82,10 @@ function dwdwt(){
         h=${PWD:$f+7}
         i=$(strpos $h '/')
         if [ -z $i ]; then
-            dir=$PWD/sites/all/themes/springboard_themes
+            dir=$PWD/web/sites/all/themes/springboard_themes
         else
 	  	      j=${h:0:$i}
-  	  	    dir=$g$j/sites/all/themes/springboard_themes
+  	  	    dir=$g$j/web/sites/all/themes/springboard_themes
   	  	fi
         if [ -d $dir ]; then
             cd $dir
@@ -96,8 +96,8 @@ function dwdwt(){
         fi
     else
         if [ -d $PATH_TO_DRUV/sites/$1 ] &&  [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes
-            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/themes/springboard_themes"
+            cd $PATH_TO_DRUV/sites/$1/web/sites/all/themes/springboard_themes
+            echo "You're in $PATH_TO_DRUV/sites/$1/web/sites/all/themes/springboard_themes"
         else
             echo "Can't find that directory"
         fi
@@ -113,10 +113,10 @@ function dwdwl(){
         h=${PWD:$f+7}
         i=$(strpos $h '/')
         if [ -z $i ]; then
-            dir=$PWD/sites/all/libraries
+            dir=$PWD/web/sites/all/libraries
         else
 			j=${h:0:$i}
-        	dir=$g$j/sites/all/libraries
+        	dir=$g$j/web/sites/all/libraries
         fi
         if [ -d $dir ]; then
             cd $dir
@@ -126,8 +126,8 @@ function dwdwl(){
         fi
     else
         if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/sites/all/libraries
-            echo "You're in $PATH_TO_DRUV/sites/$1/sites/all/libraries"
+            cd $PATH_TO_DRUV/sites/$1/web/sites/all/libraries
+            echo "You're in $PATH_TO_DRUV/sites/$1/web/sites/all/libraries"
         else
             echo "Can't find that directory"
         fi
@@ -136,9 +136,9 @@ function dwdwl(){
 # example: "dwdwl sb_default" - switch to libraries directory of the sb_default install
 
 # Check or change Springboard-Build version
-function dwbld(){
+function dwcomp(){
    dir=$PWD
-   cd $PATH_TO_DRUV/build
+   cd $PATH_TO_DRUV/springboard-composer
    if [ ! $# -eq 0 ]; then
      git checkout $1
    else
@@ -148,14 +148,12 @@ function dwbld(){
 }
 
 # examples:
-# dwbld (no arguments, displays current branch of the build repo.)
-# dwbld 7.x-4.x (switch build repo to 7.x-4.x)
+# dwcomp (no arguments, displays current branch of the build repo.)
+# dwcomp 7.x-4.x (switch build repo to 7.x-4.x)
 
 
 #  Executables
 
-alias upcc='$PATH_TO_DRUV/scripts/update-cc.sh'
-alias upccin='$PATH_TO_DRUV/scripts/update-cc-inverse.sh'
 alias make-sb='$PATH_TO_DRUV/scripts/make-sb.sh'
 alias codecept='$PATH_TO_DRUV/acceptance-tests/vendor/bin/codecept'
 alias selchr='java -jar $PATH_TO_DRUV/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'

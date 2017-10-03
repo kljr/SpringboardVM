@@ -111,7 +111,6 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
        fi;
 
        if [ ! -d sites/$directory/web} ]; then
-            echo"sdfsdfs"
             cp -R springboard-composer sites/$directory
             cd sites/$directory;
             $HOME/composer.phar about 2> /dev/null
