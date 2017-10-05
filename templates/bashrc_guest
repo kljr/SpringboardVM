@@ -1,21 +1,18 @@
 # Provisioner copies these to the guest's /home/vagrant/.bashrc
 
-PATH_TO_DRUV='/var/www/springboard'
-
-alias druv='cd $PATH_TO_DRUV'
-
+PATH_TO_NEW_DRUV='/var/www/springboard'
 
 # Add these to your .bashrc or .bash_alias.
 # Most are also available by default on the virtual machine. See templates/bashrc_guest.
 
 #  Directory switching
 
-alias drac='cd $PATH_TO_DRUV/acceptance-tests'
-alias druv='cd $PATH_TO_DRUV'
+alias drc='cd $PATH_TO_NEW_DRUV/acceptance-tests'
+alias drv='cd $PATH_TO_NEW_DRUV'
 
-function dwdw(){
+function cdcd(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_DRUV}
+        f=${#PATH_TO_NEW_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         l=$PWD
@@ -33,9 +30,9 @@ function dwdw(){
             echo "Can't find that directory"
         fi
     else
-       if [ -d $PATH_TO_DRUV/sites/$1 ]; then
-         cd $PATH_TO_DRUV/sites/$1
-         echo "you're in $PATH_TO_DRUV/sites/$1"
+       if [ -d $PATH_TO_NEW_DRUV/sites/$1 ]; then
+         cd $PATH_TO_NEW_DRUV/sites/$1
+         echo "you're in $PATH_TO_NEW_DRUV/sites/$1"
        else
          echo "Can't find that directory"
        fi
@@ -43,9 +40,9 @@ function dwdw(){
 }
 
 # Switch to modules dir.
-function dwdwm(){
+function cdcdm(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_DRUV}
+        f=${#PATH_TO_NEW_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -62,22 +59,22 @@ function dwdwm(){
             echo "Can't find that directory"
         fi
     else
-          if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/web/sites/all/modules/springboard
-            echo "You're in $PATH_TO_DRUV/sites/$1/web/sites/all/modules/springboard"
+          if [ -d $PATH_TO_NEW_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
+            cd $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/modules/springboard
+            echo "You're in $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/modules/springboard"
           else
             echo "Can't find that directory"
           fi
     fi
 }
-# example: "dwdw sb_default" - switch to springboard modules directory of the sb_default install
+# example: "cdcd sb_default" - switch to springboard modules directory of the sb_default install
 
 
 # Switch to themes dir.
 
-function dwdwt(){
+function cdcdt(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_DRUV}
+        f=${#PATH_TO_NEW_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -95,20 +92,20 @@ function dwdwt(){
             echo "Can't find that directory"
         fi
     else
-        if [ -d $PATH_TO_DRUV/sites/$1 ] &&  [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/web/sites/all/themes/springboard_themes
-            echo "You're in $PATH_TO_DRUV/sites/$1/web/sites/all/themes/springboard_themes"
+        if [ -d $PATH_TO_NEW_DRUV/sites/$1 ] &&  [ $# -eq 1 ]; then
+            cd $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/themes/springboard_themes
+            echo "You're in $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/themes/springboard_themes"
         else
             echo "Can't find that directory"
         fi
     fi
 }
-# example: "dwdwt sb_default" - switch to springboard themes directory of the sb_default install
+# example: "cdcdt sb_default" - switch to springboard themes directory of the sb_default install
 
 # Switch to libraries dir.
-function dwdwl(){
+function cdcdl(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_DRUV}
+        f=${#PATH_TO_NEW_DRUV}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -125,20 +122,20 @@ function dwdwl(){
             echo "Can't find that directory"
         fi
     else
-        if [ -d $PATH_TO_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_DRUV/sites/$1/web/sites/all/libraries
-            echo "You're in $PATH_TO_DRUV/sites/$1/web/sites/all/libraries"
+        if [ -d $PATH_TO_NEW_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
+            cd $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/libraries
+            echo "You're in $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/libraries"
         else
             echo "Can't find that directory"
         fi
     fi
 }
-# example: "dwdwl sb_default" - switch to libraries directory of the sb_default install
+# example: "cdcdl sb_default" - switch to libraries directory of the sb_default install
 
 # Check or change Springboard-Build version
 function dwcomp(){
    dir=$PWD
-   cd $PATH_TO_DRUV/springboard-composer
+   cd $PATH_TO_NEW_DRUV/springboard-composer
    if [ ! $# -eq 0 ]; then
      git checkout $1
    else
@@ -154,9 +151,8 @@ function dwcomp(){
 
 #  Executables
 
-alias make-sb='$PATH_TO_DRUV/scripts/make-sb.sh'
-alias codecept='$PATH_TO_DRUV/acceptance-tests/vendor/bin/codecept'
-alias selchr='java -jar $PATH_TO_DRUV/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
+alias makesb='$PATH_TO_NEW_DRUV/scripts/make-sb.sh'
+alias codecept='$PATH_TO_NEW_DRUV/acceptance-tests/vendor/bin/codecept'
 
 function strpos()
 {

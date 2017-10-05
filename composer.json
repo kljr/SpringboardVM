@@ -1,6 +1,6 @@
 {
     "name": "jacksonriver/druvmoser",
-    "description": "Springboard with Composer + Drush Make + DrupalVM + Codeception.",
+    "description": "Springboard with Composer + DrupalVM + Codeception.",
     "type": "project",
     "license": "MIT",
     "repositories": [

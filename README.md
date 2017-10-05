@@ -3,7 +3,7 @@
 A Springboard development environment built with Composer, Codeception, DrupalVM,
 Ansible and Bash.
 
-Provides multiple fully-configured Springboard sites with working copies
+Provides multiple fully-configured Springboard sites, each with working copies
 of the Springboard repositories, a dedicated testing site and testing suite, automatic DB backups
 from guest to host, and quick, pain-free provisioning, management and updating
  of Apache, mySQL and Drupal/Springboard.
@@ -46,16 +46,18 @@ Also helpful but not required:
 
 Clone this repository.
 
-If you want to create additional Springboard sites besides the two
-default sites, copy config/example.local.config.yml to
-config/local.config.yml and edit as you see fit.
-
 Run `composer update`
 
 After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
-you can view the DruVMoser dashboard at http://dashboard.druvmoser.dev.
+you can view the DruVMoser dashboard at http://dashboard.druv.dev.
+
+After the initial install, if you want to create additional Springboard sites besides the two
+default sites, copy config/example.local.config.yml to
+config/local.config.yml and edit as you see fit.
+ Then run `scripts/make-sb.sh` and `scripts/druv-provision.sh` in that order.
+
 
 ## What does DruVMoser do?
 
@@ -134,24 +136,22 @@ copy and paste to your computer's .bashrc file.
 
 > Directory switching
 
-* `druv` - Go to DruVMoser install directory.
-* `dwdw [docroot/path]` - switch to docroot or any path in a docroot.
-* `dwdwm [docroot]` - switch to the Springboard modules directory of site with [docroot]
-* `dwdwt [docroot]` - switch to the Springboard themes directory of site with [docroot]
-* `dwdwl [docroot]` - switch to the libraries directory of site with [docroot]
+* `drv` - Go to DruVMoser install directory.
+* `cdcd [docroot/path]` - switch to docroot or any path in a docroot.
+* `cdcdm [docroot]` - switch to the Springboard modules directory of site with [docroot]
+* `cdcdt [docroot]` - switch to the Springboard themes directory of site with [docroot]
+* `cdcdl [docroot]` - switch to the libraries directory of site with [docroot]
 * If you're already in a site directory context, the above commands will work without arguments.
 
 * `dwac` - Go to acceptance tests directory
 
 >  Managing sites
 
-* `druvpro` - provision virtual hosts for new installations, create the site, the database, and drush aliases.
-* `dwbld` - show Springboard version of the build repo
-* `dwbld [branch_name]` - switch the springboard build repo to a branch.
+* `drprov` - provision virtual hosts for new installations, create the site, the database, and drush aliases.
 
 > Testing
 
-* `dwac` - Go to acceptance tests directory
+* `drc` - Go to acceptance tests directory
 * `codecept` - start codeception
 * `selchr` - start selenium with chromedriver.
 
@@ -167,11 +167,11 @@ copy and paste to your computer's .bashrc file.
 > Apache
 
 * `aprel` - restart apache
-* `druvpro` - provision virtual hosts for new installations, create the site, database, and drush aliases.
+* `drprov` - provision virtual hosts for new installations, create the site, database, and drush aliases.
 
 > DB
 
-* `dwdump` - dump all databases to backup
+* `drdump` - dump all databases to backup
 
 ## Drush global install
 

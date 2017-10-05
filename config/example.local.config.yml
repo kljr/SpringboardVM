@@ -1,10 +1,10 @@
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance. Otherwise, leave this alone.
-#vagrant_hostname: druvmoser.dev
-#vagrant_machine_name: druvmoser
+#vagrant_hostname: druv.dev
+#vagrant_machine_name: druv
 #vagrant_ip: 0.0.0.0
-# druvmoser_drush_alias_uniqifier: '#'
+# druvmoser_drush_alias_uniqifier: 'dd'
 
 # Add additional Springboard installs and vhosts.
 # Don't use any special characters in the docroot name. Only a-z are allowed.
@@ -19,7 +19,7 @@ apache_vhosts:
   - servername: "another-site.dev"
     serveralias: "www.another-site.dev"
     projectroot: "{{druv_site_dir}}/ano"
-    documentroot: "{{druv_site_dir}}/ano/web"
+    documentroot: "{{druv_site_dir}}/ano/web" #must be /web
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # Don't forget to define the apache_vhosts_ssl entry below, as well.

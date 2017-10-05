@@ -142,7 +142,7 @@ druvmoser_apache_vhosts_template: "../vendor/geerlingguy/drupal-vm/provisioning/
 
 # A unique DruVMoser prefix for drush aliases, to keep them from
 # getting mismatched with aliases from other dev environments.
-druvmoser_drush_alias_uniqifier: '2'
+druvmoser_drush_alias_uniqifier: 'dd'
 
 
 # MySQL Configuration.
