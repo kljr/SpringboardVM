@@ -1,10 +1,10 @@
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance. Otherwise, leave this alone.
-#vagrant_hostname: druv.dev
-#vagrant_machine_name: druv
+#vagrant_hostname: sbvm.dev
+#vagrant_machine_name: sbvm
 #vagrant_ip: 0.0.0.0
-# druvmoser_drush_alias_uniqifier: 'dd'
+# springboard_vm_drush_alias_uniqifier: 'dd'
 
 # Add additional Springboard installs and vhosts.
 # Don't use any special characters in the docroot name. Only a-z are allowed.
@@ -18,15 +18,15 @@ apache_vhosts:
 # work.
   - servername: "another-site.dev"
     serveralias: "www.another-site.dev"
-    projectroot: "{{druv_site_dir}}/ano"
-    documentroot: "{{druv_site_dir}}/ano/web" #must be /web
+    projectroot: "{{sbvm_site_dir}}/ano"
+    documentroot: "{{sbvm_site_dir}}/ano/web" #must be /web
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # Don't forget to define the apache_vhosts_ssl entry below, as well.
 
 # You need to maintain the default DrupalVM vhost definitions
 # in this file too. Don't change these unless you are running multiple
-# druvmoser installs.
+# springboard_vm installs.
 
 # The Default Testing Site
   - servername: "{{ drupal_testing_domain }}"
@@ -62,12 +62,12 @@ apache_vhosts_ssl:
 
   # your cusotm site ssl entry
   - servername: "another-site.dev"
-    documentroot: "{{druv_site_dir}}/ano/web"
+    documentroot: "{{sbvm_site_dir}}/ano/web"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
-  # Default DruVMoser virtual hosts.
+  # Default SpringboardVM virtual hosts.
   - servername: "{{ drupal_testing_domain }}"
     documentroot: "{{ drupal_testing_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"

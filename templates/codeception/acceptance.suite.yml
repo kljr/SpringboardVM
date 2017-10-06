@@ -1,7 +1,7 @@
 modules:
     config:
         WebDriver:
-            url: 'https://druvmoser-test.dev/'
+            url: 'https://springboard_vm-test.dev/'
 
 # For salesforce use the serialized values from an existing DB, not the values themselves
 # For the other configs, use the actual values.

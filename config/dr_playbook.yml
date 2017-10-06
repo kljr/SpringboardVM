@@ -7,37 +7,37 @@
   vars_files:
     - ../vendor/geerlingguy/drupal-vm/default.config.yml
     - config.yml
-    - "{{ druvmoser_vm_path }}/vars/main.yml"
-    - "{{ druvmoser_vm_path }}/vars/Debian.yml"
-    - "{{ druvmoser_vm_path }}/vars/RedHat.yml"
+    - "{{ springboard_vm_vm_path }}/vars/main.yml"
+    - "{{ springboard_vm_vm_path }}/vars/Debian.yml"
+    - "{{ springboard_vm_vm_path }}/vars/RedHat.yml"
 
   # Even though we're only updating vhosts, we may need to include all roles.
   roles:
-    - { role: "{{ druvmoser_vm_roles_path }}.apache", when: drupalvm_webserver == 'apache' }
-    - { role: "{{ druvmoser_vm_roles_path }}.apache-php-fpm", when: drupalvm_webserver == 'apache' }
-    - role: "{{ druvmoser_vm_roles_path }}.php-xhprof"
+    - { role: "{{ springboard_vm_vm_roles_path }}.apache", when: drupalvm_webserver == 'apache' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.apache-php-fpm", when: drupalvm_webserver == 'apache' }
+    - role: "{{ springboard_vm_vm_roles_path }}.php-xhprof"
       workspace: "/root/php{{ php_version }}"
       when: '"xhprof" in installed_extras'
-    - role: "{{ druvmoser_vm_roles_path }}.php-xdebug"
+    - role: "{{ springboard_vm_vm_roles_path }}.php-xdebug"
       workspace: "/root/php{{ php_version }}"
       when: '"xdebug" in installed_extras'
-    - role: "{{ druvmoser_vm_path }}/roles/thom8.php-upload-progress"
+    - role: "{{ springboard_vm_vm_path }}/roles/thom8.php-upload-progress"
       workspace: "/root/php{{ php_version }}"
       when: '"upload-progress" in installed_extras'
-    - { role: "{{ druvmoser_vm_roles_path }}.blackfire", when: '"blackfire" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.adminer", when: '"adminer" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.pimpmylog", when: '"pimpmylog" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.daemonize", when: '"mailhog" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.mailhog", when: '"mailhog" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.mysql", when: drupalvm_database == 'mysql' }
-    - { role: "{{ druvmoser_vm_roles_path }}.php-mysql", when: drupalvm_database == 'mysql' }
-    - { role: "{{ druvmoser_vm_roles_path }}.drupal-console", when: 'drupal_major_version > 7 and "drupalconsole" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.drush", when: '"drush" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.memcached", when: '"memcached" in installed_extras' }
-    - { role: "{{ druvmoser_vm_roles_path }}.php-memcached", when: '"memcached" in installed_extras' }
-    - { role: "{{ druvmoser_vm_path }}/roles/franklinkim.newrelic", when: '"newrelic" in installed_extras' }
-    - { role: "{{ druvmoser_vm_path }}/roles/arknoll.selenium", when: '"selenium" in installed_extras' }
-    - role: "{{ druvmoser_vm_roles_path }}.java"
+    - { role: "{{ springboard_vm_vm_roles_path }}.blackfire", when: '"blackfire" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.adminer", when: '"adminer" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.pimpmylog", when: '"pimpmylog" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.daemonize", when: '"mailhog" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.mailhog", when: '"mailhog" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.mysql", when: drupalvm_database == 'mysql' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.php-mysql", when: drupalvm_database == 'mysql' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.drupal-console", when: 'drupal_major_version > 7 and "drupalconsole" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.drush", when: '"drush" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.memcached", when: '"memcached" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_roles_path }}.php-memcached", when: '"memcached" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_path }}/roles/franklinkim.newrelic", when: '"newrelic" in installed_extras' }
+    - { role: "{{ springboard_vm_vm_path }}/roles/arknoll.selenium", when: '"selenium" in installed_extras' }
+    - role: "{{ springboard_vm_vm_roles_path }}.java"
       when: >
         "java" in installed_extras or
         "solr" in installed_extras or
@@ -48,9 +48,9 @@
   # These tasks are lifted from the apache role.
   tasks:
 
-    - name: DruVMoser
+    - name: SpringboardVM
       set_fact:
-        druvmoser_shim: "This is just a placeholder for the 'start-at-task' ansible flag"
+        springboard_vm_shim: "This is just a placeholder for the 'start-at-task' ansible flag"
 
     - name: Yadda
       include_vars: "local.config.yml"
@@ -59,7 +59,7 @@
 
     # Include variables and define needed variables.
     - name: Include OS-specific variables.
-      include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/{{ ansible_os_family }}.yml"
+      include_vars: "{{ springboard_vm_vm_roles_path }}.apache/vars/{{ ansible_os_family }}.yml"
 
     - name: Define apache_packages.
       set_fact:
@@ -77,15 +77,15 @@
       set_fact:
         apache_version: "{{ _apache_version.stdout.split()[2].split('/')[1] }}"
 
-    - include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/apache-22.yml"
+    - include_vars: "{{ springboard_vm_vm_roles_path }}.apache/vars/apache-22.yml"
       when: "apache_version.split('.')[1] == '2'"
 
-    - include_vars: "{{ druvmoser_vm_roles_path }}.apache/vars/apache-24.yml"
+    - include_vars: "{{ springboard_vm_vm_roles_path }}.apache/vars/apache-24.yml"
       when: "apache_version.split('.')[1] == '4'"
 
     - name: Add apache vhosts configuration.
       template:
-        src: "{{ druvmoser_vm_roles_path }}.apache/templates/vhosts.conf.j2"
+        src: "{{ springboard_vm_vm_roles_path }}.apache/templates/vhosts.conf.j2"
         dest: "/etc/apache2/sites-available/vhosts.conf"
         owner: root
         group: root
@@ -103,18 +103,18 @@
 
     - name: Run configured pre-provision shell scripts.
       script: "{{ item }}"
-      with_items: "{{ druvmoser_pre_provision_scripts|default([]) }}"
+      with_items: "{{ springboard_vm_pre_provision_scripts|default([]) }}"
 
     - name: Run configured post-provision shell scripts.
       script: "{{ item }}"
-      with_items: "{{ druvmoser_post_provision_scripts|default([]) }}"
+      with_items: "{{ springboard_vm_post_provision_scripts|default([]) }}"
 
     - name: Run configured post-provision ansible task files.
       include: "{{ outer_item }}"
       loop_control:
         loop_var: outer_item
       with_fileglob:
-        - "{{ druvmoser_post_provision_tasks_dir|default(omit) }}"
+        - "{{ springboard_vm_post_provision_tasks_dir|default(omit) }}"
 
     - name: Copy dashboard page into place.
       template:

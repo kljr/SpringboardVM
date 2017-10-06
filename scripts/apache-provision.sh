@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-#deprecated, use druv-provision.sh
+#deprecated, use sbvm-provision.sh
 
-DR_NEW_VHOSTS=TRUE DRUPALVM_ANSIBLE_ARGS='--start-at-task=DruVMoser' vagrant provision
+DR_NEW_VHOSTS=TRUE DRUPALVM_ANSIBLE_ARGS='--start-at-task=SpringboardVM' vagrant provision

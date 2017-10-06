@@ -1,6 +1,6 @@
 
 # add the aliases.
 
-if [ -f $HOME/.bashrc_druv ]; then
-    . $HOME/.bashrc_druv
+if [ -f $HOME/.bashrc_sbvm ]; then
+    . $HOME/.bashrc_sbvm
 fi

@@ -1,18 +1,18 @@
 # Provisioner copies these to the guest's /home/vagrant/.bashrc
 
-PATH_TO_NEW_DRUV='/var/www/springboard'
+PATH_TO_NEW_SBVM='/var/www/springboard'
 
 # Add these to your .bashrc or .bash_alias.
 # Most are also available by default on the virtual machine. See templates/bashrc_guest.
 
 #  Directory switching
 
-alias drc='cd $PATH_TO_NEW_DRUV/acceptance-tests'
-alias drv='cd $PATH_TO_NEW_DRUV'
+alias sbvm_ac='cd $PATH_TO_NEW_SBVM/acceptance-tests'
+alias sbvm='cd $PATH_TO_NEW_SBVM'
 
 function cdcd(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_NEW_DRUV}
+        f=${#PATH_TO_NEW_SBVM}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         l=$PWD
@@ -30,9 +30,9 @@ function cdcd(){
             echo "Can't find that directory"
         fi
     else
-       if [ -d $PATH_TO_NEW_DRUV/sites/$1 ]; then
-         cd $PATH_TO_NEW_DRUV/sites/$1
-         echo "you're in $PATH_TO_NEW_DRUV/sites/$1"
+       if [ -d $PATH_TO_NEW_SBVM/sites/$1 ]; then
+         cd $PATH_TO_NEW_SBVM/sites/$1
+         echo "you're in $PATH_TO_NEW_SBVM/sites/$1"
        else
          echo "Can't find that directory"
        fi
@@ -42,7 +42,7 @@ function cdcd(){
 # Switch to modules dir.
 function cdcdm(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_NEW_DRUV}
+        f=${#PATH_TO_NEW_SBVM}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -59,9 +59,9 @@ function cdcdm(){
             echo "Can't find that directory"
         fi
     else
-          if [ -d $PATH_TO_NEW_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/modules/springboard
-            echo "You're in $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/modules/springboard"
+          if [ -d $PATH_TO_NEW_SBVM/sites/$1 ] && [ $# -eq 1 ]; then
+            cd $PATH_TO_NEW_SBVM/sites/$1/web/sites/all/modules/springboard
+            echo "You're in $PATH_TO_NEW_SBVM/sites/$1/web/sites/all/modules/springboard"
           else
             echo "Can't find that directory"
           fi
@@ -74,7 +74,7 @@ function cdcdm(){
 
 function cdcdt(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_NEW_DRUV}
+        f=${#PATH_TO_NEW_SBVM}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -92,9 +92,9 @@ function cdcdt(){
             echo "Can't find that directory"
         fi
     else
-        if [ -d $PATH_TO_NEW_DRUV/sites/$1 ] &&  [ $# -eq 1 ]; then
-            cd $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/themes/springboard_themes
-            echo "You're in $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/themes/springboard_themes"
+        if [ -d $PATH_TO_NEW_SBVM/sites/$1 ] &&  [ $# -eq 1 ]; then
+            cd $PATH_TO_NEW_SBVM/sites/$1/web/sites/all/themes/springboard_themes
+            echo "You're in $PATH_TO_NEW_SBVM/sites/$1/web/sites/all/themes/springboard_themes"
         else
             echo "Can't find that directory"
         fi
@@ -105,7 +105,7 @@ function cdcdt(){
 # Switch to libraries dir.
 function cdcdl(){
     if [ $# -eq 0 ]; then
-        f=${#PATH_TO_NEW_DRUV}
+        f=${#PATH_TO_NEW_SBVM}
         g=${PWD:0:$f+7}
         h=${PWD:$f+7}
         i=$(strpos $h '/')
@@ -122,9 +122,9 @@ function cdcdl(){
             echo "Can't find that directory"
         fi
     else
-        if [ -d $PATH_TO_NEW_DRUV/sites/$1 ] && [ $# -eq 1 ]; then
-            cd $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/libraries
-            echo "You're in $PATH_TO_NEW_DRUV/sites/$1/web/sites/all/libraries"
+        if [ -d $PATH_TO_NEW_SBVM/sites/$1 ] && [ $# -eq 1 ]; then
+            cd $PATH_TO_NEW_SBVM/sites/$1/web/sites/all/libraries
+            echo "You're in $PATH_TO_NEW_SBVM/sites/$1/web/sites/all/libraries"
         else
             echo "Can't find that directory"
         fi
@@ -133,9 +133,9 @@ function cdcdl(){
 # example: "cdcdl sb_default" - switch to libraries directory of the sb_default install
 
 # Check or change Springboard-Build version
-function dwcomp(){
+function sbvm_comp(){
    dir=$PWD
-   cd $PATH_TO_NEW_DRUV/springboard-composer
+   cd $PATH_TO_NEW_SBVM/springboard-composer
    if [ ! $# -eq 0 ]; then
      git checkout $1
    else
@@ -145,14 +145,14 @@ function dwcomp(){
 }
 
 # examples:
-# dwcomp (no arguments, displays current branch of the build repo.)
-# dwcomp 7.x-4.x (switch build repo to 7.x-4.x)
+# sbvm_comp (no arguments, displays current branch of the build repo.)
+# sbvm_comp 7.x-4.x (switch build repo to 7.x-4.x)
 
 
 #  Executables
 
-alias makesb='$PATH_TO_NEW_DRUV/scripts/make-sb.sh'
-alias codecept='$PATH_TO_NEW_DRUV/acceptance-tests/vendor/bin/codecept'
+alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
+alias codecept='$PATH_TO_NEW_SBVM/acceptance-tests/vendor/bin/codecept'
 
 function strpos()
 {

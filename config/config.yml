@@ -5,8 +5,8 @@
 
 # Springboard can't run Ubuntu 1604 because of a db schema bug.
 vagrant_box: geerlingguy/ubuntu1404
-vagrant_hostname: druv.dev
-vagrant_machine_name: druv
+vagrant_hostname: sbvm.dev
+vagrant_machine_name: sbvm
 vagrant_ip: 0.0.0.0
 
 vagrant_synced_folders:
@@ -15,7 +15,7 @@ vagrant_synced_folders:
     type: nfs
     create: true
 
-# Stop drupalvm from doing anything to install Drupal so DruVMoser can handle it.
+# Stop drupalvm from doing anything to install Drupal so SpringboardVM can handle it.
 build_makefile: false
 drupal_build_makefile: false
 build_composer: false
@@ -28,14 +28,14 @@ install_site: false
 drupal_install_site: false
 
 # Don't change this block. Really.
-druv_site_dir: "/var/www/springboard/sites"
+sbvm_site_dir: "/var/www/springboard/sites"
 drupal_composer_install_dir: "/var/www/springboard/sites" #deprecated
 drupal_core_dir: "sb_default/web"
 drupal_testing_dir: "sb_testing/web"
 drupal_core_project_dir: "sb_default"
 drupal_testing_project_dir: "sb_testing"
-drupal_core_path: "{{ druv_site_dir }}/{{drupal_core_dir}}"
-drupal_testing_path: "{{ druv_site_dir }}/{{drupal_testing_dir}}"
+drupal_core_path: "{{ sbvm_site_dir }}/{{drupal_core_dir}}"
+drupal_testing_path: "{{ sbvm_site_dir }}/{{drupal_testing_dir}}"
 drupal_domain: "{{ vagrant_machine_name }}.dev"
 drupal_testing_domain: "{{ vagrant_machine_name }}-test.dev"
 
@@ -124,25 +124,25 @@ php_max_input_vars: "4000"
 # the `provisioning/playbook.yml` file.
 pre_provision_scripts:
  - "../../../../scripts/pre-provision.sh"
-druvmoser_pre_provision_scripts:
+springboard_vm_pre_provision_scripts:
  - "../scripts/pre-provision.sh"
 
 # One script, two relative paths, depdending on context
 post_provision_scripts:
  - "../../../../scripts/post-provision.sh"
-druvmoser_post_provision_scripts:
+springboard_vm_post_provision_scripts:
  - "../scripts/post-provision.sh"
 
 
-druvmoser_vm_path: "../vendor/geerlingguy/drupal-vm/provisioning"
-druvmoser_vm_roles_path: "../vendor/geerlingguy/drupal-vm/provisioning/roles/geerlingguy"
+springboard_vm_vm_path: "../vendor/geerlingguy/drupal-vm/provisioning"
+springboard_vm_vm_roles_path: "../vendor/geerlingguy/drupal-vm/provisioning/roles/geerlingguy"
 post_provision_tasks_dir: "../../../../config/drush-aliases.yml"
-druvmoser_post_provision_tasks_dir: "../config/drush-aliases.yml"
-druvmoser_apache_vhosts_template: "../vendor/geerlingguy/drupal-vm/provisioning/roles/geerlingguy.apache/templates/vhosts.conf.j2"
+springboard_vm_post_provision_tasks_dir: "../config/drush-aliases.yml"
+springboard_vm_apache_vhosts_template: "../vendor/geerlingguy/drupal-vm/provisioning/roles/geerlingguy.apache/templates/vhosts.conf.j2"
 
-# A unique DruVMoser prefix for drush aliases, to keep them from
+# A unique SpringboardVM prefix for drush aliases, to keep them from
 # getting mismatched with aliases from other dev environments.
-druvmoser_drush_alias_uniqifier: 'dd'
+springboard_vm_drush_alias_uniqifier: 'dd'
 
 
 # MySQL Configuration.
@@ -163,7 +163,7 @@ php_xdebug_idekey: PHPSTORM
 php_xdebug_max_nesting_level: 256
 
 known_hosts_path: ~/.ssh/known_hosts
-ssh_home: "{{ druv_site_dir }}"
+ssh_home: "{{ sbvm_site_dir }}"
 
 apache_vhosts:
 

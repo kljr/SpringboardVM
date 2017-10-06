@@ -1,4 +1,4 @@
-# DruVMoser
+# SpringboardVM
 
 A Springboard development environment built with Composer, Codeception, DrupalVM,
 Ansible and Bash.
@@ -18,7 +18,7 @@ from guest to host, and quick, pain-free provisioning, management and updating
 - For acceptance tests, port 3334 open. You can change this port by editing
 config/Vagrantfile.local if there is a conflict. (You'll need to update the acceptance tests port config too.)
 - Ansible 2.2.0 or later, for faster provisioning and the creation of Drush aliases
- on your host computer. DruVMoser will work without this (it's installed on the VM too),
+ on your host computer. SpringboardVM will work without this (it's installed on the VM too),
  but you'll lose the automatic host-to-guest aliases, which are very helpful. On OS X, Ansible is
  easily installed with Homebrew.
 
@@ -29,9 +29,9 @@ If you have the following Vagrant plugins, no network/IP configuration is requir
 
 Otherwise you will need to edit *vagrant_ip* in `config/local.config.yml`
 to assign an IP Address, and update */etc/hosts* on your computer to point
-druvmoser.dev and the other domains you
+springboard_vm.dev and the other domains you
 create at the IP of the virtual machine. You can find the correct
-information for the hosts file by visiting the DruVMoser's IP address after
+information for the hosts file by visiting the SpringboardVM's IP address after
 install.
 
 For DB backups:
@@ -51,27 +51,25 @@ Run `composer update`
 After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
-you can view the DruVMoser dashboard at http://dashboard.druv.dev.
+you can view the SpringboardVM dashboard at http://dashboard.sbvm.dev.
 
 After the initial install, if you want to create additional Springboard sites besides the two
 default sites, copy config/example.local.config.yml to
 config/local.config.yml and edit as you see fit.
- Then run `scripts/make-sb.sh` and `scripts/druv-provision.sh` in that order.
+ Then run `scripts/make-sb.sh` and `scripts/sbvm-provision.sh` in that order.
 
 
-## What does DruVMoser do?
+## What does SpringboardVM do?
 
-* Downloads Springboard-Build, the Acceptance Test repo, DrupalVM, Codeception and
-their vendor dependencies, and triggers a bash script which runs drush make,
-installing Springboard by checking out git working copies of Springboard
-modules, themes and libraries from the Springboard git repo.
-* Provisions DrupalVM, Apache and mySQL, creates virtual hosts,
-site databases, and installs the Springboard profile.
+* Downloads Springboard-Composer, the Acceptance Test repo, DrupalVM, Codeception and
+their vendor dependencies.
+* Provisions DrupalVM, Apache and mySQL, creates multiple virtual hosts and
+site databases.
 * Creates two default sites, one a dedicated testing site.
-* Configures the acceptance tests to work out of the box.
 * Allows additional sites to be automatically installed in
 sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
+* Configures the acceptance tests to work out of the box.
 * Automates replacing generic site databases and file assets with
 reference site assets.
 * Provides a Drush alias to quickly install and configure developer
@@ -82,27 +80,27 @@ sets the admin password to "admin".
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
 * Creates Drush aliases from host to guest which match your docroot folder name: `drush @#docroot`, allowing you to
 keep your aliases short and simple. The "#" is not a typo, it's a configurable prefix which allows you to run multiple
-installs of DruVMoser and not have conflicting aliases.
+installs of SpringboardVM and not have conflicting aliases.
 
 ## Updating virtual hosts and adding new sites.
 
-If you want to add a new site to a previously provisioned DruVMoser,
+If you want to add a new site to a previously provisioned SpringboardVM,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` followed by `scripts/druv-provision.sh` (faster) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
+* Run `scripts/make-sb.sh` followed by `scripts/sbvm-provision.sh` (faster) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
 
 Adding too many sites at once can cause PHP timeouts, so be reasonable.
 
 ## Updating existing Springboard sites
 
 * If you want to replace all code in a site, including any repositories, just delete the project root folder, and
-run `scripts/make-sb.sh` followed by `scripts/druv-provision.sh`.
+run `scripts/make-sb.sh` followed by `scripts/sbvm-provision.sh`.
 
 ## Replacing default content with reference databases and files
 
 There's not a direct connection to S3, but if you place gzipped files and dbs in
 the `artifacts/sites` folder according to the instructions in the
- [readme,](https://github.com/kljr/druvmoser/blob/master/artifacts/README.md)
+ [readme,](https://github.com/kljr/springboard_vm/blob/master/artifacts/README.md)
 you can automatically replace any site's files and/or database with those items
  by running `scripts/load-artifact.sh.`
 
@@ -121,7 +119,7 @@ Then `vendor/bin/codecept run`
 You can use one virtual host exclusively for running tests. The shell
 scripts will make it easy to switch among different Springboard versions
 you may want to test. You can also delete the sb_testing directory, and run `scripts/make-sb.sh` followed by
-`scripts/druv-provision.sh` to install a completely new Springboard version,
+`scripts/sbvm-provision.sh` to install a completely new Springboard version,
 
 
 A port has been forwarded from the guest's 3306 port to the host's 3335
@@ -136,22 +134,22 @@ copy and paste to your computer's .bashrc file.
 
 > Directory switching
 
-* `drv` - Go to DruVMoser install directory.
+* `sbvm` - Go to SpringboardVM install directory.
 * `cdcd [docroot/path]` - switch to docroot or any path in a docroot.
 * `cdcdm [docroot]` - switch to the Springboard modules directory of site with [docroot]
 * `cdcdt [docroot]` - switch to the Springboard themes directory of site with [docroot]
 * `cdcdl [docroot]` - switch to the libraries directory of site with [docroot]
 * If you're already in a site directory context, the above commands will work without arguments.
 
-* `dwac` - Go to acceptance tests directory
+* `sbvm_ac` - Go to acceptance tests directory
 
 >  Managing sites
 
-* `drprov` - provision virtual hosts for new installations, create the site, the database, and drush aliases.
+* `sbvm_prov` - provision virtual hosts for new installations, create the site, the database, and drush aliases.
 
 > Testing
 
-* `drc` - Go to acceptance tests directory
+* `sbvm_ac` - Go to acceptance tests directory
 * `codecept` - start codeception
 * `selchr` - start selenium with chromedriver.
 
@@ -167,11 +165,11 @@ copy and paste to your computer's .bashrc file.
 > Apache
 
 * `aprel` - restart apache
-* `drprov` - provision virtual hosts for new installations, create the site, database, and drush aliases.
+* `sbvm_prov` - provision virtual hosts for new installations, create the site, database, and drush aliases.
 
 > DB
 
-* `drdump` - dump all databases to backup
+* `sbvm_dump` - dump all databases to backup
 
 ## Drush global install
 
@@ -189,7 +187,7 @@ Or take the steps below to manually install drush globally:
     chmod +x drush
     sudo mv drush /usr/local/bin
 
-##Updating DruVMoser itself
+##Updating SpringboardVM itself
 
 After you pull the latest changes, run `vagrant reload --provision`
 
@@ -203,7 +201,7 @@ Drupal VM ships with a firewall. You can disable it by ssh-ing into the
 machine and doing `sudo service firewall stop`
 
 A Vagrantfile named `Vagrantfile.custom` can be placed in the config
-directory to override or add to DrupalVM's and DruVMoser's Vagrant files.
+directory to override or add to DrupalVM's and SpringboardVM's Vagrant files.
 
 ## Credits
 
