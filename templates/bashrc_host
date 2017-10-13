@@ -146,10 +146,15 @@ function sbvm_comp(){
   cd $dir
 }
 
+
 # examples:
 # sbvm_comp (no arguments, displays current branch of the build repo.)
 # sbvm_comp 7.x-4.x (switch composer repo to 7.x-4.x)
 
+# Switch to the main springboard-composer directory.
+function cdcds(){
+   cd $PATH_TO_NEW_SBVM/springboard-composer
+}
 
 #  Executables
 
