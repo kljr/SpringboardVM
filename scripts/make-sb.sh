@@ -11,12 +11,6 @@ export PATH=$PWD:$PATH
 cd ../
 
 
-if ! command -v drush >/dev/null 2>&1; then
-  echo "You need drush to run this script. Please install drush globally."
-  exit 0;
-fi
-
-
 # Build a default springboard site and a site
 # for each vhost defined in local.config.yml.
 MAIN_CONFIG_FILE=config/config.yml
