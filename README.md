@@ -78,8 +78,8 @@ and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
 * Provides shell aliases and functions to quickly navigate the directory hierarchy and perform tasks.
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
-* Creates Drush aliases from host to guest which match your project_root folder name: `drush @#project_root`, allowing you to
-keep your aliases short and simple. The "#" is not a typo, it's a configurable prefix which allows you to run multiple
+* Creates Drush aliases from host to guest which match your project_root folder name: `drush @sb-`[`project_root`], allowing you to
+keep your aliases short and simple. The "sb-" is a configurable prefix which allows you to run multiple
 installs of SpringboardVM and not have conflicting aliases.
 
 ## Updating virtual hosts and adding new sites.

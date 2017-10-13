@@ -142,7 +142,7 @@ springboard_vm_apache_vhosts_template: "../vendor/geerlingguy/drupal-vm/provisio
 
 # A unique SpringboardVM prefix for drush aliases, to keep them from
 # getting mismatched with aliases from other dev environments.
-springboard_vm_drush_alias_uniqifier: 'dd'
+springboard_vm_drush_alias_uniqifier: 'sb-'
 
 
 # MySQL Configuration.
