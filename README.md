@@ -145,7 +145,8 @@ copy and paste to your computer's .bashrc file.
 
 >  Managing sites
 
-* `sbvm_prov` - provision virtual hosts for new installations, create the site, the database, and drush aliases.
+* `sbvm_make` - create new springboard site installations based on local.config.yml settings. The command will prompt you for the springboard version.
+* `sbvm_prov` - after running sbvm_make, provision virtual hosts for new sites, create the site databases, and create drush aliases.
 
 > Testing
 

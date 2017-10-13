@@ -152,6 +152,7 @@ function sbvm_comp(){
 #  Executables
 
 alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
+alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias codecept='$PATH_TO_NEW_SBVM/acceptance-tests/vendor/bin/codecept'
 
 function strpos()
