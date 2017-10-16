@@ -95,6 +95,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
         directory=${!vhost}
         directory=${directory/__/\/}
         if [ ! -d sites/$directory ]; then
+
             echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
             read branch
             cd springboard-composer
@@ -102,9 +103,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             git checkout $branch
             git pull
             cd ../
-       fi;
 
-       if [ ! -d sites/$directory/web} ]; then
             cp -R springboard-composer sites/$directory
             cd sites/$directory;
             $HOME/composer.phar about 2> /dev/null
