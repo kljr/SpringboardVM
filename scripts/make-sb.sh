@@ -9,8 +9,6 @@ source "$script_dir/parse-yaml.sh"
 cd $script_dir
 export PATH=$PWD:$PATH
 cd ../
-
-
 # Build a default springboard site and a site
 # for each vhost defined in local.config.yml.
 MAIN_CONFIG_FILE=config/config.yml
@@ -94,6 +92,8 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
         # Get the docroot directory name.
         directory=${!vhost}
         directory=${directory/__/\/}
+        cd $script_dir
+        cd ../
         if [ ! -d sites/$directory ]; then
 
             echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
@@ -121,12 +121,11 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                             echo "COuld not find composer"
                     fi;
                 fi;
-                 if [ ! -e sites/$directory/web/sites/default/files/sustainer.key ]; then
-                echo $directory > sites/$directory/sites/default/files/sustainer.key
-              fi;
-              cd ../../
+                if [ ! -e sites/$directory/web/sites/default/files/sustainer.key ]; then
+                    echo $directory > sites/$directory/sites/default/files/sustainer.key
+                fi;
             fi;
+            cd ../../
         fi;
-
     done
 fi
