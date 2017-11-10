@@ -8,15 +8,11 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/springboard-composer",
-                "version": "4.14",
+                "version": "dev-develop",
                 "source": {
                     "url": "https://github.com/JacksonRiver/springboard-composer.git",
                     "type": "git",
                     "reference": "develop"
-                },
-                "dist": {
-                    "url": "https://github.com/JacksonRiver/springboard-composer/archive/7.x-4.14.zip",
-                    "type": "zip"
                 }
             }
         },
@@ -24,7 +20,7 @@
             "type": "package",
             "package": {
                 "name": "jacksonriver/acceptance-tests",
-                "version": "4.14",
+                "version": "master",
                 "source": {
                     "url": "https://github.com/JacksonRiver/acceptance-tests.git",
                     "type": "git",
@@ -36,8 +32,8 @@
     "require": {
         "composer/installers": "^1.0.20",
         "mnsami/composer-custom-directory-installer": "1.1.*",
-        "jacksonriver/springboard-composer": "4.14",
-        "jacksonriver/acceptance-tests": "4.14"
+        "jacksonriver/springboard-composer": "dev-develop",
+        "jacksonriver/acceptance-tests": "dev-master"
     },
     "require-dev": {
         "geerlingguy/drupal-vm": "4.6",
