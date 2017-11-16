@@ -4,7 +4,7 @@ A Springboard development environment built with Composer, Codeception, DrupalVM
 Ansible and Bash.
 
 Provides multiple fully-configured Springboard sites, each with working copies
-of the Springboard repositories, automatic DB backups
+of the Springboard repositories, a dedicated testing site and testing suite, automatic DB backups
 from guest to host, and quick, pain-free provisioning, management and updating
  of Apache, mySQL and Drupal/Springboard.
 
@@ -64,11 +64,11 @@ config/local.config.yml and edit as you see fit.
 * Downloads Springboard-Composer and DrupalVM, and their vendor dependencies.
 * Provisions DrupalVM, Apache and mySQL, creates multiple virtual hosts and
 site databases.
-* Creates a default site.
+* Creates two default sites, one a dedicated testing site.
 * Allows additional sites to be automatically installed in
 sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
-* Configures acceptance tests to work out of the box.
+* Configures the acceptance tests to work out of the box.
 * Automates replacing generic site databases and file assets with
 reference site assets.
 * Provides a Drush alias to quickly install and configure developer
@@ -108,6 +108,12 @@ you can automatically replace any site's files and/or database with those items
 Configuration templates for codeception are copied from the
 templates/tests directory into the acceptance test repository in each site. They
 should be ready to go.
+
+On the command line, switch to sites/sb_testing, then `vendor/bin/codecept run`
+
+You can use one virtual host exclusively for running tests. The shell
+scripts will make it easy to switch among different Springboard versions
+you may want to test. 
 
 A port has been forwarded from the guest's 3306 port to the host's 3335
 port. If port 3335 is already in use, edit the port in `config/Vagranfile.local`

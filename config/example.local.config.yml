@@ -28,6 +28,12 @@ apache_vhosts:
 # in this file too. Don't change these unless you are running multiple
 # springboard_vm installs.
 
+# The Default Testing Site
+  - servername: "{{ drupal_testing_domain }}"
+    serveralias: "www.{{ drupal_testing_domain }}"
+    documentroot: "{{ drupal_testing_path }}"
+    extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
+
 # Default  virtual hosts.
 
   - servername: "{{ drupal_domain }}"
@@ -57,6 +63,13 @@ apache_vhosts_ssl:
   # your cusotm site ssl entry
   - servername: "another-site.dev"
     documentroot: "{{sbvm_site_dir}}/ano/web"
+    certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+    certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+    extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
+
+  # Default SpringboardVM virtual hosts.
+  - servername: "{{ drupal_testing_domain }}"
+    documentroot: "{{ drupal_testing_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"

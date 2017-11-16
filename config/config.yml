@@ -31,9 +31,13 @@ drupal_install_site: false
 sbvm_site_dir: "/var/www/springboard/sites"
 drupal_composer_install_dir: "/var/www/springboard/sites" #deprecated
 drupal_core_dir: "sb_default/web"
+drupal_testing_dir: "sb_testing/web"
 drupal_core_project_dir: "sb_default"
+drupal_testing_project_dir: "sb_testing"
 drupal_core_path: "{{ sbvm_site_dir }}/{{drupal_core_dir}}"
+drupal_testing_path: "{{ sbvm_site_dir }}/{{drupal_testing_dir}}"
 drupal_domain: "{{ vagrant_machine_name }}.dev"
+drupal_testing_domain: "{{ vagrant_machine_name }}-test.dev"
 
 
 # Cron jobs are added to the vagrant user's crontab. Keys include name
@@ -163,6 +167,12 @@ ssh_home: "{{ sbvm_site_dir }}"
 
 apache_vhosts:
 
+# Testing Site
+  - servername: "{{ drupal_testing_domain }}"
+    serveralias: "www.{{ drupal_testing_domain }}"
+    documentroot: "{{ drupal_testing_path }}"
+    extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
+
 # Default DrupalVM virtual hosts.
 
   - servername: "{{ drupal_domain }}"
@@ -188,6 +198,11 @@ apache_vhosts:
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 apache_vhosts_ssl:
+  - servername: "{{ drupal_testing_domain }}"
+    documentroot: "{{ drupal_testing_path }}"
+    certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+    certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+    extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # Default DrupalVM virtual hosts.
   - servername: "{{ drupal_domain }}"
@@ -205,6 +220,10 @@ apache_vhosts_ssl:
 # create additional databases. Use the docroot name for the database name.
 # If you don't specify one here, drush will create it during post-provision.
 mysql_databases:
+# Testing site
+  - name: "{{ drupal_testing_project_dir }}"
+    encoding: utf8mb4
+    collation: utf8mb4_general_ci
 
 # Default DrupalVM Db.
   - name: "{{ drupal_core_project_dir }}"
