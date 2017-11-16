@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # Add codeception config files
-if [ -d acceptance-tests ] && [ ! -f acceptance-tests/codeception.yml ]; then
-    \cp templates/codeception/codeception.yml acceptance-tests
-    \cp templates/codeception/acceptance.suite.yml acceptance-tests/tests
+if [ -d sites/sb_testing/tests ] && [ ! -f sites/sb_testing/tests/codeception.yml ]; then
+    \cp templates/codeception/codeception.yml sites/sb_testing/tests
+    \cp templates/codeception/acceptance.suite.yml sites/sb_testing/tests/tests
 fi;
 
-if [ -d acceptance-tests ] && [ ! -d acceptance-tests/vendor ]; then
-    cd acceptance-tests
+if [ -d sites/sb_testing/tests/ ] && [ ! -d sites/sb_testing/tests/vendor ]; then
+    cd sites/sb_testing/tests/
     $HOME/composer.phar about 2> /dev/null
     if [ $? -eq 0 ]; then
         $HOME/composer.phar update
@@ -20,7 +20,7 @@ if [ -d acceptance-tests ] && [ ! -d acceptance-tests/vendor ]; then
                 if [ $? -eq 0 ]; then
                     /usr/local/bin/composer update
                 else
-                    echo "Please run 'composer update' from the acceptance-tests directory too!"
+                    echo "Please run 'composer update' from the sites/sb_testing/tests/ directory too!"
             fi;
        fi;
     fi;

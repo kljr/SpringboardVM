@@ -19,6 +19,8 @@ apache_vhosts:
   - servername: "another-site.dev"
     serveralias: "www.another-site.dev"
     projectroot: "{{sbvm_site_dir}}/ano"
+    #sustainer key = project root + "_sustainer_key"
+    ano_sustainer_key: "another-site.dev"
     documentroot: "{{sbvm_site_dir}}/ano/web" #must be /web
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
