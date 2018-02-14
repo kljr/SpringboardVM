@@ -52,7 +52,7 @@ installed_extras:
   # - elasticsearch
   # - java
   - mailhog
-  # - memcached
+  - memcached
   # - newrelic
   # - nodejs
   - pimpmylog
@@ -62,8 +62,8 @@ installed_extras:
   # - solr
   # - upload-progress
   - varnish
-  # - xdebug
-  # - xhprof
+  - xdebug
+  - xhprof
 
 # Add any extra apt or yum packages you would like installed.
 drush_version: "8.1.10"
