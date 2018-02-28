@@ -112,8 +112,12 @@ should be ready to go.
 
 To start tests, move into 'sites/sb_testing' and then
  `vendor/bin/codecept run`
+ 
+To wipe and reload the testing db run
+`scripts/wipe-test=db.sh`
 
-A port has been forwarded from the guest's 3306 port to the host's 3335
+For acceptance tests using the db module,
+a port has been forwarded from the guest's 3306 port to the host's 3335
 port. If port 3335 is already in use, edit the port in `config/Vagranfile.local`
 or create a new `config/Vagrantfile.custom` file. You will also have
 to edit `acceptance-tests/codeception.yml` to have the alternate port.
