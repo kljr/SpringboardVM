@@ -15,25 +15,12 @@
                     "reference": "develop"
                 }
             }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "jacksonriver/acceptance-tests",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/JacksonRiver/acceptance-tests.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
         }
     ],
     "require": {
         "composer/installers": "^1.0.20",
         "mnsami/composer-custom-directory-installer": "1.1.*",
-        "jacksonriver/springboard-composer": "dev-develop",
-        "jacksonriver/acceptance-tests": "dev-master"
+        "jacksonriver/springboard-composer": "dev-develop"
     },
     "require-dev": {
         "geerlingguy/drupal-vm": "4.6",
@@ -48,8 +35,7 @@
     },
     "extra": {
         "installer-paths": {
-            "springboard-composer": ["jacksonriver/springboard-composer"],
-            "acceptance-tests": ["jacksonriver/acceptance-tests"]
+            "springboard-composer": ["jacksonriver/springboard-composer"]
         }
     },
     "scripts": {
