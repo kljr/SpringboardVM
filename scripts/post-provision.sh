@@ -11,14 +11,18 @@ cd ${SBVM_ROOT}/${drupal_core_dir}
 set -x
 
 cd ${SBVM_ROOT}/${drupal_core_dir}
- if [ ! -f sites/default/settings.php ]; then
-    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_core_project_dir} --root=${SBVM_ROOT}/${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_project_dir}
+if [ ! -f sites/default/settings.php ]; then
+    /usr/local/bin/drush site-install minimal -y --site-name=${drupal_core_project_dir} --root=${SBVM_ROOT}/${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_project_dir}
+    drush @sb-${drupal_core_project_dir} sql-drop -y
+    gunzip < ${SBVM_ROOT}/${drupal_core_project_dir}/.circleci/springboard.sql.gz | drush @sb-${drupal_core_project_dir} sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/
 fi;
 
 cd ${SBVM_ROOT}/${drupal_testing_dir}
- if [ ! -f sites/default/settings.php ]; then
-    /usr/local/bin/drush site-install sbsetup -y --site-name=${drupal_testing_project_dir} --root=${SBVM_ROOT}/${drupal_testing_dir}  --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_project_dir}
+if [ ! -f sites/default/settings.php ]; then
+    /usr/local/bin/drush site-install minimal -y --site-name=${drupal_testing_project_dir} --root=${SBVM_ROOT}/${drupal_testing_dir}  --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_project_dir}
+     drush @sb-${drupal_testing_project_dir} sql-drop -y
+     gunzip < ${SBVM_ROOT}/${drupal_testing_project_dir}/.circleci/springboard.sql.gz | drush @sb-${drupal_testing_project_dir} sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/
 fi;
 
@@ -36,6 +40,27 @@ if [ ! -f ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files ]; then
     fi
 fi
 
+cd /var/www/springboard
+
+if [ -d ${SBVM_ROOT}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_ROOT}/${drupal_core_project_dir}/tests/codeception.yml ]; then
+    \cp templates/codeception/codeception.yml ${SBVM_ROOT}/${drupal_core_project_dir}/tests
+fi;
+if [ -d ${SBVM_ROOT}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_ROOT}/${drupal_core_project_dir}/tests/functional.suite.yml ]; then
+    \cp templates/codeception/functional.suite.yml ${SBVM_ROOT}/${drupal_core_project_dir}/tests
+fi;
+if [ -d ${SBVM_ROOT}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_ROOT}/${drupal_core_project_dir}/tests/acceptance.suite.yml ]; then
+    \cp templates/codeception/acceptance.suite.yml ${SBVM_ROOT}/${drupal_testing_project_dir}/tests
+fi;
+
+if [ -d ${SBVM_ROOT}/${drupal_testing_project_dir} ] && [ ! -f ${SBVM_ROOT}/${drupal_testing_project_dir}/tests/codeception.yml ]; then
+    \cp templates/codeception/codeception.yml ${SBVM_ROOT}/${drupal_testing_project_dir}/tests
+fi;
+if [ -d ${SBVM_ROOT}/${drupal_testing_project_dir} ] && [ ! -f ${SBVM_ROOT}/${drupal_testing_project_dir}/tests/functional.suite.yml ]; then
+    \cp templates/codeception/functional.suite.yml ${SBVM_ROOT}/${drupal_testing_project_dir}/tests
+fi;
+if [ -d ${SBVM_ROOT}/${drupal_testing_project_dir} ] && [ ! -f ${SBVM_ROOT}/${drupal_testing_project_dir}/tests/acceptance.suite.yml ]; then
+    \cp templates/codeception/acceptance.suite.yml ${SBVM_ROOT}/${drupal_testing_project_dir}/tests
+fi;
 
 cd ${SBVM_ROOT}
 
@@ -53,7 +78,9 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
               #( set -o posix ; set ) | more
               cd ${SBVM_ROOT}/$directory
               /usr/local/bin/drush sql-create -y --root=${SBVM_ROOT}/$directory/web --db-su=root --db-su-pw=root --db-url="mysql://drupal_db_user:drupal_db_password@127.0.0.1/$directory"
-              /usr/local/bin/drush site-install sbsetup -y --root=${SBVM_ROOT}/$directory/web --site-name=$directory --account-name=admin  --account-pass=admin --db-url="mysql://root:root@127.0.0.1/$directory"
+              /usr/local/bin/drush site-install minimal -y --root=${SBVM_ROOT}/$directory/web --site-name=$directory --account-name=admin  --account-pass=admin --db-url="mysql://root:root@127.0.0.1/$directory"
+              drush @sb-$directory sql-drop -y
+              gunzip < ${SBVM_ROOT}/$directory/.circleci/springboard.sql.gz | drush @sb-$directory sql-cli
               /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/$directory/web/sites/default/files/
             fi;
 
@@ -63,5 +90,18 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             if [ ! -e ${SBVM_ROOT}/$directory/web/sites/default/files/sustainer.key ]; then
                 echo ${directory} > ${SBVM_ROOT}/$directory/web/sites/default/files/sustainer.key
             fi
+
+            cd /var/www/springboard
+            if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/codeception.yml ]; then
+                \cp templates/codeception/codeception.yml ${SBVM_ROOT}/$directory/tests
+            fi;
+            if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/functional.suite.yml ]; then
+                \cp templates/codeception/functional.suite.yml ${SBVM_ROOT}/$directory/tests
+            fi;
+            if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/acceptance.suite.yml ]; then
+                \cp templates/codeception/acceptance.suite.yml ${SBVM_ROOT}/$directory/tests
+            fi;
+
+
         done
 fi;
