@@ -61,7 +61,7 @@ config/local.config.yml and edit as you see fit.
 
 ## What does SpringboardVM do?
 
-* Downloads Springboard-Composer, the Acceptance Test repo, DrupalVM, Codeception and
+* Downloads Springboard-Composer, DrupalVM, and
 their vendor dependencies.
 * Provisions DrupalVM, Apache and mySQL, creates multiple virtual hosts and
 site databases.
@@ -69,7 +69,7 @@ site databases.
 * Allows additional sites to be automatically installed in
 sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
-* Configures the acceptance tests to work out of the box.
+* Configures the acceptance tests to work out of the box on dedicated testing domain.
 * Automates replacing generic site databases and file assets with
 reference site assets.
 * Provides a Drush alias to quickly install and configure developer
@@ -107,20 +107,11 @@ you can automatically replace any site's files and/or database with those items
 ## Running tests
 
 Configuration templates for codeception are copied from the
-templates/tests directory into the acceptance test repository. They
+templates/tests directory into sites/sb_testing/tests directory. They
 should be ready to go.
 
-If the install script was unable to find Composer, run `composer update`
-from the /acceptance-tests directory to install Codeception's
-dependencies.
-
-Then `vendor/bin/codecept run`
-
-You can use one virtual host exclusively for running tests. The shell
-scripts will make it easy to switch among different Springboard versions
-you may want to test. You can also delete the sb_testing directory, and run `scripts/make-sb.sh` followed by
-`scripts/sbvm-provision.sh` to install a completely new Springboard version,
-
+To start tests, move into 'sites/sb_testing' and then
+ `vendor/bin/codecept run`
 
 A port has been forwarded from the guest's 3306 port to the host's 3335
 port. If port 3335 is already in use, edit the port in `config/Vagranfile.local`
@@ -141,18 +132,10 @@ copy and paste to your computer's .bashrc file.
 * `cdcdl [project_root]` - switch to the libraries directory of site with [project_root]
 * If you're already in a site directory context, the above commands will work without arguments.
 
-* `sbvm_ac` - Go to acceptance tests directory
-
 >  Managing sites
 
 * `sbvm_make` - create new springboard site installations based on local.config.yml settings. The command will prompt you for the springboard version.
 * `sbvm_prov` - after running sbvm_make, provision virtual hosts for new sites, create the site databases, and create drush aliases.
-
-> Testing
-
-* `sbvm_ac` - Go to acceptance tests directory
-* `codecept` - start codeception
-* `selchr` - start selenium with chromedriver.
 
 ##### These are only available for your host computer.
 
