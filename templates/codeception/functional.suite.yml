@@ -1,0 +1,12 @@
+class_name: FunctionalTester
+# By default we run test against a ddev local site, copy this file to functional.suite.yml to change that.
+extensions:
+    enabled:
+        - Codeception\Extension\Phantoman
+modules:
+    enabled:
+        - Asserts
+        - \Helper\Functional
+        - WebDriver:
+            url: http://sbvm-test.dev
+            browser: phantomjs
