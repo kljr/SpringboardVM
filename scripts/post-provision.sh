@@ -17,6 +17,7 @@ if [ ! -f sites/default/settings.php ]; then
     gunzip < ${SBVM_ROOT}/${drupal_core_project_dir}/.circleci/springboard.sql.gz | drush @sb-${drupal_core_project_dir} sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/
 fi;
+echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/encrypt_key.key
 
 cd ${SBVM_ROOT}/${drupal_testing_dir}
 if [ ! -f sites/default/settings.php ]; then
@@ -25,6 +26,8 @@ if [ ! -f sites/default/settings.php ]; then
      gunzip < ${SBVM_ROOT}/${drupal_testing_project_dir}/.circleci/springboard.sql.gz | drush @sb-${drupal_testing_project_dir} sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/
 fi;
+echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/encrypt_key.key
+
 
 # Create a sustainer.key file in sites/default/files
 if [ ! -f ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files ]; then
@@ -83,6 +86,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
               gunzip < ${SBVM_ROOT}/$directory/.circleci/springboard.sql.gz | drush @sb-$directory sql-cli
               /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/$directory/web/sites/default/files/
             fi;
+              echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/$directory/web/sites/default/files/encrypt_key.key
 
         done
 
