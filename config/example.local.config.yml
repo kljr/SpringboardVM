@@ -15,11 +15,11 @@ apache_vhosts:
 # Keep your project root names short. They become drush aliases.
 # Projectroot and document root are both required. Document root
 # should always be projectroot + '/web'. Other conifgurations will not
-# work.
-  - servername: "another-site.dev"
-    serveralias: "www.another-site.dev"
-    projectroot: "{{sbvm_site_dir}}/ano"
+# work. Items should always be in this order.
+  - projectroot: "{{sbvm_site_dir}}/ano"
     documentroot: "{{sbvm_site_dir}}/ano/web" #must be /web
+    servername: "another-site.dev"
+    serveralias: "www.another-site.dev"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # Don't forget to define the apache_vhosts_ssl entry below, as well.

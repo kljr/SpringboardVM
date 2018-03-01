@@ -29,15 +29,15 @@ fi;
 # Create a sustainer.key file in sites/default/files
 if [ ! -f ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files ]; then
     mkdir -p ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files
-    if [ ! -e ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/sustainer.key ]; then
-      echo ${vagrant_hostname} > ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/sustainer.key
-    fi
+fi
+if [ ! -e ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/sustainer.key ]; then
+  echo ${drupal_domain} > ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/sustainer.key
 fi
 if [ ! -f ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files ]; then
     mkdir -p ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files
-    if [ ! -e ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/sustainer.key ]; then
-      echo ${drupal_testing_dir} > ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/sustainer.key
-    fi
+fi
+if [ ! -e ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/sustainer.key ]; then
+  echo 'sbvm-test.dev' > ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/sustainer.key
 fi
 
 cd /var/www/springboard
@@ -68,14 +68,14 @@ LOCAL_CONFIG_FILE=/vagrant/config/local.config.yml
 if [ -f ${LOCAL_CONFIG_FILE} ]; then
     # Parse the local config yml file into the global vars.
     eval $(parse_yaml ${LOCAL_CONFIG_FILE})
-    #( set -o posix ; set ) | more
     for vhost in ${!apache_vhosts__projectroot*}
         do
             # Get the docroot directory name.
             directory=${!vhost}
             directory=${directory/__/\/}
+             #( set -o posix ; set ) | more
             if [ ! -f ${SBVM_ROOT}/$directory/web/sites/default/settings.php ]; then
-              #( set -o posix ; set ) | more
+          #    ( set -o posix ; set ) | more
               cd ${SBVM_ROOT}/$directory
               /usr/local/bin/drush sql-create -y --root=${SBVM_ROOT}/$directory/web --db-su=root --db-su-pw=root --db-url="mysql://drupal_db_user:drupal_db_password@127.0.0.1/$directory"
               /usr/local/bin/drush site-install minimal -y --root=${SBVM_ROOT}/$directory/web --site-name=$directory --account-name=admin  --account-pass=admin --db-url="mysql://root:root@127.0.0.1/$directory"
@@ -84,24 +84,38 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
               /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/$directory/web/sites/default/files/
             fi;
 
-            if [ ! -f ${SBVM_ROOT}/$directory/web/sites/default/files ]; then
-                mkdir -p ${SBVM_ROOT}/$directory/web/sites/default/files
-            fi
-            if [ ! -e ${SBVM_ROOT}/$directory/web/sites/default/files/sustainer.key ]; then
-                echo ${directory} > ${SBVM_ROOT}/$directory/web/sites/default/files/sustainer.key
-            fi
-
-            cd /var/www/springboard
-            if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/codeception.yml ]; then
-                \cp templates/codeception/codeception.yml ${SBVM_ROOT}/$directory/tests
-            fi;
-            if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/functional.suite.yml ]; then
-                \cp templates/codeception/functional.suite.yml ${SBVM_ROOT}/$directory/tests
-            fi;
-            if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/acceptance.suite.yml ]; then
-                \cp templates/codeception/acceptance.suite.yml ${SBVM_ROOT}/$directory/tests
-            fi;
-
-
         done
+
+    for servername in ${!apache_vhosts__*}
+        do
+
+            name=${!servername}
+            directory=${servername}
+
+            if [[ $directory = *"servername"* ]]; then
+                name=${name/__/\/}
+                directory=${directory/apache_vhosts__servername__/}
+
+                if [ ! -f ${SBVM_ROOT}/$directory/web/sites/default/files ]; then
+                    mkdir -p ${SBVM_ROOT}/$directory/web/sites/default/files
+                fi
+                if [ ! -e ${SBVM_ROOT}/$directory/web/sites/default/files/sustainer.key ]; then
+                    echo ${name} > ${SBVM_ROOT}/$directory/web/sites/default/files/sustainer.key
+                fi
+
+                cd /var/www/springboard
+                if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/codeception.yml ]; then
+                    \cp templates/codeception/codeception.yml ${SBVM_ROOT}/$directory/tests
+                fi;
+                if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/functional.suite.yml ]; then
+                    \cp templates/codeception/functional.suite.yml ${SBVM_ROOT}/$directory/tests
+                fi;
+                if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/acceptance.suite.yml ]; then
+                    \cp templates/codeception/acceptance.suite.yml ${SBVM_ROOT}/$directory/tests
+                fi;
+
+            fi
+        done
+
+
 fi;

@@ -18,9 +18,11 @@ function parse_yaml {
                     printf("%s%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, "__"dirname[2], dirname[2]);
                 }
             }
-            else {
-                printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+            else if ($2 == "servername") {
+                printf("%s%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, "__"dirname[2], $3);
             }
+            else {
+               printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);            }
         }
    }'
 }
