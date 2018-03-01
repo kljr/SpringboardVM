@@ -109,6 +109,8 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                 fi;
                 if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/functional.suite.yml ]; then
                     \cp templates/codeception/functional.suite.yml ${SBVM_ROOT}/$directory/tests
+                    sed -i -e "s/sbvm-test\.dev/${name}/g" ${SBVM_ROOT}/$directory/tests/functional.suite.yml
+                    echo"dsfsdfdsfsdfsd";
                 fi;
                 if [ -d ${SBVM_ROOT}/$directory ] && [ ! -f ${SBVM_ROOT}/$directory/tests/acceptance.suite.yml ]; then
                     \cp templates/codeception/acceptance.suite.yml ${SBVM_ROOT}/$directory/tests
