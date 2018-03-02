@@ -8,13 +8,14 @@ source "/vagrant/scripts/parse-yaml.sh"
 MAIN_CONFIG_FILE=/vagrant/config/config.yml
 eval $(parse_yaml ${MAIN_CONFIG_FILE})
 cd ${SBVM_ROOT}/${drupal_core_dir}
+
 set -x
 
 cd ${SBVM_ROOT}/${drupal_core_dir}
 if [ ! -f sites/default/settings.php ]; then
     /usr/local/bin/drush site-install minimal -y --site-name=${drupal_core_project_dir} --root=${SBVM_ROOT}/${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_project_dir}
-    drush @sb-${drupal_core_project_dir} sql-drop -y
-    gunzip < ${SBVM_ROOT}/${drupal_core_project_dir}/.circleci/springboard.sql.gz | drush @sb-${drupal_core_project_dir} sql-cli
+    drush sql-drop -y
+    gunzip < ${SBVM_ROOT}/${drupal_core_project_dir}/.circleci/springboard.sql.gz | drush sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/
 fi;
 echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/encrypt_key.key
@@ -22,8 +23,8 @@ echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_
 cd ${SBVM_ROOT}/${drupal_testing_dir}
 if [ ! -f sites/default/settings.php ]; then
     /usr/local/bin/drush site-install minimal -y --site-name=${drupal_testing_project_dir} --root=${SBVM_ROOT}/${drupal_testing_dir}  --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_testing_project_dir}
-     drush @sb-${drupal_testing_project_dir} sql-drop -y
-     gunzip < ${SBVM_ROOT}/${drupal_testing_project_dir}/.circleci/springboard.sql.gz | drush @sb-${drupal_testing_project_dir} sql-cli
+     drush sql-drop -y
+     gunzip < ${SBVM_ROOT}/${drupal_testing_project_dir}/.circleci/springboard.sql.gz | drush sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/
 fi;
 echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/encrypt_key.key
@@ -82,8 +83,10 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
               cd ${SBVM_ROOT}/$directory
               /usr/local/bin/drush sql-create -y --root=${SBVM_ROOT}/$directory/web --db-su=root --db-su-pw=root --db-url="mysql://drupal_db_user:drupal_db_password@127.0.0.1/$directory"
               /usr/local/bin/drush site-install minimal -y --root=${SBVM_ROOT}/$directory/web --site-name=$directory --account-name=admin  --account-pass=admin --db-url="mysql://root:root@127.0.0.1/$directory"
-              drush @sb-$directory sql-drop -y
-              gunzip < ${SBVM_ROOT}/$directory/.circleci/springboard.sql.gz | drush @sb-$directory sql-cli
+              cd ${SBVM_ROOT}/$directory/web
+
+              drush sql-drop -y
+              gunzip < ${SBVM_ROOT}/$directory/.circleci/springboard.sql.gz | drush sql-cli
               /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/$directory/web/sites/default/files/
             fi;
               echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/$directory/web/sites/default/files/encrypt_key.key
