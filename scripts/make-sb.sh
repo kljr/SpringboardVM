@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+export COMPOSER_PROCESS_TIMEOUT=600;
 #touch /tmp/txt
 #echo $( printenv ) > /tmp/txt
 

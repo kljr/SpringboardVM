@@ -47,7 +47,7 @@ drupalvm_cron_jobs: []
 installed_extras:
   - adminer
   # - blackfire
-  - drupalconsole
+  # - drupalconsole
   - drush
   # - elasticsearch
   # - java
