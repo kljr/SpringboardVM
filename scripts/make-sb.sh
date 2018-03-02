@@ -95,17 +95,13 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
         cd $script_dir
         cd ../
         if [ ! -d sites/$directory ]; then
-
+            cp -R springboard-composer sites/$directory
+            cd sites/$directory;
             echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
             read branch
-            cd springboard-composer
             git pull
             git checkout $branch
             git pull
-            cd ../
-
-            cp -R springboard-composer sites/$directory
-            cd sites/$directory;
             $HOME/composer.phar about 2> /dev/null
             if [ $? -eq 0 ]; then
                 $HOME/composer.phar run-script dev-install
@@ -120,9 +116,6 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                         else
                             echo "COuld not find composer"
                     fi;
-                fi;
-                if [ ! -e sites/$directory/web/sites/default/files/sustainer.key ]; then
-                    echo $directory > sites/$directory/sites/default/files/sustainer.key
                 fi;
             fi;
             cd ../../
