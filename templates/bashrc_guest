@@ -7,7 +7,6 @@ PATH_TO_NEW_SBVM='/var/www/springboard'
 
 #  Directory switching
 
-alias sbvm_ac='cd $PATH_TO_NEW_SBVM/acceptance-tests'
 alias sbvm='cd $PATH_TO_NEW_SBVM'
 
 function cdcd(){
@@ -132,28 +131,10 @@ function cdcdl(){
 }
 # example: "cdcdl sb_default" - switch to libraries directory of the sb_default install
 
-# Check or change Springboard-Build version
-function sbvm_comp(){
-   dir=$PWD
-   cd $PATH_TO_NEW_SBVM/springboard-composer
-   if [ ! $# -eq 0 ]; then
-     git checkout $1
-   else
-     git status
-  fi;
-  cd $dir
-}
-
-# examples:
-# sbvm_comp (no arguments, displays current branch of the build repo.)
-# sbvm_comp 7.x-4.x (switch build repo to 7.x-4.x)
-
-
 #  Executables
 
 alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
-alias codecept='$PATH_TO_NEW_SBVM/acceptance-tests/vendor/bin/codecept'
 alias wipe-db='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
 
 function strpos()

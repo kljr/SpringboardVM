@@ -11,7 +11,6 @@ PATH_TO_NEW_SBVM=/path/to/springboard_vm_install_directory
 
 #  Directory switching
 
-alias sbvm_ac='cd $PATH_TO_NEW_SBVM/acceptance-tests'
 alias sbvm='cd $PATH_TO_NEW_SBVM'
 
 function cdcd(){
@@ -134,36 +133,12 @@ function cdcdl(){
 }
 # example: "cdcdl sb_default" - switch to libraries directory of the sb_default install
 
-# Check or change Springboard--composer version
-function sbvm_comp(){
-   dir=$PWD
-   cd $PATH_TO_NEW_SBVM/springboard-composer
-   if [ ! $# -eq 0 ]; then
-     git checkout $1
-   else
-     git status
-  fi;
-  cd $dir
-}
-
-
-# examples:
-# sbvm_comp (no arguments, displays current branch of the build repo.)
-# sbvm_comp 7.x-4.x (switch composer repo to 7.x-4.x)
-
-# Switch to the main springboard-composer directory.
-function cdcds(){
-   cd $PATH_TO_NEW_SBVM/springboard-composer
-}
 
 #  Executables
 
 alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
-alias codecept='$PATH_TO_NEW_SBVM/acceptance-tests/vendor/bin/codecept'
-alias selchr='java -jar $PATH_TO_NEW_SBVM/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
 alias wipe-db='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
-
 
 # Aliases that can only be run from the host machine:
 # Vagrant

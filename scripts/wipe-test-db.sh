@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+SBVM_ROOT=/var/www/springboard/sites
 script_dir="$(dirname "$0")"
 source "$script_dir/parse-yaml.sh"
 cd $script_dir
@@ -14,6 +14,6 @@ sa=@${springboard_vm_drush_alias_uniqifier}${dir}
 drush  $sa sql-drop -y
 gunzip < sites/${dir}/.circleci/springboard.sql.gz | drush $sa sql-cli
 drush $sa updb -y
-drush $sa vset encrypt_secure_key_path ${dir}/web/sites/default/files/
+drush $sa vset encrypt_secure_key_path ${SBVM_ROOT}/${dir}/web/sites/default/files/
 drush $sa cc all
 

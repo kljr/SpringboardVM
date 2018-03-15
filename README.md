@@ -158,6 +158,7 @@ copy and paste to your computer's .bashrc file.
 > DB
 
 * `sbvm_dump` - dump all databases to backup
+* `wipe-db` - prompts for a springboard root directory, replaces the associated db with master QA db. Resets the encryption key path to the local default.
 
 ## Drush global install
 
