@@ -154,6 +154,7 @@ function sbvm_comp(){
 alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias codecept='$PATH_TO_NEW_SBVM/acceptance-tests/vendor/bin/codecept'
+alias wipe-db='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
 
 function strpos()
 {

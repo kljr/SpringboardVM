@@ -162,6 +162,7 @@ alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias codecept='$PATH_TO_NEW_SBVM/acceptance-tests/vendor/bin/codecept'
 alias selchr='java -jar $PATH_TO_NEW_SBVM/selenium-server-standalone-2.53.1.jar -Dwebdriver.chrome.driver="/usr/local/bin/chromedriver"'
+alias wipe-db='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
 
 
 # Aliases that can only be run from the host machine:
