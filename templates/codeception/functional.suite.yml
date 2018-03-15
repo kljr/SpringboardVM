@@ -8,5 +8,5 @@ modules:
         - Asserts
         - \Helper\Functional
         - WebDriver:
-            url: http://sbvm-test.dev
+            url: http://sbvm-test.local
             browser: phantomjs

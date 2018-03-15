@@ -5,7 +5,7 @@
 
 # Springboard can't run Ubuntu 1604 because of a db schema bug.
 vagrant_box: geerlingguy/ubuntu1404
-vagrant_hostname: sbvm.dev
+vagrant_hostname: sbvm.local
 vagrant_machine_name: sbvm
 vagrant_ip: 0.0.0.0
 
@@ -36,8 +36,8 @@ drupal_core_project_dir: "sb_default"
 drupal_testing_project_dir: "sb_testing"
 drupal_core_path: "{{ sbvm_site_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ sbvm_site_dir }}/{{drupal_testing_dir}}"
-drupal_domain: "{{ vagrant_machine_name }}.dev"
-drupal_testing_domain: "{{ vagrant_machine_name }}-test.dev"
+drupal_domain: "{{ vagrant_machine_name }}.local"
+drupal_testing_domain: "{{ vagrant_machine_name }}-test.local"
 
 
 # Cron jobs are added to the vagrant user's crontab. Keys include name

@@ -1,7 +1,7 @@
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance. Otherwise, leave this alone.
-#vagrant_hostname: sbvm.dev
+#vagrant_hostname: sbvm.local
 #vagrant_machine_name: sbvm
 #vagrant_ip: 0.0.0.0
 # springboard_vm_drush_alias_uniqifier: 'dd'
@@ -18,8 +18,8 @@ apache_vhosts:
 # work. Items should always be in this order.
   - projectroot: "{{sbvm_site_dir}}/ano"
     documentroot: "{{sbvm_site_dir}}/ano/web" #must be /web
-    servername: "another-site.dev"
-    serveralias: "www.another-site.dev"
+    servername: "another-site.local"
+    serveralias: "www.another-site.local"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
 # Don't forget to define the apache_vhosts_ssl entry below, as well.
@@ -61,7 +61,7 @@ apache_vhosts:
 apache_vhosts_ssl:
 
   # your cusotm site ssl entry
-  - servername: "another-site.dev"
+  - servername: "another-site.local"
     documentroot: "{{sbvm_site_dir}}/ano/web"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
