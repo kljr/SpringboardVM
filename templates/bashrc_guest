@@ -133,9 +133,10 @@ function cdcdl(){
 
 #  Executables
 
+alias sbvm_prov=$PATH_TO_NEW_SBVM/scripts/load_artifact.sh
 alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
-alias wipe-db='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
+alias sbvm_wipe='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
 
 function strpos()
 {

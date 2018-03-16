@@ -114,7 +114,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                         if [ $? -eq 0 ]; then
                             /usr/local/bin/composer run-script dev-install
                         else
-                            echo "COuld not find composer"
+                            echo "Could not find composer"
                     fi;
                 fi;
             fi;

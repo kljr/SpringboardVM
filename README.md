@@ -15,21 +15,19 @@ from guest to host, and quick, pain-free provisioning, management and updating
 - Drush installed globally (see Drush notes below)
 - VirtualBox 5.1.10 or later (5.0.32 appears to still work on Mac)
 - Vagrant 1.8.6 or later
-- For acceptance tests, port 3334 open. You can change this port by editing
-config/Vagrantfile.local if there is a conflict. (You'll need to update the acceptance tests port config too.)
-- Ansible 2.2.0 or later, for faster provisioning and the creation of Drush aliases
+- Ansible 2.2.0 or later, for faster provisioning and for automatic the creation of Drush aliases
  on your host computer. SpringboardVM will work without this (it's installed on the VM too),
  but you'll lose the automatic host-to-guest aliases, which are very helpful. On OS X, Ansible is
  easily installed with Homebrew.
 
-If you have the following Vagrant plugins, no network/IP configuration is required:
+If you have the following Vagrant plugins, no network/IP/Host configuration is required:
 
 - [vagrant-auto_network](https://github.com/oscar-stack/vagrant-auto_network)
 - [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
 
 Otherwise you will need to edit *vagrant_ip* in `config/local.config.yml`
 to assign an IP Address, and update */etc/hosts* on your computer to point
-springboard_vm.dev and the other domains you
+springboard_vm.local and the other domains you
 create at the IP of the virtual machine. You can find the correct
 information for the hosts file by visiting the SpringboardVM's IP address after
 install.
@@ -51,12 +49,12 @@ Run `composer update`
 After the update completes, run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
-you can view the SpringboardVM dashboard at http://dashboard.sbvm.dev.
+you can view the SpringboardVM dashboard at http://dashboard.sbvm.local.
 
 After the initial install, if you want to create additional Springboard sites besides the two
 default sites, copy config/example.local.config.yml to
 config/local.config.yml and edit as you see fit.
- Then run `scripts/make-sb.sh` and `scripts/sbvm-provision.sh` in that order.
+ Then run `scripts/make-sb.sh` (alias 'sbvm_make') and `scripts/sbvm-provision.sh` (alias 'sbvm_prov') in that order.
 
 
 ## What does SpringboardVM do?
@@ -70,8 +68,10 @@ site databases.
 sites/{docroot}, with a docroot and virtual host you define in
 config/local.config.yml.
 * Configures the acceptance tests to work out of the box on dedicated testing domain.
+* Configures the acceptance tests for each optional domain you create.
 * Automates replacing generic site databases and file assets with
 reference site assets.
+* Automates replacing any site database with a fresh copy of QA master.
 * Provides a Drush alias to quickly install and configure developer
 modules: `drush dm-prep` installs admin_menu, module_filter, and devel,
 and disables toolbar menu, configures devel and the views admin UI, and
@@ -87,14 +87,14 @@ installs of SpringboardVM and not have conflicting aliases.
 If you want to add a new site to a previously provisioned SpringboardVM,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` followed by `scripts/sbvm-provision.sh` (faster) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
+* Run `scripts/make-sb.sh` (alias sbvm_make) followed by `scripts/sbvm-provision.sh` (alias sbvm_prov) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
 
 Adding too many sites at once can cause PHP timeouts, so be reasonable.
 
 ## Updating existing Springboard sites
 
 * If you want to replace all code in a site, including any repositories, just delete the project root folder, and
-run `scripts/make-sb.sh` followed by `scripts/sbvm-provision.sh`.
+run `scripts/make-sb.sh` (alias sbvm_make) followed by `scripts/sbvm-provision.sh` (alias sbvm_prov).
 
 ## Replacing default content with reference databases and files
 
@@ -102,25 +102,27 @@ There's not a direct connection to S3, but if you place gzipped files and dbs in
 the `artifacts/sites` folder according to the instructions in the
  [readme,](https://github.com/kljr/springboard_vm/blob/master/artifacts/README.md)
 you can automatically replace any site's files and/or database with those items
- by running `scripts/load-artifact.sh.`
+ by running `scripts/load-artifact.sh.` (alias sbvm_art)
 
 ## Running tests
 
 Configuration templates for codeception are copied from the
-templates/tests directory into sites/sb_testing/tests directory. They
+templates/tests directory into each sites 'tests' directory. They
 should be ready to go.
 
-To start tests, move into 'sites/sb_testing' and then
+To start tests, move into the tests directory and then
  `vendor/bin/codecept run`
  
-To wipe and reload the testing db run
-`scripts/wipe-test=db.sh`
+To wipe and reload the db:
+
+* To use the QA master db: `scripts/wipe-test-db.sh` (alias wipe-db)
+* To use any other db, follow the instruction for loading artifacts.
 
 For acceptance tests using the db module,
 a port has been forwarded from the guest's 3306 port to the host's 3335
 port. If port 3335 is already in use, edit the port in `config/Vagranfile.local`
 or create a new `config/Vagrantfile.custom` file. You will also have
-to edit `acceptance-tests/codeception.yml` to have the alternate port.
+to edit `tests/codeception.yml` to have the alternate port.
 
 ## Useful shell aliases and functions
 
@@ -158,7 +160,7 @@ copy and paste to your computer's .bashrc file.
 > DB
 
 * `sbvm_dump` - dump all databases to backup
-* `wipe-db` - prompts for a springboard root directory, replaces the associated db with master QA db. Resets the encryption key path to the local default.
+* `sbvm_wipe` - prompts for a springboard root directory, replaces the associated db with master QA db. Resets the encryption key path to the local default.
 
 ## Drush global install
 
@@ -176,7 +178,7 @@ Or take the steps below to manually install drush globally:
     chmod +x drush
     sudo mv drush /usr/local/bin
 
-##Updating SpringboardVM itself
+## Updating SpringboardVM itself
 
 After you pull the latest changes, run `vagrant reload --provision`
 
