@@ -165,6 +165,15 @@ php_xdebug_max_nesting_level: 256
 known_hosts_path: ~/.ssh/known_hosts
 ssh_home: "{{ sbvm_site_dir }}"
 
+apache_mods_enabled:
+  - expires.load
+  - ssl.load
+  - rewrite.load
+  - proxy.load
+  - proxy_fcgi.load
+  - mime.load
+
+
 apache_vhosts:
 
 # Testing Site
