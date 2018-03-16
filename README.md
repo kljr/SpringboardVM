@@ -100,7 +100,7 @@ run `scripts/make-sb.sh` (alias sbvm_make) followed by `scripts/sbvm-provision.s
 
 There's not a direct connection to S3, but if you place gzipped files and dbs in
 the `artifacts/sites` folder according to the instructions in the
- [readme,](https://github.com/kljr/SpringboardVM/tree/master/artifacts/artifacts/README.md)
+ [readme,](https://github.com/kljr/SpringboardVM/blob/master/artifacts/README.md)
 you can automatically replace any site's files and/or database with those items
  by running `scripts/load-artifact.sh.` (alias sbvm_art)
 
