@@ -115,7 +115,7 @@ To start tests, move into the tests directory and then
  
 To wipe and reload the db:
 
-* To use the QA master db: `scripts/wipe-test-db.sh` (alias wipe-db)
+* To use the QA master db: `scripts/wipe-test-db.sh` (alias sbvm_wipe)
 * To use any other db, follow the instruction for loading artifacts.
 
 For acceptance tests using the db module,
