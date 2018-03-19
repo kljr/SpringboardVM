@@ -51,6 +51,12 @@ After the update completes, run `vagrant up`.
 The first time running vagrant will take a while. After all processes complete successfully
 you can view the SpringboardVM dashboard at http://dashboard.sbvm.local.
 
+Optional: copy the contents of templates/bashrc_host to your .bashrc file, 
+and set the path for the PATH_TO_NEW_SBVM constant. This will provide the
+aliases and shortcuts that make it easier to manage SpringboardVM
+and navigate among multiple sites. These shortcuts are also automatically
+installed on the guest.
+
 After the initial install, if you want to create additional Springboard sites besides the two
 default sites, copy config/example.local.config.yml to
 config/local.config.yml and edit as you see fit.
