@@ -122,6 +122,7 @@ To start tests, move into the tests directory and then
 To wipe and reload the db:
 
 * To use the QA master db: `scripts/wipe-test-db.sh` (alias sbvm_wipe)
+* To use make a clean springboard db: `scripts/wipe-test-db-clean.sh` (alias sbvm_wipe_clean)
 * To use any other db, follow the instruction for loading artifacts.
 
 For acceptance tests using the db module,
@@ -167,6 +168,7 @@ copy and paste to your computer's .bashrc file.
 
 * `sbvm_dump` - dump all databases to backup
 * `sbvm_wipe` - prompts for a springboard root directory, replaces the associated db with master QA db. Resets the encryption key path to the local default.
+* `sbvm_wipe_clean` - prompts for a springboard root directory, replaces the associated db with a clean springboard db. Resets the encryption key path to the local default.
 
 ## Drush global install
 

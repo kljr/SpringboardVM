@@ -139,6 +139,7 @@ function cdcdl(){
 alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_wipe='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
+alias sbvm_wipe_clean='$PATH_TO_NEW_SBVM/scripts/wipe-test-db-clean.sh'
 
 # Aliases that can only be run from the host machine:
 # Vagrant
