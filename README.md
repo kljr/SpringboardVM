@@ -17,7 +17,7 @@ from guest to host, and quick, pain-free provisioning, management and updating
 - Vagrant 1.8.6 or later
 - Ansible 2.2.0 or later, for faster provisioning and for automatic the creation of Drush aliases
  on your host computer. SpringboardVM will work without this (it's installed on the VM too),
- but you'll lose the automatic host-to-guest aliases, which are very helpful. On OS X, Ansible is
+ but you'll lose the automatic host-to-guest drush aliases, which are very helpful. On OS X, Ansible is
  easily installed with Homebrew.
 
 If you have the following Vagrant plugins, no network/IP/Host configuration is required:
@@ -54,7 +54,7 @@ you can view the SpringboardVM dashboard at http://dashboard.sbvm.local.
 Optional: copy the contents of templates/bashrc_host to your .bashrc file, 
 and set the path for the PATH_TO_NEW_SBVM constant. This will provide the
 aliases and shortcuts that make it easier to manage SpringboardVM
-and navigate among multiple sites. These shortcuts are also automatically
+and navigate among multiple sites. These aliases are also automatically
 installed on the guest.
 
 After the initial install, if you want to create additional Springboard sites besides the two
