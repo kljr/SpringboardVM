@@ -102,7 +102,6 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             else
                 cp -R springboard-composer sites/$directory
             fi;
-            cp -R vendor/jacksonriver/springboard-composer sites/$directory
             cd sites/$directory;
             echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
             read branch
