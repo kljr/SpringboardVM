@@ -16,25 +16,27 @@ apache_vhosts:
 # Projectroot and document root are both required. Document root
 # should always be projectroot + '/web'. Other conifgurations will not
 # work. Items should always be in this order.
-  - projectroot: "{{sbvm_site_dir}}/ano"
-    documentroot: "{{sbvm_site_dir}}/ano/web" #must be /web
+# Don't forget to define the apache_vhosts_ssl entry below, as well.
+
+  - projectroot: "{{sbvm_site_dir}}/another"
+    documentroot: "{{sbvm_site_dir}}/another/web" #must be /web
     servername: "another-site.local"
     serveralias: "www.another-site.local"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
-# Don't forget to define the apache_vhosts_ssl entry below, as well.
+
 
 # You need to maintain the default DrupalVM vhost definitions
 # in this file too. Don't change these unless you are running multiple
 # springboard_vm installs.
-
-# The Default Testing Site
+#############################################################################
+  # Default SpringboardVM virtual hosts. Do not remove.
+#############################################################################
+# The Default Testing Site. Do not remove.
   - servername: "{{ drupal_testing_domain }}"
     serveralias: "www.{{ drupal_testing_domain }}"
     documentroot: "{{ drupal_testing_path }}"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
-
-# Default  virtual hosts.
 
   - servername: "{{ drupal_domain }}"
     serveralias: "www.{{ drupal_domain }}"
@@ -58,16 +60,22 @@ apache_vhosts:
     documentroot: "{{ dashboard_install_dir }}"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
+
+#############################################################################
+  # SSL config
+#############################################################################
 apache_vhosts_ssl:
 
-  # your cusotm site ssl entry
+  # your custom site ssl entry
   - servername: "another-site.local"
-    documentroot: "{{sbvm_site_dir}}/ano/web"
+    documentroot: "{{sbvm_site_dir}}/another/web"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
     certificate_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
     extra_parameters: "{{ apache_vhost_php_fpm_parameters }}"
 
-  # Default SpringboardVM virtual hosts.
+#############################################################################
+  # Default SpringboardVM SSL entries. Do not remove.
+#############################################################################
   - servername: "{{ drupal_testing_domain }}"
     documentroot: "{{ drupal_testing_path }}"
     certificate_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
