@@ -138,6 +138,8 @@ alias makesb='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_make='$PATH_TO_NEW_SBVM/scripts/make-sb.sh'
 alias sbvm_wipe='$PATH_TO_NEW_SBVM/scripts/wipe-test-db.sh'
 alias sbvm_wipe_clean='$PATH_TO_NEW_SBVM/scripts/wipe-test-db-clean.sh'
+alias sbvm_build='$PATH_TO_NEW_SBVM/scripts/make-sb.sh; $PATH_TO_NEW_SBVM/scripts/apache-provision.sh'
+alias sbvm_art='$PATH_TO_NEW_SBVM/scripts/load_artifact.sh'
 
 function strpos()
 {
