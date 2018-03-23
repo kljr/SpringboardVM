@@ -14,7 +14,7 @@ apache_vhosts:
 # A Custom Site
 # Keep your project root names short. They become drush aliases.
 # Projectroot and document root are both required. Document root
-# should always be projectroot + '/web'. Other conifgurations will not
+# should always be projectroot + '/web'. Other configurations will not
 # work. Items should always be in this order.
 # Don't forget to define the apache_vhosts_ssl entry below, as well.
 
@@ -26,12 +26,12 @@ apache_vhosts:
 
 
 
-# You need to maintain the default DrupalVM vhost definitions
-# in this file too. Don't change these unless you are running multiple
-# springboard_vm installs.
 #############################################################################
   # Default SpringboardVM virtual hosts. Do not remove.
 #############################################################################
+# You need to maintain the default DrupalVM vhost definitions
+# in this file too. Don't change these unless you are running multiple
+# springboard_vm installs.
 # The Default Testing Site. Do not remove.
   - servername: "{{ drupal_testing_domain }}"
     serveralias: "www.{{ drupal_testing_domain }}"
