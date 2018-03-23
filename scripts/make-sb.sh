@@ -19,13 +19,15 @@ if [ ! -d sites ]; then
   mkdir sites
 fi;
 if [ ! -d sites/${drupal_core_project_dir} ]; then
-     cd springboard-composer
-     git checkout develop
-     git pull
-     cd ../
-     cp -R springboard-composer sites/${drupal_core_project_dir}
+  if [ -d vendor/jacksonriver/springboard-composer ]; then
+    cp -R vendor/jacksonriver/springboard-composer sites/${drupal_core_project_dir}
+    else
+      cp -R springboard-composer sites/${drupal_core_project_dir}
+  fi;
   if [ -d sites/${drupal_core_project_dir} ]; then
     cd sites/${drupal_core_project_dir};
+    git checkout develop
+    git pull
     $HOME/composer.phar about 2> /dev/null
     if [ $? -eq 0 ]; then
         $HOME/composer.phar run-script dev-install
@@ -50,15 +52,15 @@ if [ ! -d sites/${drupal_core_project_dir} ]; then
 fi;
 
 if [ ! -d sites/${drupal_testing_project_dir} ]; then
-
-     cd springboard-composer
-     git checkout develop
-     git pull
-     cd ../
-     cp -R springboard-composer sites/${drupal_testing_project_dir}
-
+  if [ -d vendor/jacksonriver/springboard-composer ]; then
+    cp -R vendor/jacksonriver/springboard-composer sites/${drupal_testing_project_dir}
+    else
+      cp -R springboard-composer sites/${drupal_testing_project_dir}
+  fi;
   if [ -d sites/${drupal_testing_project_dir} ]; then
     cd sites/${drupal_testing_project_dir};
+    git checkout develop
+    git pull
     $HOME/composer.phar about 2> /dev/null
     if [ $? -eq 0 ]; then
         $HOME/composer.phar run-script dev-install
@@ -95,7 +97,12 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
         cd $script_dir
         cd ../
         if [ ! -d sites/$directory ]; then
-            cp -R springboard-composer sites/$directory
+            if [ -d vendor/jacksonriver/springboard-composer ]; then
+                cp -R vendor/jacksonriver/springboard-composer sites/$directory
+            else
+                cp -R springboard-composer sites/$directory
+            fi;
+            cp -R vendor/jacksonriver/springboard-composer sites/$directory
             cd sites/$directory;
             echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
             read branch

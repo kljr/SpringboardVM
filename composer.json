@@ -33,11 +33,6 @@
     "config": {
       "preferred-install": "source"
     },
-    "extra": {
-        "installer-paths": {
-            "springboard-composer": ["jacksonriver/springboard-composer"]
-        }
-    },
     "scripts": {
         "post-update-cmd": [
             "scripts/make-sb.sh",
