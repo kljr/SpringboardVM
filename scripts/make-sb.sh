@@ -97,14 +97,21 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
         cd $script_dir
         cd ../
         if [ ! -d sites/$directory ]; then
-            if [ -d vendor/jacksonriver/springboard-composer ]; then
-                cp -R vendor/jacksonriver/springboard-composer sites/$directory
+            echo "Building new site into directory $directory"
+            read -p "Repository name? (default: springboard-composer): " repo
+            [ -z "${repo}" ] && repo='springboard-composer'
+            if [ $repo = 'springboard-composer' ]; then
+                if [ -d vendor/jacksonriver/springboard-composer ]; then
+                    cp -R vendor/jacksonriver/springboard-composer sites/$directory
+                else
+                    cp -R springboard-composer sites/$directory
+                fi;
             else
-                cp -R springboard-composer sites/$directory
+                git clone git@github.com:JacksonRiver/$repo.git sites/$directory
             fi;
             cd sites/$directory;
-            echo "Type the branch name that you want to check out into the directory $directory, followed by [ENTER]:"
-            read branch
+            read -p "Branch name? (default: develop): " branch
+            [ -z "${branch}" ] && branch='develop'
             git pull
             git checkout $branch
             git pull
