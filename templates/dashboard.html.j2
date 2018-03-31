@@ -73,7 +73,7 @@
           <td><a href="http://{{ servername }}">{{ servername }}</a></td>
           <td><code>{{ docroot }}</code></td>
         {% if configure_drush_aliases %}
-          <td><code>drush @sb-{{ docroot|replace("/var/www/springboard/sites/", "") }}</code></td>
+          <td><code>drush @{{springboard_vm_drush_alias_uniqifier}}{{ docroot|replace("/var/www/springboard/sites/", "") }}</code></td>
         {% endif %}
         </tr>
       {% endif %}

@@ -44,14 +44,18 @@ Also helpful but not required:
 
 Clone this repository.
 
+Rename `example.local.config.yml` to `local.config.yml`.
+
 Run `composer update`
 
-After the update completes, run `vagrant up`.
+Check that the file `/etc/exports` exists on your Mac. If it doesn't `touch /etc/exports` to create it.
+
+Run `vagrant up`.
 
 The first time running vagrant will take a while. After all processes complete successfully
 you can view the SpringboardVM dashboard at http://dashboard.sbvm.local.
 
-Optional: copy the contents of templates/bashrc_host to your .bashrc file, 
+Copy the contents of templates/bashrc_host to your .bashrc file,
 and set the path for the PATH_TO_NEW_SBVM constant. This will provide the
 aliases and shortcuts that make it easier to manage SpringboardVM
 and navigate among multiple sites. These aliases are also automatically
@@ -84,9 +88,8 @@ and disables toolbar menu, configures devel and the views admin UI, and
 sets the admin password to "admin".
 * Provides shell aliases and functions to quickly navigate the directory hierarchy and perform tasks.
 * Provides automatic DB backups when you halt or destroy the VM, and backups on demand (requires vagrant triggers plugin).
-* Creates Drush aliases from host to guest which match your project_root folder name: `drush @sb-`[`project_root`], allowing you to
-keep your aliases short and simple. The "sb-" is a configurable prefix which allows you to run multiple
-installs of SpringboardVM and not have conflicting aliases.
+* Creates Drush aliases from host to guest which match your project_root folder name: `drush @`[`project_root`], allowing you to
+keep your aliases short and simple.
 
 ## Updating virtual hosts and adding new sites.
 
