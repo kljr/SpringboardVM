@@ -38,7 +38,7 @@ drupal_core_path: "{{ sbvm_site_dir }}/{{drupal_core_dir}}"
 drupal_testing_path: "{{ sbvm_site_dir }}/{{drupal_testing_dir}}"
 drupal_domain: "{{ vagrant_machine_name }}.local"
 drupal_testing_domain: "{{ vagrant_machine_name }}-test.local"
-drush_path: '/usr/local/bin'
+#drush_path: '/usr/local/bin/drush'
 
 # Cron jobs are added to the vagrant user's crontab. Keys include name
 # (required), minute, hour, day, weekday, month, job (required), and state.

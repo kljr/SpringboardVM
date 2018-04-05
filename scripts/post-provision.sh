@@ -13,6 +13,8 @@ set -x
 
 cd ${SBVM_ROOT}/${drupal_core_dir}
 if [ ! -f sites/default/settings.php ]; then
+#    db_populated=$(mysql -uroot -proot sb_defasult -e  'show tables;' | grep system);
+#     echo $db_populated
     /usr/local/bin/drush site-install minimal -y --site-name=${drupal_core_project_dir} --root=${SBVM_ROOT}/${drupal_core_dir} --account-name=admin  --account-pass=admin --db-url=mysql://root:root@localhost/${drupal_core_project_dir}
     /usr/local/bin/drush sql-drop -y
     gunzip < ${SBVM_ROOT}/${drupal_core_project_dir}/.circleci/springboard.sql.gz | drush sql-cli
