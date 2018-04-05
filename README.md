@@ -103,7 +103,7 @@ Adding too many sites at once can cause PHP timeouts, so be reasonable.
 
 ## Updating existing Springboard sites
 
-* Updating sites is easy with springboard-composer, and not covered here, but if you want to replace all code in a site, including any repositories and databases, just delete the project root folder, and
+* Updating sites is easy with springboard-composer, and not covered here, but if you want to replace all code in a site, including any repositories and databases, just delete the site root folder, and
 run `scripts/make-sb.sh` (alias sbvm_make) followed by `scripts/sbvm-provision.sh` (alias sbvm_prov).
 
 ## Replacing default content with reference databases and files
