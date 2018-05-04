@@ -19,6 +19,7 @@ if [ ! -f sites/default/settings.php ]; then
     /usr/local/bin/drush sql-drop -y
     gunzip < ${SBVM_ROOT}/${drupal_core_project_dir}/.circleci/springboard.sql.gz | drush sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_core_dir}/sites/default/files/
+    /usr/local/bin/drush upwd admin --password=admin -y
     chmod 775 ${SBVM_ROOT}/${drupal_core_project_dir}/web/sites/default
 
 fi;
@@ -30,6 +31,7 @@ if [ ! -f sites/default/settings.php ]; then
      /usr/local/bin/drush sql-drop -y
      gunzip < ${SBVM_ROOT}/${drupal_testing_project_dir}/.circleci/springboard.sql.gz | drush sql-cli
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/
+    /usr/local/bin/drush upwd admin --password=admin -y
     chmod 775 ${SBVM_ROOT}/${drupal_testing_dir}/web/sites/default
 fi;
 echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/${drupal_testing_dir}/sites/default/files/encrypt_key.key
@@ -93,6 +95,8 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
               drush sql-drop -y
               gunzip < ${SBVM_ROOT}/$directory/.circleci/springboard.sql.gz | drush sql-cli
               /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_ROOT}/$directory/web/sites/default/files/
+              /usr/local/bin/drush upwd admin --password=admin -y
+
             fi;
               echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_ROOT}/$directory/web/sites/default/files/encrypt_key.key
 
