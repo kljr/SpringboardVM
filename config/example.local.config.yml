@@ -18,6 +18,8 @@ apache_vhosts:
 # work. Items should always be in this order.
 # Don't forget to define the apache_vhosts_ssl entry below, as well.
 
+# Don't use hyphens in root names.
+
 #  - projectroot: "{{sbvm_site_dir}}/another"
 #    documentroot: "{{sbvm_site_dir}}/another/web" #must be /web
 #    servername: "another-site.local"
