@@ -45,23 +45,23 @@ drupal_testing_domain: "{{ vagrant_machine_name }}-test.local"
 drupalvm_cron_jobs: []
 
 installed_extras:
-  - adminer
+  # - adminer
   # - blackfire
   # - drupalconsole
   - drush
   # - elasticsearch
   # - java
   - mailhog
-  - memcached
+  # - memcached
   # - newrelic
   # - nodejs
-  - pimpmylog
+  # - pimpmylog
   # - redis
   # - ruby
   # - selenium
   # - solr
   # - upload-progress
-  - varnish
+  # - varnish
   - xdebug
   - xhprof
 
@@ -110,15 +110,15 @@ php_memcached_package: php5.6-memcached
 xhprof_download_url: https://github.com/phacility/xhprof/archive/master.tar.gz
 xhprof_download_folder_name: xhprof-master
 
-php_memory_limit: "192M"
-php_display_errors: "On"
+php_memory_limit: "256M"
+php_display_errors: "Off"
 php_display_startup_errors: "On"
 php_realpath_cache_size: "1024K"
 php_sendmail_path: "/opt/mailhog/mhsendmail"
 php_opcache_enabled_in_ini: true
-php_opcache_memory_consumption: "192"
+php_opcache_memory_consumption: "256"
 php_opcache_max_accelerated_files: 4096
-php_max_input_vars: "4000"
+php_max_input_vars: "1000"
 
 # Run specified scripts before or after VM is provisioned. Path is relative to
 # the `provisioning/playbook.yml` file.
