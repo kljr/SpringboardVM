@@ -8,10 +8,11 @@ source "/vagrant/scripts/parse-yaml.sh"
 
 MAIN_CONFIG_FILE=/vagrant/config/config.yml
 eval $(parse_yaml ${MAIN_CONFIG_FILE})
-cd ${SBVM_SITES}/${drupal_core_dir}
-
 set -x
 
+####
+#### Set up the default site #####
+####
 cd ${SBVM_SITES}/${drupal_core_dir}
 if [ ! -f sites/default/settings.php ]; then
     cp ${SBVM_ROOT}/templates/settings.php sites/default/settings.php
@@ -24,7 +25,18 @@ if [ ! $default_db_populated ]; then
     /usr/local/bin/drush upwd admin --password=admin -y
 fi;
 echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/encrypt_key.key
+# Create a sustainer.key file in sites/default/files
+if [ ! -f ${SBVM_SITES}/${drupal_core_dir}/sites/default/files ]; then
+    mkdir -p ${SBVM_SITES}/${drupal_core_dir}/sites/default/files
+fi
+if [ ! -e ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key ]; then
+  echo ${drupal_domain} > ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key
+fi
 
+
+####
+#### Set up the testing site #####
+####
 cd ${SBVM_SITES}/${drupal_testing_dir}
 if [ ! -f sites/default/settings.php ]; then
     cp ${SBVM_ROOT}/templates/settings.php sites/default/settings.php
@@ -38,15 +50,6 @@ if [ ! $testing_db_populated ]; then
     /usr/local/bin/drush upwd admin --password=admin -y
 fi;
 echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/encrypt_key.key
-
-
-# Create a sustainer.key file in sites/default/files
-if [ ! -f ${SBVM_SITES}/${drupal_core_dir}/sites/default/files ]; then
-    mkdir -p ${SBVM_SITES}/${drupal_core_dir}/sites/default/files
-fi
-if [ ! -e ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key ]; then
-  echo ${drupal_domain} > ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key
-fi
 if [ ! -f ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files ]; then
     mkdir -p ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files
 fi
@@ -54,8 +57,8 @@ if [ ! -e ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/sustainer.key 
   echo 'sbvm-test.local' > ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/sustainer.key
 fi
 
+### set up the test config###
 cd /var/www/springboard
-
 if [ -d ${SBVM_SITES}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_SITES}/${drupal_core_project_dir}/tests/codeception.yml ]; then
     \cp templates/codeception/codeception.yml ${SBVM_SITES}/${drupal_core_project_dir}/tests
 fi;
@@ -65,7 +68,6 @@ fi;
 if [ -d ${SBVM_SITES}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_SITES}/${drupal_core_project_dir}/tests/acceptance.suite.yml ]; then
     \cp templates/codeception/acceptance.suite.yml ${SBVM_SITES}/${drupal_testing_project_dir}/tests
 fi;
-
 if [ -d ${SBVM_SITES}/${drupal_testing_project_dir} ] && [ ! -f ${SBVM_SITES}/${drupal_testing_project_dir}/tests/codeception.yml ]; then
     \cp templates/codeception/codeception.yml ${SBVM_SITES}/${drupal_testing_project_dir}/tests
 fi;
@@ -76,8 +78,10 @@ if [ -d ${SBVM_SITES}/${drupal_testing_project_dir} ] && [ ! -f ${SBVM_SITES}/${
     \cp templates/codeception/acceptance.suite.yml ${SBVM_SITES}/${drupal_testing_project_dir}/tests
 fi;
 
+###
+### Set up any other sites defined in local config
+###
 cd ${SBVM_SITES}
-
 LOCAL_CONFIG_FILE=/vagrant/config/local.config.yml
 if [ -f ${LOCAL_CONFIG_FILE} ]; then
     # Parse the local config yml file into the global vars.
