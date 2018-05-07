@@ -32,6 +32,7 @@ fi
 if [ ! -e ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key ]; then
   echo ${drupal_domain} > ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key
 fi
+chmod 775 ${SBVM_SITES}/${drupal_core_dir}/sites/default
 
 
 ####
@@ -41,6 +42,7 @@ cd ${SBVM_SITES}/${drupal_testing_dir}
 if [ ! -f sites/default/settings.php ]; then
     cp ${SBVM_ROOT}/templates/settings.php sites/default/settings.php
     sed -i -e "s/sb_default/sb_testing/g" sites/default/settings.php
+    sed -i -e "s/'.sbvm.local'/'.sbvm-test.local'/g" sites/default/settings.php
 fi;
 testing_db_populated=$(mysql -uroot -proot sb_testing -e 'show tables;' | grep system);
 if [ ! $testing_db_populated ]; then
@@ -56,6 +58,7 @@ fi
 if [ ! -e ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/sustainer.key ]; then
   echo 'sbvm-test.local' > ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/sustainer.key
 fi
+chmod 775 ${SBVM_SITES}/${drupal_testing_dir}/sites/default
 
 ### set up the test config###
 cd /var/www/springboard
@@ -105,7 +108,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                 /usr/local/bin/drush upwd admin --password=admin -y
             fi;
             echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/$directory/web/sites/default/files/encrypt_key.key
-
+            chmod 775 ${SBVM_SITES}/$directory/web/sites/default
         done
 
     for servername in ${!apache_vhosts__*}
@@ -117,6 +120,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             if [[ $directory = *"servername"* ]]; then
                 name=${name/__/\/}
                 directory=${directory/apache_vhosts__servername__/}
+                sed -i -e "s/'.sbvm.local'/'.${name}'/g" ${SBVM_SITES}/$directory/web/sites/default/settings.php
 
                 if [ ! -f ${SBVM_SITES}/$directory/web/sites/default/files ]; then
                     mkdir -p ${SBVM_SITES}/$directory/web/sites/default/files
