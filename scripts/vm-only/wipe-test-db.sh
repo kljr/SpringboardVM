@@ -13,4 +13,3 @@ drush $sa upwd admin --password=admin -y
 drush $sa vset encrypt_secure_key_path ${SBVM_ROOT}/${dir}/web/sites/default/files/
 drush $sa cc all
 chmod 775 ${SBVM_ROOT}/${dir}/web/sites/default
-
