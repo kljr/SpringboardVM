@@ -4,7 +4,7 @@ A Springboard development environment built with Composer, Codeception, DrupalVM
 Ansible and Bash.
 
 Provides multiple fully-configured Springboard sites, each with working copies
-of the Springboard repositories, a dedicated testing site and testing suite, automatic DB backups
+of the Springboard repositories, a dedicated testing site, automatic DB backups
 from guest to host, and quick, pain-free provisioning, management and updating
  of Apache, mySQL and Drupal/Springboard.
 
@@ -12,13 +12,13 @@ from guest to host, and quick, pain-free provisioning, management and updating
 
 - Linux or Mac (with NFS, required)
 - Composer.phar installed globally, preferably renamed and moved to /usr/local/bin/composer.
-- Drush installed globally (see Drush notes below)
+- Drush installed globally on your host machine (see Drush notes below)
 - VirtualBox 5.1.10 or later (5.0.32 appears to still work on Mac)
 - Vagrant 1.8.6 or later
 - Ansible 2.2.0 or later, for faster provisioning and for automatic the creation of Drush aliases
  on your host computer. SpringboardVM will work without this (it's installed on the VM too),
  but you'll lose the automatic host-to-guest drush aliases, which are very helpful. On OS X, Ansible is
- easily installed with Homebrew.
+ easily installed with Homebrew ("brew install ansible").
 
 If you have the following Vagrant plugins, no network/IP/Host configuration is required:
 
@@ -27,7 +27,7 @@ If you have the following Vagrant plugins, no network/IP/Host configuration is r
 
 Otherwise you will need to edit *vagrant_ip* in `config/local.config.yml`
 to assign an IP Address, and update */etc/hosts* on your computer to point
-springboard_vm.local and the other domains you
+sbvm.local and the other domains you
 create at the IP of the virtual machine. You can find the correct
 information for the hosts file by visiting the SpringboardVM's IP address after
 install.
@@ -42,13 +42,15 @@ Also helpful but not required:
 
 # Usage
 
-Clone this repository.
+Install Vagrant, Virtualbox, Ansible, Vagrant-hostsupdater, Vagrant-auto_network, Composer and Drush.
+
+Then clone this repository.
 
 Rename `example.local.config.yml` to `local.config.yml`.
 
-Run `composer update`
+Run `composer update` from inside the repository folder
 
-Check that the file `/etc/exports` exists on your Mac. If it doesn't `touch /etc/exports` to create it.
+Check that the file `/etc/exports` exists on your Mac. If it doesn't `touch /etc/exports` to create it. This is needed for Vagrant's Network File Sharing (NFS).
 
 Run `vagrant up`.
 
@@ -56,15 +58,14 @@ The first time running vagrant will take a while. After all processes complete s
 you can view the SpringboardVM dashboard at http://dashboard.sbvm.local.
 
 Copy the contents of templates/bashrc_host to your .bashrc file,
-and set the path for the PATH_TO_NEW_SBVM constant. This will provide the
+and set the correct path for the PATH_TO_NEW_SBVM constant. This will provide the
 aliases and shortcuts that make it easier to manage SpringboardVM
 and navigate among multiple sites. These aliases are also automatically
 installed on the guest.
 
 After the initial install, if you want to create additional Springboard sites besides the two
-default sites, copy config/example.local.config.yml to
-config/local.config.yml and edit as you see fit.
- Then run `scripts/make-sb.sh` (alias 'sbvm_make') and `scripts/sbvm-provision.sh` (alias 'sbvm_prov') in that order.
+default sites, update local.config.yml with your new site info.
+ Then run `scripts/make-sb.sh` (alias 'sbvm_make') and `scripts/sbvm-provision.sh` (alias 'sbvm_prov') in that order, or `sbvm_build` to run them together.
 
 
 ## What does SpringboardVM do?
@@ -96,13 +97,13 @@ keep your aliases short and simple.
 If you want to add a new site to a previously provisioned SpringboardVM,
 then you need to:
 * Define the virtual host entry in local.config.yml
-* Run `scripts/make-sb.sh` (alias sbvm_make) followed by `scripts/sbvm-provision.sh` (alias sbvm_prov) or `vagrant provision` to update Apache (or nginx) and create the databases and settings files.
+* Run `scripts/make-sb.sh` (alias sbvm_make) followed by `scripts/sbvm-provision.sh` (alias sbvm_prov) to update Apache and create the databases and settings files.
 
 Adding too many sites at once can cause PHP timeouts, so be reasonable.
 
 ## Updating existing Springboard sites
 
-* Updating sites is easy with springboard-composer, and not covered here, but if you want to replace all code in a site, including any repositories, just delete the project root folder, and
+* Updating sites is easy with springboard-composer, and not covered here, but if you want to replace all code in a site, including any repositories and databases, just delete the site root folder, and
 run `scripts/make-sb.sh` (alias sbvm_make) followed by `scripts/sbvm-provision.sh` (alias sbvm_prov).
 
 ## Replacing default content with reference databases and files
@@ -152,6 +153,7 @@ copy and paste to your computer's .bashrc file.
 
 * `sbvm_make` - create new springboard site installations based on local.config.yml settings. The command will prompt you for the springboard version.
 * `sbvm_prov` - after running sbvm_make, provision virtual hosts for new sites, create the site databases, and create drush aliases.
+* `sbvm_build` - runs sbvm_make and sbvm_prov in one command.
 
 ##### These are only available for your host computer.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Type the project root of the site you want to update, followed by [ENTER]:"
+echo "Enter the project root of the site you want to update, followed by [ENTER]:"
 read docroot
 docpath="/vagrant/sites/$docroot"
 
@@ -9,7 +9,7 @@ if [ ! -d $docpath ]; then
   exit 0
 fi
 
-echo "Type the foldername in the artifacts directory whose files and database you want to load. [ENTER]:"
+echo "Enter the foldername in the artifacts directory whose files and database you want to load. [ENTER]:"
 read artifact
 
 if [ ! -d /vagrant/artifacts/sites/$artifact ]; then
