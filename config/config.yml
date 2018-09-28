@@ -8,7 +8,7 @@ vagrant_box: geerlingguy/ubuntu1404
 vagrant_hostname: sbvm.local
 vagrant_machine_name: sbvm
 vagrant_ip: 0.0.0.0
-vagrant_memory: 1024
+vagrant_memory: 2048
 
 vagrant_synced_folders:
   - local_path:  .
