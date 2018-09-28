@@ -161,7 +161,7 @@ alias aprel='DR_APACHE_RESTART=TRUE vagrant up'
 
 alias sbvm_prov='$PATH_TO_NEW_SBVM/scripts/apache-provision.sh'
 alias sbvm_build='$PATH_TO_NEW_SBVM/scripts/make-sb.sh; $PATH_TO_NEW_SBVM/scripts/apache-provision.sh'
-alias sbvm_art='$PATH_TO_NEW_SBVM/scripts/load_artifact.sh'
+alias sbvm_art='$PATH_TO_NEW_SBVM/scripts/load-artifact.sh'
 
 
 # DB backups
