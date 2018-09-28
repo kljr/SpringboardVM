@@ -6,7 +6,18 @@ extensions:
 modules:
     enabled:
         - Asserts
+        - Cli
         - \Helper\Functional
         - WebDriver:
             url: http://sbvm-test.local
             browser: phantomjs
+            window_size: 'maximize'
+    config:
+        MailHog:
+            url: 'http://sbvm.local'
+            port: '8025'
+paths:
+    envs: tests/_envs
+groups:
+    paracept_group_*: tests/_output/paracept_group_*
+drush-command: drush @sb_testing %command

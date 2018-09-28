@@ -136,6 +136,7 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                 if [ -d ${SBVM_SITES}/$directory ] && [ ! -f ${SBVM_SITES}/$directory/tests/functional.suite.yml ]; then
                     \cp templates/codeception/functional.suite.yml ${SBVM_SITES}/$directory/tests
                     sed -i -e "s/sbvm-test\.local/${name}/g" ${SBVM_SITES}/$directory/tests/functional.suite.yml
+                    sed -i -e "s/sb_testing/${name}/g" ${SBVM_SITES}/$directory/tests/functional.suite.yml
                 fi;
                 if [ -d ${SBVM_SITES}/$directory ] && [ ! -f ${SBVM_SITES}/$directory/tests/acceptance.suite.yml ]; then
                     \cp templates/codeception/acceptance.suite.yml ${SBVM_SITES}/$directory/tests
