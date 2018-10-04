@@ -62,11 +62,15 @@ chmod 775 ${SBVM_SITES}/${drupal_testing_dir}/sites/default
 
 ### set up the test config###
 cd /var/www/springboard
+
 if [ -d ${SBVM_SITES}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_SITES}/${drupal_core_project_dir}/tests/codeception.yml ]; then
     \cp templates/codeception/codeception.yml ${SBVM_SITES}/${drupal_core_project_dir}/tests
+    sed -i -e "s/sb_testing/${drupal_core_project_dir}/g" ${SBVM_SITES}/${drupal_core_project_dir}/tests/codeception.yml
 fi;
 if [ -d ${SBVM_SITES}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_SITES}/${drupal_core_project_dir}/tests/functional.suite.yml ]; then
     \cp templates/codeception/functional.suite.yml ${SBVM_SITES}/${drupal_core_project_dir}/tests
+    sed -i -e "s/sbvm-test\.local/${vagrant_machine_name}.local/g" ${SBVM_SITES}/${drupal_core_project_dir}/tests/functional.suite.yml
+    sed -i -e "s/sb_testing/${drupal_core_project_dir}/g" ${SBVM_SITES}/${drupal_core_project_dir}/tests/functional.suite.yml
 fi;
 if [ -d ${SBVM_SITES}/${drupal_core_project_dir} ] && [ ! -f ${SBVM_SITES}/${drupal_core_project_dir}/tests/acceptance.suite.yml ]; then
     \cp templates/codeception/acceptance.suite.yml ${SBVM_SITES}/${drupal_testing_project_dir}/tests
@@ -132,11 +136,12 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                 cd /var/www/springboard
                 if [ -d ${SBVM_SITES}/$directory ] && [ ! -f ${SBVM_SITES}/$directory/tests/codeception.yml ]; then
                     \cp templates/codeception/codeception.yml ${SBVM_SITES}/$directory/tests
+                    sed -i -e "s/sb_testing/${directory}/g" ${SBVM_SITES}/$directory/tests/codeception.yml
                 fi;
                 if [ -d ${SBVM_SITES}/$directory ] && [ ! -f ${SBVM_SITES}/$directory/tests/functional.suite.yml ]; then
                     \cp templates/codeception/functional.suite.yml ${SBVM_SITES}/$directory/tests
                     sed -i -e "s/sbvm-test\.local/${name}/g" ${SBVM_SITES}/$directory/tests/functional.suite.yml
-                    sed -i -e "s/sb_testing/${name}/g" ${SBVM_SITES}/$directory/tests/functional.suite.yml
+                    sed -i -e "s/sb_testing/${directory}/g" ${SBVM_SITES}/$directory/tests/functional.suite.yml
                 fi;
                 if [ -d ${SBVM_SITES}/$directory ] && [ ! -f ${SBVM_SITES}/$directory/tests/acceptance.suite.yml ]; then
                     \cp templates/codeception/acceptance.suite.yml ${SBVM_SITES}/$directory/tests
