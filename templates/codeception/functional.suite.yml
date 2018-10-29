@@ -9,7 +9,7 @@ modules:
         - Cli
         - \Helper\Functional
         - WebDriver:
-            url: http://sbvm-test.local
+            url: http://www.sbvm-test.local
             browser: phantomjs
             window_size: 'maximize'
     config:
