@@ -102,6 +102,10 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
             [ -z "${repo}" ] && repo='springboard-composer'
             if [ $repo = 'springboard-composer' ]; then
                 if [ -d vendor/jacksonriver/springboard-composer ]; then
+                    cd vendor/jacksonriver/springboard-composer
+                    git pull
+                    cd $script_dir
+                    cd ../
                     cp -R vendor/jacksonriver/springboard-composer sites/$directory
                 else
                     cp -R springboard-composer sites/$directory

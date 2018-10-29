@@ -24,11 +24,11 @@ if [ ! $default_db_populated ]; then
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/
     /usr/local/bin/drush upwd admin --password=admin -y
 fi;
-echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/encrypt_key.key
 # Create a sustainer.key file in sites/default/files
 if [ ! -f ${SBVM_SITES}/${drupal_core_dir}/sites/default/files ]; then
     mkdir -p ${SBVM_SITES}/${drupal_core_dir}/sites/default/files
 fi
+echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/encrypt_key.key
 if [ ! -e ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key ]; then
   echo ${drupal_domain} > ${SBVM_SITES}/${drupal_core_dir}/sites/default/files/sustainer.key
 fi
@@ -51,10 +51,11 @@ if [ ! $testing_db_populated ]; then
     /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/
     /usr/local/bin/drush upwd admin --password=admin -y
 fi;
-echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/encrypt_key.key
 if [ ! -f ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files ]; then
     mkdir -p ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files
 fi
+echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/encrypt_key.key
+
 if [ ! -e ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/sustainer.key ]; then
   echo 'sbvm-test.local' > ${SBVM_SITES}/${drupal_testing_dir}/sites/default/files/sustainer.key
 fi
@@ -111,7 +112,6 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
                 /usr/local/bin/drush vset encrypt_secure_key_path ${SBVM_SITES}/$directory/web/sites/default/files/
                 /usr/local/bin/drush upwd admin --password=admin -y
             fi;
-            echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/$directory/web/sites/default/files/encrypt_key.key
             chmod 775 ${SBVM_SITES}/$directory/web/sites/default
         done
 
@@ -128,10 +128,13 @@ if [ -f ${LOCAL_CONFIG_FILE} ]; then
 
                 if [ ! -f ${SBVM_SITES}/$directory/web/sites/default/files ]; then
                     mkdir -p ${SBVM_SITES}/$directory/web/sites/default/files
+                    chmod 775 ${SBVM_SITES}/$directory/web/sites/default/files
                 fi
                 if [ ! -e ${SBVM_SITES}/$directory/web/sites/default/files/sustainer.key ]; then
                     echo ${name} > ${SBVM_SITES}/$directory/web/sites/default/files/sustainer.key
                 fi
+                echo "23fe4ba7660eba65c8634fd41e18f2300eb2a1bcbbc6e81f1bde82448016890" > ${SBVM_SITES}/$directory/web/sites/default/files/encrypt_key.key
+
 
                 cd /var/www/springboard
                 if [ -d ${SBVM_SITES}/$directory ] && [ ! -f ${SBVM_SITES}/$directory/tests/codeception.yml ]; then
