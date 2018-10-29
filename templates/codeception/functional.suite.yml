@@ -14,7 +14,7 @@ modules:
             window_size: 'maximize'
     config:
         MailHog:
-            url: 'http://sbvm.local'
+            url: 'http://www.sbvm.local'
             port: '8025'
 paths:
     envs: tests/_envs
