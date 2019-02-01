@@ -8,31 +8,28 @@ config.vm.network "forwarded_port", guest: 330, host: 3335, protocol: "tcp"
 # Vagrant Triggers plugin magic
 
 # Restart apache
-if Vagrant.has_plugin?('vagrant-triggers')
-    if ENV['DR_APACHE_RESTART']
-        config.trigger.instead_of :up do
-          run_remote "service apache2 start"
-        end
-    end
+#if ENV['DR_APACHE_RESTART']
+##config.trigger.instead_of :up do
+##  run_remote "service apache2 start"
+##end
+#end
 
-    # Dump databases
-    config.trigger.before :halt do
-      info "Dumping the database before shutting down..."
-      #run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
-    end
-    config.trigger.before :destroy do
-      info "Dumping the database before shutting down..."
-    #  run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
-    end
-    if ENV['DR_DUMP_DBS']
-        config.trigger.instead_of :up do
-          info "Dumping the databases..."
-          run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
-        end
-    end
-else
-    puts "Vagrant triggers plugin not installed. Install the vagrant triggers plugin to get automatic db backups."
-end
+## Dump databases
+#config.trigger.before :halt do
+#  info "Dumping the database before shutting down..."
+#  #run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
+#end
+#config.trigger.before :destroy do
+#  info "Dumping the database before shutting down..."
+##  run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
+#end
+#if ENV['DR_DUMP_DBS']
+##config.trigger.instead_of :up do
+##  info "Dumping the databases..."
+##  run_remote  "if [ -f /vagrant/scripts/vm-only/db-backup-vm.sh ]; then /vagrant/scripts/vm-only/db-backup-vm.sh; fi;"
+##end
+#end
+
 
 if ENV['DR_NEW_VHOSTS']
    if ansible_bin && !vconfig['force_ansible_local']
