@@ -4,28 +4,30 @@
 # you want to override there.
 
 # Springboard can't run Ubuntu 1604 because of a db schema bug.
-vagrant_box: geerlingguy/ubuntu1604
+vagrant_box: geerlingguy/drupal-vm
 vagrant_hostname: sbvm.local
 vagrant_machine_name: sbvm
 vagrant_ip: 0.0.0.0
 vagrant_memory: 2048
-
+vagrant_synced_folder_default_type: ""
 vagrant_synced_folders:
   - local_path:  .
     destination: /var/www/springboard
-    type: nfs
+    type: ""
     create: true
 
 # Stop drupalvm from doing anything to install Drupal so SpringboardVM can handle it.
 build_makefile: false
 drupal_build_makefile: false
 build_composer: false
+drupal_major_version: 7
 drupal_composer_path: false
 build_composer_project: false
 drupal_build_composer: false
 drupal_build_composer_project: false
 drupal_composer_dependencies: []
 install_site: false
+drush_path: "/usr/local/bin/drush"
 drupal_install_site: false
 drush_launcher_install: no
 drush_install_from_source: yes
@@ -72,69 +74,65 @@ installed_extras:
 # Add any extra apt or yum packages you would like installed.
 drush_version: "8.1.10"
 
-php_version: "5.6"
-php_install_recommends: no
+#php_version: "5.6"
+#php_install_recommends: no
 extra_packages:
-  - php5.6
-  - php5.6-apcu
-  - php5.6-mcrypt
-  - php5.6-cli
-  - php5.6-common
-  - php5.6-curl
-  - php5.6-dev
-  - php5.6-fpm
-  - php5.6-gd
-  - php5.6-sqlite3
-  - php5.6-xml
-  - php5.6-mbstring
-  - php5.6-soap
-  - php-pear
-  - libpcre3-dev
-  - libapache2-mod-php5.6
-php_conf_paths:
-  - /etc/php/5.6/fpm
-  - /etc/php/5.6/apache2
-  - /etc/php/5.6/cli
-php_extension_conf_paths:
-  - /etc/php/5.6/fpm/conf.d
-  - /etc/php/5.6/apache2/conf.d
-  - /etc/php/5.6/cli/conf.d
-php_fpm_daemon: php5.6-fpm
-php_fpm_conf_path: "/etc/php/5.6/fpm"
-php_fpm_pool_conf_path: "/etc/php/5.6/fpm/pool.d/www.conf"
-php_mysql_package: php5.6-mysql
-
-# If you install `redis`:
-php_redis_package: php5.6-redis
-
-# If you install `memcached`:
-php_memcached_package: php5.6-memcached
+#  - php5.6
+#  - php5.6-apcu
+#  - php5.6-mcrypt
+#  - php5.6-cli
+#  - php5.6-common
+#  - php5.6-curl
+#  - php5.6-dev
+#  - php5.6-fpm
+#  - php5.6-gd
+#  - php5.6-sqlite3
+#  - php5.6-xml
+#  - php5.6-mbstring
+   - php7.2-soap
+#  - php-pear
+#  - libpcre3-dev
+#  - libapache2-mod-php5.6
+#php_conf_paths:
+#  - /etc/php/5.6/fpm
+#  - /etc/php/5.6/apache2
+#  - /etc/php/5.6/cli
+#php_extension_conf_paths:
+#  - /etc/php/5.6/fpm/conf.d
+#  - /etc/php/5.6/apache2/conf.d
+#  - /etc/php/5.6/cli/conf.d
+#php_fpm_daemon: php5.6-fpm
+#php_fpm_conf_path: "/etc/php/5.6/fpm"
+#php_fpm_pool_conf_path: "/etc/php/5.6/fpm/pool.d/www.conf"
+#php_mysql_package: php5.6-mysql
+#
+## If you install `redis`:
+#php_redis_package: php5.6-redis
+#
+## If you install `memcached`:
+#php_memcached_package: php5.6-memcached
 
 # If you install `xhprof`:
 xhprof_download_url: https://github.com/phacility/xhprof/archive/master.tar.gz
 xhprof_download_folder_name: xhprof-master
 
-php_memory_limit: "256M"
+php_version: "7.2"
+php_install_recommends: no
 php_display_errors: "Off"
 php_display_startup_errors: "On"
 php_realpath_cache_size: "1024K"
 php_sendmail_path: "/opt/mailhog/mhsendmail"
 php_opcache_enabled_in_ini: true
-php_opcache_memory_consumption: "256"
+php_opcache_memory_consumption: "192"
 php_opcache_max_accelerated_files: 4096
-php_max_input_vars: "1000"
+php_max_input_vars: "4000"
+php_memory_limit: "256M"
 
-#php_version: "7.1"
-#php_install_recommends: no
-#php_memory_limit: "192M"
-#php_display_errors: "On"
-#php_display_startup_errors: "On"
-#php_realpath_cache_size: "1024K"
-#php_sendmail_path: "/opt/mailhog/mhsendmail"
-#php_opcache_enabled_in_ini: true
-#php_opcache_memory_consumption: "192"
-#php_opcache_max_accelerated_files: 4096
-#php_max_input_vars: "4000"
+# Drupal VM defaults to using PHP-FPM with either Apache or Nginx. If you wish
+# to instead use Apache + mod_php with an Ubuntu base box, make sure you add
+# libapache2-mod-php7.0 to `extra_packages` elsewhere in this config file.
+php_enable_php_fpm: true
+php_fpm_listen: "127.0.0.1:9000"
 
 # Run specified scripts before or after VM is provisioned. Path is relative to
 # the `provisioning/playbook.yml` file.
