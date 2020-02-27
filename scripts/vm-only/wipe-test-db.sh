@@ -10,7 +10,7 @@ drush  $sa sql-drop -y
  if [ -f ${SBVM_ROOT}/${dir}/.circleci/database.initdb.d/springboard.sql.gz ]; then
   gunzip < ${SBVM_ROOT}/${dir}/.circleci/database.initdb.d/springboard.sql.gz | drush $sa sql-cli
    else
-   gunzip < ${SBVM_ROOT}/${dir}/.circleci/springboard.sql.gz | drush $sa sql-cli
+   gunzip < ${SBVM_ROOT}/${dir}/.circleci/database.initdb.d/springboard.sql.gz | drush $sa sql-cli
  fi;drush $sa updb -y
 
 drush $sa upwd admin --password=admin -y
